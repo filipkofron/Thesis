@@ -176,7 +176,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
       // Install the callback and wait for surfaceCreated() to init the camera.
       surfaceHolder.addCallback(this);
     }
-
+/*
     beepManager.updatePrefs();
     ambientLightManager.start(cameraManager);
 
@@ -242,7 +242,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
 
       characterSet = intent.getStringExtra(Intents.Scan.CHARACTER_SET);
 
-    }
+    }*/
   }
   
   private static boolean isZXingURL(String dataString) {

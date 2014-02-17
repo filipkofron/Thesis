@@ -93,7 +93,7 @@ final class DecodeThread extends Thread {
     Log.i("DecodeThread", "Hints: " + hints);
   }
 
-  Handler getHandler() {
+  public Handler getHandler() {
     try {
       handlerInitLatch.await();
     } catch (InterruptedException ie) {
