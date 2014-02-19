@@ -293,6 +293,7 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback {
         if (hasSurface) {
             // The activity was paused but not stopped, so the surface still exists. Therefore
             // surfaceCreated() won't be called, so init the camera here.
+
             initCamera(surfaceHolder);
         } else {
             // Install the callback and wait for surfaceCreated() to init the camera.

@@ -670,6 +670,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback 
     }
     try {
       cameraManager.openDriver(surfaceHolder);
+
       // Creating the handler starts the preview, which can also throw a RuntimeException.
       if (handler == null) {
         handler = new CaptureActivityHandler(this, decodeFormats, decodeHints, characterSet, cameraManager);

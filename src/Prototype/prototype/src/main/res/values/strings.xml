@@ -132,5 +132,13 @@
     <string name="wifi_ssid_label">Network Name</string>
     <string name="wifi_type_label">Type</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scan_status_scanning">Scanning ..</string>
+    <string name="scan_status_found">Read code:</string>
+    <string name="scan_status_product_name">Product name</string>
+    <string name="scan_status_product_name_default">A new product</string>
+    <string name="scan_status_category">Category</string>
+    <string name="scan_status_use_by_date">Use by</string>
+    <string name="scan_status_use_by_date_edit">2014-02-01</string>
+    <string name="scan_status_add_button_text">Add</string>
 
 </resources>

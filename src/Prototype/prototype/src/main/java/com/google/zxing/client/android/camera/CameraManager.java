@@ -22,7 +22,11 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
 import android.view.SurfaceHolder;
+import android.view.WindowManager;
+
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.client.android.camera.open.OpenCameraInterface;
 
@@ -45,6 +49,7 @@ public final class CameraManager {
   private static final int MAX_FRAME_HEIGHT = 675; // = 5/8 * 1080
 
   private final Context context;
+  private WindowManager windowManager;
   private final CameraConfigurationManager configManager;
   private Camera camera;
   private AutoFocusManager autoFocusManager;
@@ -52,6 +57,7 @@ public final class CameraManager {
   private Rect framingRectInPreview;
   private boolean initialized;
   private boolean previewing;
+  private boolean previewFrameDirty = true;
   private int requestedFramingRectWidth;
   private int requestedFramingRectHeight;
   /**
@@ -62,6 +68,7 @@ public final class CameraManager {
 
   public CameraManager(Context context) {
     this.context = context;
+    windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
     this.configManager = new CameraConfigurationManager(context);
     previewCallback = new PreviewCallback(configManager);
   }
@@ -101,6 +108,7 @@ public final class CameraManager {
       // Driver failed
       Log.w(TAG, "Camera rejected parameters. Setting only minimal safe-mode parameters");
       Log.i(TAG, "Resetting to saved camera params: " + parametersFlattened);
+        re.printStackTrace();
       // Reset:
       if (parametersFlattened != null) {
         parameters = theCamera.getParameters();
@@ -166,7 +174,7 @@ public final class CameraManager {
    * Convenience method for {@link com.google.zxing.client.android.CaptureActivity}
    */
   public synchronized void setTorch(boolean newSetting) {
-    if (newSetting != configManager.getTorchState(camera)) {
+    /*if (newSetting != configManager.getTorchState(camera)) {
       if (camera != null) {
         if (autoFocusManager != null) {
           autoFocusManager.stop();
@@ -176,7 +184,8 @@ public final class CameraManager {
           autoFocusManager.start();
         }
       }
-    }
+    }*/
+      /* TODO: Implement */
   }
 
   /**
@@ -217,8 +226,10 @@ public final class CameraManager {
       int height = findDesiredDimensionInRange(screenResolution.y, MIN_FRAME_HEIGHT, MAX_FRAME_HEIGHT);
 
       int leftOffset = (screenResolution.x - width) / 2;
-      int topOffset = (screenResolution.y - height) / 2;
-      framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
+        int topOffset, bottomOffset;
+        topOffset = (screenResolution.y - height) / 2;
+        bottomOffset =  topOffset + height;
+        framingRect = new Rect(leftOffset, topOffset, leftOffset + width, bottomOffset);
       Log.d(TAG, "Calculated framing rect: " + framingRect);
     }
     return framingRect;
@@ -240,7 +251,8 @@ public final class CameraManager {
    * not UI / screen.
    */
   public synchronized Rect getFramingRectInPreview() {
-    if (framingRectInPreview == null) {
+    if (framingRectInPreview == null || previewFrameDirty) {
+      previewFrameDirty = false;
       Rect framingRect = getFramingRect();
       if (framingRect == null) {
         return null;
@@ -252,11 +264,24 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
-      rect.left = rect.left * cameraResolution.x / screenResolution.x;
-      rect.right = rect.right * cameraResolution.x / screenResolution.x;
-      rect.top = rect.top * cameraResolution.y / screenResolution.y;
-      rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
-      framingRectInPreview = rect;
+        Display display = windowManager.getDefaultDisplay();
+
+        int rotation = display.getRotation();
+
+        if (rotation == Surface.ROTATION_0) {
+            rect.left = rect.left * cameraResolution.y / screenResolution.x;
+            rect.right = rect.right * cameraResolution.y / screenResolution.x;
+            rect.top = rect.top * cameraResolution.x / screenResolution.y;
+            rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
+        }
+        else {
+            rect.left = rect.left * cameraResolution.x / screenResolution.x;
+            rect.right = rect.right * cameraResolution.x / screenResolution.x;
+            rect.top = rect.top * cameraResolution.y / screenResolution.y;
+            rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+        }
+
+        framingRectInPreview = rect;
     }
     return framingRectInPreview;
   }
@@ -286,25 +311,51 @@ public final class CameraManager {
       requestedFramingRectWidth = width;
       requestedFramingRectHeight = height;
     }
+      previewFrameDirty = true;
   }
 
-  /**
-   * A factory method to build the appropriate LuminanceSource object based on the format
-   * of the preview buffers, as described by Camera.Parameters.
-   *
-   * @param data A preview frame.
-   * @param width The width of the image.
-   * @param height The height of the image.
-   * @return A PlanarYUVLuminanceSource instance.
-   */
-  public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
-    Rect rect = getFramingRectInPreview();
-    if (rect == null) {
-      return null;
+    /**
+     * A factory method to build the appropriate LuminanceSource object based on the format
+     * of the preview buffers, as described by Camera.Parameters.
+     *
+     * @param data A preview frame.
+     * @param width The width of the image.
+     * @param height The height of the image.
+     * @return A PlanarYUVLuminanceSource instance.
+     */
+    public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
+        /**
+         * Hack of orientation
+         */
+        Display display = windowManager.getDefaultDisplay();
+
+        int rotation = display.getRotation();
+
+        byte[] rotatedData = new byte[data.length];
+        if(width * height > data.length)
+        {
+            throw new ArrayIndexOutOfBoundsException("Width * height > data.length!! .. width: " + width + " height: " + height + " length: " + data.length);
+        }
+        if (rotation == Surface.ROTATION_0) {
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++)
+                    rotatedData[x * height + height - y - 1] = data[x + y * width];
+            }
+            int tmp = width;
+            width = height;
+            height = tmp;
+        }
+        else {
+            rotatedData = null;
+        }
+
+        Rect rect = getFramingRectInPreview();
+        if (rect == null) {
+            return null;
+        }
+        // Go ahead and assume it's YUV rather than die.
+        return new PlanarYUVLuminanceSource(rotation == Surface.ROTATION_0 ? rotatedData: data, width, height, rect.left, rect.top,
+                rect.width(), rect.height(), false);
     }
-    // Go ahead and assume it's YUV rather than die.
-    return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
-                                        rect.width(), rect.height(), false);
-  }
 
 }
