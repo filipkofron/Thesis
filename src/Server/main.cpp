@@ -1,22 +1,29 @@
 #include <iostream>
+#include <cppconn/driver.h>
+#include <cppconn/connection.h>
+#include <cppconn/exception.h>
+#include <cppconn/statement.h>
+#include <cppconn/prepared_statement.h>
 
 using namespace std;
 
+
 int main()
 {
-    cout << "Hello World!" << endl;
-    struct test_s
+    try
     {
-        int a;
-        float b;
-    };
-
-    test_s test[] = {{1, 3.14159f}};
-
-    for(test_s val : test)
-    {
-        cout << "val: " << val.a << ", " << val.b << endl;
+        auto driver = get_driver_instance();
+        auto connection = driver->connect("tcp://localhost:3306/", "root", "toor");
+        connection->setAutoCommit(true);
+        cout << "getClientInfo: " << connection->getClientInfo() << endl;
+        connection->close();
+        delete connection;
     }
+    catch(sql::SQLException &e)
+    {
+        cerr << "Error: " << e.what() << endl;
+    }
+
     return 0;
 }
 
