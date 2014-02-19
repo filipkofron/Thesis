@@ -17,6 +17,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -246,10 +247,28 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback {
          } */
 
         //Toast.makeText(, resultHandler.getDisplayContents(), 1);
-
-        Toast.makeText(getActivity().getApplicationContext(), resultHandler.getDisplayContents(), 1).show();
+        presentResult(resultHandler);
 
         restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
+    }
+
+    public void presentResult(ResultHandler resultHandler)
+    {
+        View view = getActivity().findViewById(R.id.scan_status_layout);
+        TextView textView = (TextView) getActivity().findViewById(R.id.scan_status_text);
+        textView.setText(getResources().getText(R.string.scan_status_found) + " " + resultHandler.getDisplayContents());
+        view.setBackgroundColor(getResources().getColor(R.color.scan_status_found));
+        if (captureHandler != null) {
+            captureHandler.sendEmptyMessageDelayed(R.id.scan_status_reset, BULK_MODE_SCAN_DELAY_MS * 2);
+        }
+    }
+
+    public void resetResult()
+    {
+        View view = getActivity().findViewById(R.id.scan_status_layout);
+        view.setBackgroundColor(getResources().getColor(R.color.scan_status_searching));
+        TextView textView = (TextView) getActivity().findViewById(R.id.scan_status_text);
+        textView.setText(getResources().getText(R.string.scan_status_scanning));
     }
 
     public void restartPreviewAfterDelay(long delayMS) {

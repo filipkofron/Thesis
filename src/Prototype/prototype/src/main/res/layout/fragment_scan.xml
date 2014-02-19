@@ -25,12 +25,13 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/scan_status_searching">
+        android:background="@color/scan_status_searching"
+        android:id="@+id/scan_status_layout">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:id="@+id/scan_status_text"
             android:layout_gravity="center_horizontal"
             android:layout_margin="15dp"
             android:typeface="normal"

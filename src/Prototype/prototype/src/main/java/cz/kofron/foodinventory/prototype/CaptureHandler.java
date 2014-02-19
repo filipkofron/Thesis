@@ -81,6 +81,9 @@ public class CaptureHandler extends Handler {
             case R.id.restart_preview:
                 restartPreviewAndDecode();
                 break;
+            case R.id.scan_status_reset:
+                scanFragment.resetResult();
+                break;
             case R.id.decode_succeeded:
                 state = State.SUCCESS;
                 Bundle bundle = message.getData();
