@@ -5,6 +5,10 @@
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 
+#include "Entity/DAO/UserDAOImpl.hpp"
+
+#include "Util/SHA256.hpp"
+
 using namespace std;
 
 
@@ -23,6 +27,13 @@ int main()
     {
         cerr << "Error: " << e.what() << endl;
     }
+
+    UserDAOImpl daoImpl;
+    UserDAO &dao = daoImpl;
+    User user = User::makeUser("pepa", "zdepa", dao);
+
+    cout << "Salt: " << user.getSalt() << endl;
+    cout << "Hash: " << user.getPassword() << endl;
 
     return 0;
 }
