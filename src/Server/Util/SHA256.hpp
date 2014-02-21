@@ -5,7 +5,8 @@
 #include <sstream>
 #include <iomanip>
 
-extern "C" {
+extern "C"
+{
     #include <openssl/sha.h>
 }
 
