@@ -4,10 +4,13 @@
 #include <cppconn/exception.h>
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
+#include <jsoncpp/json/writer.h>
 
 #include "Entity/DAO/UserDAOImpl.hpp"
 
 #include "Util/SHA256.hpp"
+
+#include "Protocol/LoginRequest.hpp"
 
 using namespace std;
 
@@ -28,13 +31,35 @@ int main()
         cerr << "Error: " << e.what() << endl;
     }
 
-    UserDAOImpl daoImpl;
-    UserDAO &dao = daoImpl;
-    User user = User::makeUser("pepa", "zdepa", dao);
+    Json::StyledWriter writer;
 
-    cout << "Salt: " << user.getSalt() << endl;
-    cout << "Hash: " << user.getPassword() << endl;
+
+    LoginRequest request("Lol", "Supertroll!");
+
+
+    Json::Value root;
+    request.jsonize(root);
+
+
+    std::cout << "Resp: " << writer.write(root) << std::endl;
+
+    Message *msg(Message::dejsonize(root));
+
+    if(!msg)
+    {
+        std::cout << "Error!" << std::endl;
+        return 1;
+    }
+
+    std::cout << "header: " << msg->getHeader() << std::endl;
+
+    LoginRequest *recv((LoginRequest *) msg);
+
+    Handler *handler = recv->createHandler();
+    ClientContext context;
+    handler->handle(context);
+    delete handler;
+    delete recv;
 
     return 0;
 }
-

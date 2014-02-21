@@ -6,5 +6,9 @@ list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -O0 -pedantic -Wall 
 
 add_subdirectory(Entity)
 add_subdirectory(Util)
+add_subdirectory(Client)
+add_subdirectory(Handler)
+add_subdirectory(Protocol)
+add_subdirectory(Database)
 
-target_link_libraries(${PROJECT_NAME} entity_dao entity util mysqlcppconn ssl crypto)
+target_link_libraries(${PROJECT_NAME} jsoncpp database entity_dao client protocol handler entity util mysqlcppconn ssl crypto)
