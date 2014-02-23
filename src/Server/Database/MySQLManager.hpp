@@ -3,9 +3,38 @@
 
 class MySQLManager;
 
+#include <queue>
+#include <mutex>
+
+#include <cppconn/driver.h>
+#include <cppconn/connection.h>
+
 class MySQLManager
 {
+private:
+    std::recursive_mutex queueMutex;
+    std::queue<sql::Connection *> connections;
+    sql::Driver *driver;
+    sql::Connection *getConnection();
+    sql::Connection *openNewConnection();
+    void returnConnection(sql::Connection *conn);
+public:
+    class ConnectionHolder
+    {
+    private:
+        MySQLManager *mysqlManager;
+    public:
+        ConnectionHolder(MySQLManager *mysqlManager);
+        ~ConnectionHolder();
+        sql::Connection * const conn;
+    };
 
+    MySQLManager();
+    ~MySQLManager();
+
+    void closeAll();
+
+    static MySQLManager *getInstance();
 };
 
 #endif

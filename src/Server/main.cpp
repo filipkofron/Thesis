@@ -6,11 +6,10 @@
 #include <cppconn/prepared_statement.h>
 #include <jsoncpp/json/writer.h>
 
-#include "Entity/DAO/UserDAOImpl.hpp"
-
 #include "Util/SHA256.hpp"
 
 #include "Protocol/LoginRequest.hpp"
+#include "Database/MySQLManager.hpp"
 
 using namespace std;
 
@@ -60,6 +59,16 @@ int main()
     handler->handle(context);
     delete handler;
     delete recv;
+
+    root.clear();
+
+    root["database"]["mysql"]["address"] = "tcp://localhost:3306/";
+    root["database"]["mysql"]["username"] = "root";
+    root["database"]["mysql"]["password"] = "toor";
+
+    std::cout << writer.write(root) << std::endl;
+
+    MySQLManager::ConnectionHolder connHolder(MySQLManager::getInstance());
 
     return 0;
 }

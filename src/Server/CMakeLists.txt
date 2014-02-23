@@ -4,6 +4,7 @@ aux_source_directory(. SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -O0 -pedantic -Wall -g -ftest-coverage -fprofile-arcs")
 
+add_subdirectory(Config)
 add_subdirectory(Entity)
 add_subdirectory(Util)
 add_subdirectory(Client)
@@ -11,4 +12,4 @@ add_subdirectory(Handler)
 add_subdirectory(Protocol)
 add_subdirectory(Database)
 
-target_link_libraries(${PROJECT_NAME} jsoncpp database entity_dao client protocol handler entity util mysqlcppconn ssl crypto)
+target_link_libraries(${PROJECT_NAME} jsoncpp database database_dao entity_dao client protocol handler entity util mysqlcppconn ssl crypto config)

@@ -48,7 +48,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Food` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `ean13` VARCHAR(13) NULL,
+  `gtin` VARCHAR(16) NULL,
   `name` VARCHAR(64) NULL,
   `description` TEXT NULL,
   `category_id` INT NOT NULL,
@@ -57,12 +57,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Food` (
   `amount` FLOAT NULL,
   `user_id` INT NOT NULL,
   `price` FLOAT NULL,
-  `Vendor_id` INT NOT NULL,
+  `vendor_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Food_Category_idx` (`category_id` ASC),
   INDEX `NAME` (`name` ASC),
   INDEX `fk_Food_User1_idx` (`user_id` ASC),
-  INDEX `fk_Food_Vendor1_idx` (`Vendor_id` ASC),
+  INDEX `fk_Food_Vendor1_idx` (`vendor_id` ASC),
+  UNIQUE INDEX `gtin_UNIQUE` (`gtin` ASC),
   CONSTRAINT `fk_Food_Category`
     FOREIGN KEY (`category_id`)
     REFERENCES `mydb`.`Category` (`id`)
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Food` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Food_Vendor1`
-    FOREIGN KEY (`Vendor_id`)
+    FOREIGN KEY (`vendor_id`)
     REFERENCES `mydb`.`Vendor` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
