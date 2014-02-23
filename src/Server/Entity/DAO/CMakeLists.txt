@@ -1,7 +1,12 @@
 set(entity_dao_source_files
+  CategoryDAO.hpp
+  EditDAO.hpp
+  FoodDAO.hpp
+  ImageDAO.hpp
+  InventoryDAO.hpp
+  ReviewDAO.hpp
   UserDAO.hpp
-  UserDAOImpl.hpp
-  UserDAOImpl.cpp
+  VendorDAO.hpp
   DAOException.hpp
   DAOException.cpp
 )
