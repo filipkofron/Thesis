@@ -68,7 +68,13 @@ int main()
 
     std::cout << writer.write(root) << std::endl;
 
-    MySQLManager::ConnectionHolder connHolder(MySQLManager::getInstance());
+    MySQLManager::ConnectionHolder *connHolder = new MySQLManager::ConnectionHolder(MySQLManager::getInstance());
+    for(int i = 0; i < 10; i++)
+    {
+        MySQLManager::ConnectionHolder *connHolder2 = new MySQLManager::ConnectionHolder(MySQLManager::getInstance());
+        delete connHolder2;
+    }
+    delete connHolder;
 
     return 0;
 }

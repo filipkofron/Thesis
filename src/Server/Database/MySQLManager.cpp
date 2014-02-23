@@ -18,9 +18,10 @@ MySQLManager::~MySQLManager()
 
 void MySQLManager::closeAll()
 {
-    std::lock_guard<std::recursive_mutex> lock(queueMutex);
+    std::lock_guard<std::mutex> lock(queueMutex);
     while (!connections.empty())
     {
+        std::cout << "Closing a connection!" << std::endl;
         connections.front()->close();
         delete connections.front();
         connections.pop();
@@ -36,7 +37,7 @@ MySQLManager *MySQLManager::getInstance()
 
 sql::Connection *MySQLManager::getConnection()
 {
-    std::lock_guard<std::recursive_mutex> lock(queueMutex);
+    std::lock_guard<std::mutex> lock(queueMutex);
 
     sql::Connection *connection = nullptr;
 
@@ -80,7 +81,7 @@ sql::Connection *MySQLManager::openNewConnection()
 
 void MySQLManager::returnConnection(sql::Connection *conn)
 {
-    std::lock_guard<std::recursive_mutex> lock(queueMutex);
+    std::lock_guard<std::mutex> lock(queueMutex);
 
     if(conn->isClosed())
     {

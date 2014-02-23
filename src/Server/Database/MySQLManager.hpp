@@ -12,7 +12,7 @@ class MySQLManager;
 class MySQLManager
 {
 private:
-    std::recursive_mutex queueMutex;
+    std::mutex queueMutex;
     std::queue<sql::Connection *> connections;
     sql::Driver *driver;
     sql::Connection *getConnection();
