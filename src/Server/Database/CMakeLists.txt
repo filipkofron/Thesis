@@ -3,3 +3,5 @@ set(database_source_files
   MySQLManager.cpp
 )
 add_library(database ${database_source_files})
+
+add_subdirectory(DAO)
