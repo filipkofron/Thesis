@@ -5,7 +5,7 @@ class FoodDAOMySQL;
 
 #include "../../Entity/DAO/FoodDAO.hpp"
 
-class FoodDAOMySQL
+class FoodDAOMySQL : public FoodDAO
 {
 public:
     FoodDAOMySQL() { }

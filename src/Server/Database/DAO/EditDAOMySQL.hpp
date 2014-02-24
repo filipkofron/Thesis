@@ -5,7 +5,7 @@ class EditDAOMySQL;
 
 #include "../../Entity/DAO/EditDAO.hpp"
 
-class EditDAOMySQL
+class EditDAOMySQL : public EditDAO
 {
 public:
     EditDAOMySQL() { }
