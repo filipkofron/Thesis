@@ -1,7 +1,12 @@
 #include "DAOException.hpp"
 
-DAOException::DAOException(const std::string &message)
+DAOException::DAOException(const char *message)
     : message(message)
 {
 
+}
+
+const char *DAOException::what()
+{
+    return message;
 }

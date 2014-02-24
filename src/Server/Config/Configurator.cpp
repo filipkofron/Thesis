@@ -42,3 +42,8 @@ std::string Configurator::getMySQLServerPassword()
 {
     return root["database"]["mysql"]["password"].asString();
 }
+
+std::string Configurator::getMySQLServerDatabase()
+{
+    return root["database"]["mysql"]["database"].asString();
+}

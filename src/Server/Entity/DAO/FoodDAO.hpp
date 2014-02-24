@@ -24,7 +24,7 @@ public:
     virtual std::vector<Food> getFoodByUserId(const int &userId) = 0;
     virtual std::vector<Food> getFoodByCategoryId(const int &categoryId) = 0;
     virtual std::vector<Food> getFoodByVendorId(const int &vendorId) = 0;
-    virtual std::vector<Food> getAllFood() = 0;
+    virtual std::vector<Food> getAllFood(const int &offset, const int &max) = 0;
 };
 
 #endif

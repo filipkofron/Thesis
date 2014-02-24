@@ -1,7 +1,10 @@
 #ifndef _FOOD_HPP_
 #define _FOOD_HPP_
 
+class Food;
+
 #include <string>
+#define MAX_GTIN_LENGTH 14
 
 class Food
 {
@@ -41,8 +44,8 @@ public:
     const int &getAmountMeasure() const;
     const float &getAmount() const;
     const int &getUserId() const;
-    const float &getPrice();
-    const int &getVendorId();
+    const float &getPrice() const;
+    const int &getVendorId() const;
 
     void setGtin(const std::string &gtin);
     void setName(const std::string &name);
@@ -54,6 +57,8 @@ public:
     void setUserId(const int &userId);
     void setPrice(const float &price);
     void setVendorId(const int &vendorId);
+
+    static std::string fixGtin(const std::string &plain);
 };
 
 #endif

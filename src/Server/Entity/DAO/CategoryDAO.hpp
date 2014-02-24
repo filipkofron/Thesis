@@ -14,7 +14,7 @@ public:
     CategoryDAO() { }
     virtual ~CategoryDAO() { }
 
-    virtual void addCategory(Category &cagoryte, int &newId) = 0;
+    virtual void addCategory(Category &category, int &newId) = 0;
     virtual void deleteCategory(Category &category) = 0;
     virtual void updateCategory(const Category &category) = 0;
     virtual Category getCategoryByName(const std::string &name) = 0;

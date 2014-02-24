@@ -32,9 +32,9 @@ void User::setUserName(const std::string &username)
     this->username = username;
 }
 
-void User::setPassword(const std::string &password)
+void User::setPassword(const std::string &plainPassword)
 {
-    this->password = password;
+    this->password = calculateHash(username, plainPassword, salt);
 }
 
 void User::setSalt(const std::string &salt)
@@ -66,4 +66,9 @@ User User::makeUser(const std::string &username, const std::string &plainPasswor
     user.id = newId;
 
     return user;
+}
+
+bool User::checkPassword(const std::string &plainPassword) const
+{
+    return password.compare(calculateHash(username, plainPassword, salt)) == 0;
 }

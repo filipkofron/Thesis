@@ -1,5 +1,24 @@
 #include "Food.hpp"
 
+static const char *prefixes[] =
+{
+    "Z", // 0
+    "Z", // 1
+    "Z", // 2
+    "Z", // 3
+    "Z", // 4
+    "Z", // 5
+    "Z", // 6
+    "Z", // 7
+    "A", // 8
+    "Z", // 9
+    "Z", // 10
+    "Z", // 11
+    "B", // 12
+    "C", // 13
+    "D", // 14
+};
+
 Food::Food()
 {
 
@@ -16,7 +35,7 @@ Food::Food(const int &id,
      const int &userId,
      const float &price,
      const int &vendorId)
-    : id(id), gtin(gtin), name(name), description(description), categoryId(categoryId), defaultUseBy(defaultUseBy),
+    : id(id), gtin(fixGtin(gtin)), name(name), description(description), categoryId(categoryId), defaultUseBy(defaultUseBy),
       amountMeasure(amountMeasure), amount(amount), userId(userId), price(price), vendorId(vendorId)
 {
 
@@ -67,19 +86,19 @@ const int &Food::getUserId() const
     return userId;
 }
 
-const float &Food::getPrice()
+const float &Food::getPrice() const
 {
     return price;
 }
 
-const int &Food::getVendorId()
+const int &Food::getVendorId() const
 {
     return vendorId;
 }
 
 void Food::setGtin(const std::string &gtin)
 {
-    this->gtin = gtin;
+    this->gtin = fixGtin(gtin);
 }
 
 void Food::setName(const std::string &name)
@@ -125,4 +144,38 @@ void Food::setPrice(const float &price)
 void Food::setVendorId(const int &vendorId)
 {
     this->vendorId = vendorId;
+}
+
+std::string Food::fixGtin(const std::string &plain)
+{
+    std::string temp("");
+    int len = plain.length();
+
+    if(len >= 15)
+    {
+        /*
+         * Already fixed or fail value!
+         */
+        return plain;
+    }
+
+    /*
+     * Assign a prefix:
+     * "A" - GTIN 8
+     * "B" - GTIN 12
+     * "C" - GTIN 13
+     * "D" - GTIN 14
+     */
+    const char *prefix = prefixes[len];
+
+    temp.append(prefix);
+
+    for(int i = 0; i < MAX_GTIN_LENGTH - len; i++)
+    {
+        temp.append("0");
+    }
+
+    temp.append(plain);
+
+    return temp;
 }

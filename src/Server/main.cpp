@@ -6,10 +6,16 @@
 #include <cppconn/prepared_statement.h>
 #include <jsoncpp/json/writer.h>
 
+#include "Entity/DAO/DAOException.hpp"
+
+#include "Entity/Food.hpp"
+
 #include "Util/SHA256.hpp"
 
 #include "Protocol/LoginRequest.hpp"
 #include "Database/MySQLManager.hpp"
+
+#include "Database/DAO/UserDAOMySQL.hpp"
 
 using namespace std;
 
@@ -75,6 +81,26 @@ int main()
         delete connHolder2;
     }
     delete connHolder;
+
+    UserDAOMySQL dao;
+
+    try
+    {
+        //User test = User::makeUser("pepa", "zdepa", dao);
+        User test = dao.getUserByUsername("pepa");
+        std::cout << "test: " << test.getId() << " - " << test.getUserName() << " - " << test.getPassword() << " - " << test.getSalt() << std::endl;
+        std::cout << "Check pass: " << test.checkPassword("zdepa") << std::endl;
+        test.setPassword("zdepa");
+        dao.updateUser(test);
+    }
+    catch(sql::SQLException &e)
+    {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
+    catch(DAOException &e)
+    {
+        std::cerr << "Exception: " << e.what() << std::endl;
+    }
 
     return 0;
 }

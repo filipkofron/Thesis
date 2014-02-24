@@ -8,9 +8,10 @@ class DAOException;
 class DAOException
 {
 private:
-    std::string message;
+    const char *message;
 public:
-    DAOException(const std::string &message);
+    DAOException(const char *message);
+    const char *what();
 };
 
 #endif

@@ -1,8 +1,11 @@
 #include "MySQLManager.hpp"
 
 #include <iostream>
+#include <memory>
 
 #include <cppconn/exception.h>
+#include <cppconn/prepared_statement.h>
+#include <cppconn/resultset.h>
 
 #include "../Config/Configurator.hpp"
 
@@ -74,9 +77,12 @@ sql::Connection *MySQLManager::openNewConnection()
     std::cout << "Opening a new connection with: " << Configurator::getInstance()->getMySQLServerAddress() << " - " <<
                  Configurator::getInstance()->getMySQLServerUsername() << " - " <<
                  Configurator::getInstance()->getMySQLServerPassword() << std::endl;
-    return driver->connect(Configurator::getInstance()->getMySQLServerAddress(),
-                           Configurator::getInstance()->getMySQLServerUsername(),
-                           Configurator::getInstance()->getMySQLServerPassword());
+    sql::Connection *conn = driver->connect(Configurator::getInstance()->getMySQLServerAddress(),
+                                            Configurator::getInstance()->getMySQLServerUsername(),
+                                            Configurator::getInstance()->getMySQLServerPassword());
+    conn->setAutoCommit(true);
+    conn->setSchema(Configurator::getInstance()->getMySQLServerDatabase());
+    return conn;
 }
 
 void MySQLManager::returnConnection(sql::Connection *conn)
@@ -107,4 +113,13 @@ MySQLManager::ConnectionHolder::~ConnectionHolder()
     {
         mysqlManager->returnConnection(conn);
     }
+}
+
+static const char * LAST_ID = "SELECT LAST_INSERT_ID()";
+
+int MySQLManager::lastGeneratedId(sql::Connection *conn)
+{
+    std::unique_ptr<sql::PreparedStatement> ps(conn->prepareStatement(LAST_ID));
+    std::unique_ptr<sql::ResultSet> rs(ps->executeQuery());
+    return rs->next() ? rs->getInt(1) : 0;
 }

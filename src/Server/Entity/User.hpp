@@ -27,10 +27,12 @@ public:
     static std::string calculateHash(const std::string &username, const std::string &plainPassword, const std::string &salt);
 
     void setUserName(const std::string &username);
-    void setPassword(const std::string &password);
+    void setPassword(const std::string &plainPassword);
     void setSalt(const std::string &salt);
 
     static User makeUser(const std::string &username, const std::string &password, UserDAO &userDAO);
+
+    bool checkPassword(const std::string &plainPassword) const;
 };
 
 #endif

@@ -18,6 +18,7 @@ public:
     std::string getMySQLServerAddress();
     std::string getMySQLServerUsername();
     std::string getMySQLServerPassword();
+    std::string getMySQLServerDatabase();
 };
 
 #define DEFAULT_JSON_DOCUMENT \
@@ -26,7 +27,8 @@ public:
       "\"mysql\" : {" \
          "\"address\" : \"tcp://localhost:3306/\"," \
          "\"password\" : \"toor\"," \
-         "\"username\" : \"root\"" \
+         "\"username\" : \"root\"," \
+         "\"database\" : \"mydb\"" \
       "}" \
    "}" \
 "}"

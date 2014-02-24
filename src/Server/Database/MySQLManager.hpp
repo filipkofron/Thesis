@@ -32,6 +32,8 @@ public:
     MySQLManager();
     ~MySQLManager();
 
+    static int lastGeneratedId(sql::Connection *conn);
+
     void closeAll();
 
     static MySQLManager *getInstance();
