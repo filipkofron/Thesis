@@ -47,3 +47,23 @@ std::string Configurator::getMySQLServerDatabase()
 {
     return root["database"]["mysql"]["database"].asString();
 }
+
+int Configurator::getNetworkClientMaxBuffer()
+{
+    return root["network"]["client"]["max_buffer"].asInt();
+}
+
+int Configurator::getNetworkServerListenPort()
+{
+    return root["network"]["server"]["listen_port"].asInt();
+}
+
+int Configurator::getNetworkServerBackLog()
+{
+    return root["network"]["server"]["back_log"].asInt();
+}
+
+int Configurator::getNetworkServerMaxClients()
+{
+    return root["network"]["server"]["max_clients"].asInt();
+}

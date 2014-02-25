@@ -17,6 +17,8 @@
 
 #include "Database/DAO/UserDAOMySQL.hpp"
 
+#include "Network/Server.hpp"
+
 using namespace std;
 
 
@@ -61,7 +63,7 @@ int main()
     LoginRequest *recv((LoginRequest *) msg);
 
     Handler *handler = recv->createHandler();
-    ClientContext context;
+    Context context;
     handler->handle(context);
     delete handler;
     delete recv;
@@ -71,6 +73,10 @@ int main()
     root["database"]["mysql"]["address"] = "tcp://localhost:3306/";
     root["database"]["mysql"]["username"] = "root";
     root["database"]["mysql"]["password"] = "toor";
+    root["network"]["client"]["max_buffer"] = 1024 * 128;
+    root["network"]["server"]["max_clients"] = 256;
+    root["network"]["server"]["listen_port"] = 4040;
+    root["network"]["server"]["back_log"] = 32;
 
     std::cout << writer.write(root) << std::endl;
 
@@ -101,6 +107,10 @@ int main()
     {
         std::cerr << "Exception: " << e.what() << std::endl;
     }
+
+    Server server;
+    server.initialize();
+    server.run();
 
     return 0;
 }

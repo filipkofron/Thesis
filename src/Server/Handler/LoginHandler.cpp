@@ -6,7 +6,7 @@ LoginHandler::LoginHandler(LoginRequest *request)
 
 }
 
-void LoginHandler::handle(ClientContext &clientContext)
+void LoginHandler::handle(Context &context)
 {
     // TODO: Handle login!
 }

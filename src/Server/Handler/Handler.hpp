@@ -3,13 +3,13 @@
 
 class Handler;
 
-#include "../Client/ClientContext.hpp"
+#include "../Client/Context.hpp"
 
 class Handler
 {
 public:
     virtual ~Handler();
-    virtual void handle(ClientContext &clientContext) = 0;
+    virtual void handle(Context &context) = 0;
 };
 
 

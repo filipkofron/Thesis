@@ -13,7 +13,7 @@ private:
 public:
     LoginHandler(LoginRequest *request);
     virtual ~LoginHandler();
-    virtual void handle(ClientContext &clientContext) override;
+    virtual void handle(Context &context) override;
 };
 
 #endif

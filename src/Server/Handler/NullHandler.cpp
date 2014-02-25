@@ -5,7 +5,7 @@ NullHandler::~NullHandler()
 
 }
 
-void NullHandler::handle(ClientContext &clientContext)
+void NullHandler::handle(Context &context)
 {
 
 }

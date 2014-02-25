@@ -19,6 +19,10 @@ public:
     std::string getMySQLServerUsername();
     std::string getMySQLServerPassword();
     std::string getMySQLServerDatabase();
+    int getNetworkClientMaxBuffer();
+    int getNetworkServerListenPort();
+    int getNetworkServerBackLog();
+    int getNetworkServerMaxClients();
 };
 
 #define DEFAULT_JSON_DOCUMENT \
@@ -30,7 +34,17 @@ public:
          "\"username\" : \"root\"," \
          "\"database\" : \"mydb\"" \
       "}" \
-   "}" \
+   "}," \
+    "\"network\" : {" \
+          "\"client\" : {" \
+    "\"max_buffer\" : 131072" \
+            "}," \
+            "\"server\" : {" \
+            "\"listen_port\" : 4040," \
+            "\"back_log\" : 32," \
+            "\"max_clients\" : 256" \
+"}" \
+"    }" \
 "}"
 
 #endif
