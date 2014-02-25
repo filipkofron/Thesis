@@ -2,7 +2,7 @@ project(Server)
 cmake_minimum_required(VERSION 2.8)
 aux_source_directory(. SRC_LIST)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
-list( APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -O0 -pedantic -Wall -g -ftest-coverage -fprofile-arcs")
+list( APPEND CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -O0 -pedantic -Wall -g -ftest-coverage -fprofile-arcs")
 
 add_subdirectory(Config)
 add_subdirectory(Entity)

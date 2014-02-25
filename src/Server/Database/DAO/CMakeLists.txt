@@ -9,5 +9,11 @@ set(database_dao_source_files
   FoodDAOMySQL.cpp
   ImageDAOMySQL.hpp
   ImageDAOMySQL.cpp
+  InventoryDAOMySQL.hpp
+  InventoryDAOMySQL.cpp
+  ReviewDAOMySQL.hpp
+  ReviewDAOMySQL.cpp
+  VendorDAOMySQL.hpp
+  VendorDAOMySQL.cpp
 )
 add_library(database_dao ${database_dao_source_files})
