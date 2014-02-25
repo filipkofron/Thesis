@@ -45,3 +45,15 @@ void Image::setUserId(const int &userId)
 {
     this->userId = userId;
 }
+
+Image Image::makeImage(const std::string &description, const int &foodId, const int &userId, ImageDAO &dao)
+{
+    Image image(0, description, foodId, userId);
+
+    int newId = 0;
+
+    dao.addImage(image, newId);
+    image.id = newId;
+
+    return image;
+}

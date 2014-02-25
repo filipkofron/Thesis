@@ -65,3 +65,15 @@ void Review::setRating(const float &rating)
 {
     this->rating = rating;
 }
+
+Review Review::makeReview(const int &userId, const std::string &addedOn, const std::string &reviewText, const int &foodId, const float &rating, ReviewDAO &dao)
+{
+    Review review(0, userId, addedOn, reviewText, foodId, rating);
+
+    int newId = 0;
+    dao.addReview(review, newId);
+
+    review.id = newId;
+
+    return review;
+}

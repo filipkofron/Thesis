@@ -179,3 +179,26 @@ std::string Food::fixGtin(const std::string &plain)
 
     return temp;
 }
+
+Food Food::makeFood(const std::string &gtin,
+                          const std::string &name,
+                          const std::string &description,
+                          const int &categoryId,
+                          const long &defaultUseBy,
+                          const int &amountMeasure,
+                          const float &amount,
+                          const int &userId,
+                          const float &price,
+                          const int &vendorId,
+                          FoodDAO &dao)
+{
+    Food food(0, gtin, name, description, categoryId, defaultUseBy, amountMeasure, amount, userId, price, vendorId);
+
+    int newId = 0;
+
+    dao.addFood(food, newId);
+
+    food.id = newId;
+
+    return food;
+}

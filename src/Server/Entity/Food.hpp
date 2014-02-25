@@ -4,6 +4,9 @@
 class Food;
 
 #include <string>
+
+#include "DAO/FoodDAO.hpp"
+
 #define MAX_GTIN_LENGTH 14
 
 class Food
@@ -59,6 +62,18 @@ public:
     void setVendorId(const int &vendorId);
 
     static std::string fixGtin(const std::string &plain);
+
+    static Food makeFood(const std::string &gtin,
+                          const std::string &name,
+                          const std::string &description,
+                          const int &categoryId,
+                          const long &defaultUseBy,
+                          const int &amountMeasure,
+                          const float &amount,
+                          const int &userId,
+                          const float &price,
+                          const int &vendorId,
+                          FoodDAO &dao);
 };
 
 #endif

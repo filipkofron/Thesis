@@ -55,3 +55,16 @@ void Edit::setMessage(const std::string &message)
 {
     this->message = message;
 }
+
+Edit Edit::makeEdit(const int &userId, const int &foodId, const std::string &editedOn, const std::string &message, EditDAO &dao)
+{
+    Edit edit(0, userId, foodId, editedOn, message);
+
+    int newId = 0;
+
+    dao.addEdit(edit, newId);
+
+    edit.id = newId;
+
+    return edit;
+}

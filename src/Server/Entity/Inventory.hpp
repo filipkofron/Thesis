@@ -3,6 +3,10 @@
 
 #include <string>
 
+class Inventory;
+
+#include "DAO/InventoryDAO.hpp"
+
 class Inventory
 {
 private:
@@ -22,6 +26,8 @@ public:
     void setUserId(const int &userId);
     void setFoodId(const int &foodId);
     void setUseBy(const std::string &useBy);
+
+    static Inventory makeInventory(const int &userId, const int &foodId, const std::string &useBy, InventoryDAO &dao);
 };
 
 #endif

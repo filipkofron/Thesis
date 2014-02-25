@@ -1,6 +1,10 @@
 #ifndef _CATEGORY_HPP_
 #define _CATEGORY_HPP_
 
+class Category;
+
+#include "DAO/CategoryDAO.hpp"
+
 #include <string>
 
 class Category
@@ -16,6 +20,8 @@ public:
     const std::string &getName() const;
 
     void setName(const std::string &name);
+
+    static Category makeCategory(const std::string &name, CategoryDAO &dao);
 };
 
 #endif

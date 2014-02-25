@@ -25,3 +25,16 @@ void Category::setName(const std::string &name)\
 {
     this->name = name;
 }
+
+Category Category::makeCategory(const std::string &name, CategoryDAO &dao)
+{
+    Category category(0, name);
+
+    int newId = 0;
+
+    dao.addCategory(category, newId);
+
+    category.id = newId;
+
+    return category;
+}

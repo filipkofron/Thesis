@@ -3,6 +3,10 @@
 
 #include <string>
 
+class Vendor;
+
+#include "DAO/VendorDAO.hpp"
+
 class Vendor
 {
 private:
@@ -16,6 +20,8 @@ public:
     const std::string &getName() const;
 
     void setName(const std::string &name);
+
+    static Vendor makeVendor(const std::string &name, VendorDAO &dao);
 };
 
 #endif

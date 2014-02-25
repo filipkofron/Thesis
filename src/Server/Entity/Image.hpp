@@ -3,6 +3,10 @@
 
 #include <string>
 
+class Image;
+
+#include "DAO/ImageDAO.hpp"
+
 class Image
 {
 private:
@@ -22,6 +26,8 @@ public:
     void setDescription(const std::string &description);
     void setFoodId(const int &foodId);
     void setUserId(const int &userId);
+
+    static Image makeImage(const std::string &description, const int &foodId, const int &userId, ImageDAO &dao);
 };
 
 #endif

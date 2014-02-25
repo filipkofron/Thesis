@@ -45,3 +45,15 @@ void Inventory::setUseBy(const std::string &useBy)
 {
     this->useBy = useBy;
 }
+
+Inventory Inventory::makeInventory(const int &userId, const int &foodId, const std::string &useBy, InventoryDAO &dao)
+{
+    Inventory inventory(0, userId, foodId, useBy);
+
+    int newId = 0;
+    dao.addInventory(inventory, newId);
+
+    inventory.id = newId;
+
+    return inventory;
+}

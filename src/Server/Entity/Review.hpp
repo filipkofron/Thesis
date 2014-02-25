@@ -3,6 +3,10 @@
 
 #include <string>
 
+class Review;
+
+#include "DAO/ReviewDAO.hpp"
+
 class Review
 {
 private:
@@ -28,6 +32,8 @@ public:
     void setReviewText(const std::string &reviewText);
     void setFoodId(const int &foodId);
     void setRating(const float &rating);
+
+    static Review makeReview(const int &userId, const std::string &addedOn, const std::string &reviewText, const int &foodId, const float &rating, ReviewDAO &dao);
 };
 
 #endif
