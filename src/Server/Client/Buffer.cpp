@@ -17,13 +17,14 @@ Buffer::~Buffer()
 
 void Buffer::prepare(size_t target)
 {
-    if(target > this->size)
+    if(target > size)
     {
         if(target >= maxSize)
         {
             throw BufferException("Buffer attempted to allocate more than MAX!");
         }
         bytes = (char *) realloc(bytes, target);
+        size = target;
     }
 }
 
@@ -35,6 +36,7 @@ void Buffer::reset()
 void Buffer::skip(int bytes)
 {
     position += bytes;
+    position %= size;
 }
 
 const int &Buffer::getPosition()
