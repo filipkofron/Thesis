@@ -1,4 +1,6 @@
 set(client_source_files
+  ClientThread.hpp
+  ClientThread.cpp
   Context.hpp
   Context.cpp
   BufferException.hpp

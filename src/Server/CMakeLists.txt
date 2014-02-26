@@ -13,4 +13,4 @@ add_subdirectory(Protocol)
 add_subdirectory(Database)
 add_subdirectory(Network)
 
-target_link_libraries(${PROJECT_NAME} jsoncpp database database_dao entity_dao client network protocol handler entity util mysqlcppconn ssl crypto config)
+target_link_libraries(${PROJECT_NAME} jsoncpp database database_dao entity_dao network client protocol handler entity util mysqlcppconn ssl crypto config)
