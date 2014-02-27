@@ -12,8 +12,9 @@ private:
     size_t size;
     int position;
     size_t maxSize;
-public:
     char *bytes;
+public:
+
     Buffer();
     ~Buffer();
 
@@ -21,7 +22,7 @@ public:
     void skip(int bytes);
     const int &getPosition();
     void prepare(size_t size);
-
+    char *getBytes();
 };
 
 #endif

@@ -20,7 +20,7 @@ public:
     virtual Handler *createHandler() override;
 
 protected:
-    virtual void _dejsonize(const Json::Value &content) override;
+    virtual void _dejsonize(Json::Value &content) override;
     virtual void _jsonize(Json::Value &content) override;
 };
 

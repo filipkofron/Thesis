@@ -11,14 +11,14 @@ class Message
 {
 protected:
     Message();
-    virtual void _dejsonize(const Json::Value &content) = 0;
+    virtual void _dejsonize(Json::Value &content) = 0;
     virtual void _jsonize(Json::Value &content) = 0;
 
 public:
     virtual std::string getHeader() = 0;
     virtual ~Message();
 
-    static Message *dejsonize(const Json::Value &root);
+    static Message *dejsonize(Json::Value &root);
     virtual void jsonize(Json::Value &root) final;
     virtual Handler *createHandler() = 0;
 };

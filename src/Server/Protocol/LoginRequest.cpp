@@ -32,7 +32,7 @@ Handler *LoginRequest::createHandler()
     return new LoginHandler(this);
 }
 
-void LoginRequest::_dejsonize(const Json::Value &content)
+void LoginRequest::_dejsonize(Json::Value &content)
 {
     username = content["username"].asString();
     password = content["password"].asString();

@@ -27,3 +27,6 @@ proguard/
 *.ipr
 *.iws
 .idea/
+/src/TestClient/nbproject/private/
+/src/TestClient/build/
+/src/TestClient/dist/

@@ -3,11 +3,10 @@
 #include "../Config/Configurator.hpp"
 #include "../Client/ClientThread.hpp"
 #include <sys/socket.h>
-
+#include <cstdio>
 #include <thread>
 #include <mutex>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <sys/ioctl.h>
 #include <sys/time.h>
 #include <netinet/in.h>
@@ -16,7 +15,7 @@
 #include <cstring>
 
 Server::Server()
-    : stopped(false)
+    : stopped(false), clientNum(0)
 {
 }
 
@@ -51,7 +50,7 @@ void Server::initialize()
     }
 
 
-    acceptTimeout.tv_sec  = 5;
+    acceptTimeout.tv_sec  = 30;
     acceptTimeout.tv_usec = 0;
 
     rc = setsockopt (listenSD, SOL_SOCKET, SO_RCVTIMEO, (char *) &acceptTimeout, sizeof(acceptTimeout));
@@ -71,16 +70,34 @@ void Server::initialize()
     std::cout << "Started server on port " << port << std::endl;
 }
 
+void Server::addrToStr(char *buffer, int bufLen, const sockaddr_in &addr)
+{
+    const char *ad = (const char *) &addr.sin_addr;
+
+    snprintf(buffer, bufLen, "%d.%d.%d.%d", ((int) ad[0]) & 0xFF, ((int) ad[1]) & 0xFF, ((int) ad[2]) & 0xFF, ((int) ad[3]) & 0xFF);
+}
+
 void Server::handleClient(int clientSD, sockaddr_in clientAddr)
 {
     std::lock_guard<std::mutex> lock(clientMutex);
-
     std::shared_ptr<Context> context(new Context());
+
+    timeval clientTimeout;
+
+    clientTimeout.tv_sec  = 10;
+    clientTimeout.tv_usec = 0;
+
+    setsockopt (clientSD, SOL_SOCKET, SO_RCVTIMEO, (char *) &clientTimeout, sizeof(clientTimeout));
+    setsockopt (clientSD, SOL_SOCKET, SO_SNDTIMEO, (char *) &clientTimeout, sizeof(clientTimeout));
+
     context->setServer(this);
     context->setClientSD(clientSD);
+    addrToStr(context->getAddr(), CONTEXT_ADDR_BUFFER_LEN, clientAddr);
+    context->setPort((int) clientAddr.sin_port);
 
     clients[clientSD] = context;
     context->setThread(std::shared_ptr<std::thread> (new std::thread(ClientThread::run, context)));
+    clientNum++;
 }
 
 void Server::run()
@@ -152,4 +169,9 @@ void Server::clearFinishedContexts()
 
         std::cout << "Client cleaned up!" << std::endl;
     }
+}
+
+const unsigned long &Server::getClientNum()
+{
+    return clientNum;
 }

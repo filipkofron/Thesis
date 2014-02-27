@@ -43,3 +43,8 @@ const int &Buffer::getPosition()
 {
     return position;
 }
+
+char *Buffer::getBytes()
+{
+    return bytes;
+}

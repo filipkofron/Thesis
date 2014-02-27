@@ -9,3 +9,5 @@ set(client_source_files
   Buffer.cpp
 )
 add_library(client ${client_source_files})
+
+target_link_libraries( client network )

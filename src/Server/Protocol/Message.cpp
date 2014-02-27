@@ -12,12 +12,16 @@ Message::~Message()
 
 }
 
-Message *Message::dejsonize(const Json::Value &root)
+Message *Message::dejsonize(Json::Value &root)
 {
+    if(!root.isObject())
+    {
+        return nullptr;
+    }
+
     std::string header = root["header"].asString();
 
     Message *msg = nullptr;
-
     for(;;)
     {
         if(header.compare(LoginRequest::getStaticHeader()) == 0)
@@ -34,6 +38,7 @@ Message *Message::dejsonize(const Json::Value &root)
 
         break;
     }
+    std::cout << "4" << std::endl;
 
     if(msg)
     {

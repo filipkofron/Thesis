@@ -32,7 +32,7 @@ Handler *LoginResponse::createHandler()
     return new NullHandler();
 }
 
-void LoginResponse::_dejsonize(const Json::Value &content)
+void LoginResponse::_dejsonize(Json::Value &content)
 {
     success = content["success"].asBool();
     message = content["message"].asString();
