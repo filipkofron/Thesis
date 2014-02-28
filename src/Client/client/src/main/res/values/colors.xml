@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="actionbar_background">#ffa1c5e6</drawable>
+    <drawable name="drawer_list_item_bg_normal_start">#ffaaaaaa</drawable>
+    <drawable name="drawer_list_item_bg_normal_end">#ff9b9b9b</drawable>
+</resources>
