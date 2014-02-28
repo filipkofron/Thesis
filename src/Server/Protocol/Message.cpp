@@ -14,11 +14,6 @@ Message::~Message()
 
 Message *Message::dejsonize(Json::Value &root)
 {
-    if(!root.isObject())
-    {
-        return nullptr;
-    }
-
     std::string header = root["header"].asString();
 
     Message *msg = nullptr;

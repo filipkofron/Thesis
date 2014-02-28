@@ -24,88 +24,24 @@ using namespace std;
 
 int main()
 {
+    Json::Value test;
+    test = "fuck";
     try
     {
-        auto driver = get_driver_instance();
-        auto connection = driver->connect("tcp://localhost:3306/", "root", "toor");
-        connection->setAutoCommit(true);
-        cout << "getClientInfo: " << connection->getClientInfo() << endl;
-        connection->close();
-        delete connection;
+        test["gtfo"] = "fuck";
     }
-    catch(sql::SQLException &e)
+    catch(std::runtime_error &e)
     {
-        cerr << "Error: " << e.what() << endl;
+        std::cerr << "error: " << e.what() << std::endl;
     }
-
-    Json::StyledWriter writer;
-
-
-    LoginRequest request("Lol", "Supertroll!");
-
-
-    Json::Value root;
-    request.jsonize(root);
-
-
-    std::cout << "Resp: " << writer.write(root) << std::endl;
-
-    Message *msg(Message::dejsonize(root));
-
-    if(!msg)
-    {
-        std::cout << "Error!" << std::endl;
-        return 1;
-    }
-
-    std::cout << "header: " << msg->getHeader() << std::endl;
-
-    LoginRequest *recv((LoginRequest *) msg);
-
-    Handler *handler = recv->createHandler();
-    Context context;
-    handler->handle(context);
-    delete handler;
-    delete recv;
-
-    root.clear();
-
-    root["database"]["mysql"]["address"] = "tcp://localhost:3306/";
-    root["database"]["mysql"]["username"] = "root";
-    root["database"]["mysql"]["password"] = "toor";
-    root["network"]["client"]["max_buffer"] = 1024 * 128;
-    root["network"]["server"]["max_clients"] = 256;
-    root["network"]["server"]["listen_port"] = 4040;
-    root["network"]["server"]["back_log"] = 32;
-
-    std::cout << writer.write(root) << std::endl;
-
-    MySQLManager::ConnectionHolder *connHolder = new MySQLManager::ConnectionHolder(MySQLManager::getInstance());
-    for(int i = 0; i < 10; i++)
-    {
-        MySQLManager::ConnectionHolder *connHolder2 = new MySQLManager::ConnectionHolder(MySQLManager::getInstance());
-        delete connHolder2;
-    }
-    delete connHolder;
-
-    UserDAOMySQL dao;
 
     try
     {
-        //User test = User::makeUser("pepa", "zdepa", dao);
-        User test = dao.getUserByUsername("pepa");
-        std::cout << "test: " << test.getId() << " - " << test.getUserName() << " - " << test.getPassword() << " - " << test.getSalt() << std::endl;
-        std::cout << "Check pass: " << test.checkPassword("zdepa") << std::endl;
-        test.setPassword("zdepa");
-        dao.updateUser(test);
+        test["gtfo"].asInt();
     }
-    catch(sql::SQLException &e)
+    catch(std::runtime_error &e)
     {
-        std::cerr << "Exception: " << e.what() << std::endl;
-    }
-    catch(DAOException &e)
-    {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << "error: " << e.what() << std::endl;
     }
 
     Server server;

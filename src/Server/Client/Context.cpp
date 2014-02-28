@@ -1,7 +1,7 @@
 #include "Context.hpp"
 
 Context::Context()
-    : finished(false)
+    : finished(false), loggedIn(false), username("_no_user_")
 {
 }
 
@@ -63,4 +63,24 @@ const bool &Context::getFinished()
 void Context::setFinished(const bool &finished)
 {
     this->finished = finished;
+}
+
+const bool &Context::getLoggedIn()
+{
+    return loggedIn;
+}
+
+void Context::setLoggedIn(const bool &loggedIn)
+{
+    this->loggedIn = loggedIn;
+}
+
+const std::string &Context::getUsername()
+{
+    return username;
+}
+
+void Context::setUsername(const std::string &username)
+{
+    this->username = username;
 }

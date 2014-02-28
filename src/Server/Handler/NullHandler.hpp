@@ -9,7 +9,7 @@ class NullHandler : public Handler
 {
 public:
     virtual ~NullHandler();
-    virtual void handle(Context &context) override;
+    virtual void handle(Context &contex) override;
 };
 
 #endif

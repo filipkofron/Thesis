@@ -18,6 +18,8 @@ private:
     int port;
     bool finished;
     int clientSD;
+    bool loggedIn;
+    std::string username;
     Buffer buffer;
     Server *server;
     std::shared_ptr<std::thread> thread;
@@ -35,6 +37,10 @@ public:
     const int &getPort();
     const bool &getFinished();
     void setFinished(const bool &finished);
+    const bool &getLoggedIn();
+    void setLoggedIn(const bool &loggedIn);
+    const std::string &getUsername();
+    void setUsername(const std::string &username);
 };
 
 #endif

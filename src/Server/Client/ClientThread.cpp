@@ -2,6 +2,7 @@
 
 #include "../Network/BufferReader.hpp"
 #include "../Network/ReadException.hpp"
+#include "../Network/WriteException.hpp"
 #include "BufferException.hpp"
 #include "../Protocol/Message.hpp"
 
@@ -33,7 +34,7 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
         Json::Value root;
         while(!context->getFinished())
         {
-            BufferReader::readBuffer(context);
+            BufferReader::readBuffer(*context);
 
 
             bool parseRes = reader.parse(std::string(context->getBuffer().getBytes()), root);
@@ -51,10 +52,12 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
                 std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " Parsing JSON successful!" << std::endl;
             }
 
-            Message *msg = Message::dejsonize(root);
-            if(msg)
+            std::shared_ptr<Message> msg(Message::dejsonize(root));
+            if(msg.get())
             {
                 std::cout << "Got message: '" << typeid(msg).name() << "'" << std::endl;
+                std::shared_ptr<Handler> handler(msg->createHandler());
+                handler->handle(*context);
             }
             else
             {
@@ -68,8 +71,16 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
     {
         std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " read error!" << std::endl;
     }
+    catch(WriteException &e)
+    {
+        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " write error!" << std::endl;
+    }
     catch(BufferException &e)
     {
         std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Buffer error:" << e.what() << std::endl;
+    }
+    catch(std::runtime_error &e)
+    {
+        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Runtime error:" << e.what() << std::endl;
     }
 }

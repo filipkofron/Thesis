@@ -33,17 +33,17 @@ int BufferReader::readSize(const int &sd)
     return size;
 }
 
-void BufferReader::readBuffer(std::shared_ptr<Context> context)
+void BufferReader::readBuffer(Context &context)
 {
-    int bufferSize = readSize(context->getClientSD());
+    int bufferSize = readSize(context.getClientSD());
     std::cout << "Client wants to allocate: " << bufferSize << std::endl;
 
-    Buffer &buffer = context->getBuffer();
+    Buffer &buffer = context.getBuffer();
     /* prepare for size bufferSize + 1 for the final null to terminate the string, this will not be needed for compressed data */
     buffer.prepare((size_t) bufferSize + 1);
 
     std::cout << "Will read buffer of size: " << bufferSize << std::endl;
 
-    readFully(context->getClientSD(), buffer.getBytes(), bufferSize);
+    readFully(context.getClientSD(), buffer.getBytes(), bufferSize);
     buffer.getBytes()[bufferSize] = '\0';
 }

@@ -14,7 +14,7 @@ private:
     static int readSize(const int &sd);
     static void readFully(const int &sd, char *buffer, const int &len);
 public:
-    static void readBuffer(std::shared_ptr<Context> context);
+    static void readBuffer(Context &context);
 };
 
 #endif

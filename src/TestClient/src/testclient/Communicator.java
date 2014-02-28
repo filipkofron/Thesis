@@ -1,11 +1,16 @@
 package testclient;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
+import protocol.JSONReceiver;
+import protocol.JSONSender;
+import protocol.LoginRequest;
+import protocol.LoginResponse;
+import protocol.Message;
 
 /**
  *
@@ -13,36 +18,19 @@ import org.json.simple.JSONObject;
  */
 public class Communicator implements ConnectionListener {
 
-    private final static Charset utf8Charser = Charset.forName("UTF-8");
+    
     
     @Override
     public void onConnected(Connection connection) {
         try {
             OutputStream os = connection.getSocket().getOutputStream();
+            InputStream is = connection.getSocket().getInputStream();
             
-            JSONObject obj = new JSONObject();
-            obj.put("A key", "Some value");
-
-            JSONObject obj2 = new JSONObject();
-            obj2.put("A sub key", "Some sub value");
+            JSONSender.send(os, new LoginRequest("pepa", "zdepa").jsonize());
+            Message msg = Message.dejsonize(JSONReceiver.receive(is));
+            LoginResponse lr = (LoginResponse) msg;
+            System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
             
-            obj.put("A key", "Some value");
-            obj.put("A key 2", obj2);
-
-            //String helloWorld = obj.toJSONString();
-            String helloWorld = "49ut89ehrdgiojpz4]gj";
-            byte [] msgBytes = helloWorld.getBytes(utf8Charser);
-            int size = msgBytes.length;
-            byte [] bytes = new byte[4];
-            
-            bytes[0] = (byte)((size >> 24) & 0xFF);
-            bytes[1] = (byte)((size >> 16) & 0xFF);
-            bytes[2] = (byte)((size >> 8) & 0xFF);
-            bytes[3] = (byte)(size & 0xFF);
-            
-            os.write(bytes);
-            os.write(msgBytes);
-            os.flush();
             os.close();
             connection.disconnect();
         } catch (IOException ex) {

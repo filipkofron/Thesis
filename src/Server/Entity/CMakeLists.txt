@@ -20,3 +20,5 @@ set(entity_source_files
 add_library(entity ${entity_source_files})
 
 add_subdirectory(DAO)
+
+target_link_libraries(entity util)

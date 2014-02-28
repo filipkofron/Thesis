@@ -7,6 +7,7 @@ class InventoryDAOMySQL;
 
 class InventoryDAOMySQL : public InventoryDAO
 {
+public:
     InventoryDAOMySQL() { }
     virtual ~InventoryDAOMySQL() { }
 
