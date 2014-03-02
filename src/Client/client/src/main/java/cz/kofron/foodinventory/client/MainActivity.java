@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private Fragment currentFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -45,9 +46,23 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Fragment fragment = null;
+
+        switch (position) {
+            case 1:
+                fragment = new FoodListFragment();
+                break;
+        }
+
+        if (fragment == null) {
+            fragment = PlaceholderFragment.newInstance(position + 1);
+        }
+
+        currentFragment = fragment;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 
@@ -57,7 +72,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_inventory);
                 break;
             case 2:
-                mTitle = getString(R.string.title_all_food);
+                mTitle = getString(R.string.title_browse_food);
                 break;
             case 3:
                 mTitle = getString(R.string.title_barcode);
@@ -79,7 +94,14 @@ public class MainActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+            Fragment frag = currentFragment;
+            int menuId = R.menu.main;
+            if(frag instanceof OnFragmentMenuCreationListener)
+            {
+                menuId = ((OnFragmentMenuCreationListener) frag).onGetMenuId();
+            }
+
+            getMenuInflater().inflate(menuId, menu);
             restoreActionBar();
             return true;
         }

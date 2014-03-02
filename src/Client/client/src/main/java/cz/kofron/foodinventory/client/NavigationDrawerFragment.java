@@ -103,7 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
                 R.id.text_drawer_list_item,
                 new String[]{
                         getString(R.string.title_inventory),
-                        getString(R.string.title_all_food),
+                        getString(R.string.title_browse_food),
                         getString(R.string.title_barcode),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
