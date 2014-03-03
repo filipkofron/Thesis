@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -12,20 +13,27 @@ import android.widget.ListView;
  */
 public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlobalLayoutListener {
 
-        public NowLikeListView(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            setDividerHeight(0);
-            initLayoutObserver();
+    public NowLikeListView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setDividerHeight(0);
+        initLayoutObserver();
+    }
 
-        }
+    public NowLikeListView(Context context) {
+        super(context);
+        initLayoutObserver();
+    }
 
-        public NowLikeListView(Context context) {
-            super(context);
-            initLayoutObserver();
-        }
 
-        private void initLayoutObserver() {
+    private void initLayoutObserver() {
             getViewTreeObserver().addOnGlobalLayoutListener(this);
+
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("position " + i);
+            }
+        });
         }
 
         @Override

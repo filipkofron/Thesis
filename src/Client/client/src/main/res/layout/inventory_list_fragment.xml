@@ -9,7 +9,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0px"
+        android:dividerHeight="0dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         android:background="@color/item_background_color">

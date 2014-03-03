@@ -4,88 +4,112 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/item_backround_color"
     android:foregroundGravity="center"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="2dp"
     android:paddingBottom="2dp"
+    android:background="@color/item_background_color"
+    android:focusable="false"
+    android:clickable="false"
     >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/food_list_item_card"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/card_background"
-        android:layout_gravity="center"
+        android:paddingBottom="2dp"
+        android:background="@color/item_background_color"
+        android:focusable="false"
         android:clickable="false">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView"
-            android:background="@color/food_list_item_image_background"
-            android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
-            android:contentDescription="Food image"
-            android:src="@drawable/ic_launcher"
-            android:baselineAlignBottom="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/card_background"
+            android:layout_gravity="center"
+            android:focusable="false"
+            android:clickable="false">
 
-        <ImageButton
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/imageButton"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:src="@android:drawable/ic_menu_add"
-            android:scaleType="centerCrop"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/food_list_item_button_add_background"
-            android:padding="10dp" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView"
+                android:background="@color/food_list_item_image_background"
+                android:adjustViewBounds="false"
+                android:scaleType="centerCrop"
+                android:contentDescription="Food image"
+                android:src="@drawable/ic_launcher"
+                android:baselineAlignBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:focusable="false"
+                android:clickable="false"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            android:text="Potravina"
-            android:id="@+id/food_list_item_food_name"
-            android:layout_alignTop="@+id/imageButton"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/item_title"
-            android:typeface="normal" />
+            <ImageButton
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageButton"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_new"
+                android:scaleType="centerCrop"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/food_list_item_button_add_background"
+                android:padding="10dp"
+                android:focusable="true"
+                android:clickable="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Strucny popis potraviny"
-            android:id="@+id/textView"
-            android:textColor="@color/item_detail"
-            android:layout_below="@+id/food_list_item_food_name"
-            android:layout_alignLeft="@+id/food_list_item_food_name"
-            android:layout_alignStart="@+id/food_list_item_food_name"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:text="Potravina"
+                android:id="@+id/food_list_item_food_name"
+                android:layout_alignTop="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/item_title"
+                android:typeface="normal"
+                android:focusable="false"
+                android:clickable="false"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GTIN:"
-            android:id="@+id/food_list_item_food_gtin"
-            android:textAppearance="@android:style/TextAppearance.Small"
-            android:layout_alignBottom="@+id/imageView"
-            android:layout_alignLeft="@+id/food_list_item_food_name"
-            android:layout_alignStart="@+id/food_list_item_food_name"
-            android:layout_marginBottom="2dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Strucny popis potraviny"
+                android:id="@+id/textView"
+                android:textColor="@color/item_detail"
+                android:layout_below="@+id/food_list_item_food_name"
+                android:layout_alignLeft="@+id/food_list_item_food_name"
+                android:layout_alignStart="@+id/food_list_item_food_name"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="5dp"
+                android:focusable="false"
+                android:clickable="false"
+                />
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GTIN:"
+                android:id="@+id/food_list_item_food_gtin"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignLeft="@+id/food_list_item_food_name"
+                android:layout_alignStart="@+id/food_list_item_food_name"
+                android:layout_marginBottom="2dp"
+                android:focusable="false"
+                android:clickable="false"/>
+
+        </RelativeLayout>
+    </LinearLayout>
 
 </FrameLayout>

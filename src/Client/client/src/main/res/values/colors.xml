@@ -3,9 +3,13 @@
     <drawable name="actionbar_background">#ffc6c6c6</drawable>
     <drawable name="drawer_list_item_bg_normal_start">#ffaaaaaa</drawable>
     <drawable name="drawer_list_item_bg_normal_end">#ffaaaaaa</drawable>
-    <color name="item_backround_color">#ffdcdcdc</color>
+    <color name="item_background_color">#ffdcdcdc</color>
     <color name="food_list_item_image_background">#ffebebeb</color>
     <color name="stroke">#dddddd</color>
     <color name="item_title">#ff4d4d4d</color>
     <color name="item_detail">#ff828282</color>
+    <color name="inventory_item_add">#ffaaaaaa</color>
+    <color name="inventory_item_remove">#ffcdcdcd</color>
+    <color name="inventory_item_count_background">#ffbbbbbb</color>
+    <color name="card_background_color">#ffdcdcdc</color>
 </resources>

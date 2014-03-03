@@ -1,6 +1,7 @@
 package cz.kofron.foodinventory.client;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +22,32 @@ public class FoodListAdapter extends ArrayAdapter {
         this.context = context;
     }
 
+    private class RowClickListener implements View.OnClickListener
+    {
+        private int position;
+
+        private RowClickListener(int position) {
+            this.position = position;
+        }
+
+        @Override
+        public void onClick(View view) {
+            System.out.println("On click: " + view);
+            Intent intent = new Intent(context, FoodDetailActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.food_list_item, parent, false);
+
         TextView foodName = (TextView) view.findViewById(R.id.food_list_item_food_name);
         TextView foodGtin = (TextView) view.findViewById(R.id.food_list_item_food_gtin);
         View card = view.findViewById(R.id.food_list_item_card);
+
+        card.setOnClickListener(new RowClickListener(position));
 
         int d = 255;
         if((position & 1) == 1)
