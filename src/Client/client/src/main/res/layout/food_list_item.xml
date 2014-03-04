@@ -52,11 +52,11 @@
             <ImageButton
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imageButton"
+                android:id="@+id/add_button"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_action_new"
+                android:src="@drawable/add_dark"
                 android:scaleType="centerCrop"
                 android:layout_alignParentStart="false"
                 android:layout_alignParentTop="true"
@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Potravina"
                 android:id="@+id/food_list_item_food_name"
                 android:layout_alignTop="@+id/imageButton"

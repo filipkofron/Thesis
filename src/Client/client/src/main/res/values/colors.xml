@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <drawable name="actionbar_background">#ffc6c6c6</drawable>
-    <drawable name="drawer_list_item_bg_normal_start">#ffaaaaaa</drawable>
-    <drawable name="drawer_list_item_bg_normal_end">#ffaaaaaa</drawable>
+    <drawable name="actionbar_background">#ff3c3c3c</drawable>
+    <drawable name="drawer_list_item_bg_normal_start">#ff323232</drawable>
+    <drawable name="drawer_list_item_bg_normal_end">#ff323232</drawable>
     <color name="item_background_color">#ffdcdcdc</color>
     <color name="food_list_item_image_background">#ffebebeb</color>
     <color name="stroke">#dddddd</color>

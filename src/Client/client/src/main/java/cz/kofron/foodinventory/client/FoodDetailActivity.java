@@ -1,9 +1,11 @@
 package cz.kofron.foodinventory.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 /**
  * Created by kofee on 3/3/14.
  */
-public class FoodDetailActivity  extends ActionBarActivity {
+public class FoodDetailActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +40,23 @@ public class FoodDetailActivity  extends ActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        int menuId = R.menu.food_detail;
+        getMenuInflater().inflate(menuId, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.action_edit:
+                Intent foodEditIntent = new Intent(this, FoodEditActivity.class);
+                startActivity(foodEditIntent);
                 return true;
         }
 

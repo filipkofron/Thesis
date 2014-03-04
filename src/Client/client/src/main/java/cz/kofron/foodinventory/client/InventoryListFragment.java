@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 /**
  * Created by kofee on 3/2/14.
  */
-public class InventoryListFragment extends ListFragment implements OnFragmentMenuCreationListener {
+public class InventoryListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         setListAdapter(new InventoryListAdapter(getActivity()));
     }
@@ -30,10 +32,5 @@ public class InventoryListFragment extends ListFragment implements OnFragmentMen
         inflater.inflate(R.menu.food_list, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public int onGetMenuId() {
-        return R.menu.food_list;
     }
 }

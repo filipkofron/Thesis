@@ -97,13 +97,7 @@ public class MainActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            Fragment frag = currentFragment;
             int menuId = R.menu.main;
-            if(frag instanceof OnFragmentMenuCreationListener)
-            {
-                menuId = ((OnFragmentMenuCreationListener) frag).onGetMenuId();
-            }
-
             getMenuInflater().inflate(menuId, menu);
             restoreActionBar();
             return true;

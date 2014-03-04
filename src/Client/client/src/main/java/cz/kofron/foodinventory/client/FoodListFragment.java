@@ -6,6 +6,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -13,10 +14,12 @@ import android.widget.ListView;
 /**
  * Created by Filip Kofron on 3/1/14.
  */
-public class FoodListFragment extends ListFragment implements OnFragmentMenuCreationListener {
+public class FoodListFragment extends ListFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         setListAdapter(new FoodListAdapter(getActivity()));
     }
@@ -35,8 +38,17 @@ public class FoodListFragment extends ListFragment implements OnFragmentMenuCrea
     }
 
     @Override
-    public int onGetMenuId() {
-        return R.menu.food_list;
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId())
+        {
+            case R.id.action_add:
+                Intent foodEditIntent = new Intent(getActivity(), FoodEditActivity.class);
+                startActivity(foodEditIntent);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

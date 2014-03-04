@@ -3,10 +3,12 @@ package cz.kofron.foodinventory.client;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -46,6 +48,15 @@ public class FoodListAdapter extends ArrayAdapter {
         TextView foodName = (TextView) view.findViewById(R.id.food_list_item_food_name);
         TextView foodGtin = (TextView) view.findViewById(R.id.food_list_item_food_gtin);
         View card = view.findViewById(R.id.food_list_item_card);
+
+        ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
+        final int positionNow = position;
+        ob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new InventoryAddFoodDialogFragment().show((FragmentActivity) context);
+            }
+        });
 
         card.setOnClickListener(new RowClickListener(position));
 

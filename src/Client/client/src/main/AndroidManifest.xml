@@ -20,6 +20,10 @@
             android:name="cz.kofron.foodinventory.client.FoodDetailActivity"
             android:label="@string/app_name">
         </activity>
+        <activity
+            android:name="cz.kofron.foodinventory.client.FoodEditActivity"
+            android:label="@string/app_name">
+        </activity>
     </application>
 
 </manifest>
