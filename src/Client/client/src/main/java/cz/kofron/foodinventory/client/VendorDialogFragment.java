@@ -45,7 +45,6 @@ public class VendorDialogFragment extends DialogFragment {
 
     public void show(FragmentActivity activity)
     {
-        VendorDialogFragment frag = new VendorDialogFragment();
-        frag.show(activity.getSupportFragmentManager(), "vendors");
+        show(activity.getSupportFragmentManager(), "vendors");
     }
 }

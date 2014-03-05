@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/card_background"
-        android:layout_gravity="center"
+        android:layout_gravity="right|center_vertical"
         android:clickable="false"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -40,17 +40,20 @@
             class="cz.kofron.foodinventory.client.RemoveView"
             android:id="@+id/view2"
             android:padding="8dp"
-            android:background="@color/inventory_item_remove"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="#b7b7b7"
             android:layout_gravity="center"
-            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/relativeLayout"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Potravina"
+            android:text="Some food name"
             android:id="@+id/inventory_list_item_food_name"
             android:textColor="@color/item_title"
             android:typeface="normal"
@@ -60,55 +63,51 @@
             android:layout_toRightOf="@+id/inventory_imageView"
             android:layout_marginLeft="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Počet: 10 ks"
-            android:id="@+id/textView"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_gravity="right|center_vertical"
+        <RelativeLayout
+            android:layout_width="42dp"
+            android:layout_height="fill_parent"
+            android:background="#c3c3c3"
+            android:id="@+id/relativeLayout"
+            android:layout_toLeftOf="@+id/view2"
+            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/inventory_imageView"
-            android:layout_margin="5dp" />
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:id="@+id/textView"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_gravity="right|center_vertical"
+                android:textSize="25sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Spotřebujte do:"
+            android:text="Until"
             android:id="@+id/textView2"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:typeface="normal"
             android:textSize="12sp"
             android:layout_gravity="left|center_vertical"
-            android:layout_marginRight="24dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/textView3"
-            android:layout_alignEnd="@+id/textView3"
-            android:layout_marginTop="5dp" />
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/inventory_list_item_food_name"
+            android:layout_alignStart="@+id/inventory_list_item_food_name" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="20.09.2013"
             android:id="@+id/textView3"
-            android:layout_gravity="right|center_vertical"
-            android:layout_below="@+id/textView2"
-            android:layout_toLeftOf="@+id/view2"
-            android:layout_marginRight="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-1"
-            android:id="@+id/textView4"
+            android:textStyle="italic"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/view2"
-            android:layout_alignEnd="@+id/view2"
-            android:layout_alignLeft="@+id/view2"
-            android:layout_alignStart="@+id/view2"
-            android:textAlignment="center"
-            android:singleLine="false"
-            android:gravity="center" />
+            android:layout_toRightOf="@+id/textView2" />
 
     </RelativeLayout>
 

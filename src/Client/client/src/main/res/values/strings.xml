@@ -4,7 +4,7 @@
     <string name="app_name">FoodInventory</string>
     <string name="title_inventory">My Inventory</string>
     <string name="title_browse_food">Browse food</string>
-    <string name="title_barcode">Barcode scan</string>
+    <string name="title_barcode">Scan barcode</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -16,7 +16,8 @@
     <string name="pick_vendor">Pick a vendor</string>
     <string name="food_detail_title">Food detail</string>
     <string name="title_inventory_add_food">Add food to inventory</string>
+    <string name="title_inventory_food">Food in inventory</string>
     <string name="cancel">Cancel</string>
-    <string name="add">Add</string>
+    <string name="ok">Ok</string>
 
 </resources>

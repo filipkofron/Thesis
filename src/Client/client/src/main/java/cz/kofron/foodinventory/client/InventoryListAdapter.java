@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,12 @@ public class InventoryListAdapter extends ArrayAdapter {
             d = 248;
         }
         card.setBackgroundColor(Color.argb(255, d, d, d));
+        card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new InventoryFoodDialogFragment(R.string.title_inventory_food).show((FragmentActivity) context);
+            }
+        });
 
         foodName.setText(foodName.getText() + " #" + (position + 1));
 

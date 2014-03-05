@@ -5,6 +5,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -19,6 +20,13 @@ public class InventoryListFragment extends ListFragment {
         setHasOptionsMenu(true);
 
         setListAdapter(new InventoryListAdapter(getActivity()));
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new LoginDialogFragment().show(getActivity());
+            }
+        });
     }
 
     @Override
@@ -27,9 +35,19 @@ public class InventoryListFragment extends ListFragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_add)
+        {
+            new InventoryAddFoodDialogFragment().show(getActivity());
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
-        inflater.inflate(R.menu.food_list, menu);
+        inflater.inflate(R.menu.inventory_list, menu);
 
         super.onCreateOptionsMenu(menu, inflater);
     }

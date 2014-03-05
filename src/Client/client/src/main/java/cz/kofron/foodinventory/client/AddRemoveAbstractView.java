@@ -59,12 +59,12 @@ public abstract class AddRemoveAbstractView extends View {
         switch (type)
         {
             case ADD:
-                paint.setColor(Color.GREEN);
+                paint.setColor(Color.DKGRAY);
                 canvas.drawLine(x, y + h / 2, x + w, y + h / 2, paint);
                 canvas.drawLine(x + w / 2, y, x + w / 2, y + h, paint);
                 break;
             case REMOVE:
-                paint.setColor(Color.RED);
+                paint.setColor(Color.DKGRAY);
 
                 canvas.drawLine(x, y + h / 2, x + w, y + h / 2, paint);
                 break;

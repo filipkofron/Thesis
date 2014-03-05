@@ -9,13 +9,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioGroup;
 
 /**
  * Created by kofee on 3/5/14.
  */
-public class InventoryAddFoodDialogFragment extends DialogFragment {
-
+public class LoginDialogFragment extends DialogFragment {
     private View view;
     private Dialog dialog;
 
@@ -23,11 +23,38 @@ public class InventoryAddFoodDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.inventory_add_dialog, null);
+        View view = inflater.inflate(R.layout.login_dialog, null);
         this.view = view;
+
+        Button newAccountButton = (Button) view.findViewById(R.id.new_account);
+        newAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new NewAccountDialogFragment().show(getActivity());
+                    }
+                });
+            }
+        });
+
+        Button lostPasswordButton = (Button) view.findViewById(R.id.new_account);
+        lostPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new LostPasswordDialogFragment().show(getActivity());
+                    }
+                });
+            }
+        });
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-        builder.setTitle(R.string.title_inventory_add_food);
+        builder.setTitle("Login");
         builder.setCancelable(true);
         builder.setNegativeButton(R.string.cancel, onCancelListener);
         builder.setPositiveButton(R.string.ok, onOkListener);
@@ -48,21 +75,7 @@ public class InventoryAddFoodDialogFragment extends DialogFragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    RadioGroup rg = (RadioGroup) view.findViewById(R.id.radio_group);
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    dialog.cancel();
-                    switch(rg.getCheckedRadioButtonId()) {
-                        case R.id.radio_scan_barcode:
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.container, new FoodListFragment())
-                                    .commit();
-                            break;
-                        case R.id.radio_search_food:
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.container, new FoodListFragment())
-                                    .commit();
-                            break;
-                    }
+                    System.out.println("Would login: " + LoginDialogFragment.this);
                 }
             });
         }
@@ -70,6 +83,6 @@ public class InventoryAddFoodDialogFragment extends DialogFragment {
 
     public void show(FragmentActivity activity)
     {
-        show(activity.getSupportFragmentManager(), "invetory_add_food_dialog");
+        show(activity.getSupportFragmentManager(), "login_dialog");
     }
 }

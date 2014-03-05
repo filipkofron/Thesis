@@ -54,7 +54,7 @@ public class FoodListAdapter extends ArrayAdapter {
         ob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new InventoryAddFoodDialogFragment().show((FragmentActivity) context);
+                new InventoryFoodDialogFragment(R.string.title_inventory_add_food).show((FragmentActivity) context);
             }
         });
 
