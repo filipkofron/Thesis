@@ -26,7 +26,7 @@ public class LostPasswordDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-        builder.setTitle("New account");
+        builder.setTitle("Lost password");
         builder.setCancelable(true);
         builder.setNegativeButton(R.string.cancel, onCancelListener);
         builder.setPositiveButton(R.string.ok, onOkListener);

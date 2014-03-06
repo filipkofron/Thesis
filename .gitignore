@@ -30,3 +30,5 @@ proguard/
 /src/TestClient/nbproject/private/
 /src/TestClient/build/
 /src/TestClient/dist/
+
+src/Server/CMakeLists.txt.user

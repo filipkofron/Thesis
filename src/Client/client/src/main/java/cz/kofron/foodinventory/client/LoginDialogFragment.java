@@ -39,7 +39,7 @@ public class LoginDialogFragment extends DialogFragment {
             }
         });
 
-        Button lostPasswordButton = (Button) view.findViewById(R.id.new_account);
+        Button lostPasswordButton = (Button) view.findViewById(R.id.lost_password);
         lostPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

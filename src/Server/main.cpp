@@ -21,9 +21,11 @@
 
 using namespace std;
 
-
-int main()
+void json_exception_test()
 {
+    std::cout << __FILE__ << ":" << __LINE__
+              <<" if the following exits this program, you need to upgrade the JSONCPP library to use exceptions" << std::endl;
+
     Json::Value test;
     test = "fuck";
     try
@@ -43,6 +45,11 @@ int main()
     {
         std::cerr << "error: " << e.what() << std::endl;
     }
+}
+
+int main()
+{
+    json_exception_test();
 
     Server server;
     server.initialize();
