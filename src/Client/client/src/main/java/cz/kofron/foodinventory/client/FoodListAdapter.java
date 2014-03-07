@@ -63,7 +63,7 @@ public class FoodListAdapter extends ArrayAdapter {
         int d = 255;
         if((position & 1) == 1)
         {
-            d = 248;
+            d = 240;
         }
         card.setBackgroundColor(Color.argb(255, d, d, d));
 

@@ -3,7 +3,7 @@
 
     <string name="app_name">FoodInventory</string>
     <string name="title_inventory">My Inventory</string>
-    <string name="title_browse_food">Browse food</string>
+    <string name="title_search_food">Search food</string>
     <string name="title_barcode">Scan barcode</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

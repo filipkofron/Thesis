@@ -2,8 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/item_background_color">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +22,6 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_background"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -53,7 +51,6 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/card_background"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -88,7 +85,6 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/card_background"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -129,7 +125,6 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/card_background"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -156,13 +151,11 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/card_background">
+                android:layout_height="fill_parent">
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/horizontalScrollView"
-                        android:background="@drawable/card_background"
                         android:fillViewport="true"
                         android:layout_marginBottom="1dp">
 
@@ -191,7 +184,6 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@drawable/card_background"
                 android:layout_marginBottom="1dp">
 
                 <TextView
@@ -225,8 +217,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/card_background">
+                android:layout_height="fill_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -304,8 +295,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/card_background">
+                android:layout_height="fill_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -390,8 +380,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/card_background">
+                android:layout_height="fill_parent">
 
                 <TextView
                     android:layout_width="wrap_content"

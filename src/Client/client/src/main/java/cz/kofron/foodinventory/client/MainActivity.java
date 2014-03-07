@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity
                 fragment = new InventoryListFragment();
                 break;
             case 1:
-                fragment = new FoodListFragment();
+                fragment = new FoodSearchFragment();
                 break;
         }
 
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_inventory);
                 break;
             case 2:
-                mTitle = getString(R.string.title_browse_food);
+                mTitle = getString(R.string.title_search_food);
                 break;
             case 3:
                 mTitle = getString(R.string.title_barcode);

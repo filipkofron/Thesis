@@ -11,5 +11,6 @@
     <color name="inventory_item_add">#ffaaaaaa</color>
     <color name="inventory_item_remove">#ffcdcdcd</color>
     <color name="inventory_item_count_background">#ffbbbbbb</color>
-    <color name="card_background_color">#ffdcdcdc</color>
+    <color name="background">#fff5f5f5</color>
+    <color name="input_background">#ffffffff</color>
 </resources>

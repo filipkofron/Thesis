@@ -3,6 +3,7 @@ package cz.kofron.foodinventory.client;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -51,16 +52,15 @@ public class InventoryAddFoodDialogFragment extends DialogFragment {
                     RadioGroup rg = (RadioGroup) view.findViewById(R.id.radio_group);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     dialog.cancel();
+                    Intent intent;
                     switch(rg.getCheckedRadioButtonId()) {
                         case R.id.radio_scan_barcode:
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.container, new FoodListFragment())
-                                    .commit();
+                            intent = new Intent(getActivity(), FoodListActivity.class);
+                            getActivity().startActivity(intent);
                             break;
                         case R.id.radio_search_food:
-                            fragmentManager.beginTransaction()
-                                    .replace(R.id.container, new FoodListFragment())
-                                    .commit();
+                            intent = new Intent(getActivity(), FoodListActivity.class);
+                            getActivity().startActivity(intent);
                             break;
                     }
                 }
