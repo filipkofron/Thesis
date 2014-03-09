@@ -11,61 +11,73 @@ import android.widget.ListView;
 /**
  * Created by kofee on 3/1/14.
  */
-public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlobalLayoutListener {
+public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlobalLayoutListener
+{
 
-    public NowLikeListView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setDividerHeight(0);
-        initLayoutObserver();
-    }
+	public NowLikeListView(Context context, AttributeSet attrs)
+	{
+		super(context, attrs);
+		setDividerHeight(0);
+		initLayoutObserver();
+	}
 
-    public NowLikeListView(Context context) {
-        super(context);
-        initLayoutObserver();
-    }
+	public NowLikeListView(Context context)
+	{
+		super(context);
+		initLayoutObserver();
+	}
 
 
-    private void initLayoutObserver() {
-            getViewTreeObserver().addOnGlobalLayoutListener(this);
+	private void initLayoutObserver()
+	{
+		getViewTreeObserver().addOnGlobalLayoutListener(this);
 
-        setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("position " + i);
-            }
-        });
-        }
+		setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+			{
+				System.out.println("position " + i);
+			}
+		});
+	}
 
-        @Override
-        public void onGlobalLayout() {
-            getViewTreeObserver().removeGlobalOnLayoutListener(this);
+	@Override
+	public void onGlobalLayout()
+	{
+		getViewTreeObserver().removeGlobalOnLayoutListener(this);
 
-            final int heightPx = getContext().getResources().getDisplayMetrics().heightPixels;
+		final int heightPx = getContext().getResources().getDisplayMetrics().heightPixels;
 
-            boolean inversed = false;
-            final int childCount = getChildCount();
+		boolean inversed = false;
+		final int childCount = getChildCount();
 
-            for (int i = 0; i < childCount; i++) {
-                View child = getChildAt(i);
+		for (int i = 0; i < childCount; i++)
+		{
+			View child = getChildAt(i);
 
-                int[] location = new int[2];
+			int[] location = new int[2];
 
-                child.getLocationOnScreen(location);
+			child.getLocationOnScreen(location);
 
-                if (location[1] > heightPx) {
-                    break;
-                }
+			if (location[1] > heightPx)
+			{
+				break;
+			}
 
-                if (!inversed) {
-                    child.startAnimation(AnimationUtils.loadAnimation(getContext(),
-                            R.anim.slide_up_left));
-                } else {
-                    child.startAnimation(AnimationUtils.loadAnimation(getContext(),
-                            R.anim.slide_up_right));
-                }
+			if (!inversed)
+			{
+				child.startAnimation(AnimationUtils.loadAnimation(getContext(),
+						R.anim.slide_up_left));
+			}
+			else
+			{
+				child.startAnimation(AnimationUtils.loadAnimation(getContext(),
+						R.anim.slide_up_right));
+			}
 
-                inversed = !inversed;
-            }
+			inversed = !inversed;
+		}
 
-        }
+	}
 }

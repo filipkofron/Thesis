@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">FoodInventory</string>
+    <string name="title_home">Home</string>
     <string name="title_inventory">My Inventory</string>
     <string name="title_search_food">Search food</string>
     <string name="title_barcode">Scan barcode</string>

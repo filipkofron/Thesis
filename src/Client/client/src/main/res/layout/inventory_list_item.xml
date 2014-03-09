@@ -29,21 +29,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true" />
 
-        <view
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            class="cz.kofron.foodinventory.client.RemoveView"
-            android:id="@+id/view2"
-            android:padding="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="#b7b7b7"
-            android:layout_gravity="center"
-            android:layout_alignTop="@+id/relativeLayout"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,55 +39,29 @@
             android:typeface="normal"
             android:textStyle="bold"
             android:layout_gravity="left|center_vertical"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/inventory_imageView"
-            android:layout_marginLeft="5dp" />
+            android:layout_margin="8dp" />
 
-        <RelativeLayout
-            android:layout_width="42dp"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:background="#c3c3c3"
-            android:id="@+id/relativeLayout"
-            android:layout_toLeftOf="@+id/view2"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:padding="5dp">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
-                android:id="@+id/textView"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_gravity="right|center_vertical"
-                android:textSize="25sp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Until"
-            android:id="@+id/textView2"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:typeface="normal"
-            android:textSize="12sp"
-            android:layout_gravity="left|center_vertical"
-            android:layout_centerVertical="true"
-            android:layout_alignLeft="@+id/inventory_list_item_food_name"
-            android:layout_alignStart="@+id/inventory_list_item_food_name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="20.09.2013"
-            android:id="@+id/textView3"
-            android:textStyle="italic"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/textView2" />
+                android:text="20.09.2013"
+                android:id="@+id/textView3"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/textView2"
+                android:layout_gravity="center"
+                android:layout_margin="10dp" />
+        </FrameLayout>
 
     </RelativeLayout>
 

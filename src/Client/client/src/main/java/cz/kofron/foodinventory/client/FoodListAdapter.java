@@ -14,67 +14,74 @@ import android.widget.TextView;
 /**
  * Created by Filip Kofron on 3/1/14.
  */
-public class FoodListAdapter extends ArrayAdapter {
+public class FoodListAdapter extends ArrayAdapter
+{
 
-    private Context context;
+	private Context context;
 
-    FoodListAdapter(Context context) {
+	FoodListAdapter(Context context)
+	{
 
-        super(context, R.layout.food_list_item);
-        this.context = context;
-    }
+		super(context, R.layout.food_list_item);
+		this.context = context;
+	}
 
-    private class RowClickListener implements View.OnClickListener
-    {
-        private int position;
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent)
+	{
+		View view = LayoutInflater.from(context).inflate(R.layout.food_list_item, parent, false);
 
-        private RowClickListener(int position) {
-            this.position = position;
-        }
+		TextView foodName = (TextView) view.findViewById(R.id.food_list_item_food_name);
+		TextView foodGtin = (TextView) view.findViewById(R.id.food_list_item_food_gtin);
+		View card = view.findViewById(R.id.food_list_item_card);
 
-        @Override
-        public void onClick(View view) {
-            System.out.println("On click: " + view);
-            Intent intent = new Intent(context, FoodDetailActivity.class);
-            context.startActivity(intent);
-        }
-    }
+		ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
+		final int positionNow = position;
+		ob.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				new InventoryFoodDialogFragment(R.string.title_inventory_add_food).show((FragmentActivity) context);
+			}
+		});
 
+		card.setOnClickListener(new RowClickListener(position));
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.food_list_item, parent, false);
+		int d = 255;
+		if ((position & 1) == 1)
+		{
+			d = 240;
+		}
+		card.setBackgroundColor(Color.argb(255, d, d, d));
 
-        TextView foodName = (TextView) view.findViewById(R.id.food_list_item_food_name);
-        TextView foodGtin = (TextView) view.findViewById(R.id.food_list_item_food_gtin);
-        View card = view.findViewById(R.id.food_list_item_card);
+		foodName.setText(foodName.getText() + " #" + (position + 1));
+		foodGtin.setText(foodGtin.getText() + " 38166351763");
 
-        ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
-        final int positionNow = position;
-        ob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new InventoryFoodDialogFragment(R.string.title_inventory_add_food).show((FragmentActivity) context);
-            }
-        });
+		return view;
+	}
 
-        card.setOnClickListener(new RowClickListener(position));
+	@Override
+	public int getCount()
+	{
+		return 40;
+	}
 
-        int d = 255;
-        if((position & 1) == 1)
-        {
-            d = 240;
-        }
-        card.setBackgroundColor(Color.argb(255, d, d, d));
+	private class RowClickListener implements View.OnClickListener
+	{
+		private int position;
 
-        foodName.setText(foodName.getText() + " #" + (position + 1));
-        foodGtin.setText(foodGtin.getText() + " 38166351763");
+		private RowClickListener(int position)
+		{
+			this.position = position;
+		}
 
-        return view;
-    }
-
-    @Override
-    public int getCount() {
-        return 40;
-    }
+		@Override
+		public void onClick(View view)
+		{
+			System.out.println("On click: " + view);
+			Intent intent = new Intent(context, FoodDetailActivity.class);
+			context.startActivity(intent);
+		}
+	}
 }

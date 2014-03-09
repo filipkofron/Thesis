@@ -12,43 +12,50 @@ import android.view.ViewGroup;
 /**
  * Created by kofee on 3/2/14.
  */
-public class InventoryListFragment extends ListFragment {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+public class InventoryListFragment extends ListFragment
+{
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+		setHasOptionsMenu(true);
 
-        setListAdapter(new InventoryListAdapter(getActivity()));
+		setListAdapter(new InventoryListAdapter(getActivity()));
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new LoginDialogFragment().show(getActivity());
-            }
-        });
-    }
+		getActivity().runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				new LoginDialogFragment().show(getActivity());
+			}
+		});
+	}
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.inventory_list_fragment, container, false);
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	{
+		return inflater.inflate(R.layout.inventory_list_fragment, container, false);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_add)
-        {
-            new InventoryAddFoodDialogFragment().show(getActivity());
-        }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		if (item.getItemId() == R.id.action_add)
+		{
+			new InventoryAddFoodDialogFragment().show(getActivity());
+		}
 
-        return super.onOptionsItemSelected(item);
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+	{
 
-        inflater.inflate(R.menu.inventory_list, menu);
+		inflater.inflate(R.menu.inventory_list, menu);
 
-        super.onCreateOptionsMenu(menu, inflater);
-    }
+		super.onCreateOptionsMenu(menu, inflater);
+	}
 }
