@@ -6,4 +6,4 @@
     android:divider="#cc555555"
     android:dividerHeight="1dp"
     android:background="#cc2b2b2b"
-    tools:context="cz.kofron.foodinventory.client.NavigationDrawerFragment" />
+    tools:context="cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment" />

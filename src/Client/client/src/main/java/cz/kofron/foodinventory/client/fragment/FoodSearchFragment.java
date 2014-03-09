@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+
+import cz.kofron.foodinventory.client.activity.FoodListActivity;
+import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.FoodSearchAutoCompleteAdapter;
 
 /**
  * Created by kofee on 3/7/14.

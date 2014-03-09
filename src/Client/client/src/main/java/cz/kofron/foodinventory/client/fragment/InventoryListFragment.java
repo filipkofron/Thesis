@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -8,6 +8,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
 
 /**
  * Created by kofee on 3/2/14.

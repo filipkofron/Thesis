@@ -5,10 +5,43 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <SurfaceView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/surface_view"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.5" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relative"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView"
+                android:layout_margin="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView2"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/textView"
+                android:layout_margin="50dp"/>
+        </RelativeLayout>
+
+        <SurfaceView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/surface_view"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@id/relative"/>
+
+
+    </RelativeLayout>
+
 </LinearLayout>

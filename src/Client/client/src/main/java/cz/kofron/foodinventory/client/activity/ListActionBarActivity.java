@@ -1,8 +1,10 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
+
+import cz.kofron.foodinventory.client.view.NowLikeListView;
 
 public abstract class ListActionBarActivity extends ActionBarActivity
 {

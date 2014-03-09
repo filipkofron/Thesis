@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,10 +9,12 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import cz.kofron.foodinventory.client.R;
+
 /**
  * Created by kofee on 3/5/14.
  */
-public class LostPasswordDialogFragment extends DialogFragment
+public class NewAccountDialogFragment extends DialogFragment
 {
 	private View view;
 	private Dialog dialog;
@@ -33,7 +35,7 @@ public class LostPasswordDialogFragment extends DialogFragment
 				@Override
 				public void run()
 				{
-					System.out.println("Would send lost password: " + LostPasswordDialogFragment.this);
+					System.out.println("Would create new account: " + NewAccountDialogFragment.this);
 				}
 			});
 		}
@@ -44,13 +46,13 @@ public class LostPasswordDialogFragment extends DialogFragment
 	{
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 
-		View view = inflater.inflate(R.layout.lost_password_dialog, null);
+		View view = inflater.inflate(R.layout.signup_dialog, null);
 		this.view = view;
 
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setView(view);
-		builder.setTitle("Lost password");
+		builder.setTitle("New account");
 		builder.setCancelable(true);
 		builder.setNegativeButton(R.string.cancel, onCancelListener);
 		builder.setPositiveButton(R.string.ok, onOkListener);
@@ -62,6 +64,6 @@ public class LostPasswordDialogFragment extends DialogFragment
 
 	public void show(FragmentActivity activity)
 	{
-		show(activity.getSupportFragmentManager(), "lost_password_dialog");
+		show(activity.getSupportFragmentManager(), "new_account_dialog");
 	}
 }

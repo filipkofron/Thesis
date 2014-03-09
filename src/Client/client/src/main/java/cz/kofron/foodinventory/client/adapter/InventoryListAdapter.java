@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
+import cz.kofron.foodinventory.client.R;
+
 /**
  * Created by kofee on 3/2/14.
  */
@@ -16,7 +19,7 @@ public class InventoryListAdapter extends ArrayAdapter
 {
 	private Context context;
 
-	InventoryListAdapter(Context context)
+	public InventoryListAdapter(Context context)
 	{
 
 		super(context, R.layout.inventory_list_item);

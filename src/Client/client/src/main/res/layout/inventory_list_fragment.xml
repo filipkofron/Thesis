@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:padding="-1dp">
 
-    <cz.kofron.foodinventory.client.NowLikeListView
+    <cz.kofron.foodinventory.client.view.NowLikeListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,6 +14,6 @@
         android:paddingBottom="4dp"
         android:background="@color/item_background_color">
 
-    </cz.kofron.foodinventory.client.NowLikeListView>
+    </cz.kofron.foodinventory.client.view.NowLikeListView>
 
 </LinearLayout>

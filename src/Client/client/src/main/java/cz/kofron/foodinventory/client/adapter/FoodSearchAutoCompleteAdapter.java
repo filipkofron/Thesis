@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
+import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
+import cz.kofron.foodinventory.client.R;
+
 /**
  * Created by Filip Kofron on 3/1/14.
  */
@@ -19,7 +23,7 @@ public class FoodListAdapter extends ArrayAdapter
 
 	private Context context;
 
-	FoodListAdapter(Context context)
+	public FoodListAdapter(Context context)
 	{
 
 		super(context, R.layout.food_list_item);

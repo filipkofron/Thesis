@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cz.kofron.foodinventory.client.MainActivity">
+    tools:context="cz.kofron.foodinventory.client.activity.MainActivity">
 
     <!-- As the main content view, the view below consumes the entire
          space available using match_parent in both dimensions. -->
@@ -25,7 +25,7 @@
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:name="cz.kofron.foodinventory.client.NavigationDrawerFragment"
+        android:name="cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment"
         tools:layout="@layout/food_list_fragment" />
 
 </android.support.v4.widget.DrawerLayout>

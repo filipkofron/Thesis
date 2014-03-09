@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.activity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.fragment.VendorDialogFragment;
 
 /**
  * Created by kofee on 3/4/14.

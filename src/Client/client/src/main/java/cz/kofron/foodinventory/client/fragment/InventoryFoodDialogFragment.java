@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client;
+package cz.kofron.foodinventory.client.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+
+import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
+import cz.kofron.foodinventory.client.R;
 
 /**
  * Created by kofee on 3/5/14.
