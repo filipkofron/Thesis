@@ -5,7 +5,9 @@
     <string name="title_home">Home</string>
     <string name="title_inventory">My Inventory</string>
     <string name="title_search_food">Search food</string>
-    <string name="title_barcode">Scan barcode</string>
+    <string name="title_add_via_barcode">Add via barcode</string>
+    <string name="title_remove_via_barcode">Remove via barcode</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

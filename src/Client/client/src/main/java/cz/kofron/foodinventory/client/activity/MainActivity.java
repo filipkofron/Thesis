@@ -10,11 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.fragment.AddScanFragment;
 import cz.kofron.foodinventory.client.fragment.FoodSearchFragment;
 import cz.kofron.foodinventory.client.fragment.HomeFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryListFragment;
 import cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment;
-import cz.kofron.foodinventory.client.fragment.ScanFragment;
+import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
 
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks
@@ -65,7 +66,11 @@ public class MainActivity extends ActionBarActivity
 				fragment = new FoodSearchFragment();
 				break;
 			case 3:
-				fragment = new ScanFragment();
+				fragment = new AddScanFragment();
+				break;
+			case 4:
+				fragment = new RemoveScanFragment();
+				break;
 		}
 
 		if (fragment == null)
@@ -95,7 +100,10 @@ public class MainActivity extends ActionBarActivity
 				mTitle = getString(R.string.title_search_food);
 				break;
 			case 4:
-				mTitle = getString(R.string.title_barcode);
+				mTitle = getString(R.string.title_add_via_barcode);
+				break;
+			case 5:
+				mTitle = getString(R.string.title_remove_via_barcode);
 				break;
 		}
 	}

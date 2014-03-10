@@ -15,6 +15,8 @@ public class DecodeThread extends Thread
 	private int width;
 	private int height;
 
+	private boolean returnedBuffer = true;
+
 	private Decoder decoder;
 
 	private Camera camera;
@@ -48,16 +50,26 @@ public class DecodeThread extends Thread
 			notify();
 		}
 
+		returnedBuffer = false;
+
 		return true;
 	}
 
 	private void doJob()
 	{
-		decoder.decode(data, width, height, rotated);
+		try
+		{
+			decoder.decode(data, width, height, rotated);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		if(camera != null)
 		{
 			camera.addCallbackBuffer(data);
+			returnedBuffer = true;
 		}
 	}
 
@@ -88,5 +100,10 @@ public class DecodeThread extends Thread
 			{
 			}
 		}
+	}
+
+	public boolean hasReturnedBuffer()
+	{
+		return returnedBuffer;
 	}
 }

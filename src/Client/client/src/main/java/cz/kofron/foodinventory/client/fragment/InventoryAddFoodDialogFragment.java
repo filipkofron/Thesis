@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 
 import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.activity.MainActivity;
 
 /**
  * Created by kofee on 3/5/14.
@@ -41,14 +42,12 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 				public void run()
 				{
 					RadioGroup rg = (RadioGroup) view.findViewById(R.id.radio_group);
-					FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 					dialog.cancel();
 					Intent intent;
 					switch (rg.getCheckedRadioButtonId())
 					{
 						case R.id.radio_scan_barcode:
-							intent = new Intent(getActivity(), FoodListActivity.class);
-							getActivity().startActivity(intent);
+							((MainActivity) getActivity()).onNavigationDrawerItemSelected(3);
 							break;
 						case R.id.radio_search_food:
 							intent = new Intent(getActivity(), FoodListActivity.class);

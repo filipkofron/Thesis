@@ -11,7 +11,7 @@
         android:id="@+id/inventory_list_item_card"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_gravity="right|center_vertical"
+        android:layout_gravity="center"
         android:clickable="false">
 
         <ImageView
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Some food name"
+            android:text="name"
             android:id="@+id/inventory_list_item_food_name"
             android:textColor="@color/item_title"
             android:typeface="normal"
@@ -49,7 +49,8 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true">
+            android:layout_alignParentEnd="true"
+            android:id="@+id/frameLayout">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,6 +63,15 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp" />
         </FrameLayout>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:layout_toLeftOf="@+id/frameLayout"
+            android:src="@drawable/ic_action_remove"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"/>
 
     </RelativeLayout>
 

@@ -1,7 +1,9 @@
 package cz.kofron.foodinventory.client.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
+import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,15 +30,34 @@ import cz.kofron.foodinventory.client.barcode.ResultCallback;
 /**
  * Created by kofee on 3/9/14.
  */
-public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback
+public abstract class AbstractScanFragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback
 {
 
 	private boolean lockCameraUse = false;
 	private SurfaceView surfaceView;
+	protected TextView resultView;
 	private Camera camera;
 	private boolean previewRunning = false;
 	private DecodeThread decodeThread;
 	private boolean rotated;
+	private long lastResult;
+
+	private final static int RESULT_PERIOD_MS = 1500;
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+			savedInstanceState)
+	{
+		View view = inflater.inflate(R.layout.scan_fragment, null);
+
+		surfaceView = (SurfaceView) view.findViewById(R.id.surface_view);
+		final SurfaceHolder surfaceHolder = surfaceView.getHolder();
+
+		surfaceHolder.addCallback(this);
+		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+		return view;
+	}
 
 	@Override
 	public void surfaceCreated(SurfaceHolder surfaceHolder)
@@ -110,10 +133,11 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Ca
 		for (int camIdx = 0; camIdx < cameraCount; camIdx++)
 		{
 			Camera.getCameraInfo(camIdx, cameraInfo);
-			if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT)
+			if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK)
 			{
 				try
 				{
+					System.out.println("Opening cam back " + camIdx);
 					camera = Camera.open(camIdx);
 					break;
 				}
@@ -127,8 +151,31 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Ca
 
 		if (camera == null)
 		{
+			for (int camIdx = 0; camIdx < cameraCount; camIdx++)
+			{
+				Camera.getCameraInfo(camIdx, cameraInfo);
+				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT)
+				{
+					try
+					{
+						System.out.println("Opening cam front " + camIdx);
+						camera = Camera.open(camIdx);
+						break;
+					}
+					catch (RuntimeException e)
+					{
+						camera = null;
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (camera == null)
+		{
 			try
 			{
+				System.out.println("Opening default camera.");
 				camera = Camera.open();
 			}
 			catch (RuntimeException e)
@@ -189,27 +236,31 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Ca
 
 				parameters.setPreviewFormat(ImageFormat.NV21);
 				camera.setParameters(parameters);
+
+				try
+				{
+					parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+					camera.setParameters(parameters);
+				}
+				catch(RuntimeException e)
+				{
+					e.printStackTrace();
+					try
+					{
+						parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+						camera.setParameters(parameters);
+					}
+					catch(RuntimeException e2)
+					{
+						e2.printStackTrace();
+					}
+				}
 			}
 		}
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-			savedInstanceState)
-	{
-		View view = inflater.inflate(R.layout.scan_fragment, null);
-
-		surfaceView = (SurfaceView) view.findViewById(R.id.surface_view);
-		final SurfaceHolder surfaceHolder = surfaceView.getHolder();
-
-		surfaceHolder.addCallback(this);
-		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-
-		return view;
-	}
-
-	@Override
-	public void onPreviewFrame(byte[] bytes, Camera camera)
+	public synchronized void onPreviewFrame(byte[] bytes, Camera camera)
 	{
 		if(!previewRunning)
 		{
@@ -217,13 +268,28 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Ca
 		}
 		Camera.Parameters params = camera.getParameters();
 
-		if (lockCameraUse) {
+		DecodeThread dt = decodeThread;
+
+		if(dt != null)
+		{
+			if(!dt.hasReturnedBuffer())
+			{
+				camera.addCallbackBuffer(bytes);
+				return;
+			}
+		}
+		else
+		{
+			camera.addCallbackBuffer(bytes);
+			return;
+		}
+
+		if (lockCameraUse || (System.currentTimeMillis() - lastResult) < RESULT_PERIOD_MS)
+		{
 			camera.addCallbackBuffer(bytes);
 			return;
 		}
 		lockCameraUse = true;
-
-		DecodeThread dt = decodeThread;
 
 		if(dt != null)
 		{
@@ -246,10 +312,41 @@ public class ScanFragment extends Fragment implements SurfaceHolder.Callback, Ca
 			@Override
 			public void presentResult(String result)
 			{
+				lastResult = System.currentTimeMillis();
 				System.out.println("Presenting result: " + result);
+
+				final String res = result;
+				new Thread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						setResult(res);
+						try
+						{
+							Thread.sleep(RESULT_PERIOD_MS - 100);
+						}
+						catch (InterruptedException e)
+						{
+						}
+						setResult("none");
+					}
+				}).start();
 			}
 		}));
 		decodeThread.start();
+	}
+
+	public void setResult(final String text)
+	{
+		getActivity().runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				resultView.setText(text);
+			}
+		});
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package cz.kofron.foodinventory.client.barcode;
 
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import com.google.zxing.BinaryBitmap;
@@ -8,7 +9,6 @@ import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.HybridBinarizer;
 
@@ -62,8 +62,11 @@ public class Decoder
 				rect.width(), rect.height(), false);
 	}
 
+	int debugTest = 0;
+
 	public void decode(byte [] data, int width, int height, boolean rotated)
 	{
+		System.out.println("Decoding.." + (debugTest++));
 		String someResult = "";
 
 		PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height, rotated);

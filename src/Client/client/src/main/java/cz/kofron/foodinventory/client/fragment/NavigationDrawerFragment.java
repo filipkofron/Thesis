@@ -114,7 +114,8 @@ public class NavigationDrawerFragment extends Fragment
 						getString(R.string.title_home),
 						getString(R.string.title_inventory),
 						getString(R.string.title_search_food),
-						getString(R.string.title_barcode),
+						getString(R.string.title_add_via_barcode),
+						getString(R.string.title_remove_via_barcode)
 				}
 		));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
