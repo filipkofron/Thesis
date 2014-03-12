@@ -16,6 +16,9 @@ import cz.kofron.foodinventory.client.fragment.HomeFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryListFragment;
 import cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment;
 import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
+import cz.kofron.foodinventory.client.network.Connector;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.protocol.MessageInitializer;
 
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks
@@ -32,10 +35,19 @@ public class MainActivity extends ActionBarActivity
 	 */
 	private CharSequence mTitle;
 
+	static
+	{
+		MessageInitializer.initialize();
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
+		NetworkInstance.prepare();
+		NetworkInstance.connector.start();
+
 		setContentView(R.layout.activity_main);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -46,6 +58,14 @@ public class MainActivity extends ActionBarActivity
 		mNavigationDrawerFragment.setUp(
 				R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+
+		NetworkInstance.connector.stop();
 	}
 
 	@Override

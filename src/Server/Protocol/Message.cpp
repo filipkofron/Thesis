@@ -1,6 +1,7 @@
 #include "Message.hpp"
 #include "LoginRequest.hpp"
 #include "LoginResponse.hpp"
+#include "KeepAlive.hpp"
 
 Message::Message()
 {
@@ -28,6 +29,12 @@ Message *Message::dejsonize(Json::Value &root)
         if(header.compare(LoginResponse::getStaticHeader()) == 0)
         {
             msg = new LoginResponse();
+            break;
+        }
+
+        if(header.compare(KeepAlive::getStaticHeader()) == 0)
+        {
+            msg = new KeepAlive();
             break;
         }
 

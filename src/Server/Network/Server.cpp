@@ -49,8 +49,8 @@ void Server::initialize()
        throw ServerException("bind() failed!");
     }
 
-
-    acceptTimeout.tv_sec  = 30;
+    std::cout << "DEBUG: server will timeout after 30minutes!" << std::endl;
+    acceptTimeout.tv_sec  = 1800;
     acceptTimeout.tv_usec = 0;
 
     rc = setsockopt (listenSD, SOL_SOCKET, SO_RCVTIMEO, (char *) &acceptTimeout, sizeof(acceptTimeout));
@@ -84,7 +84,7 @@ void Server::handleClient(int clientSD, sockaddr_in clientAddr)
 
     timeval clientTimeout;
 
-    clientTimeout.tv_sec  = 10;
+    clientTimeout.tv_sec  = 45;
     clientTimeout.tv_usec = 0;
 
     setsockopt (clientSD, SOL_SOCKET, SO_RCVTIMEO, (char *) &clientTimeout, sizeof(clientTimeout));

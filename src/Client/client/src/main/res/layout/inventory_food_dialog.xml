@@ -64,46 +64,54 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Number of food items"
-            android:id="@+id/textView2"
-            android:layout_below="@+id/datePicker"
-            android:layout_margin="8dp" />
-
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:padding="8dp">
+            android:id="@+id/item_count_layout"
+            android:layout_below="@+id/datePicker"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="2"
-                android:id="@+id/textView3"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:padding="8dp" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Number of food items"
+                android:id="@+id/textView2"
+                android:layout_margin="8dp" />
 
-            <Button
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="-"
-                android:id="@+id/button"
-                android:layout_alignTop="@+id/textView3"
-                android:layout_toLeftOf="@+id/textView3" />
+                android:layout_below="@+id/textView2"
+                android:padding="8dp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:id="@+id/button2"
-                android:layout_alignTop="@+id/textView3"
-                android:layout_toRightOf="@+id/textView3" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="2"
+                    android:id="@+id/textView3"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:padding="8dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/button"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_toLeftOf="@+id/textView3" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/button2"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_toRightOf="@+id/textView3" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>
