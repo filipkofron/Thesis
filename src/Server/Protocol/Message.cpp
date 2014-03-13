@@ -2,6 +2,8 @@
 #include "LoginRequest.hpp"
 #include "LoginResponse.hpp"
 #include "KeepAlive.hpp"
+#include "GetInventoryRequest.hpp"
+#include "GetInventoryResponse.hpp"
 
 Message::Message()
 {
@@ -38,9 +40,20 @@ Message *Message::dejsonize(Json::Value &root)
             break;
         }
 
+        if(header.compare(GetInventoryRequest::getStaticHeader()) == 0)
+        {
+            msg = new GetInventoryRequest();
+            break;
+        }
+
+        if(header.compare(GetInventoryResponse::getStaticHeader()) == 0)
+        {
+            msg = new GetInventoryResponse();
+            break;
+        }
+
         break;
     }
-    std::cout << "4" << std::endl;
 
     if(msg)
     {

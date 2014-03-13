@@ -39,8 +39,6 @@ void BufferWriter::writeBuffer(Context &context)
      */
     int lenBytes = strlen(context.getBuffer().getBytes());
 
-    std::cout << "Want to send: '" << context.getBuffer().getBytes() << "'" << std::endl;
-
     writeSize(context.getClientSD(), lenBytes);
 
     writeFully(context.getClientSD(), context.getBuffer().getBytes(), lenBytes);

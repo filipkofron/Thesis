@@ -15,5 +15,8 @@ public class MessageInitializer {
     {
         Message.registerMessageChild(new LoginRequest());
         Message.registerMessageChild(new LoginResponse());
+
+	    Message.registerMessageChild(new GetInventoryRequest());
+	    Message.registerMessageChild(new GetInventoryResponse());
     }
 }

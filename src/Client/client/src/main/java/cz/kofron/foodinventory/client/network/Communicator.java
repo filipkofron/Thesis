@@ -7,6 +7,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cz.kofron.foodinventory.client.protocol.GetInventoryRequest;
+import cz.kofron.foodinventory.client.protocol.GetInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
 import cz.kofron.foodinventory.client.protocol.KeepAlive;
@@ -33,10 +35,27 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new LoginRequest(name, password).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			LoginResponse lr = (LoginResponse) msg;
-			System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
+			System.out.println("LoginResponse: " + lr);
+			if(lr != null)
+			{
+				System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
+			}
 			return lr;
 		}
 	}
+
+	public GetInventoryResponse getInventory(boolean direct, int id, String foodName, String foodGtin) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new GetInventoryRequest(direct, id, foodName, foodGtin).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			GetInventoryResponse gir = (GetInventoryResponse) msg;
+			System.out.println("GetInventoryResponse: " + gir);
+			return gir;
+		}
+	}
+
 
 	public void keepAlive() throws IOException
 	{

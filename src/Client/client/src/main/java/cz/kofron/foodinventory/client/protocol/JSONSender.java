@@ -31,8 +31,15 @@ public class JSONSender {
 
         Atomics.integerToBytes(size, bytes);
 
-        os.write(bytes);
-        os.write(msgBytes);
-        os.flush();
+	    try
+	    {
+		    os.write(bytes);
+		    os.write(msgBytes);
+		    os.flush();
+	    }
+	    catch(NullPointerException e)
+	    {
+		    throw new IOException(e);
+	    }
     }
 }

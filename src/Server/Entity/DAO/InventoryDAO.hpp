@@ -20,6 +20,8 @@ public:
     virtual Inventory getInventoryById(const int &id) = 0;
     virtual std::vector<Inventory> getInventoryByUserId(const int &userId) = 0;
     virtual std::vector<Inventory> getInventoryByFoodId(const int &foodId) = 0;
+    virtual std::vector<Inventory> searchInventoryByFoodName(const int &userId, const std::string &foodName) = 0;
+    virtual std::vector<Inventory> searchInventoryByGtin(const int &userId, const std::string &gtin) = 0;
 };
 
 #endif

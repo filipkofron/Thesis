@@ -27,6 +27,7 @@ void LoginHandler::handle(Context &context)
     {
         std::shared_ptr<UserDAO> dao = DAOFactory::getUserDAO();
         User user = dao->getUserByUsername(request->username);
+        context.setUserId(user.getId());
         context.setUsername(user.getUserName());
         context.setLoggedIn(user.checkPassword(request->password));
     }

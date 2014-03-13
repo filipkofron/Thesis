@@ -11,7 +11,7 @@ static const char *DELETE_VENDOR = "DELETE FROM Vendor WHERE id = ?";
 static const char *UPDATE_VENDOR = "UPDATE Vendor SET name = ? WHERE id = ?";
 static const char *VENDOR_BY_ID = "SELECT id, name FROM Vendor WHERE id = ?";
 static const char *VENDOR_BY_NAME = "SELECT id, name FROM Vendor WHERE name = ?";
-static const char *FIND_VENDOR_BY_NAME = "SELECT id, name FROM Vendor WHERE name LIKE ?";
+static const char *FIND_VENDOR_BY_NAME = "SELECT id, name FROM Vendor WHERE name COLLATE UTF8_GENERAL_CI LIKE ?";
 
 void VendorDAOMySQL::addVendor(Vendor &vendor, int &newId)
 {

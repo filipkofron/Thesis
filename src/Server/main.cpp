@@ -49,6 +49,10 @@ void json_exception_test()
 
 int main()
 {
+    std::cout << "> [Food inventory server]" << std::endl;
+    std::cout << "> Author: Filip Kofron (filip.kofron.cz@gmail.com)" << std::endl;
+    std::cout << "> Build: " << __DATE__ << " " << __TIME__ << std::endl;
+    std::cout << std::endl;
     json_exception_test();
 
     Server server;

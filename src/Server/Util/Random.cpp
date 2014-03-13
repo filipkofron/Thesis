@@ -5,7 +5,7 @@
 
 RandomInitializer::RandomInitializer()
 {
-    std::cout << "Initializing random!" << std::endl;
+    std::cout << "DEBUG> Initializing random!" << std::endl;
     check();
 }
 

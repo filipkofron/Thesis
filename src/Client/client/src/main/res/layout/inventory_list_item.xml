@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="20.09.2013"
-                android:id="@+id/textView3"
+                android:id="@+id/date_view"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@+id/textView2"
                 android:layout_gravity="center"

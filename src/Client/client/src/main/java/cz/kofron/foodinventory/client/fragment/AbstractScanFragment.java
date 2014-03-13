@@ -67,6 +67,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	@Override
 	public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3)
 	{
+		previewRunning = false;
 		destroyCamera();
 
 		initCamera(surfaceHolder);
@@ -75,6 +76,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	@Override
 	public void surfaceDestroyed(SurfaceHolder surfaceHolder)
 	{
+		previewRunning = false;
 		destroyCamera();
 	}
 
@@ -264,6 +266,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	{
 		if(!previewRunning)
 		{
+			camera.addCallbackBuffer(bytes);
 			return;
 		}
 		Camera.Parameters params = camera.getParameters();
@@ -353,6 +356,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	public void onPause()
 	{
 		super.onPause();
+		previewRunning = false;
 		DecodeThread dt = decodeThread;
 		decodeThread = null;
 

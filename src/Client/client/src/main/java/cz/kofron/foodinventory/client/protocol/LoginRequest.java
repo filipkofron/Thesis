@@ -54,8 +54,8 @@ public class LoginRequest extends Message {
     @Override
     protected void dejsonizeContent(JSONObject obj) throws JSONException
     {
-        username = (String) obj.get("username");
-        password = (String) obj.get("password");
+        username = obj.getString("username");
+        password = obj.getString("password");
     }
 
     @Override

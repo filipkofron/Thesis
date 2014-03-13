@@ -20,6 +20,7 @@ private:
     int clientSD;
     bool loggedIn;
     std::string username;
+    int userId;
     Buffer buffer;
     Server *server;
     std::shared_ptr<std::thread> thread;
@@ -41,6 +42,8 @@ public:
     void setLoggedIn(const bool &loggedIn);
     const std::string &getUsername();
     void setUsername(const std::string &username);
+    const int &getUserId();
+    void setUserId(const int &userId);
 };
 
 #endif

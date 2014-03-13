@@ -10,11 +10,9 @@ import java.sql.Timestamp;
  */
 public class InventoryItem extends AbstractEntity
 {
-	protected int userId;
-	protected String userName;
-
 	protected int foodId;
 	protected String foodName;
+	protected String foodGtin;
 
 	protected long useBy;
 
@@ -23,34 +21,13 @@ public class InventoryItem extends AbstractEntity
 		super(id, true);
 	}
 
-	public InventoryItem(int id, boolean exists, int foodId, int userId, String userName, String foodName, long useBy)
+	public InventoryItem(int id, boolean exists, int foodId, String foodName, String foodGtin, long useBy)
 	{
 		super(id, exists);
 		this.foodId = foodId;
-		this.userId = userId;
-		this.userName = userName;
 		this.foodName = foodName;
+		this.foodGtin = foodGtin;
 		this.useBy = useBy;
-	}
-
-	public int getUserId()
-	{
-		return userId;
-	}
-
-	public void setUserId(int userId)
-	{
-		this.userId = userId;
-	}
-
-	public String getUserName()
-	{
-		return userName;
-	}
-
-	public void setUserName(String userName)
-	{
-		this.userName = userName;
 	}
 
 	public int getFoodId()
@@ -73,6 +50,16 @@ public class InventoryItem extends AbstractEntity
 		this.foodName = foodName;
 	}
 
+	public String getFoodGtin()
+	{
+		return foodGtin;
+	}
+
+	public void setFoodGtin(String foodGtin)
+	{
+		this.foodGtin = foodGtin;
+	}
+
 	public long getUseBy()
 	{
 		return useBy;
@@ -88,11 +75,9 @@ public class InventoryItem extends AbstractEntity
 	{
 		JSONObject object = new JSONObject();
 
-		object.put("userId", userId);
-		object.put("userName", userName);
-
 		object.put("foodId", foodId);
 		object.put("foodName", foodName);
+		object.put("foodGtin", foodGtin);
 
 		java.sql.Timestamp useByTimeStamp = new Timestamp(useBy);
 
@@ -105,11 +90,9 @@ public class InventoryItem extends AbstractEntity
 	{
 		InventoryItem ii = new InventoryItem(jsonObject.getInt("id"));
 
-		ii.userId = jsonObject.getInt("userId");
-		ii.userName = jsonObject.getString("userName");
-
 		ii.foodId = jsonObject.getInt("foodId");
 		ii.foodName = jsonObject.getString("foodName");
+		ii.foodGtin = jsonObject.getString("foodGtin");
 
 		java.sql.Timestamp useByTimeStamp = Timestamp.valueOf(jsonObject.getString("useBy"));
 		ii.useBy = useByTimeStamp.getTime();

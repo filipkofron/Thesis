@@ -37,8 +37,8 @@ public class LoginResponse extends Message{
     @Override
     protected void dejsonizeContent(JSONObject obj) throws JSONException
     {
-        success = (boolean) obj.get("success");
-        message = (String) obj.get("message");
+        success = obj.getBoolean("success");
+        message = obj.getString("message");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package cz.kofron.foodinventory.client.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -8,15 +9,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
+import cz.kofron.foodinventory.client.task.LoadInventoryTask;
+import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 3/2/14.
  */
 public class InventoryListFragment extends ListFragment
 {
+	private InventoryListAdapter adapter;
+	private ProgressBar progressBar;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -24,22 +32,64 @@ public class InventoryListFragment extends ListFragment
 
 		setHasOptionsMenu(true);
 
-		setListAdapter(new InventoryListAdapter(getActivity()));
+		adapter = new InventoryListAdapter(getActivity());
+		setListAdapter(adapter);
 
-		getActivity().runOnUiThread(new Runnable()
+		LoadInventoryTask lit = new LoadInventoryTask();
+
+		Runnable success = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				toggleProgressBar(false);
+			}
+		};
+
+		Runnable fail = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				toggleProgressBar(false);
+				NetworkErrorToast.showError(getActivity());
+			}
+		};
+
+		lit.execute(new LoadInventoryParam("", "", adapter, success, fail));
+
+		/*getActivity().runOnUiThread(new Runnable()
 		{
 			@Override
 			public void run()
 			{
 				new LoginDialogFragment().show(getActivity());
 			}
-		});
+		});*/
+	}
+
+	public void toggleProgressBar(boolean on)
+	{
+		if(progressBar == null)
+		{
+			return;
+		}
+		if(on)
+		{
+			progressBar.setVisibility(ProgressBar.VISIBLE);
+		}
+		else
+		{
+			progressBar.setVisibility(ProgressBar.GONE);
+		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		return inflater.inflate(R.layout.inventory_list_fragment, container, false);
+		View view = inflater.inflate(R.layout.inventory_list_fragment, container, false);
+		progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+		return view;
 	}
 
 	@Override

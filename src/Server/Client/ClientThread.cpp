@@ -56,6 +56,11 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
             if(msg.get())
             {
                 std::cout << "Got message: '" << typeid(msg).name() << "'" << std::endl;
+
+
+                std::cout << ">>>> DEBUG >>>> SLOW DOWN FOR 3s" << std::endl;
+                sleep(3);
+
                 std::shared_ptr<Handler> handler(msg->createHandler());
                 handler->handle(*context);
             }

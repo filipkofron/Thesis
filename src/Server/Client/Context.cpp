@@ -84,3 +84,13 @@ void Context::setUsername(const std::string &username)
 {
     this->username = username;
 }
+
+const int &Context::getUserId()
+{
+    return userId;
+}
+
+void Context::setUserId(const int &userId)
+{
+    this->userId = userId;
+}

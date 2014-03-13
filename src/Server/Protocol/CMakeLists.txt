@@ -5,6 +5,10 @@ set(protocol_source_files
   LoginResponse.cpp
   LoginRequest.hpp
   LoginRequest.cpp
+  GetInventoryRequest.hpp
+  GetInventoryRequest.cpp
+  GetInventoryResponse.hpp
+  GetInventoryResponse.cpp
   KeepAlive.hpp
   KeepAlive.cpp
 )
