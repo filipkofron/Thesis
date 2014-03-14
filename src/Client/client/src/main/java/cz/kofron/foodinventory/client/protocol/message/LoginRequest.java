@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cz.kofron.foodinventory.client.protocol;
+package cz.kofron.foodinventory.client.protocol.message;
 
 import org.json.*;
 
@@ -12,7 +12,8 @@ import org.json.*;
  *
  * @author kofee
  */
-public class LoginRequest extends Message {
+public class LoginRequest extends Message
+{
 
     private String username;
     private String password;

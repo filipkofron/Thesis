@@ -16,9 +16,8 @@ import cz.kofron.foodinventory.client.fragment.HomeFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryListFragment;
 import cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment;
 import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
-import cz.kofron.foodinventory.client.network.Connector;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
-import cz.kofron.foodinventory.client.protocol.MessageInitializer;
+import cz.kofron.foodinventory.client.protocol.message.MessageInitializer;
 
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks

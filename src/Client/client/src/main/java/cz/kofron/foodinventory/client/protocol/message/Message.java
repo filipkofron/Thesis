@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client.protocol;
+package cz.kofron.foodinventory.client.protocol.message;
 
 import java.util.HashMap;
 import java.util.Map;

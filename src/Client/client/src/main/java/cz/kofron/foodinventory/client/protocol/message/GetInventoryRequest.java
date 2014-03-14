@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client.protocol;
+package cz.kofron.foodinventory.client.protocol.message;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
-import cz.kofron.foodinventory.client.protocol.GetInventoryResponse;
+import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
 
 /**

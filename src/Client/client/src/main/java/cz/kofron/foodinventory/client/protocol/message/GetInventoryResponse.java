@@ -1,4 +1,4 @@
-package cz.kofron.foodinventory.client.protocol;
+package cz.kofron.foodinventory.client.protocol.message;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +42,7 @@ public class GetInventoryResponse extends Message
 	{
 		JSONArray array = obj.getJSONArray("items");
 		int len = array.length();
-		intentoryItems = new ArrayList<>();
+		intentoryItems = new ArrayList<>(len);
 
 		for(int i = 0; i < len; i++)
 		{
