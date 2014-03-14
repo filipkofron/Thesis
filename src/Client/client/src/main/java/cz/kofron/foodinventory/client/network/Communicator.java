@@ -6,10 +6,10 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import cz.kofron.foodinventory.client.protocol.message.GetInventoryRequest;
-import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
+import cz.kofron.foodinventory.client.protocol.message.GetInventoryRequest;
+import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.KeepAlive;
 import cz.kofron.foodinventory.client.protocol.message.LoginRequest;
 import cz.kofron.foodinventory.client.protocol.message.LoginResponse;
@@ -35,7 +35,7 @@ public class Communicator implements ConnectionListener
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			LoginResponse lr = (LoginResponse) msg;
 			System.out.println("LoginResponse: " + lr);
-			if(lr != null)
+			if (lr != null)
 			{
 				System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
 			}

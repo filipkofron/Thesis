@@ -95,6 +95,7 @@ public final class HighLevelEncoder
 	// A map showing the available shift codes.  (The shifts to BINARY are not
 	// shown
 	static final int[][] SHIFT_TABLE = new int[6][6]; // mode shift codes, per table
+
 	static
 	{
 		for (int[] table : SHIFT_TABLE)
@@ -111,9 +112,11 @@ public final class HighLevelEncoder
 		SHIFT_TABLE[MODE_DIGIT][MODE_PUNCT] = 0;
 		SHIFT_TABLE[MODE_DIGIT][MODE_UPPER] = 15;
 	}
+
 	// A reverse mapping from [mode][char] to the encoding for that character
 	// in that mode.  An entry of 0 indicates no mapping exists.
 	private static final int[][] CHAR_MAP = new int[5][256];
+
 	static
 	{
 		CHAR_MAP[MODE_UPPER][' '] = 1;
@@ -155,6 +158,7 @@ public final class HighLevelEncoder
 			}
 		}
 	}
+
 	private final byte[] text;
 
 	public HighLevelEncoder(byte[] text)

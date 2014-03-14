@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 
 /**
  * Created by kofee on 3/5/14.

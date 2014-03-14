@@ -43,7 +43,7 @@ public class GetFoodDetailResponse extends Message
 
 		foodDetails = new ArrayList<>(array.length());
 
-		for(int i = 0; i < array.length(); i++)
+		for (int i = 0; i < array.length(); i++)
 		{
 			foodDetails.add(FoodDetail.fromJson(array.getJSONObject(i)));
 		}
@@ -56,7 +56,7 @@ public class GetFoodDetailResponse extends Message
 		JSONArray array = new JSONArray();
 
 		int i = 0;
-		for(FoodDetail fd : foodDetails)
+		for (FoodDetail fd : foodDetails)
 		{
 			array.put(i, fd.toJSON());
 			i++;

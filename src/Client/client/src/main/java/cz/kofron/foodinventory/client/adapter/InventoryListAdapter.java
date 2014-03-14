@@ -10,10 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.InventoryItem;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
@@ -56,6 +55,20 @@ public class InventoryListAdapter extends ArrayAdapter
 		return view;
 	}
 
+	public void updateContent(ArrayList<InventoryItem> items)
+	{
+		clear();
+		this.items = items;
+
+		notifyDataSetChanged();
+	}
+
+	@Override
+	public int getCount()
+	{
+		return items.size();
+	}
+
 	private class OnItemClick implements View.OnClickListener
 	{
 		private InventoryItem item;
@@ -70,19 +83,5 @@ public class InventoryListAdapter extends ArrayAdapter
 		{
 			new InventoryFoodDialogFragment(R.string.title_inventory_food).show((FragmentActivity) context);
 		}
-	}
-
-	public void updateContent(ArrayList<InventoryItem> items)
-	{
-		clear();
-		this.items = items;
-
-		notifyDataSetChanged();
-	}
-
-	@Override
-	public int getCount()
-	{
-		return items.size();
 	}
 }

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="-1dp">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:padding="-1dp">
 
     <cz.kofron.foodinventory.client.view.NowLikeListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/item_background_color"
         android:dividerHeight="0px"
-        android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        android:background="@color/item_background_color">
+        android:paddingTop="4dp">
 
     </cz.kofron.foodinventory.client.view.NowLikeListView>
 

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@color/background">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical"
+              android:weightSum="1">
 
     <AutoCompleteTextView
+        android:id="@+id/autocomplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/autocomplete"
         android:layout_gravity="center_horizontal"
-        android:editable="true"
-        android:hint="Food name or GTIN (barcode)"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"
+        android:editable="true"
         android:enabled="true"
-        android:maxLines="1" />
+        android:hint="Food name or GTIN (barcode)"
+        android:maxLines="1"/>
 
     <Button
+        android:id="@+id/button_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search Food"
-        android:id="@+id/button_search"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:text="Search Food"/>
 </LinearLayout>

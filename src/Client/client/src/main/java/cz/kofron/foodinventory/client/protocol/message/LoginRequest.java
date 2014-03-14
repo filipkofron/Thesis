@@ -6,67 +6,75 @@
 
 package cz.kofron.foodinventory.client.protocol.message;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
- *
  * @author kofee
  */
 public class LoginRequest extends Message
 {
 
-    private String username;
-    private String password;
+	private String username;
+	private String password;
 
-    public LoginRequest() {
-    }
-    
-    public LoginRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+	public LoginRequest()
+	{
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public LoginRequest(String username, String password)
+	{
+		this.username = username;
+		this.password = password;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername()
+	{
+		return username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    @Override
-    public String getHeader() {
-        return "LoginRequest";
-    }
+	public String getPassword()
+	{
+		return password;
+	}
 
-    @Override
-    public Message newMessage() {
-        return new LoginRequest();
-    }
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
 
-    @Override
-    protected void dejsonizeContent(JSONObject obj) throws JSONException
-    {
-        username = obj.getString("username");
-        password = obj.getString("password");
-    }
+	@Override
+	public String getHeader()
+	{
+		return "LoginRequest";
+	}
 
-    @Override
-    protected JSONObject jsonizeContent() throws JSONException
-    {
-        JSONObject obj = new JSONObject();
-        obj.put("username", username);
-        obj.put("password", password);
-        
-        return obj;
-    }
-    
+	@Override
+	public Message newMessage()
+	{
+		return new LoginRequest();
+	}
+
+	@Override
+	protected void dejsonizeContent(JSONObject obj) throws JSONException
+	{
+		username = obj.getString("username");
+		password = obj.getString("password");
+	}
+
+	@Override
+	protected JSONObject jsonizeContent() throws JSONException
+	{
+		JSONObject obj = new JSONObject();
+		obj.put("username", username);
+		obj.put("password", password);
+
+		return obj;
+	}
+
 }

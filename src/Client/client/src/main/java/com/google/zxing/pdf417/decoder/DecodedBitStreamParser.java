@@ -61,6 +61,7 @@ final class DecodedBitStreamParser
 	 * This is used in the numeric compaction decode algorithm.
 	 */
 	private static final BigInteger[] EXP900;
+
 	static
 	{
 		EXP900 = new BigInteger[16];
@@ -72,6 +73,7 @@ final class DecodedBitStreamParser
 			EXP900[i] = EXP900[i - 1].multiply(nineHundred);
 		}
 	}
+
 	private static final int NUMBER_OF_SEQUENCE_CODEWORDS = 2;
 
 	private DecodedBitStreamParser()

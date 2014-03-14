@@ -33,10 +33,10 @@ public final class StringUtils
 	public static final String GB2312 = "GB2312";
 	private static final String PLATFORM_DEFAULT_ENCODING =
 			System.getProperty("file.encoding");
-	private static final String EUC_JP = "EUC_JP";
 	private static final boolean ASSUME_SHIFT_JIS =
 			SHIFT_JIS.equalsIgnoreCase(PLATFORM_DEFAULT_ENCODING) ||
 					EUC_JP.equalsIgnoreCase(PLATFORM_DEFAULT_ENCODING);
+	private static final String EUC_JP = "EUC_JP";
 	private static final String UTF8 = "UTF8";
 	private static final String ISO88591 = "ISO8859_1";
 

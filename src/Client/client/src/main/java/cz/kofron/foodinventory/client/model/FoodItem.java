@@ -30,6 +30,18 @@ public class FoodItem extends AbstractEntity
 		this.gtin = gtin;
 	}
 
+	public static FoodItem fromJson(JSONObject obj) throws JSONException
+	{
+		FoodItem foodItem = new FoodItem(obj.getInt("id"));
+		foodItem.defaultUseBy = obj.getLong("defaultUseBy");
+		foodItem.imageId = obj.getString("imageId");
+		foodItem.name = obj.getString("name");
+		foodItem.desc = obj.getString("desc");
+		foodItem.gtin = obj.getString("gtin");
+
+		return foodItem;
+	}
+
 	public long getDefaultUseBy()
 	{
 		return defaultUseBy;
@@ -91,17 +103,5 @@ public class FoodItem extends AbstractEntity
 		obj.put("gtin", gtin);
 
 		return obj;
-	}
-
-	public static FoodItem fromJson(JSONObject obj) throws JSONException
-	{
-		FoodItem foodItem = new FoodItem(obj.getInt("id"));
-		foodItem.defaultUseBy = obj.getLong("defaultUseBy");
-		foodItem.imageId = obj.getString("imageId");
-		foodItem.name = obj.getString("name");
-		foodItem.desc = obj.getString("desc");
-		foodItem.gtin = obj.getString("gtin");
-
-		return foodItem;
 	}
 }

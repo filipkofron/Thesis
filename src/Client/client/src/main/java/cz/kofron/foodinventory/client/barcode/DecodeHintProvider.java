@@ -2,8 +2,6 @@ package cz.kofron.foodinventory.client.barcode;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
-import com.google.zxing.ResultPoint;
-import com.google.zxing.ResultPointCallback;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -28,9 +26,9 @@ public class DecodeHintProvider
 				BarcodeFormat.RSS_EXPANDED);
 	}
 
-	public static Map<DecodeHintType,Object>  provideHints()
+	public static Map<DecodeHintType, Object> provideHints()
 	{
-		Map<DecodeHintType,Object> hints = new EnumMap<>(DecodeHintType.class);
+		Map<DecodeHintType, Object> hints = new EnumMap<>(DecodeHintType.class);
 		Collection<BarcodeFormat> decodeFormats = EnumSet.noneOf(BarcodeFormat.class);
 		decodeFormats.addAll(PRODUCT_FORMATS);
 

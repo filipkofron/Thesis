@@ -18,6 +18,8 @@ public class FoodDetail extends AbstractEntity
 	private ArrayList<String> imageIds;
 	private String description;
 	private long defaultUseBy;
+	private int amountType;
+	private float amount;
 	private float usualPrice;
 	private ArrayList<FoodReview> reviews;
 	private String addedBy;
@@ -26,6 +28,24 @@ public class FoodDetail extends AbstractEntity
 	public FoodDetail(int id)
 	{
 		super(id, true);
+	}
+
+	public FoodDetail(int id, boolean exists, String name, String vendor, int vendorId, String gtin, ArrayList<String> imageIds, String description, long defaultUseBy, int amountType, float amount, float usualPrice, ArrayList<FoodReview> reviews, String addedBy, String lastEditedBy)
+	{
+		super(id, exists);
+		this.name = name;
+		this.vendor = vendor;
+		this.vendorId = vendorId;
+		this.gtin = gtin;
+		this.imageIds = imageIds;
+		this.description = description;
+		this.defaultUseBy = defaultUseBy;
+		this.amountType = amountType;
+		this.amount = amount;
+		this.usualPrice = usualPrice;
+		this.reviews = reviews;
+		this.addedBy = addedBy;
+		this.lastEditedBy = lastEditedBy;
 	}
 
 	public static FoodDetail fromJson(JSONObject obj) throws JSONException
@@ -40,19 +60,21 @@ public class FoodDetail extends AbstractEntity
 		JSONArray imageArray = obj.getJSONArray("imageIds");
 		fd.imageIds = new ArrayList<>(imageArray.length());
 
-		for(int i = 0; i < imageArray.length(); i++)
+		for (int i = 0; i < imageArray.length(); i++)
 		{
 			fd.imageIds.add(imageArray.getString(i));
 		}
 
 		fd.description = obj.getString("description");
 		fd.defaultUseBy = obj.getLong("defaultUseBy");
+		fd.amountType = obj.getInt("amountType");
+		fd.amount = (float) obj.getDouble("amount");
 		fd.usualPrice = (float) obj.getDouble("usualPrice");
 
 		JSONArray reviewArray = obj.getJSONArray("reviews");
 		fd.reviews = new ArrayList<>(reviewArray.length());
 
-		for(int i = 0; i < reviewArray.length(); i++)
+		for (int i = 0; i < reviewArray.length(); i++)
 		{
 			fd.reviews.add(FoodReview.fromJson(reviewArray.getJSONObject(i)));
 		}
@@ -76,7 +98,7 @@ public class FoodDetail extends AbstractEntity
 		JSONArray imageArray = new JSONArray();
 
 		int i = 0;
-		for(String imageId : imageIds)
+		for (String imageId : imageIds)
 		{
 			imageArray.put(i, imageId);
 			i++;
@@ -85,12 +107,14 @@ public class FoodDetail extends AbstractEntity
 		obj.put("imageIds", imageArray);
 		obj.put("description", description);
 		obj.put("defaultUseBy", defaultUseBy);
+		obj.put("amountType", amountType);
+		obj.put("amount", amount);
 		obj.put("usualPrice", usualPrice);
 
 		JSONArray reviewArray = new JSONArray();
 
 		i = 0;
-		for(FoodReview review : reviews)
+		for (FoodReview review : reviews)
 		{
 			reviewArray.put(i, review.toJSON());
 			i++;
@@ -101,5 +125,70 @@ public class FoodDetail extends AbstractEntity
 		obj.put("lastEditedBy", lastEditedBy);
 
 		return obj;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getVendor()
+	{
+		return vendor;
+	}
+
+	public int getVendorId()
+	{
+		return vendorId;
+	}
+
+	public String getGtin()
+	{
+		return gtin;
+	}
+
+	public ArrayList<String> getImageIds()
+	{
+		return imageIds;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public long getDefaultUseBy()
+	{
+		return defaultUseBy;
+	}
+
+	public int getAmountType()
+	{
+		return amountType;
+	}
+
+	public float getAmount()
+	{
+		return amount;
+	}
+
+	public float getUsualPrice()
+	{
+		return usualPrice;
+	}
+
+	public ArrayList<FoodReview> getReviews()
+	{
+		return reviews;
+	}
+
+	public String getAddedBy()
+	{
+		return addedBy;
+	}
+
+	public String getLastEditedBy()
+	{
+		return lastEditedBy;
 	}
 }

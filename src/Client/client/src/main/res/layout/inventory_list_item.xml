@@ -2,76 +2,76 @@
 
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/item_background_color"
-    android:foregroundGravity="center">
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/item_background_color"
+             android:foregroundGravity="center">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/inventory_list_item_card"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:clickable="false">
+    <RelativeLayout android:id="@+id/inventory_list_item_card"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:clickable="false">
 
         <ImageView
+            android:id="@+id/inventory_imageView"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:id="@+id/inventory_imageView"
-            android:adjustViewBounds="false"
-            android:scaleType="centerCrop"
-            android:contentDescription="Food image"
-            android:src="@drawable/ic_launcher"
-            android:baselineAlignBottom="true"
-            android:background="@color/food_list_item_image_background"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="false"
+            android:background="@color/food_list_item_image_background"
+            android:baselineAlignBottom="true"
+            android:contentDescription="Food image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher"/>
 
         <TextView
+            android:id="@+id/inventory_list_item_food_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="name"
-            android:id="@+id/inventory_list_item_food_name"
-            android:textColor="@color/item_title"
-            android:typeface="normal"
-            android:textStyle="bold"
-            android:layout_gravity="left|center_vertical"
             android:layout_centerVertical="true"
+            android:layout_gravity="left|center_vertical"
+            android:layout_margin="8dp"
             android:layout_toRightOf="@+id/inventory_imageView"
-            android:layout_margin="8dp" />
+            android:text="name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/item_title"
+            android:textStyle="bold"
+            android:typeface="normal"/>
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/frameLayout">
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true">
 
             <TextView
+                android:id="@+id/date_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="20.09.2013"
-                android:id="@+id/date_view"
                 android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/textView2"
                 android:layout_gravity="center"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@+id/textView2"
+                android:text="20.09.2013"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
         </FrameLayout>
 
         <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
-            android:layout_toLeftOf="@+id/frameLayout"
-            android:src="@drawable/ic_action_remove"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/frameLayout"
+            android:src="@drawable/ic_action_remove"/>
 
     </RelativeLayout>
 

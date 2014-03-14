@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.adapter.FoodSearchAutoCompleteAdapter;
 
 /**

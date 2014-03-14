@@ -6,61 +6,70 @@
 
 package cz.kofron.foodinventory.client.protocol.message;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
- *
  * @author kofee
  */
 public class LoginResponse extends Message
 {
-    private boolean success;
-    private String message;
+	private boolean success;
+	private String message;
 
-    public LoginResponse() {
-    }
-    
-    public LoginResponse(boolean success, String message) {
-        this.success = success;
-        this.message = message;
-    }
+	public LoginResponse()
+	{
+	}
 
-    @Override
-    public String getHeader() {
-        return "LoginResponse";
-    }
+	public LoginResponse(boolean success, String message)
+	{
+		this.success = success;
+		this.message = message;
+	}
 
-    @Override
-    public Message newMessage() {
-        return new LoginResponse();
-    }
+	@Override
+	public String getHeader()
+	{
+		return "LoginResponse";
+	}
 
-    @Override
-    protected void dejsonizeContent(JSONObject obj) throws JSONException
-    {
-        success = obj.getBoolean("success");
-        message = obj.getString("message");
-    }
+	@Override
+	public Message newMessage()
+	{
+		return new LoginResponse();
+	}
 
-    @Override
-    protected JSONObject jsonizeContent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	protected void dejsonizeContent(JSONObject obj) throws JSONException
+	{
+		success = obj.getBoolean("success");
+		message = obj.getString("message");
+	}
 
-    public boolean isSuccess() {
-        return success;
-    }
+	@Override
+	protected JSONObject jsonizeContent()
+	{
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+	public boolean isSuccess()
+	{
+		return success;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public void setSuccess(boolean success)
+	{
+		this.success = success;
+	}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public String getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage(String message)
+	{
+		this.message = message;
+	}
 
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="5dp">
 
 
     <RelativeLayout
@@ -12,72 +12,72 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_margin="8dp"
             android:text="Food"
-            android:id="@+id/textView4"
-            android:layout_margin="8dp" />
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <RelativeLayout
+            android:id="@+id/food_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/food_container"
             android:layout_below="@+id/textView4">
 
             <TextView
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Some food name"
-                android:id="@+id/textView5"
-                android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="83dp"
-                android:layout_marginRight="8dp" />
+                android:layout_marginRight="8dp"
+                android:text="Some food name"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <Button
+                android:id="@+id/details_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
-                android:id="@+id/details_button"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/textView5" />
+                android:layout_toRightOf="@+id/textView5"
+                android:text="Details"/>
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Pick a use by date"
-            android:id="@+id/textView"
+            android:layout_below="@+id/food_container"
             android:layout_margin="8dp"
-            android:layout_below="@+id/food_container" />
+            android:text="Pick a use by date"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
 
         <DatePicker
+            android:id="@+id/datePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/datePicker"
-            android:calendarViewShown="false"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+            android:layout_margin="5dp"
+            android:calendarViewShown="false"/>
 
         <RelativeLayout
+            android:id="@+id/item_count_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/item_count_layout"
             android:layout_below="@+id/datePicker"
             >
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_margin="8dp"
                 android:text="Number of food items"
-                android:id="@+id/textView2"
-                android:layout_margin="8dp" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -86,30 +86,30 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="2"
-                    android:id="@+id/textView3"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="8dp" />
+                    android:padding="8dp"
+                    android:text="2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
                     android:id="@+id/button"
-                    android:layout_alignTop="@+id/textView3"
-                    android:layout_toLeftOf="@+id/textView3" />
-
-                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:id="@+id/button2"
                     android:layout_alignTop="@+id/textView3"
-                    android:layout_toRightOf="@+id/textView3" />
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:text="-"/>
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_toRightOf="@+id/textView3"
+                    android:text="+"/>
             </RelativeLayout>
 
         </RelativeLayout>

@@ -7,10 +7,11 @@
 package cz.kofron.foodinventory.client.network;
 
 /**
- *
  * @author kofee
  */
-public interface ConnectionListener {
-    public void onConnected(Connection connection);
-    public void onDisconnected(Connection connection);
+public interface ConnectionListener
+{
+	public void onConnected(Connection connection);
+
+	public void onDisconnected(Connection connection);
 }

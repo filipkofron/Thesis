@@ -7,33 +7,33 @@
 package cz.kofron.foodinventory.client.protocol.message;
 
 /**
- *
  * @author kofee
  */
-public class MessageInitializer {
-    public static void initialize()
-    {
-	    Message.registerMessageChild(new KeepAlive());
+public class MessageInitializer
+{
+	public static void initialize()
+	{
+		Message.registerMessageChild(new KeepAlive());
 
-        Message.registerMessageChild(new LoginRequest());
-        Message.registerMessageChild(new LoginResponse());
+		Message.registerMessageChild(new LoginRequest());
+		Message.registerMessageChild(new LoginResponse());
 
-	    Message.registerMessageChild(new GetInventoryRequest());
-	    Message.registerMessageChild(new GetInventoryResponse());
+		Message.registerMessageChild(new GetInventoryRequest());
+		Message.registerMessageChild(new GetInventoryResponse());
 
-	    Message.registerMessageChild(new DeleteInventoryRequest());
-	    Message.registerMessageChild(new DeleteInventoryResponse());
+		Message.registerMessageChild(new DeleteInventoryRequest());
+		Message.registerMessageChild(new DeleteInventoryResponse());
 
-	    Message.registerMessageChild(new EditInventoryRequest());
-	    Message.registerMessageChild(new EditInventoryResponse());
+		Message.registerMessageChild(new EditInventoryRequest());
+		Message.registerMessageChild(new EditInventoryResponse());
 
-	    Message.registerMessageChild(new GetFoodItemRequest());
-	    Message.registerMessageChild(new GetFoodItemResponse());
+		Message.registerMessageChild(new GetFoodItemRequest());
+		Message.registerMessageChild(new GetFoodItemResponse());
 
-	    Message.registerMessageChild(new GetFoodDetailRequest());
-	    Message.registerMessageChild(new GetFoodDetailResponse());
+		Message.registerMessageChild(new GetFoodDetailRequest());
+		Message.registerMessageChild(new GetFoodDetailResponse());
 
-	    Message.registerMessageChild(new EditFoodRequest());
-	    Message.registerMessageChild(new EditFoodResponse());
-    }
+		Message.registerMessageChild(new EditFoodRequest());
+		Message.registerMessageChild(new EditFoodResponse());
+	}
 }

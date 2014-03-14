@@ -7,17 +7,16 @@
 package cz.kofron.foodinventory.client.network;
 
 /**
- *
  * @author kofee
  */
 public class NetworkInstance
 {
-    public static Communicator communicator = new Communicator();
+	public static Communicator communicator = new Communicator();
 	public static Connector connector = new Connector();
 
 	public static void prepare()
 	{
-		if(connector != null)
+		if (connector != null)
 		{
 			connector.stop();
 		}

@@ -30,6 +30,20 @@ public class InventoryItem extends AbstractEntity
 		this.useBy = useBy;
 	}
 
+	public static InventoryItem fromJSON(JSONObject jsonObject) throws JSONException
+	{
+		InventoryItem ii = new InventoryItem(jsonObject.getInt("id"));
+
+		ii.foodId = jsonObject.getInt("foodId");
+		ii.foodName = jsonObject.getString("foodName");
+		ii.foodGtin = jsonObject.getString("foodGtin");
+
+		java.sql.Timestamp useByTimeStamp = Timestamp.valueOf(jsonObject.getString("useBy"));
+		ii.useBy = useByTimeStamp.getTime();
+
+		return ii;
+	}
+
 	public int getFoodId()
 	{
 		return foodId;
@@ -84,19 +98,5 @@ public class InventoryItem extends AbstractEntity
 		object.put("useBy", useByTimeStamp.toString());
 
 		return object;
-	}
-
-	public static InventoryItem fromJSON(JSONObject jsonObject) throws JSONException
-	{
-		InventoryItem ii = new InventoryItem(jsonObject.getInt("id"));
-
-		ii.foodId = jsonObject.getInt("foodId");
-		ii.foodName = jsonObject.getString("foodName");
-		ii.foodGtin = jsonObject.getString("foodGtin");
-
-		java.sql.Timestamp useByTimeStamp = Timestamp.valueOf(jsonObject.getString("useBy"));
-		ii.useBy = useByTimeStamp.getTime();
-
-		return ii;
 	}
 }

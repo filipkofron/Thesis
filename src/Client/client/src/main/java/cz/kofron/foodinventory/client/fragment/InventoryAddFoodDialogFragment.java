@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.activity.MainActivity;
 
 /**

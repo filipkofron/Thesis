@@ -44,7 +44,7 @@ public class GetInventoryResponse extends Message
 		int len = array.length();
 		intentoryItems = new ArrayList<>(len);
 
-		for(int i = 0; i < len; i++)
+		for (int i = 0; i < len; i++)
 		{
 			InventoryItem ii = InventoryItem.fromJSON(array.getJSONObject(i));
 			intentoryItems.add(ii);
@@ -58,7 +58,7 @@ public class GetInventoryResponse extends Message
 		JSONArray array = new JSONArray();
 
 		int i = 0;
-		for(InventoryItem ii : intentoryItems)
+		for (InventoryItem ii : intentoryItems)
 		{
 			array.put(i, ii.toJSON());
 			i++;

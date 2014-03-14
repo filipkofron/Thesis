@@ -69,6 +69,7 @@ public abstract class UPCEANReader extends OneDReader
 	 * As above but also including the "even", or "G" patterns used to encode UPC/EAN digits.
 	 */
 	static final int[][] L_AND_G_PATTERNS;
+
 	static
 	{
 		L_AND_G_PATTERNS = new int[20][];
@@ -84,6 +85,7 @@ public abstract class UPCEANReader extends OneDReader
 			L_AND_G_PATTERNS[i] = reversedWidths;
 		}
 	}
+
 	// These two values are critical for determining how permissive the decoding will be.
 	// We've arrived at these values through a lot of trial and error. Setting them any higher
 	// lets false positives creep in quickly.

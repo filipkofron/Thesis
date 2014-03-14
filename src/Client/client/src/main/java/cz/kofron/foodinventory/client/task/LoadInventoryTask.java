@@ -20,7 +20,7 @@ public class LoadInventoryTask extends AsyncTask<LoadInventoryParam, Void, Void>
 	@Override
 	protected Void doInBackground(LoadInventoryParam... loadInventoryTasks)
 	{
-		if(loadInventoryTasks.length > 0)
+		if (loadInventoryTasks.length > 0)
 		{
 			this.param = loadInventoryTasks[0];
 		}
@@ -47,16 +47,16 @@ public class LoadInventoryTask extends AsyncTask<LoadInventoryParam, Void, Void>
 	{
 		super.onPostExecute(aVoid);
 
-		if(param == null)
+		if (param == null)
 		{
 			return;
 		}
 
-		if(gir != null)
+		if (gir != null)
 		{
 			InventoryListAdapter adapter = param.adapter.get();
 
-			if(adapter != null)
+			if (adapter != null)
 			{
 				adapter.updateContent(gir.getIntentoryItems());
 			}

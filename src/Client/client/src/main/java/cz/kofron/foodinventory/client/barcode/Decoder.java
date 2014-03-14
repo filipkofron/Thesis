@@ -1,6 +1,5 @@
 package cz.kofron.foodinventory.client.barcode;
 
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import com.google.zxing.BinaryBitmap;
@@ -17,9 +16,10 @@ import com.google.zxing.common.HybridBinarizer;
  */
 public class Decoder
 {
+	int debugTest = 0;
 	private ResultCallback callBack;
-
 	private MultiFormatReader multiFormatReader;
+	private byte[] rotationDataBuffer;
 
 	public Decoder(ResultCallback callBack)
 	{
@@ -29,11 +29,9 @@ public class Decoder
 		multiFormatReader.setHints(DecodeHintProvider.provideHints());
 	}
 
-	private byte [] rotationDataBuffer;
-
 	public synchronized PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height, boolean rotated)
 	{
-		if(rotated)
+		if (rotated)
 		{
 			if (rotationDataBuffer == null)
 			{
@@ -58,13 +56,11 @@ public class Decoder
 		rect.right = width;
 		rect.bottom = height;
 
-		return new PlanarYUVLuminanceSource(rotated ? rotationDataBuffer: data, width, height, rect.left, rect.top,
+		return new PlanarYUVLuminanceSource(rotated ? rotationDataBuffer : data, width, height, rect.left, rect.top,
 				rect.width(), rect.height(), false);
 	}
 
-	int debugTest = 0;
-
-	public void decode(byte [] data, int width, int height, boolean rotated)
+	public void decode(byte[] data, int width, int height, boolean rotated)
 	{
 		System.out.println("Decoding.." + (debugTest++));
 		String someResult = "";
@@ -72,18 +68,24 @@ public class Decoder
 		PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height, rotated);
 
 		Result rawResult = null;
-		if (source != null) {
+		if (source != null)
+		{
 			BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-			try {
+			try
+			{
 				rawResult = multiFormatReader.decodeWithState(bitmap);
-			} catch (ReaderException re) {
+			}
+			catch (ReaderException re)
+			{
 				// continue
-			} finally {
+			}
+			finally
+			{
 				multiFormatReader.reset();
 			}
 		}
 
-		if(rawResult != null)
+		if (rawResult != null)
 		{
 			ParsedResult parsedResult = ResultParser.parseResult(rawResult);
 

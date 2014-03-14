@@ -1,6 +1,5 @@
 package cz.kofron.foodinventory.client.fragment;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -70,11 +69,11 @@ public class InventoryListFragment extends ListFragment
 
 	public void toggleProgressBar(boolean on)
 	{
-		if(progressBar == null)
+		if (progressBar == null)
 		{
 			return;
 		}
-		if(on)
+		if (on)
 		{
 			progressBar.setVisibility(ProgressBar.VISIBLE);
 		}

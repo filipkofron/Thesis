@@ -31,7 +31,7 @@ public class SymbolInfo
 			new SymbolInfo(false, 5, 7, 10, 10, 1),
 	  /*rect*/new SymbolInfo(true, 5, 7, 16, 6, 1),
 			new SymbolInfo(false, 8, 10, 12, 12, 1),
-      /*rect*/new SymbolInfo(true, 10, 11, 14, 6, 2),
+	  /*rect*/new SymbolInfo(true, 10, 11, 14, 6, 2),
 			new SymbolInfo(false, 12, 12, 14, 14, 1),
       /*rect*/new SymbolInfo(true, 16, 14, 24, 10, 1),
 
@@ -71,6 +71,7 @@ public class SymbolInfo
 	private final int dataRegions;
 	private final int rsBlockData;
 	private final int rsBlockError;
+
 	public SymbolInfo(boolean rectangular, int dataCapacity, int errorCodewords,
 	                  int matrixWidth, int matrixHeight, int dataRegions)
 	{

@@ -11,7 +11,7 @@ public class DecodeThread extends Thread
 	private boolean working = false;
 
 	private boolean rotated;
-	private byte [] data;
+	private byte[] data;
 	private int width;
 	private int height;
 
@@ -32,9 +32,9 @@ public class DecodeThread extends Thread
 		this.stopped = stopped;
 	}
 
-	public boolean scheduleJobIfFree(byte [] data, int width, int height, boolean rotated)
+	public boolean scheduleJobIfFree(byte[] data, int width, int height, boolean rotated)
 	{
-		if(working)
+		if (working)
 		{
 			return false;
 		}
@@ -61,12 +61,12 @@ public class DecodeThread extends Thread
 		{
 			decoder.decode(data, width, height, rotated);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 
-		if(camera != null)
+		if (camera != null)
 		{
 			camera.addCallbackBuffer(data);
 			returnedBuffer = true;
@@ -76,7 +76,7 @@ public class DecodeThread extends Thread
 	@Override
 	public void run()
 	{
-		while(!stopped)
+		while (!stopped)
 		{
 			try
 			{
@@ -84,13 +84,13 @@ public class DecodeThread extends Thread
 				{
 					wait(1000);
 
-					if(stopped)
+					if (stopped)
 					{
 						continue;
 					}
 				}
 
-				if(working)
+				if (working)
 				{
 					doJob();
 					working = false;

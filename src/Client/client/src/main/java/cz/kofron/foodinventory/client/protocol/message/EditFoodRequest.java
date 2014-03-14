@@ -15,13 +15,15 @@ public class EditFoodRequest extends Message
 	private String gtin;
 	private String description;
 	private long defaultUseBy;
+	private int amountType;
+	private float amount;
 	private float usualPrice;
 
 	public EditFoodRequest()
 	{
 	}
 
-	public EditFoodRequest(boolean adding, int id, String name, int vendorId, String gtin, String description, long defaultUseBy, float usualPrice)
+	public EditFoodRequest(boolean adding, int id, String name, int vendorId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice)
 	{
 		this.adding = adding;
 		this.id = id;
@@ -30,6 +32,8 @@ public class EditFoodRequest extends Message
 		this.gtin = gtin;
 		this.description = description;
 		this.defaultUseBy = defaultUseBy;
+		this.amountType = amountType;
+		this.amount = amount;
 		this.usualPrice = usualPrice;
 	}
 
@@ -55,6 +59,8 @@ public class EditFoodRequest extends Message
 		gtin = obj.getString("gtin");
 		description = obj.getString("description");
 		defaultUseBy = obj.getLong("defaultUseBy");
+		amountType = obj.getInt("amountType");
+		amount = (float) obj.getDouble("amount");
 		usualPrice = (float) obj.getDouble("usualPrice");
 	}
 
@@ -70,6 +76,8 @@ public class EditFoodRequest extends Message
 		obj.put("gtin", gtin);
 		obj.put("description", description);
 		obj.put("defaultUseBy", defaultUseBy);
+		obj.put("amountType", amountType);
+		obj.put("amount", amount);
 		obj.put("usualPrice", usualPrice);
 
 		return obj;

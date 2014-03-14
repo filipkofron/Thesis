@@ -25,6 +25,17 @@ public class FoodReview extends AbstractEntity
 		this.text = text;
 	}
 
+	public static FoodReview fromJson(JSONObject obj) throws JSONException
+	{
+		FoodReview foodReview = new FoodReview(obj.getInt("id"));
+
+		foodReview.rating = (float) obj.getDouble("rating");
+		foodReview.username = obj.getString("username");
+		foodReview.text = obj.getString("text");
+
+		return foodReview;
+	}
+
 	@Override
 	protected JSONObject makeJSONObject() throws JSONException
 	{
@@ -37,14 +48,18 @@ public class FoodReview extends AbstractEntity
 		return obj;
 	}
 
-	public static FoodReview fromJson(JSONObject obj) throws JSONException
+	public float getRating()
 	{
-		FoodReview foodReview = new FoodReview(obj.getInt("id"));
+		return rating;
+	}
 
-		foodReview.rating = (float) obj.getDouble("rating");
-		foodReview.username = obj.getString("username");
-		foodReview.text = obj.getString("text");
+	public String getUsername()
+	{
+		return username;
+	}
 
-		return foodReview;
+	public String getText()
+	{
+		return text;
 	}
 }

@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
-import cz.kofron.foodinventory.client.R;
 
 /**
  * Created by Filip Kofron on 3/1/14.

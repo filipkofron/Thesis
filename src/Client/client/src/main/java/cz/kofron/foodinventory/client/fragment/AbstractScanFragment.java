@@ -1,9 +1,7 @@
 package cz.kofron.foodinventory.client.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
-import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -33,16 +29,15 @@ import cz.kofron.foodinventory.client.barcode.ResultCallback;
 public abstract class AbstractScanFragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback
 {
 
+	private final static int RESULT_PERIOD_MS = 1500;
+	protected TextView resultView;
 	private boolean lockCameraUse = false;
 	private SurfaceView surfaceView;
-	protected TextView resultView;
 	private Camera camera;
 	private boolean previewRunning = false;
 	private DecodeThread decodeThread;
 	private boolean rotated;
 	private long lastResult;
-
-	private final static int RESULT_PERIOD_MS = 1500;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -87,8 +82,8 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 			try
 			{
 				int size = 4 * camera.getParameters().getPreviewSize().width * camera.getParameters().getPreviewSize().height;
-				byte [] buffer = new byte[size];
-				byte [] buffer2 = new byte[size];
+				byte[] buffer = new byte[size];
+				byte[] buffer2 = new byte[size];
 				camera.addCallbackBuffer(buffer);
 				camera.addCallbackBuffer(buffer2);
 				camera.setPreviewCallbackWithBuffer(this);
@@ -121,7 +116,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 
 	private void turnOffCamera()
 	{
-		if(camera != null)
+		if (camera != null)
 		{
 			camera.release();
 			camera = null;
@@ -244,7 +239,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 					parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 					camera.setParameters(parameters);
 				}
-				catch(RuntimeException e)
+				catch (RuntimeException e)
 				{
 					e.printStackTrace();
 					try
@@ -252,7 +247,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 						parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
 						camera.setParameters(parameters);
 					}
-					catch(RuntimeException e2)
+					catch (RuntimeException e2)
 					{
 						e2.printStackTrace();
 					}
@@ -264,7 +259,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	@Override
 	public synchronized void onPreviewFrame(byte[] bytes, Camera camera)
 	{
-		if(!previewRunning)
+		if (!previewRunning)
 		{
 			camera.addCallbackBuffer(bytes);
 			return;
@@ -273,9 +268,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 
 		DecodeThread dt = decodeThread;
 
-		if(dt != null)
+		if (dt != null)
 		{
-			if(!dt.hasReturnedBuffer())
+			if (!dt.hasReturnedBuffer())
 			{
 				camera.addCallbackBuffer(bytes);
 				return;
@@ -294,9 +289,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 		lockCameraUse = true;
 
-		if(dt != null)
+		if (dt != null)
 		{
-			if(!dt.scheduleJobIfFree(bytes, params.getPreviewSize().width, params.getPreviewSize().height, rotated))
+			if (!dt.scheduleJobIfFree(bytes, params.getPreviewSize().width, params.getPreviewSize().height, rotated))
 			{
 				camera.addCallbackBuffer(bytes);
 			}
@@ -360,7 +355,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		DecodeThread dt = decodeThread;
 		decodeThread = null;
 
-		if(dt != null)
+		if (dt != null)
 		{
 			dt.setStopped(true);
 		}

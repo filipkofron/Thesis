@@ -83,7 +83,7 @@ public class DefaultPlacement
 
 		do
 		{
-	        /* repeatedly first check for one of the special corner cases, then... */
+		    /* repeatedly first check for one of the special corner cases, then... */
 			if ((row == numrows) && (col == 0))
 			{
 				corner1(pos++);

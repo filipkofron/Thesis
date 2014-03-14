@@ -41,6 +41,7 @@ public class VendorDialogFragment extends DialogFragment
 	{
 		public void onVendorSelected(int vendorId);
 	}
+
 	static
 	{
 		final int vendors = 50;
