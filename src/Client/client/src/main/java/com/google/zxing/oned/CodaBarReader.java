@@ -34,6 +34,7 @@ import java.util.Map;
  */
 public final class CodaBarReader extends OneDReader
 {
+	private static final String ALPHABET_STRING = "0123456789-$:/.+ABCD";
 	static final char[] ALPHABET = ALPHABET_STRING.toCharArray();
 	/**
 	 * These represent the encodings of characters, as patterns of wide and narrow bars. The 7 least-significant bits of
@@ -43,7 +44,6 @@ public final class CodaBarReader extends OneDReader
 			0x003, 0x006, 0x009, 0x060, 0x012, 0x042, 0x021, 0x024, 0x030, 0x048, // 0-9
 			0x00c, 0x018, 0x045, 0x051, 0x054, 0x015, 0x01A, 0x029, 0x00B, 0x00E, // -$:/.+ABCD
 	};
-	private static final String ALPHABET_STRING = "0123456789-$:/.+ABCD";
 	// These values are critical for determining how permissive the decoding
 	// will be. All stripe sizes must be within the window these define, as
 	// compared to the average stripe size.

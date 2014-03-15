@@ -57,7 +57,18 @@ public class FoodDetail extends AbstractEntity
 		fd.vendorId = obj.getInt("vendorId");
 		fd.gtin = obj.getString("gtin");
 
-		JSONArray imageArray = obj.getJSONArray("imageIds");
+		JSONArray imageArray;
+
+		if(obj.isNull("imageIds"))
+		{
+			imageArray = new JSONArray();
+		}
+		else
+		{
+			imageArray = obj.getJSONArray("imageIds");
+		}
+
+
 		fd.imageIds = new ArrayList<>(imageArray.length());
 
 		for (int i = 0; i < imageArray.length(); i++)

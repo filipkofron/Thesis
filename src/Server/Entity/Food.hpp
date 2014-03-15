@@ -8,6 +8,9 @@ class Food;
 #include "DAO/FoodDAO.hpp"
 
 #define MAX_GTIN_LENGTH 14
+#define AMOUNT_TYPE_GRAMS 0
+#define AMOUNT_TYPE_LITRES 1
+#define AMOUNT_TYPE_PIECES 2
 
 class Food
 {

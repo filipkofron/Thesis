@@ -8,6 +8,10 @@ import java.util.logging.Logger;
 
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailRequest;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailResponse;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodItemRequest;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodItemResponse;
 import cz.kofron.foodinventory.client.protocol.message.GetInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.KeepAlive;
@@ -55,6 +59,29 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	public GetFoodDetailResponse getFoodDetail(int id) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new GetFoodDetailRequest(id).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			GetFoodDetailResponse gfdr = (GetFoodDetailResponse) msg;
+			System.out.println("GetFoodDetailResponse: " + gfdr);
+			return gfdr;
+		}
+	}
+
+	public GetFoodItemResponse getFoodItem(boolean direct, int id, String name, String gtin, int skip) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new GetFoodItemRequest(direct, id, name, gtin, skip).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			GetFoodItemResponse gfir = (GetFoodItemResponse) msg;
+			System.out.println("GetFoodItemResponse: " + gfir);
+			return gfir;
+		}
+	}
 
 	public void keepAlive() throws IOException
 	{
@@ -77,6 +104,11 @@ public class Communicator implements ConnectionListener
 			LoginResponse lr = login("pepa", "zdepa");
 
 			System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
+
+			getFoodDetail(1);
+
+			getFoodItem(false, 0, "", "", 0);
+
 		}
 		catch (IOException ex)
 		{

@@ -5,6 +5,10 @@ set(handler_source_files
   LoginHandler.cpp
   GetInventoryHandler.hpp
   GetInventoryHandler.cpp
+  GetFoodDetailHandler.hpp
+  GetFoodDetailHandler.cpp
+  GetFoodItemHandler.hpp
+  GetFoodItemHandler.cpp
   NullHandler.hpp
   NullHandler.cpp
   HandlerException.hpp

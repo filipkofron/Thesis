@@ -39,7 +39,16 @@ public class GetFoodItemResponse extends Message
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
-		JSONArray array = obj.getJSONArray("foods");
+		JSONArray array;
+
+		if(obj.isNull("foods"))
+		{
+			array = new JSONArray();
+		}
+		else
+		{
+			array = obj.getJSONArray("foods");
+		}
 
 		foods = new ArrayList<>(array.length());
 

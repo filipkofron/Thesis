@@ -9,6 +9,14 @@ set(protocol_source_files
   GetInventoryRequest.cpp
   GetInventoryResponse.hpp
   GetInventoryResponse.cpp
+  GetFoodDetailRequest.hpp
+  GetFoodDetailRequest.cpp
+  GetFoodDetailResponse.hpp
+  GetFoodDetailResponse.cpp
+  GetFoodItemRequest.hpp
+  GetFoodItemRequest.cpp
+  GetFoodItemResponse.hpp
+  GetFoodItemResponse.cpp
   KeepAlive.hpp
   KeepAlive.cpp
 )

@@ -29,6 +29,8 @@ void GetInventoryHandler::handle(Context &context)
     std::shared_ptr<FoodDAO> foodDao = DAOFactory::getFoodDAO();
     std::vector<Inventory> inventories;
 
+    bool tried = false;
+
     if(request->direct)
     {
         std::vector<Inventory> temp = inventoryDao->getInventoryByUserId(context.getUserId());
@@ -39,18 +41,21 @@ void GetInventoryHandler::handle(Context &context)
                 inventories.push_back(inv);
             }
         }
+        tried = true;
     }
 
     if(request->food.length() > 2)
     {
         inventories = inventoryDao->searchInventoryByFoodName(context.getUserId(), request->food);
+        tried = true;
     }
     if(request->gtin.length() > 2)
     {
         inventories = inventoryDao->searchInventoryByGtin(context.getUserId(), request->gtin);
+        tried = true;
     }
 
-    if(inventories.size() < 1)
+    if(inventories.size() < 1 && !tried)
     {
         inventories = inventoryDao->getInventoryByUserId(context.getUserId());
     }

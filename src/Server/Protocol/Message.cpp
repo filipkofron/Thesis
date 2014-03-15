@@ -4,6 +4,10 @@
 #include "KeepAlive.hpp"
 #include "GetInventoryRequest.hpp"
 #include "GetInventoryResponse.hpp"
+#include "GetFoodDetailRequest.hpp"
+#include "GetFoodDetailResponse.hpp"
+#include "GetFoodItemRequest.hpp"
+#include "GetFoodItemResponse.hpp"
 
 Message::Message()
 {
@@ -51,6 +55,31 @@ Message *Message::dejsonize(Json::Value &root)
             msg = new GetInventoryResponse();
             break;
         }
+
+        if(header.compare(GetFoodDetailRequest::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodDetailRequest();
+            break;
+        }
+
+        if(header.compare(GetFoodDetailResponse::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodDetailResponse();
+            break;
+        }
+
+        if(header.compare(GetFoodItemRequest::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodItemRequest();
+            break;
+        }
+
+        if(header.compare(GetFoodItemResponse::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodItemResponse();
+            break;
+        }
+
 
         break;
     }
