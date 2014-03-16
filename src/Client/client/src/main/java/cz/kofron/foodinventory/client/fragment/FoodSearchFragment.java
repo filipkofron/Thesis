@@ -18,12 +18,14 @@ import cz.kofron.foodinventory.client.adapter.FoodSearchAutoCompleteAdapter;
  */
 public class FoodSearchFragment extends Fragment
 {
+	private AutoCompleteTextView actv;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = inflater.inflate(R.layout.search_food, container, false);
 
-		AutoCompleteTextView actv = (AutoCompleteTextView) view.findViewById(R.id.autocomplete);
+		actv = (AutoCompleteTextView) view.findViewById(R.id.autocomplete);
 		actv.setAdapter(new FoodSearchAutoCompleteAdapter(getActivity(), R.layout.list_item));
 
 		Button searchButton = (Button) view.findViewById(R.id.button_search);
@@ -33,6 +35,7 @@ public class FoodSearchFragment extends Fragment
 			public void onClick(View view)
 			{
 				Intent foodEditIntent = new Intent(getActivity(), FoodListActivity.class);
+				foodEditIntent.putExtra("SEARCH_VALUE", actv.getText().toString());
 				startActivity(foodEditIntent);
 			}
 		});

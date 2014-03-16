@@ -7,15 +7,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.FoodListAdapter;
+import cz.kofron.foodinventory.client.task.SearchFoodTask;
+import cz.kofron.foodinventory.client.task.param.SearchFoodParam;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by Filip Kofron on 3/1/14.
  */
 public class FoodListActivity extends ListActionBarActivity
 {
+	private ProgressBar progressBar;
+	private String searchString;
+	private FoodListAdapter adapter;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -25,20 +33,63 @@ public class FoodListActivity extends ListActionBarActivity
 
 		View view = getLayoutInflater().inflate(R.layout.food_list, null);
 
+		progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
+
 		ListView lv = (ListView) view.findViewById(android.R.id.list);
 
-		lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		adapter = new FoodListAdapter(this);
+		lv.setAdapter(adapter);
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null)
+		{
+			searchString = extras.getString("SEARCH_VALUE");
+		}
+		if(searchString == null)
+		{
+			searchString = "";
+		}
+
+		SearchFoodTask sft = new SearchFoodTask();
+
+		Runnable success = new Runnable()
 		{
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+			public void run()
 			{
-				System.out.println("onItemClick: " + this + " i: " + i + " l: " + l);
+				toggleProgressBar(false);
 			}
-		});
+		};
 
-		lv.setAdapter(new FoodListAdapter(this));
+		Runnable fail = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				toggleProgressBar(false);
+				NetworkErrorToast.showError(FoodListActivity.this);
+			}
+		};
+
+		sft.execute(new SearchFoodParam(searchString, adapter, success, fail));
 
 		setContentView(view);
+	}
+
+	public void toggleProgressBar(boolean on)
+	{
+		if (progressBar == null)
+		{
+			return;
+		}
+		if (on)
+		{
+			progressBar.setVisibility(ProgressBar.VISIBLE);
+		}
+		else
+		{
+			progressBar.setVisibility(ProgressBar.GONE);
+		}
 	}
 
 	@Override

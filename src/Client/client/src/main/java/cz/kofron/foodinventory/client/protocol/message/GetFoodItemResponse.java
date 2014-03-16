@@ -74,4 +74,9 @@ public class GetFoodItemResponse extends Message
 
 		return obj;
 	}
+
+	public ArrayList<FoodItem> getFoods()
+	{
+		return foods;
+	}
 }

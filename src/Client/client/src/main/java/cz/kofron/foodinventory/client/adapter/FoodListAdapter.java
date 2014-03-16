@@ -11,22 +11,27 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
+import cz.kofron.foodinventory.client.model.FoodItem;
+import cz.kofron.foodinventory.client.model.InventoryItem;
+import cz.kofron.foodinventory.client.util.GtinUtil;
 
 /**
  * Created by Filip Kofron on 3/1/14.
  */
 public class FoodListAdapter extends ArrayAdapter
 {
-
+	private ArrayList<FoodItem> items;
 	private Context context;
 
 	public FoodListAdapter(Context context)
 	{
-
 		super(context, R.layout.food_list_item);
+		items = new ArrayList<>();
 		this.context = context;
 	}
 
@@ -34,9 +39,12 @@ public class FoodListAdapter extends ArrayAdapter
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		View view = LayoutInflater.from(context).inflate(R.layout.food_list_item, parent, false);
+		FoodItem foodItem = items.get(position);
 
 		TextView foodName = (TextView) view.findViewById(R.id.food_list_item_food_name);
 		TextView foodGtin = (TextView) view.findViewById(R.id.food_list_item_food_gtin);
+		TextView foodDesc = (TextView) view.findViewById(R.id.food_description);
+
 		View card = view.findViewById(R.id.food_list_item_card);
 
 		ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
@@ -59,16 +67,33 @@ public class FoodListAdapter extends ArrayAdapter
 		}
 		card.setBackgroundColor(Color.argb(255, d, d, d));
 
-		foodName.setText(foodName.getText() + " #" + (position + 1));
-		foodGtin.setText(foodGtin.getText() + " 38166351763");
+		foodName.setText(foodItem.getName());
+		foodGtin.setText(GtinUtil.getReadableGtin(foodItem.getGtin()));
+
+		String desc = foodItem.getDesc().replace("\r", "").replace("\n", "");
+
+		if(desc.length() > 30)
+		{
+			desc = desc.substring(0, 30) + "..";
+		}
+
+		foodDesc.setText(desc);
 
 		return view;
+	}
+
+	public void updateContent(ArrayList<FoodItem> items)
+	{
+		clear();
+		this.items = items;
+
+		notifyDataSetChanged();
 	}
 
 	@Override
 	public int getCount()
 	{
-		return 40;
+		return items.size();
 	}
 
 	private class RowClickListener implements View.OnClickListener

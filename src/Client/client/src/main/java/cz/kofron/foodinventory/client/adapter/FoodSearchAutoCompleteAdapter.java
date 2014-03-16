@@ -5,13 +5,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
+
+import cz.kofron.foodinventory.client.model.FoodItem;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.util.SearchType;
 
 /**
  * Created by kofee on 3/7/14.
  */
 public class FoodSearchAutoCompleteAdapter extends ArrayAdapter implements Filterable
 {
+	private long lastCompletion = System.currentTimeMillis();
+	private long MIN_COMPLETION_PERIOD = 300; // milis
 
 	private ArrayList<String> resultList = new ArrayList<>();
 
@@ -22,27 +31,44 @@ public class FoodSearchAutoCompleteAdapter extends ArrayAdapter implements Filte
 
 	public ArrayList<String> autocomplete(String constr)
 	{
-		ArrayList<String> temp = new ArrayList<>();
-
 		constr = constr.toLowerCase();
 
-		temp.add("Ahoj");
-		temp.add("Svete");
-		temp.add("Ahoj svete");
-		temp.add("Svet smrdi");
+		ArrayList<String> resultArray = new ArrayList<>();
 
-		ArrayList<String> results = new ArrayList<>();
+		Set<String> results = new TreeSet<>();
 
-		for (String src : temp)
+		try
 		{
-			String str = src.toLowerCase();
-			if (str.contains(constr))
+			ArrayList<FoodItem> foods = NetworkInstance.communicator.getFoodItem(false, 0, constr, "", 0).getFoods();
+			for(FoodItem food : foods)
 			{
-				results.add(src);
+				results.add(food.getName());
+			}
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		if(SearchType.isGtin(constr))
+		{
+			try
+			{
+				ArrayList<FoodItem> foods = NetworkInstance.communicator.getFoodItem(false, 0, "", constr, 0).getFoods();
+				for(FoodItem food : foods)
+				{
+					results.add(food.getName());
+				}
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
 			}
 		}
 
-		return results;
+		resultArray.addAll(results);
+
+		return resultArray;
 	}
 
 	@Override
@@ -68,8 +94,13 @@ public class FoodSearchAutoCompleteAdapter extends ArrayAdapter implements Filte
 				FilterResults filterResults = new FilterResults();
 				if (constraint != null)
 				{
-					// Retrieve the autocomplete results.
-					resultList = autocomplete(constraint.toString());
+					String constr = constraint.toString();
+					if(constr.length() > 2 && (System.currentTimeMillis() - lastCompletion) > MIN_COMPLETION_PERIOD)
+					{
+						// Retrieve the autocomplete results.
+						resultList = autocomplete(constr);
+						lastCompletion = System.currentTimeMillis();
+					}
 
 					// Assign the data to the FilterResults
 					filterResults.values = resultList;

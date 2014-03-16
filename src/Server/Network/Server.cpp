@@ -49,8 +49,8 @@ void Server::initialize()
        throw ServerException("bind() failed!");
     }
 
-    std::cout << "DEBUG: server will timeout after 2minutes!" << std::endl;
-    acceptTimeout.tv_sec  = 120;
+    std::cout << "DEBUG: server will timeout after 10minutes!" << std::endl;
+    acceptTimeout.tv_sec  = 10 * 60;
     acceptTimeout.tv_usec = 0;
 
     rc = setsockopt (listenSD, SOL_SOCKET, SO_RCVTIMEO, (char *) &acceptTimeout, sizeof(acceptTimeout));
