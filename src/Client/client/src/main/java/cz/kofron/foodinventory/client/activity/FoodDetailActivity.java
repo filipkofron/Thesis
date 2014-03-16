@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -30,6 +31,7 @@ public class FoodDetailActivity extends ActionBarActivity
 	private FoodDetail food;
 	private ProgressBar progressBar;
 	private View view;
+	private ScrollView scrollView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +39,7 @@ public class FoodDetailActivity extends ActionBarActivity
 		super.onCreate(savedInstanceState);
 
 		view = LayoutInflater.from(this).inflate(R.layout.food_detail, null);
+		scrollView = (ScrollView) view.findViewById(R.id.scroll_view);
 		progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 		LinearLayout imageList = (LinearLayout) view.findViewById(R.id.imageList);
 
@@ -104,11 +107,11 @@ public class FoodDetailActivity extends ActionBarActivity
 	{
 		if(show)
 		{
-			view.setVisibility(View.VISIBLE);
+			scrollView.setVisibility(View.VISIBLE);
 		}
 		else
 		{
-			view.setVisibility(View.INVISIBLE);
+			scrollView.setVisibility(View.INVISIBLE);
 		}
 	}
 
