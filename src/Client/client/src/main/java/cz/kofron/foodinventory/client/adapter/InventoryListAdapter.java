@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
+import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
@@ -81,7 +82,8 @@ public class InventoryListAdapter extends ArrayAdapter
 		@Override
 		public void onClick(View view)
 		{
-			new InventoryFoodDialogFragment(R.string.title_inventory_food).show((FragmentActivity) context);
+			FoodItem foodItem = new FoodItem(item.getFoodId(), true, item.getUseBy() - System.currentTimeMillis(), "", item.getFoodName(), "", "");
+			new InventoryFoodDialogFragment(R.string.title_inventory_food, foodItem, true).show((FragmentActivity) context);
 		}
 	}
 }

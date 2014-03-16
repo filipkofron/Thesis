@@ -54,7 +54,7 @@ public class FoodListAdapter extends ArrayAdapter
 			@Override
 			public void onClick(View view)
 			{
-				new InventoryFoodDialogFragment(R.string.title_inventory_add_food).show((FragmentActivity) context);
+				new InventoryFoodDialogFragment(R.string.title_inventory_add_food, items.get(positionNow), false).show((FragmentActivity) context);
 			}
 		});
 
@@ -108,8 +108,8 @@ public class FoodListAdapter extends ArrayAdapter
 		@Override
 		public void onClick(View view)
 		{
-			System.out.println("On click: " + view);
 			Intent intent = new Intent(context, FoodDetailActivity.class);
+			intent.putExtra("FOOD_ID", items.get(position).getId());
 			context.startActivity(intent);
 		}
 	}

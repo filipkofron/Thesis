@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class FoodDetail extends AbstractEntity
 {
 	private String name;
+	String category;
+	int categoryId;
 	private String vendor;
 	private int vendorId;
 	private String gtin;
@@ -30,10 +32,12 @@ public class FoodDetail extends AbstractEntity
 		super(id, true);
 	}
 
-	public FoodDetail(int id, boolean exists, String name, String vendor, int vendorId, String gtin, ArrayList<String> imageIds, String description, long defaultUseBy, int amountType, float amount, float usualPrice, ArrayList<FoodReview> reviews, String addedBy, String lastEditedBy)
+	public FoodDetail(int id, boolean exists, String name, String category, int categoryId, String vendor, int vendorId, String gtin, ArrayList<String> imageIds, String description, long defaultUseBy, int amountType, float amount, float usualPrice, ArrayList<FoodReview> reviews, String addedBy, String lastEditedBy)
 	{
 		super(id, exists);
 		this.name = name;
+		this.category = category;
+		this.categoryId = categoryId;
 		this.vendor = vendor;
 		this.vendorId = vendorId;
 		this.gtin = gtin;
@@ -53,6 +57,8 @@ public class FoodDetail extends AbstractEntity
 		FoodDetail fd = new FoodDetail(obj.getInt("id"));
 
 		fd.name = obj.getString("name");
+		fd.category = obj.getString("category");
+		fd.categoryId = obj.getInt("categoryId");
 		fd.vendor = obj.getString("vendor");
 		fd.vendorId = obj.getInt("vendorId");
 		fd.gtin = obj.getString("gtin");
@@ -102,6 +108,8 @@ public class FoodDetail extends AbstractEntity
 		JSONObject obj = new JSONObject();
 
 		obj.put("name", name);
+		obj.put("category", category);
+		obj.put("categoryId", categoryId);
 		obj.put("vendor", vendor);
 		obj.put("vendorId", vendorId);
 		obj.put("gtin", gtin);
@@ -201,5 +209,25 @@ public class FoodDetail extends AbstractEntity
 	public String getLastEditedBy()
 	{
 		return lastEditedBy;
+	}
+
+	public String getCategory()
+	{
+		return category;
+	}
+
+	public void setCategory(String category)
+	{
+		this.category = category;
+	}
+
+	public int getCategoryId()
+	{
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId)
+	{
+		this.categoryId = categoryId;
 	}
 }

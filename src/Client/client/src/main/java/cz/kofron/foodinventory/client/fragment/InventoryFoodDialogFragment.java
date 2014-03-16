@@ -10,15 +10,29 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
+import cz.kofron.foodinventory.client.model.FoodItem;
 
 /**
  * Created by kofee on 3/5/14.
  */
 public class InventoryFoodDialogFragment extends DialogFragment
 {
+	private FoodItem foodItem;
+	private TextView foodName;
+	private DatePicker datePicker;
+	private TextView count;
+	private Button plusButton;
+	private Button minusButton;
+	private boolean edit;
 
 	private int title;
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
@@ -38,9 +52,64 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	};
 
-	public InventoryFoodDialogFragment(int title)
+	public InventoryFoodDialogFragment(int title, FoodItem foodItem, boolean edit)
 	{
 		this.title = title;
+		this.foodItem = foodItem;
+		this.edit = edit;
+	}
+
+	private int getCount()
+	{
+		try
+		{
+			return Integer.parseInt(count.getText().toString());
+		}
+		catch(NumberFormatException e)
+		{
+		}
+		return 1;
+	}
+
+	private void incrementCount()
+	{
+		int curr = getCount();
+		if(curr < 100)
+		{
+			curr++;
+		}
+		count.setText(Integer.toString(curr));
+	}
+
+	private void decrementCount()
+	{
+		int curr = getCount();
+		if(curr > 1)
+		{
+			curr--;
+		}
+		count.setText(Integer.toString(curr));
+	}
+
+	public void setupCount()
+	{
+		plusButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				incrementCount();
+			}
+		});
+
+		minusButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				decrementCount();
+			}
+		});
 	}
 
 	@Override
@@ -49,6 +118,29 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 
 		View view = inflater.inflate(R.layout.inventory_food_dialog, null);
+		foodName = (TextView) view.findViewById(R.id.food_name);
+		datePicker = (DatePicker) view.findViewById(R.id.date_picker);
+
+		plusButton = (Button) view.findViewById(R.id.plus_button);
+		minusButton = (Button) view.findViewById(R.id.minus_button);
+		count = (TextView) view.findViewById(R.id.count);
+
+		if(edit)
+		{
+			RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.item_count_layout);
+			rl.removeAllViews();
+			rl.invalidate();
+		}
+		else
+		{
+			setupCount();
+		}
+
+		foodName.setText(foodItem.getName());
+		Date date = new Date(foodItem.getDefaultUseBy() + System.currentTimeMillis());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
 		Button detailsButton = (Button) view.findViewById(R.id.details_button);
 
@@ -58,6 +150,7 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			public void onClick(View view)
 			{
 				Intent intent = new Intent(getActivity(), FoodDetailActivity.class);
+				intent.putExtra("FOOD_ID", foodItem.getId());
 				getActivity().startActivity(intent);
 			}
 		});

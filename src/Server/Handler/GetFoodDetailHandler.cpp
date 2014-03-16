@@ -25,18 +25,15 @@ void GetFoodDetailHandler::handle(Context &context)
     std::shared_ptr<VendorDAO> vendorDao = DAOFactory::getVendorDAO();
     std::shared_ptr<UserDAO> userDao = DAOFactory::getUserDAO();
     std::shared_ptr<EditDAO> editDao = DAOFactory::getEditDAO();
+    std::shared_ptr<CategoryDAO> categoryDao = DAOFactory::getCategoryDAO();
 
     Food food = foodDao->getFoodById(request->id);
 
     std::vector<Image> images = imageDao->getImageByFoodId(request->id);
     std::vector<Review> reviews = reviewDao->getReviewByFoodId(request->id);
-
     Vendor vendor = vendorDao->getVendorById(food.getVendorId());
-
     User addedBy = userDao->getUserById(food.getUserId());
-
     std::vector<Edit> edits = editDao->getEditByFoodId(food.getId());
-
     int userEditedId = addedBy.getId();
 
     bool editFound = false;
@@ -60,13 +57,15 @@ void GetFoodDetailHandler::handle(Context &context)
     }
 
     User editedBy = userDao->getUserById(userEditedId);
+    Category category = categoryDao->getCategoryById(food.getCategoryId());
 
     Json::Value items;
-
     Json::Value obj;
 
     obj["id"] = food.getId();
     obj["name"] = food.getName();
+    obj["category"] = category.getName();
+    obj["categoryId"] = category.getId();
     obj["vendor"] = vendor.getName();
     obj["vendorId"] = food.getVendorId();
     obj["gtin"] = food.getGtin();

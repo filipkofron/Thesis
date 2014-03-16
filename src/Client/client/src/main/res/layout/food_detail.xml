@@ -1,337 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:visibility="invisible">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:padding="8dp">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:focusable="true">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:padding="8dp">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:autoText="false"
-                android:text="Food name"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView3"
-                android:layout_alignStart="@+id/textView3"
-                android:layout_below="@+id/textView3"
-                android:layout_marginBottom="5dp"
-                android:text="GTIN: 56483544736"
-                android:textAppearance="@android:style/TextAppearance.Small"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView"
-                android:layout_toRightOf="@+id/textView"
-                android:text=" - A category"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView"
-                android:layout_alignStart="@+id/textView"
-                android:layout_below="@+id/textView2"
-                android:layout_marginBottom="1dp"
-                android:text="by A food company"/>
-
-        </RelativeLayout>
-
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:id="@+id/imageList"
+            <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal"
-                android:paddingLeft="1dp"
-                android:weightSum="1">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:focusable="true">
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="2dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:autoText="false"
+                    android:text="Food name"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:id="@+id/gtin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/vendor"
+                    android:layout_alignStart="@+id/vendor"
+                    android:layout_below="@+id/vendor"
+                    android:layout_marginBottom="5dp"
+                    android:text="GTIN: 56483544736"
+                    android:textAppearance="@android:style/TextAppearance.Small"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/name"
+                    android:layout_toRightOf="@+id/name"
+                    android:text=" - A category"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/vendor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/name"
+                    android:layout_alignStart="@+id/name"
+                    android:layout_below="@+id/category"
+                    android:layout_marginBottom="1dp"
+                    android:text="by A food company"/>
+
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:id="@+id/imageList"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal"
                     android:paddingLeft="1dp"
-                    android:paddingRight="1dp"
-                    android:src="@drawable/ic_launcher"/>
+                    android:weightSum="1">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="2dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="1dp"
-                    android:src="@drawable/ic_launcher"/>
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="2dp"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:paddingLeft="1dp"
+                        android:paddingRight="1dp"
+                        android:src="@drawable/ic_launcher"/>
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="2dp"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="1dp"
-                    android:src="@drawable/ic_launcher"/>
-            </LinearLayout>
-        </HorizontalScrollView>
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="2dp"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:paddingLeft="1dp"
+                        android:paddingRight="1dp"
+                        android:src="@drawable/ic_launcher"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:paddingBottom="8dp">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Description:"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/description_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/textView4"
-                android:layout_alignStart="@+id/textView4"
-                android:layout_below="@+id/textView4"
-                android:scrollbars="vertical"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="1dp">
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Default use by"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView7"
-                android:layout_toRightOf="@+id/textView7"
-                android:text="1 year 4 monts 10 days"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="Usual price"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/textView10"
-                android:text="$1.99"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-        </RelativeLayout>
-
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="2dp"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:paddingLeft="1dp"
+                        android:paddingRight="1dp"
+                        android:src="@drawable/ic_launcher"/>
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
                 android:paddingBottom="8dp">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
                     android:layout_margin="8dp"
-                    android:text="Reviews"
+                    android:text="Description:"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                <RatingBar
-                    android:id="@+id/ratingBar"
+                <TextView
+                    android:id="@+id/description_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView8"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center_horizontal"
-                    android:rating="3"/>
+                    android:layout_alignLeft="@+id/textView4"
+                    android:layout_alignStart="@+id/textView4"
+                    android:layout_below="@+id/textView4"
+                    android:scrollbars="vertical"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+            </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/ratingBar"
-                    android:orientation="vertical">
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                    <include layout="@layout/vertical_line"/>
-
-                    <include layout="@layout/review"/>
-
-                </LinearLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="8dp">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView6"
+                    android:text="Default use by"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/default_use_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 year 4 monts 10 days"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_below="@+id/textView7"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="8dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usual price"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/usual_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="$1.99"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_below="@+id/textView10"/>
+            </RelativeLayout>
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="8dp"
+                        android:text="Reviews"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView8"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:rating="3"/>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="false"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/ratingBar"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                        <include layout="@layout/vertical_line"/>
+
+                        <include layout="@layout/review"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView6"
+                        android:layout_centerHorizontal="true"
+                        android:text="Your rating"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic"/>
+                </RelativeLayout>
+            </ScrollView>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:text="Your rating"
+                    android:layout_margin="8dp"
+                    android:text="Added by"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/added_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView11"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="3dp"
+                    android:text="user@gmail.com"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic"/>
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/added_by"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="3dp"
+                    android:text="Last edited by"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/edited_by"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView14"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="3dp"
+                    android:text="anotheruser@gmail.com"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textStyle="italic"/>
             </RelativeLayout>
-        </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        </LinearLayout>
+    </ScrollView>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="8dp"
-                android:text="Added by"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView11"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="3dp"
-                android:text="user@gmail.com"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic"/>
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView13"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="3dp"
-                android:text="Last edited by"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView14"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginTop="3dp"
-                android:text="anotheruser@gmail.com"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-</ScrollView>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:visibility="visible"/>
+</RelativeLayout>

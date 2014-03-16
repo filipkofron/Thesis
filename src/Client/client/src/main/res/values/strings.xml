@@ -22,6 +22,9 @@
     <string name="title_inventory_food">Food in inventory</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
+    <string name="year">Years</string>
+    <string name="month">Months</string>
+    <string name="day">Days</string>
     <string name="network_error_toast">Network error</string>
 
 </resources>
