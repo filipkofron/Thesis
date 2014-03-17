@@ -32,7 +32,7 @@ public class RemoveScanFragment extends AbstractScanFragment
 
 		ListView lv = (ListView) view.findViewById(R.id.listView);
 
-		lv.setAdapter(new InventoryListAdapter(getActivity()));
+		lv.setAdapter(new InventoryListAdapter(getActivity(), null));
 
 		return view;
 	}

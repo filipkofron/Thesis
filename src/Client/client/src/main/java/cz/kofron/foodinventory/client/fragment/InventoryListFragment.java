@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
 import cz.kofron.foodinventory.client.task.LoadInventoryTask;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
@@ -19,7 +20,7 @@ import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 /**
  * Created by kofee on 3/2/14.
  */
-public class InventoryListFragment extends ListFragment
+public class InventoryListFragment extends ListFragment implements ReloadCallback
 {
 	private InventoryListAdapter adapter;
 	private ProgressBar progressBar;
@@ -31,9 +32,23 @@ public class InventoryListFragment extends ListFragment
 
 		setHasOptionsMenu(true);
 
-		adapter = new InventoryListAdapter(getActivity());
+		adapter = new InventoryListAdapter(getActivity(), this);
 		setListAdapter(adapter);
 
+		load();
+
+		/*getActivity().runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				new LoginDialogFragment().show(getActivity());
+			}
+		});*/
+	}
+
+	private void load()
+	{
 		LoadInventoryTask lit = new LoadInventoryTask();
 
 		Runnable success = new Runnable()
@@ -56,15 +71,20 @@ public class InventoryListFragment extends ListFragment
 		};
 
 		lit.execute(new LoadInventoryParam("", "", adapter, success, fail));
+	}
 
-		/*getActivity().runOnUiThread(new Runnable()
+	public void update()
+	{
+		getActivity().runOnUiThread(new Runnable()
 		{
 			@Override
 			public void run()
 			{
-				new LoginDialogFragment().show(getActivity());
+				adapter.clear();
+				adapter.notifyDataSetChanged();
+				load();
 			}
-		});*/
+		});
 	}
 
 	public void toggleProgressBar(boolean on)

@@ -54,7 +54,7 @@ public class FoodListAdapter extends ArrayAdapter
 			@Override
 			public void onClick(View view)
 			{
-				new InventoryFoodDialogFragment(R.string.title_inventory_add_food, items.get(positionNow), false).show((FragmentActivity) context);
+				new InventoryFoodDialogFragment(R.string.title_inventory_add_food, items.get(positionNow), 0, false, null).show((FragmentActivity) context);
 			}
 		});
 

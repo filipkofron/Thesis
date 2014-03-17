@@ -4,11 +4,13 @@
 class Date;
 
 #include <string>
+#include <inttypes.h>
 
 class Date
 {
 public:
-    static long unixTimeFromMysqlString(const std::string &s);
+    static int64_t unixTimeFromMysqlString(const std::string &s);
+    static std::string unixTimeToMysqlString(const int64_t &t);
 };
 
 #endif

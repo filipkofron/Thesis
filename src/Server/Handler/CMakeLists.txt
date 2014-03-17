@@ -9,6 +9,8 @@ set(handler_source_files
   GetFoodDetailHandler.cpp
   GetFoodItemHandler.hpp
   GetFoodItemHandler.cpp
+  EditInventoryHandler.hpp
+  EditInventoryHandler.cpp
   NullHandler.hpp
   NullHandler.cpp
   HandlerException.hpp

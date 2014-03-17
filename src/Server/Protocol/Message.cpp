@@ -8,6 +8,8 @@
 #include "GetFoodDetailResponse.hpp"
 #include "GetFoodItemRequest.hpp"
 #include "GetFoodItemResponse.hpp"
+#include "EditInventoryRequest.hpp"
+#include "EditInventoryResponse.hpp"
 
 Message::Message()
 {
@@ -80,6 +82,17 @@ Message *Message::dejsonize(Json::Value &root)
             break;
         }
 
+        if(header.compare(EditInventoryRequest::getStaticHeader()) == 0)
+        {
+            msg = new EditInventoryRequest();
+            break;
+        }
+
+        if(header.compare(EditInventoryResponse::getStaticHeader()) == 0)
+        {
+            msg = new EditInventoryResponse();
+            break;
+        }
 
         break;
     }

@@ -20,7 +20,7 @@ private:
     std::string name;
     std::string description;
     int categoryId;
-    long defaultUseBy;
+    int64_t defaultUseBy;
     int amountMeasure;
     float amount;
     int userId;
@@ -34,7 +34,7 @@ public:
          const std::string &name,
          const std::string &description,
          const int &categoryId,
-         const long &defaultUseBy,
+         const int64_t &defaultUseBy,
          const int &amountMeasure,
          const float &amount,
          const int &userId,
@@ -46,7 +46,7 @@ public:
     const std::string &getName() const;
     const std::string &getDescription() const;
     const int &getCategoryId() const;
-    const long &getDefaultUseBy() const;
+    const int64_t &getDefaultUseBy() const;
     const int &getAmountMeasure() const;
     const float &getAmount() const;
     const int &getUserId() const;
@@ -57,7 +57,7 @@ public:
     void setName(const std::string &name);
     void setDescription(const std::string &description);
     void setCategoryId(const int &categoryId);
-    void setDefaultUseBy(const long &defaultUseBy);
+    void setDefaultUseBy(const int64_t &defaultUseBy);
     void setAmountMeasure(const int &amountMeasure);
     void setAmount(const float &amount);
     void setUserId(const int &userId);
@@ -70,7 +70,7 @@ public:
                           const std::string &name,
                           const std::string &description,
                           const int &categoryId,
-                          const long &defaultUseBy,
+                          const int64_t &defaultUseBy,
                           const int &amountMeasure,
                           const float &amount,
                           const int &userId,

@@ -9,6 +9,7 @@ class Server;
 #include <mutex>
 #include <ctime>
 #include <deque>
+#include <inttypes.h>
 
 #include "../Client/Context.hpp"
 
@@ -22,7 +23,7 @@ private:
     bool stopped;
     sockaddr_in addr;
     timeval acceptTimeout;
-    unsigned long clientNum;
+    uint64_t clientNum;
     void addrToStr(char *buffer, int bufLen, const sockaddr_in &addr);
     void handleClient(int clientSD, sockaddr_in clientAddr);
     void clearFinishedContexts();
@@ -34,7 +35,7 @@ public:
     std::mutex &getClientMutex();
     std::map<int, std::shared_ptr<Context>> &getClients();
     std::deque<std::shared_ptr<Context>> &getFinishedContexts();
-    const unsigned long &getClientNum();
+    const uint64_t &getClientNum();
 };
 
 #endif

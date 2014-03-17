@@ -29,7 +29,7 @@ Food::Food(const int &id,
      const std::string &name,
      const std::string &description,
      const int &categoryId,
-     const long &defaultUseBy,
+     const int64_t &defaultUseBy,
      const int &amountMeasure,
      const float &amount,
      const int &userId,
@@ -66,7 +66,7 @@ const int &Food::getCategoryId() const
     return categoryId;
 }
 
-const long &Food::getDefaultUseBy() const
+const int64_t &Food::getDefaultUseBy() const
 {
     return defaultUseBy;
 }
@@ -116,7 +116,7 @@ void Food::setCategoryId(const int &categoryId)
     this->categoryId = categoryId;
 }
 
-void Food::setDefaultUseBy(const long &defaultUseBy)
+void Food::setDefaultUseBy(const int64_t &defaultUseBy)
 {
     this->defaultUseBy = defaultUseBy;
 }
@@ -184,7 +184,7 @@ Food Food::makeFood(const std::string &gtin,
                           const std::string &name,
                           const std::string &description,
                           const int &categoryId,
-                          const long &defaultUseBy,
+                          const int64_t &defaultUseBy,
                           const int &amountMeasure,
                           const float &amount,
                           const int &userId,

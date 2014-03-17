@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +20,12 @@ import java.util.Date;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.model.FoodItem;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.task.EditInventoryTask;
+import cz.kofron.foodinventory.client.task.param.EditInventoryParam;
+import cz.kofron.foodinventory.client.util.PickerDate;
 
 /**
  * Created by kofee on 3/5/14.
@@ -32,7 +38,9 @@ public class InventoryFoodDialogFragment extends DialogFragment
 	private TextView count;
 	private Button plusButton;
 	private Button minusButton;
+	private int inventoryId;
 	private boolean edit;
+	private ReloadCallback reloadCallback;
 
 	private int title;
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
@@ -43,20 +51,46 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			System.out.println("Canceled.");
 		}
 	};
+
+	public class Success implements Runnable
+	{
+		@Override
+		public void run()
+		{
+			if(reloadCallback != null)
+			{
+				reloadCallback.update();
+			}
+		}
+	}
+
+	public class Fail implements Runnable
+	{
+		@Override
+		public void run()
+		{
+
+		}
+	}
+
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
 		public void onClick(DialogInterface dialogInterface, int i)
 		{
 			System.out.println("Ok.");
+			AsyncTask at = new EditInventoryTask(getActivity(), new EditInventoryParam(new Success(), new Fail(), !edit, inventoryId, foodItem.getId(), PickerDate.getDateFromDatePicket(datePicker).getTime(), getCount()));
+			at.execute();
 		}
 	};
 
-	public InventoryFoodDialogFragment(int title, FoodItem foodItem, boolean edit)
+	public InventoryFoodDialogFragment(int title, FoodItem foodItem, int inventoryId, boolean edit, ReloadCallback reloadCallback)
 	{
 		this.title = title;
 		this.foodItem = foodItem;
 		this.edit = edit;
+		this.inventoryId = inventoryId;
+		this.reloadCallback = reloadCallback;
 	}
 
 	private int getCount()

@@ -24,12 +24,14 @@ public class InventoryListAdapter extends ArrayAdapter
 {
 	private Context context;
 	private ArrayList<InventoryItem> items;
+	private ReloadCallback reloadCallback;
 
-	public InventoryListAdapter(Context context)
+	public InventoryListAdapter(Context context, ReloadCallback fragment)
 	{
 		super(context, R.layout.inventory_list_item);
 		items = new ArrayList<>();
 		this.context = context;
+		this.reloadCallback = fragment;
 	}
 
 	@Override
@@ -83,7 +85,7 @@ public class InventoryListAdapter extends ArrayAdapter
 		public void onClick(View view)
 		{
 			FoodItem foodItem = new FoodItem(item.getFoodId(), true, item.getUseBy() - System.currentTimeMillis(), "", item.getFoodName(), "", "");
-			new InventoryFoodDialogFragment(R.string.title_inventory_food, foodItem, true).show((FragmentActivity) context);
+			new InventoryFoodDialogFragment(R.string.title_inventory_food, foodItem, item.getId(), true, reloadCallback).show((FragmentActivity) context);
 		}
 	}
 }

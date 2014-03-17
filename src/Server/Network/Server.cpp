@@ -171,7 +171,7 @@ void Server::clearFinishedContexts()
     }
 }
 
-const unsigned long &Server::getClientNum()
+const uint64_t &Server::getClientNum()
 {
     return clientNum;
 }

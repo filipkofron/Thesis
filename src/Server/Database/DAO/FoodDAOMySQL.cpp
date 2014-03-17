@@ -6,6 +6,7 @@
 #include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
 
+#include <inttypes.h>
 #include <sstream>
 
 static const char *ADD_FOOD = "INSERT INTO Food (gtin, name, description, category_id, default_use_by, amount_measure, amount, user_id, price, vendor_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -122,7 +123,7 @@ Food FoodDAOMySQL::getFoodById(const int &id)
 
     std::stringstream ss;
     ss << res->getString(6);
-    long defaultUseLong;
+    int64_t defaultUseLong;
     ss >> defaultUseLong;
 
     return Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11));
@@ -144,7 +145,7 @@ Food FoodDAOMySQL::getFoodByGtin(const std::string &gtin)
 
     std::stringstream ss;
     ss << res->getString(6);
-    long defaultUseLong;
+    int64_t defaultUseLong;
     ss >> defaultUseLong;
 
     return Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11));
@@ -165,7 +166,7 @@ std::vector<Food> FoodDAOMySQL::findFoodByGtin(const std::string &gtin)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
@@ -188,7 +189,7 @@ std::vector<Food> FoodDAOMySQL::findFoodByName(const std::string &name)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
@@ -211,7 +212,7 @@ std::vector<Food> FoodDAOMySQL::getFoodByUserId(const int &userId)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
@@ -234,7 +235,7 @@ std::vector<Food> FoodDAOMySQL::getFoodByCategoryId(const int &categoryId)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
@@ -257,7 +258,7 @@ std::vector<Food> FoodDAOMySQL::getFoodByVendorId(const int &vendorId)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
@@ -281,7 +282,7 @@ std::vector<Food> FoodDAOMySQL::getAllFood(const int &offset, const int &max)
     {
         std::stringstream ss;
         ss << res->getString(6);
-        long defaultUseLong;
+        int64_t defaultUseLong;
         ss >> defaultUseLong;
         food.push_back(Food(res->getInt(1), res->getString(2), res->getString(3), res->getString(4), res->getInt(5), defaultUseLong, res->getInt(7), res->getDouble(8), res->getInt(9), res->getDouble(10), res->getInt(11)));
     }
