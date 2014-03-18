@@ -30,7 +30,6 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 {
 
 	private final static int RESULT_PERIOD_MS = 1500;
-	protected TextView resultView;
 	private boolean lockCameraUse = false;
 	private SurfaceView surfaceView;
 	private Camera camera;
@@ -38,6 +37,8 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	private DecodeThread decodeThread;
 	private boolean rotated;
 	private long lastResult;
+
+	public abstract void onGtin(String gtin);
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
@@ -342,7 +343,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 			@Override
 			public void run()
 			{
-				resultView.setText(text);
+				onGtin(text);
 			}
 		});
 	}

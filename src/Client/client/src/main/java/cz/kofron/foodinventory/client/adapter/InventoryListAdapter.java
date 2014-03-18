@@ -131,7 +131,7 @@ public class InventoryListAdapter extends ArrayAdapter
 		public void onClick(View view)
 		{
 			FoodItem foodItem = new FoodItem(item.getFoodId(), true, item.getUseBy() - System.currentTimeMillis(), "", item.getFoodName(), "", "");
-			new InventoryFoodDialogFragment(R.string.title_inventory_food, foodItem, item.getId(), true, reloadCallback).show((FragmentActivity) context);
+			new InventoryFoodDialogFragment(R.string.title_inventory_food, foodItem, item.getId(), true, reloadCallback, null).show((FragmentActivity) context);
 		}
 	}
 }

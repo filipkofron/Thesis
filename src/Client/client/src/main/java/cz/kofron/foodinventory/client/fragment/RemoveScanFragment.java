@@ -16,23 +16,32 @@ import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
  */
 public class RemoveScanFragment extends AbstractScanFragment
 {
+	private boolean accept = true;
+
+	private Runnable onDone = new Runnable()
+	{
+		@Override
+		public void run()
+		{
+			accept = true;
+		}
+	};
+
+	@Override
+	public void onGtin(String gtin)
+	{
+		if(accept)
+		{
+			accept = false;
+
+			new SearchRemoveDialogFragment(gtin, onDone).show(getActivity());
+		}
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		RelativeLayout rl = (RelativeLayout) view.findViewById(R.id.relative_layout);
-
-		View addView = inflater.inflate(R.layout.scan_remove, null);
-		rl.addView(addView);
-
-		resultView = (TextView) view.findViewById(R.id.gtin_view);
-
-		view.invalidate();
-
-		ListView lv = (ListView) view.findViewById(R.id.listView);
-
-		lv.setAdapter(new InventoryListAdapter(getActivity(), null));
 
 		return view;
 	}

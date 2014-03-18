@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class InventoryFoodDialogFragment extends DialogFragment
 	private int inventoryId;
 	private boolean edit;
 	private ReloadCallback reloadCallback;
+	private Runnable onDone;
 
 	private int title;
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
@@ -61,6 +63,10 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			{
 				reloadCallback.update();
 			}
+			if(onDone != null)
+			{
+				onDone.run();
+			}
 		}
 	}
 
@@ -69,7 +75,10 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		@Override
 		public void run()
 		{
-
+			if(onDone != null)
+			{
+				onDone.run();
+			}
 		}
 	}
 
@@ -84,13 +93,14 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	};
 
-	public InventoryFoodDialogFragment(int title, FoodItem foodItem, int inventoryId, boolean edit, ReloadCallback reloadCallback)
+	public InventoryFoodDialogFragment(int title, FoodItem foodItem, int inventoryId, boolean edit, ReloadCallback reloadCallback, Runnable onDone)
 	{
 		this.title = title;
 		this.foodItem = foodItem;
 		this.edit = edit;
 		this.inventoryId = inventoryId;
 		this.reloadCallback = reloadCallback;
+		this.onDone = onDone;
 	}
 
 	private int getCount()
@@ -196,7 +206,28 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		builder.setNegativeButton(R.string.cancel, onCancelListener);
 		builder.setPositiveButton(R.string.ok, onOkListener);
 
-		return builder.create();
+		final Dialog dialog = builder.create();
+
+		dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+			@Override
+			public boolean onKey(DialogInterface arg0, int keyCode,
+			                     KeyEvent event) {
+				// TODO Auto-generated method stub
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+					dialog.dismiss();
+					if(onDone != null)
+					{
+						onDone.run();
+					}
+				}
+				return true;
+			}
+		});
+
+
+		return dialog;
 	}
 
 	public void show(FragmentActivity activity)

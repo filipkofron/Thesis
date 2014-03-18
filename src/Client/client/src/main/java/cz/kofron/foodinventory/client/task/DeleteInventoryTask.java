@@ -49,7 +49,7 @@ public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 		super.onPreExecute();
 
 		pd = new ProgressDialog(context);
-		pd.setTitle("Deleting...");
+		pd.setTitle("Removing...");
 		pd.setMessage("Please wait.");
 		pd.setCancelable(false);
 		pd.setIndeterminate(true);
