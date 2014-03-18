@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
+import cz.kofron.foodinventory.client.task.DeleteInventoryTask;
+import cz.kofron.foodinventory.client.task.param.DeleteInventoryParam;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
 /**
@@ -42,6 +46,7 @@ public class InventoryListAdapter extends ArrayAdapter
 		View view = LayoutInflater.from(context).inflate(R.layout.inventory_list_item, parent, false);
 		TextView foodName = (TextView) view.findViewById(R.id.inventory_list_item_food_name);
 		TextView date = (TextView) view.findViewById(R.id.date_view);
+		ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
 		View card = view.findViewById(R.id.inventory_list_item_card);
 
 		int d = 255;
@@ -51,6 +56,8 @@ public class InventoryListAdapter extends ArrayAdapter
 		}
 		card.setBackgroundColor(Color.argb(255, d, d, d));
 		card.setOnClickListener(new OnItemClick(item));
+
+		deleteButton.setOnClickListener(new OnItemDelete(item));
 
 		foodName.setText(item.getFoodName());
 		date.setText(SimpleDate.longToDate(item.getUseBy()));
@@ -70,6 +77,45 @@ public class InventoryListAdapter extends ArrayAdapter
 	public int getCount()
 	{
 		return items.size();
+	}
+
+	private class OnItemDelete implements View.OnClickListener
+	{
+		private InventoryItem item;
+
+		private OnItemDelete(InventoryItem item)
+		{
+			this.item = item;
+		}
+
+		@Override
+		public void onClick(View view)
+		{
+			Runnable success = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					if(reloadCallback != null)
+					{
+						reloadCallback.update();
+					}
+				}
+			};
+
+			Runnable fail = new Runnable()
+			{
+				@Override
+				public void run()
+				{
+
+				}
+			};
+
+			DeleteInventoryParam dip = new DeleteInventoryParam(success, fail, OnItemDelete.this.item.getId());
+			DeleteInventoryTask dit = new DeleteInventoryTask(context, dip);
+			dit.execute();
+		}
 	}
 
 	private class OnItemClick implements View.OnClickListener

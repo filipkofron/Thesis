@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
+import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryRequest;
+import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailRequest;
@@ -71,6 +73,18 @@ public class Communicator implements ConnectionListener
 			GetFoodDetailResponse gfdr = (GetFoodDetailResponse) msg;
 			System.out.println("GetFoodDetailResponse: " + gfdr);
 			return gfdr;
+		}
+	}
+
+	public boolean deleteInventory(int id) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new DeleteInventoryRequest(id).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			DeleteInventoryResponse dir = (DeleteInventoryResponse) msg;
+			System.out.println("DeleteInventoryResponse: " + dir);
+			return dir.isSuccess();
 		}
 	}
 

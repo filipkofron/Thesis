@@ -10,6 +10,8 @@
 #include "GetFoodItemResponse.hpp"
 #include "EditInventoryRequest.hpp"
 #include "EditInventoryResponse.hpp"
+#include "DeleteInventoryRequest.hpp"
+#include "DeleteInventoryResponse.hpp"
 
 Message::Message()
 {
@@ -91,6 +93,18 @@ Message *Message::dejsonize(Json::Value &root)
         if(header.compare(EditInventoryResponse::getStaticHeader()) == 0)
         {
             msg = new EditInventoryResponse();
+            break;
+        }
+
+        if(header.compare(DeleteInventoryRequest::getStaticHeader()) == 0)
+        {
+            msg = new DeleteInventoryRequest();
+            break;
+        }
+
+        if(header.compare(DeleteInventoryResponse::getStaticHeader()) == 0)
+        {
+            msg = new DeleteInventoryResponse();
             break;
         }
 

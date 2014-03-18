@@ -1,18 +1,28 @@
 set(handler_source_files
   Handler.hpp
   Handler.cpp
+
   LoginHandler.hpp
   LoginHandler.cpp
+
   GetInventoryHandler.hpp
   GetInventoryHandler.cpp
+
   GetFoodDetailHandler.hpp
   GetFoodDetailHandler.cpp
+
   GetFoodItemHandler.hpp
   GetFoodItemHandler.cpp
+
   EditInventoryHandler.hpp
   EditInventoryHandler.cpp
+
+  DeleteInventoryHandler.hpp
+  DeleteInventoryHandler.cpp
+
   NullHandler.hpp
   NullHandler.cpp
+
   HandlerException.hpp
   HandlerException.cpp
 )

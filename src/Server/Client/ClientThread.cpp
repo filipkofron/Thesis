@@ -5,6 +5,9 @@
 #include "../Network/WriteException.hpp"
 #include "BufferException.hpp"
 #include "../Protocol/Message.hpp"
+#include "../Handler/HandlerException.hpp"
+#include "../Entity/DAO/DAOException.hpp"
+#include <cppconn/exception.h>
 
 #include <iostream>
 #include <unistd.h>
@@ -79,6 +82,18 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
     catch(BufferException &e)
     {
         std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Buffer error:" << e.what() << std::endl;
+    }
+    catch(DAOException &e)
+    {
+        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": DAO error:" << e.what() << std::endl;
+    }
+    catch(sql::SQLException &e)
+    {
+        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": SQL error:" << e.what() << std::endl;
+    }
+    catch(HandlerException &e)
+    {
+        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Handler error:" << e.message << std::endl;
     }
     catch(std::runtime_error &e)
     {

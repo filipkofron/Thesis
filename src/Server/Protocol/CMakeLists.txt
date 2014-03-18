@@ -24,9 +24,13 @@ set(protocol_source_files
 
   EditInventoryRequest.hpp
   EditInventoryRequest.cpp
-
   EditInventoryResponse.hpp
   EditInventoryResponse.cpp
+
+  DeleteInventoryRequest.hpp
+  DeleteInventoryRequest.cpp
+  DeleteInventoryResponse.hpp
+  DeleteInventoryResponse.cpp
 
   KeepAlive.hpp
   KeepAlive.cpp

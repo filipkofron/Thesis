@@ -40,7 +40,16 @@ public class GetInventoryResponse extends Message
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
-		JSONArray array = obj.getJSONArray("items");
+		JSONArray array;
+		if(!obj.isNull("items"))
+		{
+			array = obj.getJSONArray("items");
+		}
+		else
+		{
+			array = new JSONArray();
+		}
+
 		int len = array.length();
 		intentoryItems = new ArrayList<>(len);
 
