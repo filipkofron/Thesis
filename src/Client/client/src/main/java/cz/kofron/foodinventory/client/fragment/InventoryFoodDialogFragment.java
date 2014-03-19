@@ -51,6 +51,11 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		public void onClick(DialogInterface dialogInterface, int i)
 		{
 			System.out.println("Canceled.");
+
+			if(onDone != null)
+			{
+				onDone.run();
+			}
 		}
 	};
 
@@ -90,6 +95,10 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			System.out.println("Ok.");
 			AsyncTask at = new EditInventoryTask(getActivity(), new EditInventoryParam(new Success(), new Fail(), !edit, inventoryId, foodItem.getId(), PickerDate.getDateFromDatePicket(datePicker).getTime(), getCount()));
 			at.execute();
+			if(onDone != null)
+			{
+				onDone.run();
+			}
 		}
 	};
 
@@ -216,16 +225,27 @@ public class InventoryFoodDialogFragment extends DialogFragment
 				// TODO Auto-generated method stub
 				if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-					dialog.dismiss();
 					if(onDone != null)
 					{
 						onDone.run();
 					}
+					dialog.dismiss();
 				}
 				return true;
 			}
 		});
 
+		dialog.setOnDismissListener(new DialogInterface.OnDismissListener()
+		{
+			@Override
+			public void onDismiss(DialogInterface dialogInterface)
+			{
+				if(onDone != null)
+				{
+					onDone.run();
+				}
+			}
+		});
 
 		return dialog;
 	}

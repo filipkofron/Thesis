@@ -16,16 +16,14 @@ public class LoginRequest extends Message
 {
 
 	private String username;
-	private String password;
 
 	public LoginRequest()
 	{
 	}
 
-	public LoginRequest(String username, String password)
+	public LoginRequest(String username)
 	{
 		this.username = username;
-		this.password = password;
 	}
 
 	public String getUsername()
@@ -36,16 +34,6 @@ public class LoginRequest extends Message
 	public void setUsername(String username)
 	{
 		this.username = username;
-	}
-
-	public String getPassword()
-	{
-		return password;
-	}
-
-	public void setPassword(String password)
-	{
-		this.password = password;
 	}
 
 	@Override
@@ -64,7 +52,6 @@ public class LoginRequest extends Message
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
 		username = obj.getString("username");
-		password = obj.getString("password");
 	}
 
 	@Override
@@ -72,7 +59,6 @@ public class LoginRequest extends Message
 	{
 		JSONObject obj = new JSONObject();
 		obj.put("username", username);
-		obj.put("password", password);
 
 		return obj;
 	}

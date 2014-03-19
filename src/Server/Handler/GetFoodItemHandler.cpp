@@ -71,6 +71,7 @@ void GetFoodItemHandler::handle(Context &context)
         obj["gtin"] = food.getGtin();
 
         items[i] = obj;
+        i++;
     }
 
     GetFoodItemResponse response(items);

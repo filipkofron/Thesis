@@ -85,6 +85,18 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 			}
 		});
 
+		dialog.setOnDismissListener(new DialogInterface.OnDismissListener()
+		{
+			@Override
+			public void onDismiss(DialogInterface dialogInterface)
+			{
+				if(onDone != null)
+				{
+					onDone.run();
+				}
+			}
+		});
+
 		update();
 
 		return dialog;

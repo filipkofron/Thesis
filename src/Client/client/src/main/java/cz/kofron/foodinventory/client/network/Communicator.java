@@ -36,11 +36,18 @@ public class Communicator implements ConnectionListener
 	private OutputStream os;
 	private InputStream is;
 
-	public LoginResponse login(String name, String password) throws IOException
+	private String username;
+
+	public Communicator(String username)
+	{
+		this.username = username;
+	}
+
+	public LoginResponse login(String name) throws IOException
 	{
 		synchronized (this)
 		{
-			JSONSender.send(os, new LoginRequest(name, password).jsonize());
+			JSONSender.send(os, new LoginRequest(name).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			LoginResponse lr = (LoginResponse) msg;
 			System.out.println("LoginResponse: " + lr);
@@ -130,7 +137,7 @@ public class Communicator implements ConnectionListener
 			os = connection.getSocket().getOutputStream();
 			is = connection.getSocket().getInputStream();
 
-			LoginResponse lr = login("pepa", "zdepa");
+			LoginResponse lr = login(username);
 
 			System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
 

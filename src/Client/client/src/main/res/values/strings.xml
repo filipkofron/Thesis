@@ -28,5 +28,6 @@
     <string name="network_error_toast">Network error</string>
     <string name="title_add_new_food">Add new food</string>
     <string name="title_remove_food">Remove food from inventory</string>
+    <string name="title_select_account">Select an account</string>
 
 </resources>

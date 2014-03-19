@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.fragment.AccountSelectDialogFragment;
 import cz.kofron.foodinventory.client.fragment.AddScanFragment;
 import cz.kofron.foodinventory.client.fragment.FoodSearchFragment;
 import cz.kofron.foodinventory.client.fragment.HomeFragment;
@@ -44,9 +45,6 @@ public class MainActivity extends ActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 
-		NetworkInstance.prepare();
-		NetworkInstance.connector.start();
-
 		setContentView(R.layout.activity_main);
 
 		mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -57,6 +55,31 @@ public class MainActivity extends ActionBarActivity
 		mNavigationDrawerFragment.setUp(
 				R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
+		tryConnect();
+	}
+
+	public void tryConnect()
+	{
+		runOnUiThread(new AccountEnforcer());
+	}
+
+	private class AccountEnforcer implements Runnable
+	{
+		@Override
+		public void run()
+		{
+			String account = getSharedPreferences("account", MainActivity.MODE_PRIVATE).getString("username", "");
+			if(account == null || account.trim().length() < 3)
+			{
+				new AccountSelectDialogFragment().show(MainActivity.this);
+			}
+			else
+			{
+				NetworkInstance.prepare(account);
+				NetworkInstance.connector.start();
+			}
+		}
 	}
 
 	@Override
@@ -64,7 +87,10 @@ public class MainActivity extends ActionBarActivity
 	{
 		super.onDestroy();
 
-		NetworkInstance.connector.stop();
+		if(NetworkInstance.isPrepared())
+		{
+			NetworkInstance.connector.stop();
+		}
 	}
 
 	@Override

@@ -55,6 +55,8 @@ int main()
     std::cout << std::endl;
     json_exception_test();
 
+    std::cout << "> [test]: " << Food::fixGtin("90490880") << std::endl;
+
     Server server;
     server.initialize();
     server.run();

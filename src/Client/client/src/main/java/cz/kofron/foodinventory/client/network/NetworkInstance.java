@@ -11,15 +11,24 @@ package cz.kofron.foodinventory.client.network;
  */
 public class NetworkInstance
 {
-	public static Communicator communicator = new Communicator();
+	public static Communicator communicator;
 	public static Connector connector = new Connector();
 
-	public static void prepare()
+	private static boolean prepared = false;
+
+	public static void prepare(String username)
 	{
 		if (connector != null)
 		{
 			connector.stop();
 		}
 		connector = new Connector();
+		communicator = new Communicator(username);
+		prepared = true;
+	}
+
+	public static boolean isPrepared()
+	{
+		return prepared;
 	}
 }

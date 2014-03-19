@@ -9,10 +9,9 @@ class LoginRequest : public Message
 {
 public:
     std::string username;
-    std::string password;
 
     LoginRequest();
-    LoginRequest(const std::string &username, const std::string &password);
+    LoginRequest(const std::string &username);
     virtual ~LoginRequest();
 
     static std::string getStaticHeader();

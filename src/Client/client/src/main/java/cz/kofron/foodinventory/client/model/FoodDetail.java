@@ -88,7 +88,17 @@ public class FoodDetail extends AbstractEntity
 		fd.amount = (float) obj.getDouble("amount");
 		fd.usualPrice = (float) obj.getDouble("usualPrice");
 
-		JSONArray reviewArray = obj.getJSONArray("reviews");
+		JSONArray reviewArray;
+
+		if(obj.isNull("reviews"))
+		{
+			reviewArray = new JSONArray();
+		}
+		else
+		{
+			reviewArray = obj.getJSONArray("reviews");
+		}
+
 		fd.reviews = new ArrayList<>(reviewArray.length());
 
 		for (int i = 0; i < reviewArray.length(); i++)

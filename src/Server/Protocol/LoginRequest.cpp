@@ -6,8 +6,8 @@ LoginRequest::LoginRequest()
 
 }
 
-LoginRequest::LoginRequest(const std::string &username, const std::string &password)
-    : username(username), password(password)
+LoginRequest::LoginRequest(const std::string &username)
+    : username(username)
 {
 
 }
@@ -35,11 +35,9 @@ Handler *LoginRequest::createHandler()
 void LoginRequest::_dejsonize(Json::Value &content)
 {
     username = content["username"].asString();
-    password = content["password"].asString();
 }
 
 void LoginRequest::_jsonize(Json::Value &content)
 {
     content["username"] = username;
-    content["password"] = password;
 }

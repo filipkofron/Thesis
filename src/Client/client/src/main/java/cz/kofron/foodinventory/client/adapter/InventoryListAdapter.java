@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
@@ -69,6 +71,24 @@ public class InventoryListAdapter extends ArrayAdapter
 	{
 		clear();
 		this.items = items;
+
+		Collections.sort(items, new Comparator<InventoryItem>()
+		{
+			@Override
+			public int compare(InventoryItem inventoryItem, InventoryItem inventoryItem2)
+			{
+				long res = inventoryItem.getUseBy() - inventoryItem2.getUseBy();
+				if(res < 0)
+				{
+					return -1;
+				}
+				if(res > 0)
+				{
+					return 1;
+				}
+				return 0;
+			}
+		});
 
 		notifyDataSetChanged();
 	}

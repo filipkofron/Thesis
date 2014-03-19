@@ -36,15 +36,6 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		setListAdapter(adapter);
 
 		load();
-
-		/*getActivity().runOnUiThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				new LoginDialogFragment().show(getActivity());
-			}
-		});*/
 	}
 
 	private void load()
