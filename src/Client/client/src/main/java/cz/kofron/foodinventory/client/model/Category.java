@@ -33,4 +33,9 @@ public class Category extends AbstractEntity
 
 		return obj;
 	}
+
+	public String getName()
+	{
+		return name;
+	}
 }

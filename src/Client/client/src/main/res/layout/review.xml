@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/rating_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -22,22 +22,22 @@
             android:textAppearance="@android:style/TextAppearance.Large"/>
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/rating_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_margin="3dp"
-            android:layout_toRightOf="@+id/textView"
+            android:layout_toRightOf="@+id/rating_value"
             android:text="alex777dogeisbest@gmail.com"
             android:textStyle="italic"/>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
-            android:layout_below="@+id/textView2"
+            android:layout_alignLeft="@+id/rating_user"
+            android:layout_alignStart="@+id/rating_user"
+            android:layout_below="@+id/rating_user"
             android:text="This is quite decent food that you can buy in this category, although i recommend to look at blabla..."/>
     </RelativeLayout>
 

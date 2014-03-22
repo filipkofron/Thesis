@@ -18,6 +18,7 @@ import java.util.Date;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.model.FoodDetail;
+import cz.kofron.foodinventory.client.model.FoodReview;
 import cz.kofron.foodinventory.client.task.LoadFoodDetailTask;
 import cz.kofron.foodinventory.client.task.param.LoadFoodDetailParam;
 import cz.kofron.foodinventory.client.util.GtinUtil;
@@ -133,6 +134,7 @@ public class FoodDetailActivity extends ActionBarActivity
 				this.finish();
 				return true;
 			case R.id.action_edit:
+				FoodEditActivity.initialFoodDetail = food;
 				Intent foodEditIntent = new Intent(this, FoodEditActivity.class);
 				startActivity(foodEditIntent);
 				return true;
@@ -143,6 +145,7 @@ public class FoodDetailActivity extends ActionBarActivity
 
 	public void setFoodDetail(final FoodDetail foodDetail)
 	{
+		food = foodDetail;
 		runOnUiThread(new Runnable()
 		{
 			@Override
@@ -151,6 +154,31 @@ public class FoodDetailActivity extends ActionBarActivity
 				setFoodDetailSync(foodDetail);
 			}
 		});
+	}
+
+	private void populateReviews(FoodDetail foodDetail)
+	{
+		LinearLayout reviewLayout = (LinearLayout) findViewById(R.id.review_layout);
+		reviewLayout.removeAllViews();
+
+		for(FoodReview review : foodDetail.getReviews())
+		{
+			View reviewView = LayoutInflater.from(this).inflate(R.layout.review, null);
+			View separator = LayoutInflater.from(this).inflate(R.layout.vertical_line, null);
+
+			String num = String.format("%.1f", review.getRating());
+
+			TextView ratingValue = (TextView) reviewView.findViewById(R.id.rating_value);
+			TextView ratingUser = (TextView) reviewView.findViewById(R.id.rating_user);
+			TextView ratingText = (TextView) reviewView.findViewById(R.id.rating_text);
+
+			ratingValue.setText(num);
+			ratingUser.setText(review.getUsername());
+			ratingText.setText(review.getText());
+
+			reviewLayout.addView(reviewView);
+			reviewLayout.addView(separator);
+		}
 	}
 
 	private void setFoodDetailSync(FoodDetail foodDetail)
@@ -164,6 +192,8 @@ public class FoodDetailActivity extends ActionBarActivity
 		TextView usualPrice = (TextView) findViewById(R.id.usual_price);
 		TextView addedBy = (TextView) findViewById(R.id.added_by);
 		TextView editedBy = (TextView) findViewById(R.id.edited_by);
+
+		populateReviews(foodDetail);
 
 		name.setText(foodDetail.getName());
 		category.setText(foodDetail.getCategory());
@@ -180,5 +210,7 @@ public class FoodDetailActivity extends ActionBarActivity
 		usualPrice.setText("$" + foodDetail.getUsualPrice());
 		addedBy.setText(foodDetail.getAddedBy());
 		editedBy.setText(foodDetail.getLastEditedBy());
+
+		view.invalidate();
 	}
 }

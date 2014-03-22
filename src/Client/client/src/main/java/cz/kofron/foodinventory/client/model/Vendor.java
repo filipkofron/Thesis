@@ -33,4 +33,9 @@ public class Vendor extends AbstractEntity
 
 		return obj;
 	}
+
+	public String getName()
+	{
+		return name;
+	}
 }

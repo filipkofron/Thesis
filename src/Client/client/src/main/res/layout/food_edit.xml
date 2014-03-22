@@ -37,7 +37,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -46,7 +46,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_below="@+id/textView"
                     android:layout_margin="3dp"
-                    android:text="Food name"/>
+                    android:text="New Food name"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -62,16 +62,18 @@
                     android:text="Vendor"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-                <TextView
-                    android:id="@+id/vendor_text"
+                <EditText
+                    android:id="@+id/vendor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/textView5"
                     android:layout_alignStart="@+id/textView5"
                     android:layout_below="@+id/textView5"
                     android:layout_marginBottom="3dp"
-                    android:text="Nesstle"
-                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    android:text="Unknown"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:layout_marginRight="3dp"
+                    android:minWidth="150dp"/>
 
                 <Button
                     android:id="@+id/vendor_button"
@@ -100,7 +102,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/gtin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -207,7 +209,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -245,7 +247,7 @@
                     android:text="Years"/>
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/years"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -261,16 +263,16 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText5"
+                    android:layout_below="@+id/years"
                     android:layout_margin="3dp"
                     android:text="Months"/>
 
                 <EditText
-                    android:id="@+id/editText6"
+                    android:id="@+id/months"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/editText5"
-                    android:layout_alignRight="@+id/editText5"
+                    android:layout_alignEnd="@+id/years"
+                    android:layout_alignRight="@+id/years"
                     android:layout_below="@+id/textView11"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="3dp"
@@ -283,18 +285,18 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText6"
+                    android:layout_below="@+id/months"
                     android:layout_margin="3dp"
                     android:text="Days"/>
 
                 <EditText
-                    android:id="@+id/editText7"
+                    android:id="@+id/days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/editText6"
+                    android:layout_alignEnd="@+id/months"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignRight="@+id/editText6"
+                    android:layout_alignRight="@+id/months"
                     android:layout_below="@+id/textView12"
                     android:layout_margin="3dp"
                     android:inputType="number"
@@ -318,7 +320,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <RadioGroup
-                    android:id="@+id/radioGroup"
+                    android:id="@+id/amount_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -328,7 +330,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/grams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -338,14 +340,14 @@
                         android:text="Grams"/>
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/liters"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="Litres"/>
 
                     <RadioButton
-                        android:id="@+id/radioButton3"
+                        android:id="@+id/pieces"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
@@ -356,7 +358,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/radioGroup"
+                    android:layout_below="@+id/amount_type"
                     android:layout_marginBottom="3dp"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
@@ -365,7 +367,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView7"
@@ -377,12 +379,12 @@
                     android:text="100"/>
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/amount_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/editText4"
+                    android:layout_alignBottom="@+id/amount"
                     android:layout_marginBottom="10dp"
-                    android:layout_toRightOf="@+id/radioGroup"
+                    android:layout_toRightOf="@+id/amount_type"
                     android:text="g"/>
 
             </RelativeLayout>
@@ -406,15 +408,15 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/editText8"
-                    android:layout_alignBottom="@+id/editText8"
+                    android:layout_alignBaseline="@+id/price"
+                    android:layout_alignBottom="@+id/price"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_margin="3dp"
                     android:text="$"/>
 
                 <EditText
-                    android:id="@+id/editText8"
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

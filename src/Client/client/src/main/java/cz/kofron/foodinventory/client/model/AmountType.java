@@ -5,7 +5,7 @@ package cz.kofron.foodinventory.client.model;
  */
 public class AmountType
 {
-	private final static int GRAMS = 0;
-	private final static int LITERS = 1;
-	private final static int PIECES = 2;
+	public final static int GRAMS = 0;
+	public final static int LITERS = 1;
+	public final static int PIECES = 2;
 }

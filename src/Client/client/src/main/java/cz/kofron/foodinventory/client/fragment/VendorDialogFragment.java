@@ -7,21 +7,37 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
+import java.util.ArrayList;
+
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.model.Vendor;
 
 /**
  * Created by kofee on 3/4/14.
  */
 public class VendorDialogFragment extends DialogFragment
 {
-	private final static String[] testVendors;
+	private final ArrayList<Vendor> vendors;
+
+	public VendorDialogFragment(ArrayList<Vendor> vendors)
+	{
+		this.vendors = vendors;
+	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.pick_vendor);
-		builder.setItems(testVendors, new DialogInterface.OnClickListener()
+		String [] vendorStrings = new String[vendors.size()];
+		int i = 0;
+		for(Vendor vendor : vendors)
+		{
+			vendorStrings[i] = vendor.getName();
+			i++;
+		}
+
+		builder.setItems(vendorStrings, new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
@@ -40,15 +56,5 @@ public class VendorDialogFragment extends DialogFragment
 	public static interface VendorDialogListener
 	{
 		public void onVendorSelected(int vendorId);
-	}
-
-	static
-	{
-		final int vendors = 50;
-		testVendors = new String[vendors];
-		for (int i = 0; i < testVendors.length; i++)
-		{
-			testVendors[i] = "Vendor #" + (i + 1);
-		}
 	}
 }
