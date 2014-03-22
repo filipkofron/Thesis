@@ -12,6 +12,7 @@ static const char *UPDATE_VENDOR = "UPDATE Vendor SET name = ? WHERE id = ?";
 static const char *VENDOR_BY_ID = "SELECT id, name FROM Vendor WHERE id = ?";
 static const char *VENDOR_BY_NAME = "SELECT id, name FROM Vendor WHERE name = ?";
 static const char *FIND_VENDOR_BY_NAME = "SELECT id, name FROM Vendor WHERE name COLLATE UTF8_GENERAL_CI LIKE ?";
+static const char *ALL_VENDORS = "SELECT id, name FROM Vendor";
 
 void VendorDAOMySQL::addVendor(Vendor &vendor, int &newId)
 {
@@ -74,6 +75,22 @@ Vendor VendorDAOMySQL::getVendorById(const int &id)
     }
 
     return Vendor(res->getInt(1), res->getString(2));
+}
+
+std::vector<Vendor> VendorDAOMySQL::getAllVendors()
+{
+    MySQLManager::ConnectionHolder ch(MySQLManager::getInstance());
+    std::unique_ptr<sql::PreparedStatement> ps(ch.conn->prepareStatement(ALL_VENDORS));
+
+    std::unique_ptr<sql::ResultSet> res(ps->executeQuery());
+
+    std::vector<Vendor> vendors;
+    while(res->next())
+    {
+        vendors.push_back(Vendor(res->getInt(1), res->getString(2)));
+    }
+
+    return vendors;
 }
 
 Vendor VendorDAOMySQL::getVendorByName(const std::string &name)

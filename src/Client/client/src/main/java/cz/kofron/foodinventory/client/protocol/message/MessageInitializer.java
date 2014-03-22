@@ -35,5 +35,8 @@ public class MessageInitializer
 
 		Message.registerMessageChild(new EditFoodRequest());
 		Message.registerMessageChild(new EditFoodResponse());
+
+		Message.registerMessageChild(new GetFoodBaseRequest());
+		Message.registerMessageChild(new GetFoodBaseResponse());
 	}
 }

@@ -20,6 +20,12 @@ set(handler_source_files
   DeleteInventoryHandler.hpp
   DeleteInventoryHandler.cpp
 
+  EditFoodHandler.hpp
+  EditFoodHandler.cpp
+
+  GetFoodBaseHandler.hpp
+  GetFoodBaseHandler.cpp
+
   NullHandler.hpp
   NullHandler.cpp
 

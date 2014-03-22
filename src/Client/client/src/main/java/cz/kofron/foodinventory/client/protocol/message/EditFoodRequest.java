@@ -11,7 +11,8 @@ public class EditFoodRequest extends Message
 	private boolean adding;
 	private int id;
 	private String name;
-	private int vendorId;
+	private String vendor;
+	private int categoryId;
 	private String gtin;
 	private String description;
 	private long defaultUseBy;
@@ -23,12 +24,13 @@ public class EditFoodRequest extends Message
 	{
 	}
 
-	public EditFoodRequest(boolean adding, int id, String name, int vendorId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice)
+	public EditFoodRequest(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice)
 	{
 		this.adding = adding;
 		this.id = id;
 		this.name = name;
-		this.vendorId = vendorId;
+		this.vendor = vendor;
+		this.categoryId = categoryId;
 		this.gtin = gtin;
 		this.description = description;
 		this.defaultUseBy = defaultUseBy;
@@ -55,7 +57,8 @@ public class EditFoodRequest extends Message
 		adding = obj.getBoolean("adding");
 		id = obj.getInt("id");
 		name = obj.getString("name");
-		vendorId = obj.getInt("vendorId");
+		vendor = obj.getString("vendor");
+		categoryId = obj.getInt("categoryId");
 		gtin = obj.getString("gtin");
 		description = obj.getString("description");
 		defaultUseBy = obj.getLong("defaultUseBy");
@@ -72,7 +75,8 @@ public class EditFoodRequest extends Message
 		obj.put("adding", adding);
 		obj.put("id", id);
 		obj.put("name", name);
-		obj.put("vendorId", vendorId);
+		obj.put("vendor", vendor);
+		obj.put("categoryId", categoryId);
 		obj.put("gtin", gtin);
 		obj.put("description", description);
 		obj.put("defaultUseBy", defaultUseBy);

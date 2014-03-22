@@ -7,12 +7,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import cz.kofron.foodinventory.client.model.FoodDetail;
+import cz.kofron.foodinventory.client.model.FoodHelper;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryResponse;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodBaseRequest;
+import cz.kofron.foodinventory.client.protocol.message.GetFoodBaseResponse;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailRequest;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailResponse;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodItemRequest;
@@ -119,6 +122,18 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	public GetFoodBaseResponse getFoodBase() throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new GetFoodBaseRequest().jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			GetFoodBaseResponse gfbs = (GetFoodBaseResponse) msg;
+			System.out.println("GetFoodBaseResponse: " + gfbs);
+			return gfbs;
+		}
+	}
+
 	public void keepAlive() throws IOException
 	{
 		synchronized (this)
@@ -141,6 +156,11 @@ public class Communicator implements ConnectionListener
 
 			System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
 
+			GetFoodBaseResponse gfbr = getFoodBase();
+
+			System.out.println("Got vendors, categories: " + gfbr.getVendors().size() + ", " + gfbr.getCategories().size());
+			FoodHelper.vendors = gfbr.getVendors();
+			FoodHelper.categories = gfbr.getCategories();
 
 		}
 		catch (IOException ex)

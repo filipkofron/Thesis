@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <cstring>
+#include <chrono>
 
 int64_t Date::unixTimeFromMysqlString(const std::string &s)
 {
@@ -24,4 +25,15 @@ std::string Date::unixTimeToMysqlString(const int64_t &t)
     memset(&buf, 1, sizeof(buf));
     strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &timeinfo);
     return std::string(buf);
+}
+
+int64_t Date::currentTimeMilis()
+{
+    namespace sc = std::chrono;
+
+    auto time = sc::system_clock::now();
+    auto since_epoch = time.time_since_epoch();
+    auto millis = sc::duration_cast<sc::milliseconds>(since_epoch);
+
+    return (int64_t) millis.count();
 }

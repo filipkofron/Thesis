@@ -12,6 +12,10 @@
 #include "EditInventoryResponse.hpp"
 #include "DeleteInventoryRequest.hpp"
 #include "DeleteInventoryResponse.hpp"
+#include "EditFoodRequest.hpp"
+#include "EditFoodResponse.hpp"
+#include "GetFoodBaseRequest.hpp"
+#include "GetFoodBaseResponse.hpp"
 
 Message::Message()
 {
@@ -105,6 +109,30 @@ Message *Message::dejsonize(Json::Value &root)
         if(header.compare(DeleteInventoryResponse::getStaticHeader()) == 0)
         {
             msg = new DeleteInventoryResponse();
+            break;
+        }
+
+        if(header.compare(EditFoodRequest::getStaticHeader()) == 0)
+        {
+            msg = new EditFoodRequest();
+            break;
+        }
+
+        if(header.compare(EditFoodResponse::getStaticHeader()) == 0)
+        {
+            msg = new EditFoodResponse();
+            break;
+        }
+
+        if(header.compare(GetFoodBaseRequest::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodBaseRequest();
+            break;
+        }
+
+        if(header.compare(GetFoodBaseResponse::getStaticHeader()) == 0)
+        {
+            msg = new GetFoodBaseResponse();
             break;
         }
 

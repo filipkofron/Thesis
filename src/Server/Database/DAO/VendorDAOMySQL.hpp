@@ -16,6 +16,7 @@ public:
     virtual void updateVendor(const Vendor &vendor);
     virtual Vendor getVendorById(const int &id);
     virtual Vendor getVendorByName(const std::string &name);
+    virtual std::vector<Vendor> getAllVendors();
     virtual std::vector<Vendor> findVendorByName(const std::string &name);
 };
 

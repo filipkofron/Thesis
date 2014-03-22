@@ -32,6 +32,16 @@ set(protocol_source_files
   DeleteInventoryResponse.hpp
   DeleteInventoryResponse.cpp
 
+  EditFoodRequest.hpp
+  EditFoodRequest.cpp
+  EditFoodResponse.hpp
+  EditFoodResponse.cpp
+
+  GetFoodBaseRequest.hpp
+  GetFoodBaseRequest.cpp
+  GetFoodBaseResponse.hpp
+  GetFoodBaseResponse.cpp
+
   KeepAlive.hpp
   KeepAlive.cpp
 )
