@@ -3,6 +3,7 @@
 #include <jsoncpp/json/value.h>
 #include "BufferWriter.hpp"
 #include <cstring>
+#include <iostream>
 
 void MessageSender::sendMessage(Context &context, Message &message)
 {

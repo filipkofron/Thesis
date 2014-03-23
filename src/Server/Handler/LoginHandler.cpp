@@ -3,6 +3,7 @@
 #include "../Entity/DAO/DAOException.hpp"
 #include "../Network/MessageSender.hpp"
 #include "../Protocol/LoginResponse.hpp"
+#include <iostream>
 
 LoginHandler::LoginHandler(LoginRequest *request)
     : request(request)

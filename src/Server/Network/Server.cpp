@@ -13,6 +13,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <cstring>
+#include <iostream>
 
 Server::Server()
     : stopped(false), clientNum(0)
@@ -113,8 +114,8 @@ void Server::run()
         if (clientSD < 0)
         {
             std::cout << "Time out.." << std::endl;
-            //continue;
-            stopped = true;
+            continue;
+            //stopped = true;
         }
         else
         {
