@@ -32,9 +32,11 @@ Handler *EditFoodResponse::createHandler()
 void EditFoodResponse::_dejsonize(Json::Value &content)
 {
     success = content["success"].asBool();
+    id = content["id"].asInt();
 }
 
 void EditFoodResponse::_jsonize(Json::Value &content)
 {
     content["success"] = success;
+    content["id"] = id;
 }

@@ -320,7 +320,7 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 				return true;
 			case R.id.action_save:
 
-				EditFoodTask eft = new EditFoodTask(makeParam(), this);
+				EditFoodTask eft = new EditFoodTask(makeParam(), imageEditAdapter.makeEditParam(), this);
 				eft.execute();
 				return true;
 		}

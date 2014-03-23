@@ -10,13 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.ImageZoomDialogFragment;
+import cz.kofron.foodinventory.client.protocol.message.EditFoodResponse;
+import cz.kofron.foodinventory.client.task.LoadImageTask;
+import cz.kofron.foodinventory.client.task.param.EditImagesParam;
+import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 
 /**
  * Created by kofee on 23.3.14.
@@ -25,6 +29,19 @@ public class ImageEditAdapter
 {
 	private LinearLayout layout;
 	private Activity activity;
+	private TreeSet<String> deletedIds = new TreeSet<>();
+	private class Pair
+	{
+		public Bitmap bitmap;
+		public View view;
+
+		private Pair(Bitmap bitmap, View view)
+		{
+			this.bitmap = bitmap;
+			this.view = view;
+		}
+	}
+	private ArrayList<Pair> newBitmaps = new ArrayList<>();
 	public final static int REQUEST_CODE = 13463;
 
 	public ImageEditAdapter(LinearLayout layout, Activity activity)
@@ -61,7 +78,7 @@ public class ImageEditAdapter
 
 	private void populateImage(Bitmap bitmap)
 	{
-		View imageLayout = LayoutInflater.from(activity).inflate(R.layout.image_edit_item, null);
+		final View imageLayout = LayoutInflater.from(activity).inflate(R.layout.image_edit_item, null);
 		ImageView image = (ImageView) imageLayout.findViewById(R.id.image);
 		Button removeButton = (Button) imageLayout.findViewById(R.id.remove_button);
 
@@ -74,12 +91,24 @@ public class ImageEditAdapter
 			{
 				layout.removeView(toRemove);
 
-				// TODO: add removed image to some queue or remove from queue
+				Pair remove = null;
+				for(Pair pair : newBitmaps)
+				{
+					if(pair.view == toRemove)
+					{
+						remove = pair;
+						break;
+					}
+				}
+				if(remove != null)
+				{
+					newBitmaps.remove(remove);
+				}
 
-				System.out.println("TODO: add removed image to some queue or remove from queue");
 				layout.invalidate();
 			}
 		});
+		newBitmaps.add(new Pair(bitmap, toRemove));
 		image.setImageBitmap(bitmap);
 
 		final Bitmap bitmapToShow = bitmap;
@@ -98,7 +127,51 @@ public class ImageEditAdapter
 
 	private void populateImage(String id)
 	{
+		final View imageLayout = LayoutInflater.from(activity).inflate(R.layout.image_edit_item, null);
+		ImageView image = (ImageView) imageLayout.findViewById(R.id.image);
+		Button removeButton = (Button) imageLayout.findViewById(R.id.remove_button);
 
+		final View toRemove = imageLayout;
+		final String idToRemove = id;
+
+		removeButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				layout.removeView(toRemove);
+
+				deletedIds.add(idToRemove);
+
+				layout.invalidate();
+			}
+		});
+		image.setImageResource(R.drawable.loading);
+
+		final ImageView imageToSet = image;
+		BitmapLoadedCallback onLoaded = new BitmapLoadedCallback()
+		{
+			@Override
+			public void onBitmap(Bitmap bitmap)
+			{
+				final Bitmap bitmapToShow = bitmap;
+				imageToSet.setOnClickListener(new View.OnClickListener()
+				{
+					@Override
+					public void onClick(View view)
+					{
+						new ImageZoomDialogFragment(bitmapToShow).show((FragmentActivity) activity);
+					}
+				});
+			}
+		};
+
+		LoadImageParam lip = new LoadImageParam(id, image, onLoaded);
+		LoadImageTask lit = new LoadImageTask(lip);
+		lit.execute();
+
+		layout.addView(imageLayout);
+		layout.invalidate();
 	}
 
 	public void onImageStream(InputStream is)
@@ -125,9 +198,27 @@ public class ImageEditAdapter
 		populateImage(resizedBitmap);
 	}
 
-	public void populate(ArrayList<String> image)
+	public void populate(ArrayList<String> images)
 	{
 		layout.removeAllViews();
 		populateAddNew();
+		for(String id : images)
+		{
+			populateImage(id);
+		}
+	}
+
+	public EditImagesParam makeEditParam()
+	{
+		ArrayList<String> deleteIds = new ArrayList<>();
+		deleteIds.addAll(deletedIds);
+
+		ArrayList<Bitmap> bitmaps = new ArrayList<>();
+		for(Pair pair : newBitmaps)
+		{
+			bitmaps.add(pair.bitmap);
+		}
+
+		return new EditImagesParam(deleteIds, bitmaps);
 	}
 }

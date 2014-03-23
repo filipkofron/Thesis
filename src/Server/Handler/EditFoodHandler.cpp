@@ -18,7 +18,7 @@ void EditFoodHandler::handle(Context &context)
 {
     if(!context.getLoggedIn())
     {
-        EditFoodResponse response(false);
+        EditFoodResponse response(false, 0);
         MessageSender::sendMessage(context, response);
     }
 
@@ -65,6 +65,6 @@ void EditFoodHandler::handle(Context &context)
 
     Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), msg, *editDao);
 
-    EditFoodResponse response(true);
+    EditFoodResponse response(true, food.getId());
     MessageSender::sendMessage(context, response);
 }

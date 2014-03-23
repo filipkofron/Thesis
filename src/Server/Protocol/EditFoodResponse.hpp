@@ -9,9 +9,10 @@ class EditFoodResponse : public Message
 {
 public:
     bool success;
+    int id;
 
     EditFoodResponse();
-    EditFoodResponse(const bool &success);
+    EditFoodResponse(const bool &success, const int &id);
     virtual ~EditFoodResponse();
     static std::string getStaticHeader();
     virtual std::string getHeader() override;

@@ -1,5 +1,7 @@
 package cz.kofron.foodinventory.client.network;
 
+import android.graphics.Bitmap;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,6 +12,10 @@ import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodHelper;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
+import cz.kofron.foodinventory.client.protocol.message.AddImageRequest;
+import cz.kofron.foodinventory.client.protocol.message.AddImageResponse;
+import cz.kofron.foodinventory.client.protocol.message.DeleteImageRequest;
+import cz.kofron.foodinventory.client.protocol.message.DeleteImageResponse;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.EditFoodRequest;
@@ -28,6 +34,8 @@ import cz.kofron.foodinventory.client.protocol.message.KeepAlive;
 import cz.kofron.foodinventory.client.protocol.message.LoginRequest;
 import cz.kofron.foodinventory.client.protocol.message.LoginResponse;
 import cz.kofron.foodinventory.client.protocol.message.Message;
+import cz.kofron.foodinventory.client.protocol.message.SetUserReviewRequest;
+import cz.kofron.foodinventory.client.protocol.message.SetUserReviewResponse;
 
 
 /**
@@ -136,7 +144,7 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
-	public boolean editFood(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice) throws IOException
+	public EditFoodResponse editFood(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice) throws IOException
 	{
 		synchronized (this)
 		{
@@ -144,7 +152,43 @@ public class Communicator implements ConnectionListener
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			EditFoodResponse efr = (EditFoodResponse) msg;
 			System.out.println("EditFoodResponse: " + efr);
-			return efr.isSuccess();
+			return efr;
+		}
+	}
+
+	public boolean addImage(Bitmap bitmap, int id) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new AddImageRequest(bitmap, id).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			AddImageResponse air = (AddImageResponse) msg;
+			System.out.println("AddImageResponse: " + air);
+			return air.isSuccess();
+		}
+	}
+
+	public boolean deleteImage(int id) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new DeleteImageRequest(id).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			DeleteImageResponse dir = (DeleteImageResponse) msg;
+			System.out.println("DeleteImageResponse: " + dir);
+			return dir.isSuccess();
+		}
+	}
+
+	public boolean setUserReview(float rating, String text) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new SetUserReviewRequest(rating, text).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			SetUserReviewResponse surr = (SetUserReviewResponse) msg;
+			System.out.println("SetUserReviewResponse: " + surr);
+			return surr.isSuccess();
 		}
 	}
 

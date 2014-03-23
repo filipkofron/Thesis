@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class Connector
 {
 	private final static int KEEP_ALIVE_PERIOD_MS = 20000;
+	public final static String SERVER_ADDR = "foodinventory.halt.cz";
 	private ConnectorThread connectorThread = new ConnectorThread();
 	private Connection connection;
 	private long lastKeepAlive = 0;
@@ -32,8 +33,7 @@ public class Connector
 	private Connection createConnection()
 	{
 		System.out.println("Connecting...");
-		Connection newConnection = new Connection("foodinventory.halt.cz", 4040);
-		//Connection newConnection = new Connection("192.168.1.6", 4040);
+		Connection newConnection = new Connection(SERVER_ADDR, 4040);
 		newConnection.addConnectionListener(NetworkInstance.communicator);
 		return newConnection;
 	}

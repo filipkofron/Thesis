@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client.task;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -9,7 +10,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.protocol.message.EditFoodResponse;
 import cz.kofron.foodinventory.client.task.param.EditFoodParam;
+import cz.kofron.foodinventory.client.task.param.EditImagesParam;
 
 /**
  * Created by kofee on 23.3.14.
@@ -20,11 +23,13 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 	private EditFoodParam param;
 	private Activity activity;
 	private boolean result = false;
+	private EditImagesParam imagesParam;
 
-	public EditFoodTask(EditFoodParam param, Activity activity)
+	public EditFoodTask(EditFoodParam param, EditImagesParam imagesParam, Activity activity)
 	{
 		this.param = param;
 		this.activity = activity;
+		this.imagesParam = imagesParam;
 	}
 
 	@Override
@@ -41,16 +46,62 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 		}
 		pd.setMessage("Please wait.");
 		pd.setCancelable(false);
-		pd.setIndeterminate(true);
+		pd.setIndeterminate(false);
 		pd.show();
 	}
 
 	@Override
 	protected Void doInBackground(Object... object)
 	{
+		final int step = 1 + 10000 / (1 + imagesParam.bitmapToUpload.size() + imagesParam.idsToRemove.size());
+		final ProgressDialog fpd = pd;
 		try
 		{
-			result = NetworkInstance.communicator.editFood(param.adding, param.id, param.name, param.vendor, param.categoryId, param.gtin, param.description, param.defaultUseBy, param.amountType, param.amount, param.usualPrice);
+			activity.runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					fpd.setProgress(0);
+				}
+			});
+			EditFoodResponse efr = NetworkInstance.communicator.editFood(param.adding, param.id, param.name, param.vendor, param.categoryId, param.gtin, param.description, param.defaultUseBy, param.amountType, param.amount, param.usualPrice);
+			int foodId = efr.getId();
+			result = efr.isSuccess();
+
+			activity.runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					fpd.setProgress(fpd.getProgress() + step);
+				}
+			});
+			for(String id : imagesParam.idsToRemove)
+			{
+				NetworkInstance.communicator.deleteImage(Integer.parseInt(id));
+				activity.runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						fpd.setProgress(fpd.getProgress() + step);
+					}
+				});
+			}
+
+			for(Bitmap bitmap : imagesParam.bitmapToUpload)
+			{
+				NetworkInstance.communicator.addImage(bitmap, foodId);
+				activity.runOnUiThread(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						fpd.setProgress(fpd.getProgress() + step);
+					}
+				});
+			}
 		}
 		catch (IOException e)
 		{

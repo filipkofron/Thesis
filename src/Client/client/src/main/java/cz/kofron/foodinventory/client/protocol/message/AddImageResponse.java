@@ -4,40 +4,37 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by kofee on 14.3.14.
+ * Created by kofee on 23.3.14.
  */
-public class EditFoodResponse extends Message
+public class AddImageResponse extends Message
 {
 	private boolean success;
-	private int id;
 
-	public EditFoodResponse()
+	public AddImageResponse()
 	{
 	}
 
-	public EditFoodResponse(boolean success, int id)
+	public AddImageResponse(boolean success)
 	{
 		this.success = success;
-		this.id = id;
 	}
 
 	@Override
 	public String getHeader()
 	{
-		return "EditFoodResponse";
+		return "AddImageResponse";
 	}
 
 	@Override
 	public Message newMessage()
 	{
-		return new EditFoodResponse();
+		return new AddImageResponse();
 	}
 
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
 		success = obj.getBoolean("success");
-		id = obj.getInt("id");
 	}
 
 	@Override
@@ -45,17 +42,11 @@ public class EditFoodResponse extends Message
 	{
 		JSONObject obj = new JSONObject();
 		obj.put("success", success);
-		obj.put("id", id);
 		return obj;
 	}
 
 	public boolean isSuccess()
 	{
 		return success;
-	}
-
-	public int getId()
-	{
-		return id;
 	}
 }
