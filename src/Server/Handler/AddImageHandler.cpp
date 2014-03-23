@@ -39,15 +39,22 @@ void AddImageHandler::handle(Context &context)
     std::string path = Configurator::getInstance()->getImageDir() + "/" + std::to_string(image.getId()) + ".jpg";
 
     std::cout << "Decoding: '" << request->image << "'" << std::endl;
-    std::vector<int8_t> bytes = Base64::decode(request->image);
+
+    const char *encoded = request->image.c_str();
+    int size = Base64decode_len(encoded) + 1;
+    char *decoded = (char *) calloc(size * sizeof(char), sizeof(char));
+
+    Base64decode(decoded, encoded);
     FILE *file = fopen(path.c_str(), "wb+");
 
     bool res = file != NULL;
 
-    for(int8_t &byte : bytes)
+    if(file)
     {
-        fputc(byte, file);
+        fwrite(decoded, sizeof(char), size, file);
     }
+
+    free(decoded);
 
     fclose(file);
 
