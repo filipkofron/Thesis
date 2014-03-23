@@ -80,7 +80,7 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void>
 		}
 		else
 		{
-			new AddNewFoodDialogFragment(onDone).show((FragmentActivity) context);
+			new AddNewFoodDialogFragment(onDone, gtin).show((FragmentActivity) context);
 		}
 	}
 }

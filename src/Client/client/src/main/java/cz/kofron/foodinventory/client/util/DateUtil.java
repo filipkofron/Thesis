@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by kofee on 17.3.14.
  */
-public class PickerDate
+public class DateUtil
 {
 	public static Date getDateFromDatePicket(DatePicker datePicker){
 		int day = datePicker.getDayOfMonth();
@@ -19,5 +19,17 @@ public class PickerDate
 		calendar.set(year, month, day);
 
 		return calendar.getTime();
+	}
+
+	public static long getTimeFromValues(int years, int months, int days)
+	{
+		int day = days + 1;
+		int month = months;
+		int year = days + 1970;
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month, day);
+
+		return calendar.getTime().getTime();
 	}
 }

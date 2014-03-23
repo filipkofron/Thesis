@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodReview;
 import cz.kofron.foodinventory.client.task.LoadFoodDetailTask;
@@ -26,7 +27,7 @@ import cz.kofron.foodinventory.client.util.GtinUtil;
 /**
  * Created by kofee on 3/3/14.
  */
-public class FoodDetailActivity extends ActionBarActivity
+public class FoodDetailActivity extends ActionBarActivity implements ReloadCallback
 {
 	private int foodId;
 	private FoodDetail food;
@@ -58,6 +59,17 @@ public class FoodDetailActivity extends ActionBarActivity
 		{
 			foodId = extras.getInt("FOOD_ID");
 		}
+
+		loadContent();
+
+		setTitle(R.string.food_detail_title);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		TextView tv = (TextView) view.findViewById(R.id.description_text);
+		tv.setMovementMethod(new ScrollingMovementMethod());
+	}
+
+	public void loadContent()
+	{
 		LoadFoodDetailTask lfdt = new LoadFoodDetailTask();
 
 		Runnable success = new Runnable()
@@ -81,11 +93,6 @@ public class FoodDetailActivity extends ActionBarActivity
 		};
 
 		lfdt.execute(new LoadFoodDetailParam(foodId, this, success, fail));
-
-		setTitle(R.string.food_detail_title);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		TextView tv = (TextView) view.findViewById(R.id.description_text);
-		tv.setMovementMethod(new ScrollingMovementMethod());
 	}
 
 	public void toggleProgressBar(boolean on)
@@ -135,6 +142,7 @@ public class FoodDetailActivity extends ActionBarActivity
 				return true;
 			case R.id.action_edit:
 				FoodEditActivity.initialFoodDetail = food;
+				FoodEditActivity.initialReloadCallback = this;
 				Intent foodEditIntent = new Intent(this, FoodEditActivity.class);
 				startActivity(foodEditIntent);
 				return true;
@@ -212,5 +220,11 @@ public class FoodDetailActivity extends ActionBarActivity
 		editedBy.setText(foodDetail.getLastEditedBy());
 
 		view.invalidate();
+	}
+
+	@Override
+	public void update()
+	{
+		loadContent();
 	}
 }

@@ -37,6 +37,8 @@ void VendorDAOMySQL::addVendor(Vendor &vendor, int &newId)
     ps->setString(1, vendor.getName());
 
     ps->execute();
+
+    newId = MySQLManager::lastGeneratedId(ch.conn);
 }
 
 void VendorDAOMySQL::deleteVendor(Vendor &vendor)

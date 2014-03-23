@@ -47,19 +47,19 @@ void EditFoodHandler::handle(Context &context)
     else
     {
         food = foodDao->getFoodById(request->id);
+        food.setCategoryId(category.getId());
+        food.setName(request->name);
+        food.setVendorId(vendor.getId());
+        food.setGtin(request->gtin);
+        food.setDescription(request->description);
+        food.setDefaultUseBy(request->defaultUseBy);
+        food.setAmountMeasure(request->amountType);
+        food.setAmount(request->amount);
+        food.setPrice(request->usualPrice);
+
+        foodDao->updateFood(food);
+
     }
-
-    food.setCategoryId(category.getId());
-    food.setName(request->name);
-    food.setVendorId(vendor.getId());
-    food.setGtin(request->gtin);
-    food.setDescription(request->description);
-    food.setDefaultUseBy(request->defaultUseBy);
-    food.setAmountMeasure(request->amountType);
-    food.setAmount(request->amount);
-    food.setPrice(request->usualPrice);
-
-    foodDao->updateFood(food);
 
     const char *msg = request->adding ? "User added food." : "User edited food.";
 

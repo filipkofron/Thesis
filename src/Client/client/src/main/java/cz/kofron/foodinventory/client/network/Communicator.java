@@ -12,6 +12,8 @@ import cz.kofron.foodinventory.client.protocol.JSONReceiver;
 import cz.kofron.foodinventory.client.protocol.JSONSender;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.DeleteInventoryResponse;
+import cz.kofron.foodinventory.client.protocol.message.EditFoodRequest;
+import cz.kofron.foodinventory.client.protocol.message.EditFoodResponse;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryRequest;
 import cz.kofron.foodinventory.client.protocol.message.EditInventoryResponse;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodBaseRequest;
@@ -131,6 +133,18 @@ public class Communicator implements ConnectionListener
 			GetFoodBaseResponse gfbs = (GetFoodBaseResponse) msg;
 			System.out.println("GetFoodBaseResponse: " + gfbs);
 			return gfbs;
+		}
+	}
+
+	public boolean editFood(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice) throws IOException
+	{
+		synchronized (this)
+		{
+			JSONSender.send(os, new EditFoodRequest(adding, id, name, vendor, categoryId, gtin, description, defaultUseBy, amountType, amount, usualPrice).jsonize());
+			Message msg = Message.dejsonize(JSONReceiver.receive(is));
+			EditFoodResponse efr = (EditFoodResponse) msg;
+			System.out.println("EditFoodResponse: " + efr);
+			return efr.isSuccess();
 		}
 	}
 

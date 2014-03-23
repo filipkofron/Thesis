@@ -247,7 +247,7 @@
                     android:text="Years"/>
 
                 <EditText
-                    android:id="@+id/years"
+                    android:id="@+id/use_years"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -263,16 +263,16 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/years"
+                    android:layout_below="@+id/use_years"
                     android:layout_margin="3dp"
                     android:text="Months"/>
 
                 <EditText
-                    android:id="@+id/months"
+                    android:id="@+id/use_months"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/years"
-                    android:layout_alignRight="@+id/years"
+                    android:layout_alignEnd="@+id/use_years"
+                    android:layout_alignRight="@+id/use_years"
                     android:layout_below="@+id/textView11"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="3dp"
@@ -285,18 +285,18 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/months"
+                    android:layout_below="@+id/use_months"
                     android:layout_margin="3dp"
                     android:text="Days"/>
 
                 <EditText
-                    android:id="@+id/days"
+                    android:id="@+id/use_days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/months"
+                    android:layout_alignEnd="@+id/use_months"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_alignRight="@+id/months"
+                    android:layout_alignRight="@+id/use_months"
                     android:layout_below="@+id/textView12"
                     android:layout_margin="3dp"
                     android:inputType="number"

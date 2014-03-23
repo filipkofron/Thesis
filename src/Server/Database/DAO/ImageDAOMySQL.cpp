@@ -23,6 +23,8 @@ void ImageDAOMySQL::addImage(Image &image, int &newId)
     ps->setInt(3, image.getUserId());
 
     ps->execute();
+
+    newId = MySQLManager::lastGeneratedId(ch.conn);
 }
 
 void ImageDAOMySQL::deleteImage(Image &image)

@@ -1,6 +1,5 @@
 package cz.kofron.foodinventory.client.activity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,12 +20,16 @@ import java.util.Date;
 import java.util.List;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.fragment.VendorDialogFragment;
 import cz.kofron.foodinventory.client.model.AmountType;
 import cz.kofron.foodinventory.client.model.Category;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodHelper;
 import cz.kofron.foodinventory.client.model.Vendor;
+import cz.kofron.foodinventory.client.task.EditFoodTask;
+import cz.kofron.foodinventory.client.task.param.EditFoodParam;
+import cz.kofron.foodinventory.client.util.DateUtil;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 
 /**
@@ -38,10 +40,15 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	private View view;
 
 	public static FoodDetail initialFoodDetail;
+	public static String initialGtin;
+	public static ReloadCallback initialReloadCallback;
 
 	private FoodDetail foodDetail;
 	private ArrayList<Category> categories = FoodHelper.categories;
 	private ArrayList<Vendor> vendors = FoodHelper.vendors;
+	private String givenGtin;
+	private ReloadCallback reloadCallback;
+	private int selectedCategory;
 
 	public void showSelectVendorDialog()
 	{
@@ -68,9 +75,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		Spinner category = (Spinner) view.findViewById(R.id.category_spinner);
 		EditText gtin = (EditText) view.findViewById(R.id.gtin);
 		EditText description = (EditText) view.findViewById(R.id.description);
-		EditText years = (EditText) view.findViewById(R.id.years);
-		EditText months = (EditText) view.findViewById(R.id.months);
-		EditText days = (EditText) view.findViewById(R.id.days);
+		EditText years = (EditText) view.findViewById(R.id.use_years);
+		EditText months = (EditText) view.findViewById(R.id.use_months);
+		EditText days = (EditText) view.findViewById(R.id.use_days);
 		RadioGroup rg = (RadioGroup) view.findViewById(R.id.amount_type);
 		EditText amount = (EditText) view.findViewById(R.id.amount);
 		EditText price = (EditText) view.findViewById(R.id.price);
@@ -87,6 +94,7 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		{
 			if(cat.getName().equals(foodDetail.getCategory()))
 			{
+				selectedCategory = cat.getId();
 				break;
 			}
 			selection++;
@@ -109,11 +117,12 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	{
 		super.onCreate(savedInstanceState);
 
-		if(initialFoodDetail != null)
-		{
-			foodDetail = initialFoodDetail;
-			initialFoodDetail = null;
-		}
+		foodDetail = initialFoodDetail;
+		initialFoodDetail = null;
+		givenGtin = initialGtin;
+		initialGtin = null;
+		reloadCallback = initialReloadCallback;
+		initialReloadCallback = null;
 
 		view = LayoutInflater.from(this).inflate(R.layout.food_edit, null);
 		((Button) view.findViewById(R.id.vendor_button)).setOnClickListener(new View.OnClickListener()
@@ -152,6 +161,14 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		{
 			populateEdit();
 		}
+		else
+		{
+			if(givenGtin != null)
+			{
+				EditText gtin = (EditText) view.findViewById(R.id.gtin);
+				gtin.setText(givenGtin);
+			}
+		}
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(view);
@@ -165,6 +182,118 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	private int getSelectedCategoryId()
+	{
+		Spinner category = (Spinner) view.findViewById(R.id.category_spinner);
+
+		return categories.get(category.getSelectedItemPosition()).getId();
+	}
+
+	private long getDefaultUseByTime()
+	{
+		EditText years = (EditText) view.findViewById(R.id.use_years);
+		EditText months = (EditText) view.findViewById(R.id.use_months);
+		EditText days = (EditText) view.findViewById(R.id.use_days);
+
+		int year;
+		int month;
+		int day;
+
+		if(years.getText() != null)
+		{
+			year = Integer.parseInt(years.getText().toString());
+		}
+		else
+		{
+			year = 0;
+		}
+
+		if(months.getText() != null)
+		{
+			month = Integer.parseInt(months.getText().toString());
+		}
+		else
+		{
+			month = 0;
+		}
+
+		if(days.getText() != null)
+		{
+			day = Integer.parseInt(days.getText().toString());
+		}
+		else
+		{
+			day = 0;
+		}
+
+		return DateUtil.getTimeFromValues(year, month, day);
+	}
+
+	private int getSelectedAmountType()
+	{
+		RadioGroup rg = (RadioGroup) view.findViewById(R.id.amount_type);
+
+		RadioButton [] buttons = new RadioButton[3];
+		buttons[AmountType.GRAMS] = (RadioButton) view.findViewById(R.id.grams);
+		buttons[AmountType.LITERS] = (RadioButton) view.findViewById(R.id.liters);
+		buttons[AmountType.PIECES] = (RadioButton) view.findViewById(R.id.pieces);
+
+		int selected = 0;
+
+		for(int i = 0; i < 3; i++)
+		{
+			if(rg.getCheckedRadioButtonId() == buttons[i].getId())
+			{
+				selected = i;
+			}
+		}
+
+		return selected;
+	}
+
+	private EditFoodParam makeParam()
+	{
+		Runnable success = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if(reloadCallback != null)
+				{
+					reloadCallback.update();
+				}
+			}
+		};
+		Runnable fail = new Runnable()
+		{
+			@Override
+			public void run()
+			{
+			}
+		};
+
+		EditText name = (EditText) view.findViewById(R.id.name);
+		EditText vendor = (EditText) view.findViewById(R.id.vendor);
+		EditText gtin = (EditText) view.findViewById(R.id.gtin);
+		EditText description = (EditText) view.findViewById(R.id.description);
+
+		EditText amount = (EditText) view.findViewById(R.id.amount);
+		EditText price = (EditText) view.findViewById(R.id.price);
+
+		boolean addingP = foodDetail == null;
+		int idP = addingP ? 0 : foodDetail.getId();
+		String nameP = name.getText().toString();
+		String vendorP = vendor.getText().toString();
+		int categoryIdP = getSelectedCategoryId();
+		String gtinP = gtin.getText().toString();
+		String descriptionP = description.getText().toString();
+		long defaultUseByP = getDefaultUseByTime();
+		int amountTypeP = getSelectedAmountType();
+		float amountP = Float.parseFloat(amount.getText().toString());
+		float usualPriceP = Float.parseFloat(price.getText().toString());
+
+		return new EditFoodParam(addingP, idP, nameP, vendorP, categoryIdP, gtinP, descriptionP, defaultUseByP, amountTypeP, amountP, usualPriceP, success, fail);
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -175,30 +304,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 				this.finish();
 				return true;
 			case R.id.action_save:
-				Toast.makeText(this, "Saving", 1000).show();
-				AsyncTask at = new AsyncTask<Object, Object, Object>()
-				{
-					@Override
-					protected Object doInBackground(Object... objects)
-					{
-						try
-						{
-							Thread.sleep(1500);
-						}
-						catch (InterruptedException e)
-						{
-						}
-						return null;
-					}
 
-					@Override
-					protected void onPostExecute(Object o)
-					{
-						Toast.makeText(FoodEditActivity.this, "Saved", 1000).show();
-						FoodEditActivity.this.finish();
-					}
-				};
-				at.execute();
+				EditFoodTask eft = new EditFoodTask(makeParam(), this);
+				eft.execute();
 				return true;
 		}
 

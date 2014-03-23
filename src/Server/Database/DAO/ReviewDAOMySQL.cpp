@@ -25,6 +25,8 @@ void ReviewDAOMySQL::addReview(Review &review, int &newId)
     ps->setDouble(5, review.getRating());
 
     ps->execute();
+
+    newId = MySQLManager::lastGeneratedId(ch.conn);
 }
 
 void ReviewDAOMySQL::deleteReview(Review &review)
