@@ -25,7 +25,7 @@ public class DateUtil
 	{
 		int day = days + 1;
 		int month = months;
-		int year = days + 1970;
+		int year = years + 1970;
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, month, day);

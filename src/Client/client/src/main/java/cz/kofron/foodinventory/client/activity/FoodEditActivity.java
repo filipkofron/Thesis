@@ -1,5 +1,7 @@
 package cz.kofron.foodinventory.client.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -9,17 +11,22 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ImageEditAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.fragment.VendorDialogFragment;
 import cz.kofron.foodinventory.client.model.AmountType;
@@ -49,6 +56,7 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	private String givenGtin;
 	private ReloadCallback reloadCallback;
 	private int selectedCategory;
+	private ImageEditAdapter imageEditAdapter;
 
 	public void showSelectVendorDialog()
 	{
@@ -99,6 +107,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			}
 			selection++;
 		}
+
+		imageEditAdapter.populate(foodDetail.getImageIds());
+
 		category.setSelection(selection);
 		gtin.setText(GtinUtil.getReadableGtin(foodDetail.getGtin()));
 		description.setText(foodDetail.getDescription());
@@ -157,6 +168,8 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			}
 		});
 
+		imageEditAdapter = new ImageEditAdapter((LinearLayout) view.findViewById(R.id.image_list), this);
+
 		if(foodDetail != null)
 		{
 			populateEdit();
@@ -168,6 +181,8 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 				EditText gtin = (EditText) view.findViewById(R.id.gtin);
 				gtin.setText(givenGtin);
 			}
+			imageEditAdapter.populate(new ArrayList<String>());
+			view.invalidate();
 		}
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -311,5 +326,28 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		}
 
 		return false;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if(requestCode == ImageEditAdapter.REQUEST_CODE && resultCode == Activity.RESULT_OK)
+		{
+			try
+			{
+				InputStream stream = getContentResolver().openInputStream(data.getData());
+				imageEditAdapter.onImageStream(stream);
+				stream.close();
+			}
+			catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }
