@@ -7,8 +7,8 @@
 
 namespace Base64
 {
-    std::string encode(const unsigned char *buf, unsigned int bufLen);
-    std::vector<uint8_t> decode(std::string const& encoded_string);
+    std::string encode(const int8_t *buf, unsigned int bufLen);
+    std::vector<int8_t> decode(std::string const& encoded_string);
 }
 
 #endif

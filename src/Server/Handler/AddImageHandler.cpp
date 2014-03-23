@@ -36,16 +36,15 @@ void AddImageHandler::handle(Context &context)
     Image image = Image::makeImage("", food.getId(), context.getUserId(), *imageDao);
     Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), "User added image.", *editDao);
 
-
     std::string path = Configurator::getInstance()->getImageDir() + "/" + std::to_string(image.getId()) + ".jpg";
 
     std::cout << "Decoding: '" << request->image << "'" << std::endl;
-    std::vector<uint8_t> bytes = Base64::decode(request->image);
+    std::vector<int8_t> bytes = Base64::decode(request->image);
     FILE *file = fopen(path.c_str(), "wb+");
 
     bool res = file != NULL;
 
-    for(uint8_t &byte : bytes)
+    for(int8_t &byte : bytes)
     {
         fputc(byte, file);
     }
