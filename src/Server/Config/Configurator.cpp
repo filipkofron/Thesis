@@ -67,3 +67,8 @@ int Configurator::getNetworkServerMaxClients()
 {
     return root["network"]["server"]["max_clients"].asInt();
 }
+
+std::string Configurator::getImageDir()
+{
+    return "/var/www/img/";
+}

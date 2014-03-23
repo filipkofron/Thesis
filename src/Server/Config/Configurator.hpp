@@ -19,6 +19,7 @@ public:
     std::string getMySQLServerUsername();
     std::string getMySQLServerPassword();
     std::string getMySQLServerDatabase();
+    std::string getImageDir();
     int getNetworkClientMaxBuffer();
     int getNetworkServerListenPort();
     int getNetworkServerBackLog();

@@ -29,6 +29,12 @@ set(handler_source_files
   NullHandler.hpp
   NullHandler.cpp
 
+  AddImageHandler.hpp
+  AddImageHandler.cpp
+
+  DeleteImageHandler.hpp
+  DeleteImageHandler.cpp
+
   HandlerException.hpp
   HandlerException.cpp
 )

@@ -17,7 +17,6 @@ import java.util.TreeSet;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.ImageZoomDialogFragment;
-import cz.kofron.foodinventory.client.protocol.message.EditFoodResponse;
 import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.EditImagesParam;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;

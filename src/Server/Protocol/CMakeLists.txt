@@ -42,6 +42,16 @@ set(protocol_source_files
   GetFoodBaseResponse.hpp
   GetFoodBaseResponse.cpp
 
+  AddImageRequest.hpp
+  AddImageRequest.cpp
+  AddImageResponse.hpp
+  AddImageResponse.cpp
+
+  DeleteImageRequest.hpp
+  DeleteImageRequest.cpp
+  DeleteImageResponse.hpp
+  DeleteImageResponse.cpp
+
   KeepAlive.hpp
   KeepAlive.cpp
 )

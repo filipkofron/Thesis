@@ -47,13 +47,16 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 		pd.setMessage("Please wait.");
 		pd.setCancelable(false);
 		pd.setIndeterminate(false);
+		pd.setMax(1 + imagesParam.bitmapToUpload.size() + imagesParam.idsToRemove.size());
+		pd.setProgress(0);
+		pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		pd.show();
 	}
 
 	@Override
 	protected Void doInBackground(Object... object)
 	{
-		final int step = 1 + 10000 / (1 + imagesParam.bitmapToUpload.size() + imagesParam.idsToRemove.size());
+		final int step = 1;
 		final ProgressDialog fpd = pd;
 		try
 		{
