@@ -6,6 +6,7 @@
 #include "../Util/Date.hpp"
 #include "../Util/Base64.hpp"
 #include <stdio.h>
+#include <iostream>
 
 AddImageHandler::AddImageHandler(AddImageRequest *request)
     : request(request)
@@ -38,6 +39,7 @@ void AddImageHandler::handle(Context &context)
 
     std::string path = Configurator::getInstance()->getImageDir() + "/" + std::to_string(image.getId()) + ".jpg";
 
+    std::cout << "Decoding: '" << request->image << "'" << std::endl;
     std::vector<uint8_t> bytes = Base64::decode(request->image);
     FILE *file = fopen(path.c_str(), "wb+");
 

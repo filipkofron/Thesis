@@ -38,5 +38,11 @@ public class MessageInitializer
 
 		Message.registerMessageChild(new GetFoodBaseRequest());
 		Message.registerMessageChild(new GetFoodBaseResponse());
+
+		Message.registerMessageChild(new AddImageRequest());
+		Message.registerMessageChild(new AddImageResponse());
+
+		Message.registerMessageChild(new DeleteImageRequest());
+		Message.registerMessageChild(new DeleteImageResponse());
 	}
 }
