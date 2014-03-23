@@ -5,8 +5,8 @@ EditFoodResponse::EditFoodResponse()
 {
 }
 
-EditFoodResponse::EditFoodResponse(const bool &success)
-    : success (success)
+EditFoodResponse::EditFoodResponse(const bool &success, const int &id)
+    : success (success), id(id)
 {
 }
 
