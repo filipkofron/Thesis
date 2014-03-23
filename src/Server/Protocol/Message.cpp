@@ -16,6 +16,11 @@
 #include "EditFoodResponse.hpp"
 #include "GetFoodBaseRequest.hpp"
 #include "GetFoodBaseResponse.hpp"
+#include "AddImageRequest.hpp"
+#include "AddImageResponse.hpp"
+#include "DeleteImageRequest.hpp"
+#include "DeleteImageResponse.hpp"
+
 
 Message::Message()
 {
@@ -133,6 +138,32 @@ Message *Message::dejsonize(Json::Value &root)
         if(header.compare(GetFoodBaseResponse::getStaticHeader()) == 0)
         {
             msg = new GetFoodBaseResponse();
+            break;
+        }
+
+
+        if(header.compare(AddImageRequest::getStaticHeader()) == 0)
+        {
+            msg = new AddImageRequest();
+            break;
+        }
+
+        if(header.compare(AddImageResponse::getStaticHeader()) == 0)
+        {
+            msg = new AddImageResponse();
+            break;
+        }
+
+
+        if(header.compare(DeleteImageRequest::getStaticHeader()) == 0)
+        {
+            msg = new DeleteImageRequest();
+            break;
+        }
+
+        if(header.compare(DeleteImageResponse::getStaticHeader()) == 0)
+        {
+            msg = new DeleteImageResponse();
             break;
         }
 
