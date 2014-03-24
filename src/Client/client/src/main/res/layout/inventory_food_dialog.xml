@@ -35,7 +35,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="83dp"
                 android:layout_marginRight="8dp"
-                android:maxWidth="80dp"
+                android:maxWidth="150dp"
                 android:text="Some food name"
                 android:textAppearance="?android:attr/textAppearanceMedium"/>
 

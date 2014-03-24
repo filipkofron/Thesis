@@ -29,6 +29,7 @@ public class FoodListActivity extends ListActionBarActivity
 	{
 		super.onCreate(savedInstanceState);
 
+		getSupportActionBar().setTitle(R.string.title_search_results);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		View view = getLayoutInflater().inflate(R.layout.food_list, null);

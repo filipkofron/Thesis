@@ -186,6 +186,7 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			view.invalidate();
 		}
 
+		getSupportActionBar().setTitle(R.string.title_food_edit);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(view);
 	}

@@ -63,7 +63,7 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 
 		loadContent();
 
-		setTitle(R.string.food_detail_title);
+		getSupportActionBar().setTitle(R.string.title_food_detail);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		TextView tv = (TextView) view.findViewById(R.id.description_text);
 		tv.setMovementMethod(new ScrollingMovementMethod());

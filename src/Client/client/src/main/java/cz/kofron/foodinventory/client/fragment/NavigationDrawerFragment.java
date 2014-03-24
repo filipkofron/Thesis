@@ -214,6 +214,7 @@ public class NavigationDrawerFragment extends Fragment
 	private void selectItem(int position)
 	{
 		mCurrentSelectedPosition = position;
+		mCallbacks.onSectionAttached(position);
 		if (mDrawerListView != null)
 		{
 			mDrawerListView.setItemChecked(position, true);
@@ -314,5 +315,7 @@ public class NavigationDrawerFragment extends Fragment
 		 * Called when an item in the navigation drawer is selected.
 		 */
 		void onNavigationDrawerItemSelected(int position);
+
+		public void onSectionAttached(int number);
 	}
 }

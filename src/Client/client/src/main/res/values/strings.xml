@@ -17,7 +17,6 @@
     <string name="action_edit">Edit</string>
     <string name="action_save">Save</string>
     <string name="pick_vendor">Pick a vendor</string>
-    <string name="food_detail_title">Food detail</string>
     <string name="title_inventory_add_food">Add food to inventory</string>
     <string name="title_inventory_food">Food in inventory</string>
     <string name="cancel">Cancel</string>
@@ -32,5 +31,9 @@
     <string name="title_remove_food">Remove food from inventory</string>
     <string name="title_select_account">Select an account</string>
     <string name="title_select_image">Select an image source</string>
+
+    <string name="title_food_detail">Food detail</string>
+    <string name="title_food_edit">Food edit</string>
+    <string name="title_search_results">Search results</string>
 
 </resources>
