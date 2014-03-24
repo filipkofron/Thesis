@@ -5,6 +5,7 @@
 #include "../Entity/DAO/DAOFactory.hpp"
 #include "../Entity/DAO/InventoryDAO.hpp"
 #include "../Entity/DAO/FoodDAO.hpp"
+#include "../Entity/DAO/ImageDAO.hpp"
 #include "../Network/MessageSender.hpp"
 
 GetInventoryHandler::GetInventoryHandler(GetInventoryRequest *request)
@@ -27,6 +28,7 @@ void GetInventoryHandler::handle(Context &context)
 
     std::shared_ptr<InventoryDAO> inventoryDao = DAOFactory::getInventoryDAO();
     std::shared_ptr<FoodDAO> foodDao = DAOFactory::getFoodDAO();
+    std::shared_ptr<ImageDAO> imageDao = DAOFactory::getImageDAO();
     std::vector<Inventory> inventories;
 
     bool tried = false;
@@ -76,6 +78,19 @@ void GetInventoryHandler::handle(Context &context)
         Json::Value val;
         val["id"] = id;
         val["foodId"] = foodId;
+
+
+        std::vector<Image> images = imageDao->getImageByFoodId(food.getId());
+
+        if(images.size() > 0)
+        {
+            val["imageId"] = images.at(0).getId();
+        }
+        else
+        {
+            val["imageId"] = 0;
+        }
+
         val["foodName"] = foodName;
         val["foodGtin"] = foodGtin;
         val["useBy"] = useBy;

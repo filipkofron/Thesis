@@ -27,7 +27,7 @@
                         android:focusable="false">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
@@ -67,7 +67,7 @@
                 android:layout_alignTop="@+id/imageButton"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="2dp"
-                android:layout_toRightOf="@+id/imageView"
+                android:layout_toRightOf="@+id/image"
                 android:clickable="false"
                 android:focusable="false"
                 android:text="Potravina"
@@ -94,7 +94,7 @@
                 android:id="@+id/food_list_item_food_gtin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView"
+                android:layout_alignBottom="@+id/image"
                 android:layout_alignLeft="@+id/food_list_item_food_name"
                 android:layout_alignStart="@+id/food_list_item_food_name"
                 android:layout_marginBottom="2dp"

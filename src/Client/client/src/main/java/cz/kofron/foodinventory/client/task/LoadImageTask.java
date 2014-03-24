@@ -44,7 +44,10 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		if(bitmap != null)
 		{
 			iv.setImageBitmap(bitmap);
-			param.callback.onBitmap(bitmap);
+			if(param.callback != null)
+			{
+				param.callback.onBitmap(bitmap);
+			}
 			iv.invalidate();
 		}
 	}

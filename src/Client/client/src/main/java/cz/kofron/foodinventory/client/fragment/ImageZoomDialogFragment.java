@@ -35,7 +35,7 @@ public class ImageZoomDialogFragment extends DialogFragment
 		ImageView image = (ImageView) view.findViewById(R.id.image);
 		image.setImageBitmap(bitmap);
 
-		Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Translucent_NoTitleBar);
+		Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_NoTitleBar);
 
 		final Dialog dialogToDismiss = dialog;
 		view.setOnClickListener(new View.OnClickListener()

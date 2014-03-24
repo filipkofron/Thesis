@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,7 +21,9 @@ import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
 import cz.kofron.foodinventory.client.task.DeleteInventoryTask;
+import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.DeleteInventoryParam;
+import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
 /**
@@ -50,6 +53,13 @@ public class InventoryListAdapter extends ArrayAdapter
 		TextView date = (TextView) view.findViewById(R.id.date_view);
 		ImageButton deleteButton = (ImageButton) view.findViewById(R.id.delete_button);
 		View card = view.findViewById(R.id.inventory_list_item_card);
+
+		ImageView image = (ImageView) card.findViewById(R.id.image);
+		image.setImageResource(R.drawable.loading);
+
+		LoadImageParam lip = new LoadImageParam(String.valueOf(item.getImageId()), image, null);
+		LoadImageTask lit = new LoadImageTask(lip);
+		lit.execute();
 
 		int d = 255;
 		if ((position & 1) == 1)

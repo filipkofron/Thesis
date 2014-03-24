@@ -15,7 +15,7 @@
                     android:clickable="false">
 
         <ImageView
-            android:id="@+id/inventory_imageView"
+            android:id="@+id/image"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
@@ -36,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="left|center_vertical"
             android:layout_margin="8dp"
-            android:layout_toRightOf="@+id/inventory_imageView"
+            android:layout_toRightOf="@+id/image"
             android:text="name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/item_title"

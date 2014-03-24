@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
+import cz.kofron.foodinventory.client.task.LoadImageTask;
+import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 
 /**
@@ -46,6 +49,13 @@ public class FoodListAdapter extends ArrayAdapter
 		TextView foodDesc = (TextView) view.findViewById(R.id.food_description);
 
 		View card = view.findViewById(R.id.food_list_item_card);
+
+		ImageView image = (ImageView) card.findViewById(R.id.image);
+		image.setImageResource(R.drawable.loading);
+
+		LoadImageParam lip = new LoadImageParam(foodItem.getImageId(), image, null);
+		LoadImageTask lit = new LoadImageTask(lip);
+		lit.execute();
 
 		ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
 		final int positionNow = position;

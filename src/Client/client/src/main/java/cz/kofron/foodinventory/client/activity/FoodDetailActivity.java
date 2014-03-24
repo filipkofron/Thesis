@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ImageViewAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodReview;
@@ -34,6 +35,7 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 	private ProgressBar progressBar;
 	private View view;
 	private ScrollView scrollView;
+	private ImageViewAdapter imageViewAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -45,12 +47,7 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
 		LinearLayout imageList = (LinearLayout) view.findViewById(R.id.imageList);
 
-		for (int i = 0; i < 10; i++)
-		{
-			View imageLayout = LayoutInflater.from(this).inflate(R.layout.food_detail_image, null);
-
-			imageList.addView(imageLayout);
-		}
+		imageViewAdapter = new ImageViewAdapter(imageList, this);
 
 		setContentView(view);
 
@@ -218,6 +215,8 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		usualPrice.setText("$" + foodDetail.getUsualPrice());
 		addedBy.setText(foodDetail.getAddedBy());
 		editedBy.setText(foodDetail.getLastEditedBy());
+
+		imageViewAdapter.populate(foodDetail.getImageIds());
 
 		view.invalidate();
 	}
