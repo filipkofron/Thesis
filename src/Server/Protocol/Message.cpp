@@ -20,6 +20,8 @@
 #include "AddImageResponse.hpp"
 #include "DeleteImageRequest.hpp"
 #include "DeleteImageResponse.hpp"
+#include "SetUserReviewRequest.hpp"
+#include "SetUserReviewResponse.hpp"
 
 
 Message::Message()
@@ -164,6 +166,18 @@ Message *Message::dejsonize(Json::Value &root)
         if(header.compare(DeleteImageResponse::getStaticHeader()) == 0)
         {
             msg = new DeleteImageResponse();
+            break;
+        }
+
+        if(header.compare(SetUserReviewRequest::getStaticHeader()) == 0)
+        {
+            msg = new SetUserReviewRequest();
+            break;
+        }
+
+        if(header.compare(SetUserReviewResponse::getStaticHeader()) == 0)
+        {
+            msg = new SetUserReviewResponse();
             break;
         }
 

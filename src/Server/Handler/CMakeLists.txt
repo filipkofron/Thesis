@@ -35,6 +35,9 @@ set(handler_source_files
   DeleteImageHandler.hpp
   DeleteImageHandler.cpp
 
+  SetUserRatingHandler.hpp
+  SetUserRatingHandler.cpp
+
   HandlerException.hpp
   HandlerException.cpp
 )

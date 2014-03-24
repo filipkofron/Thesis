@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -19,8 +20,10 @@ import java.util.Date;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.ImageViewAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
+import cz.kofron.foodinventory.client.fragment.ReviewDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodReview;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.LoadFoodDetailTask;
 import cz.kofron.foodinventory.client.task.param.LoadFoodDetailParam;
 import cz.kofron.foodinventory.client.util.GtinUtil;
@@ -36,6 +39,7 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 	private View view;
 	private ScrollView scrollView;
 	private ImageViewAdapter imageViewAdapter;
+	private FoodReview currentFoodReview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -186,6 +190,39 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		}
 	}
 
+	private void populateRatingBar(final FoodDetail foodDetail)
+	{
+		currentFoodReview = null;
+		for(FoodReview review : foodDetail.getReviews())
+		{
+			if(review.equals(NetworkInstance.communicator.getUsername()))
+			{
+				currentFoodReview = review;
+				break;
+			}
+		}
+
+		RatingBar ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
+
+		if(currentFoodReview != null)
+		{
+			ratingBar.setRating(currentFoodReview.getRating());
+		}
+
+		ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+		{
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
+			{
+				if(fromUser)
+				{
+					new ReviewDialogFragment(foodDetail, FoodDetailActivity.this, ratingBar.getRating(), currentFoodReview).show(FoodDetailActivity.this);
+				}
+			}
+		});
+
+	}
+
 	private void setFoodDetailSync(FoodDetail foodDetail)
 	{
 		TextView name = (TextView) findViewById(R.id.name);
@@ -198,6 +235,7 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		TextView addedBy = (TextView) findViewById(R.id.added_by);
 		TextView editedBy = (TextView) findViewById(R.id.edited_by);
 
+		populateRatingBar(foodDetail);
 		populateReviews(foodDetail);
 
 		name.setText(foodDetail.getName());

@@ -52,6 +52,11 @@ set(protocol_source_files
   DeleteImageResponse.hpp
   DeleteImageResponse.cpp
 
+  SetUserReviewRequest.hpp
+  SetUserReviewRequest.cpp
+  SetUserReviewResponse.hpp
+  SetUserReviewResponse.cpp
+
   KeepAlive.hpp
   KeepAlive.cpp
 )

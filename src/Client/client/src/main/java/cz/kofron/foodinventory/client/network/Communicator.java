@@ -180,11 +180,11 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
-	public boolean setUserReview(float rating, String text) throws IOException
+	public boolean setUserReview(float rating, boolean delete, int foodId, String text) throws IOException
 	{
 		synchronized (this)
 		{
-			JSONSender.send(os, new SetUserReviewRequest(rating, text).jsonize());
+			JSONSender.send(os, new SetUserReviewRequest(rating, delete, foodId, text).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			SetUserReviewResponse surr = (SetUserReviewResponse) msg;
 			System.out.println("SetUserReviewResponse: " + surr);
@@ -232,5 +232,10 @@ public class Communicator implements ConnectionListener
 	public void onDisconnected(Connection connection)
 	{
 
+	}
+
+	public String getUsername()
+	{
+		return username;
 	}
 }

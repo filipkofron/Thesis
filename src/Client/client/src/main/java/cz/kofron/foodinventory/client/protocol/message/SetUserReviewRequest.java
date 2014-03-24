@@ -9,15 +9,19 @@ import org.json.JSONObject;
 public class SetUserReviewRequest extends Message
 {
 	private float rating;
+	private boolean delete;
+	private int foodId;
 	private String text;
 
 	public SetUserReviewRequest()
 	{
 	}
 
-	public SetUserReviewRequest(float rating, String text)
+	public SetUserReviewRequest(float rating, boolean delete, int foodId, String text)
 	{
 		this.rating = rating;
+		this.delete = delete;
+		this.foodId = foodId;
 		this.text = text;
 	}
 
@@ -37,7 +41,9 @@ public class SetUserReviewRequest extends Message
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
 		rating = (float) obj.getDouble("rating");
+		delete = obj.getBoolean("delete");
 		text = obj.getString("text");
+		foodId = obj.getInt("foodId");
 	}
 
 	@Override
@@ -47,6 +53,8 @@ public class SetUserReviewRequest extends Message
 
 		obj.put("rating", rating);
 		obj.put("text", text);
+		obj.put("delete", delete);
+		obj.put("foodId", foodId);
 
 		return obj;
 	}

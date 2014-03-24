@@ -64,11 +64,21 @@ public class ImageEditAdapter
 			@Override
 			public void onClick(View view)
 			{
-				Intent intent = new Intent();
-				intent.setType("image/*");
-				intent.setAction(Intent.ACTION_GET_CONTENT);
-				intent.addCategory(Intent.CATEGORY_OPENABLE);
-				activity.startActivityForResult(intent, REQUEST_CODE);
+				Intent imageIntent = new Intent();
+				imageIntent.setType("image/*");
+				imageIntent.setAction(Intent.ACTION_GET_CONTENT);
+				imageIntent.addCategory(Intent.CATEGORY_OPENABLE);
+
+				Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+				Intent chooser = new Intent(Intent.ACTION_CHOOSER);
+				chooser.putExtra(Intent.EXTRA_INTENT, imageIntent);
+				chooser.putExtra(Intent.EXTRA_TITLE, activity.getString(R.string.title_select_image));
+
+				Intent[] intentArray =  {cameraIntent};
+				chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+
+				activity.startActivityForResult(chooser, REQUEST_CODE);
 			}
 		});
 
@@ -173,9 +183,8 @@ public class ImageEditAdapter
 		layout.invalidate();
 	}
 
-	public void onImageStream(InputStream is)
+	public void onImageBitmap(Bitmap bitmap)
 	{
-		Bitmap bitmap = BitmapFactory.decodeStream(is);
 		int w = bitmap.getWidth();
 		int h = bitmap.getHeight();
 		int size = w * h;
@@ -185,7 +194,7 @@ public class ImageEditAdapter
 			return;
 		}
 
-		int max = 90000;
+		int max = 200000;
 		float partRatio = (float) Math.sqrt((float) max / size);
 
 		w = (int) (w * partRatio);
@@ -195,6 +204,11 @@ public class ImageEditAdapter
 		bitmap.recycle();
 
 		populateImage(resizedBitmap);
+	}
+
+	public void onImageStream(InputStream is)
+	{
+		onImageBitmap(BitmapFactory.decodeStream(is));
 	}
 
 	public void populate(ArrayList<String> images)

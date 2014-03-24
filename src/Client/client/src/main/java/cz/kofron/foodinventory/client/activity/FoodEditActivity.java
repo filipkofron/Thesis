@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -333,19 +334,26 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	{
 		if(requestCode == ImageEditAdapter.REQUEST_CODE && resultCode == Activity.RESULT_OK)
 		{
-			try
+			if(data.getData() != null)
 			{
-				InputStream stream = getContentResolver().openInputStream(data.getData());
-				imageEditAdapter.onImageStream(stream);
-				stream.close();
+				try
+				{
+					InputStream stream = getContentResolver().openInputStream(data.getData());
+					imageEditAdapter.onImageStream(stream);
+					stream.close();
+				}
+				catch (FileNotFoundException e)
+				{
+					e.printStackTrace();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
-			catch (FileNotFoundException e)
+			else
 			{
-				e.printStackTrace();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
+				imageEditAdapter.onImageBitmap((Bitmap) data.getExtras().get("data"));
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);

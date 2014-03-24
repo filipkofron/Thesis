@@ -44,5 +44,8 @@ public class MessageInitializer
 
 		Message.registerMessageChild(new DeleteImageRequest());
 		Message.registerMessageChild(new DeleteImageResponse());
+
+		Message.registerMessageChild(new SetUserReviewRequest());
+		Message.registerMessageChild(new SetUserReviewResponse());
 	}
 }
