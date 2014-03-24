@@ -100,6 +100,7 @@ void GetFoodDetailHandler::handle(Context &context)
         obj["username"] = ratingUser.getUserName();
         obj["text"] = rev.getReviewText();
         reviewObjects[i] = obj;
+        i++;
     }
 
     obj["reviews"] = reviewObjects;
