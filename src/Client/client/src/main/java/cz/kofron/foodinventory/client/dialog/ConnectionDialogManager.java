@@ -3,6 +3,8 @@ package cz.kofron.foodinventory.client.dialog;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
+
 /**
  * Created by kofee on 25.3.14.
  */
@@ -36,6 +38,17 @@ public class ConnectionDialogManager
 						pd.show();
 					}
 				});
+			}
+		}
+	}
+
+	public static synchronized void reloadActivity()
+	{
+		if(activity != null && !activity.isFinishing())
+		{
+			if(activity instanceof ReloadCallback)
+			{
+				((ReloadCallback) activity).update();
 			}
 		}
 	}

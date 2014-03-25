@@ -237,6 +237,7 @@ public class Communicator implements ConnectionListener
 			{
 				ConnectionDialogManager.hideDialog();
 			}
+			ConnectionDialogManager.reloadActivity();
 		}
 		catch (IOException ex)
 		{

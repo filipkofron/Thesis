@@ -6,13 +6,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.GtinCaptureScanFragment;
 
 /**
  * Created by kofee on 25.3.14.
  */
-public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSelectListener
+public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSelectListener, ReloadCallback
 {
 	private OnGtinSelectListener onGtinSelectListener;
 
@@ -64,5 +65,11 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 	{
 		super.onResume();
 		ConnectionDialogManager.initialize(this);
+	}
+
+	@Override
+	public void update()
+	{
+
 	}
 }

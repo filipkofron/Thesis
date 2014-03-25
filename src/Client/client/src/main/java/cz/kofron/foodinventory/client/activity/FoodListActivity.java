@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.FoodListAdapter;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.task.SearchFoodTask;
 import cz.kofron.foodinventory.client.task.param.SearchFoodParam;
@@ -19,7 +20,7 @@ import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 /**
  * Created by Filip Kofron on 3/1/14.
  */
-public class FoodListActivity extends ListActionBarActivity
+public class FoodListActivity extends ListActionBarActivity implements ReloadCallback
 {
 	private ProgressBar progressBar;
 	private String searchString;
@@ -52,6 +53,15 @@ public class FoodListActivity extends ListActionBarActivity
 			searchString = "";
 		}
 
+
+		loadContent();
+
+
+		setContentView(view);
+	}
+
+	private void loadContent()
+	{
 		SearchFoodTask sft = new SearchFoodTask();
 
 		Runnable success = new Runnable()
@@ -74,8 +84,6 @@ public class FoodListActivity extends ListActionBarActivity
 		};
 
 		sft.execute(new SearchFoodParam(searchString, adapter, success, fail));
-
-		setContentView(view);
 	}
 
 	public void toggleProgressBar(boolean on)
@@ -125,5 +133,18 @@ public class FoodListActivity extends ListActionBarActivity
 	{
 		super.onResume();
 		ConnectionDialogManager.initialize(this);
+	}
+
+	@Override
+	public void update()
+	{
+		runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				loadContent();
+			}
+		});
 	}
 }

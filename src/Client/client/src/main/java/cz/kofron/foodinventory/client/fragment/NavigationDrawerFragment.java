@@ -110,8 +110,8 @@ public class NavigationDrawerFragment extends Fragment
 				getActionBar().getThemedContext(),
 				R.layout.navigation_drawer_item,
 				R.id.text_drawer_list_item,
-				new String[]{
-						getString(R.string.title_home),
+				new String[]
+				{
 						getString(R.string.title_inventory),
 						getString(R.string.title_search_food),
 						getString(R.string.title_add_via_barcode),

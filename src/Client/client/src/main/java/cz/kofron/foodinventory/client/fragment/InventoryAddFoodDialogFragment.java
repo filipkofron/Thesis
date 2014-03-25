@@ -47,14 +47,14 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 					switch (rg.getCheckedRadioButtonId())
 					{
 						case R.id.radio_scan_barcode:
-							((MainActivity) getActivity()).onNavigationDrawerItemSelected(3);
+							((MainActivity) getActivity()).onNavigationDrawerItemSelected(2);
 							break;
 						case R.id.radio_search_food:
 							FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 							fragmentManager.beginTransaction()
 									.replace(R.id.container, new FoodSearchFragment())
 									.commit();
-							((MainActivity) getActivity()).onSectionAttached(2);
+							((MainActivity) getActivity()).onSectionAttached(1);
 							break;
 					}
 				}

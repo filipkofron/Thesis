@@ -11,12 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.background.AlarmScheduler;
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.AccountSelectDialogFragment;
 import cz.kofron.foodinventory.client.fragment.AddScanFragment;
 import cz.kofron.foodinventory.client.fragment.FoodSearchFragment;
-import cz.kofron.foodinventory.client.fragment.HomeFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryListFragment;
 import cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment;
 import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
@@ -25,7 +25,7 @@ import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.MessageInitializer;
 
 public class MainActivity extends ActionBarActivity
-		implements NavigationDrawerFragment.NavigationDrawerCallbacks
+		implements NavigationDrawerFragment.NavigationDrawerCallbacks, ReloadCallback
 {
 
 	/**
@@ -38,6 +38,7 @@ public class MainActivity extends ActionBarActivity
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	private int lastPosition = 0;
 
 	static
 	{
@@ -79,6 +80,19 @@ public class MainActivity extends ActionBarActivity
 		runOnUiThread(new AccountEnforcer());
 	}
 
+	@Override
+	public void update()
+	{
+		runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				onNavigationDrawerItemSelected(lastPosition);
+			}
+		});
+	}
+
 	private class AccountEnforcer implements Runnable
 	{
 		@Override
@@ -114,28 +128,28 @@ public class MainActivity extends ActionBarActivity
 		// update the main content by replacing fragments
 		Fragment fragment = null;
 
+		lastPosition = position;
 		switch (position)
 		{
 			case 0:
-				fragment = new HomeFragment();
-				break;
-			case 1:
 				fragment = new InventoryListFragment();
 				break;
-			case 2:
+			case 1:
 				fragment = new FoodSearchFragment();
 				break;
-			case 3:
+			case 2:
 				fragment = new AddScanFragment();
 				break;
-			case 4:
+			case 3:
 				fragment = new RemoveScanFragment();
 				break;
 		}
 
 		if (fragment == null)
 		{
-			fragment = new HomeFragment();
+			fragment = new InventoryListFragment();
+			mTitle = getString(R.string.title_inventory);
+			getSupportActionBar().setTitle(mTitle);
 		}
 
 		currentFragment = fragment;
@@ -152,18 +166,15 @@ public class MainActivity extends ActionBarActivity
 		switch (number)
 		{
 			case 0:
-				mTitle = getString(R.string.title_home);
-				break;
-			case 1:
 				mTitle = getString(R.string.title_inventory);
 				break;
-			case 2:
+			case 1:
 				mTitle = getString(R.string.title_search_food);
 				break;
-			case 3:
+			case 2:
 				mTitle = getString(R.string.title_add_via_barcode);
 				break;
-			case 4:
+			case 3:
 				mTitle = getString(R.string.title_remove_via_barcode);
 				break;
 		}

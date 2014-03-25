@@ -44,7 +44,7 @@ import cz.kofron.foodinventory.client.util.GtinUtil;
 /**
  * Created by kofee on 3/4/14.
  */
-public class FoodEditActivity extends ActionBarActivity implements VendorDialogFragment.VendorDialogListener, OnGtinSelectListener
+public class FoodEditActivity extends ActionBarActivity implements VendorDialogFragment.VendorDialogListener, OnGtinSelectListener, ReloadCallback
 {
 	private View view;
 
@@ -392,5 +392,11 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	{
 		super.onResume();
 		ConnectionDialogManager.initialize(this);
+	}
+
+	@Override
+	public void update()
+	{
+
 	}
 }
