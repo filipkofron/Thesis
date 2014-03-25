@@ -23,7 +23,7 @@ public class NetworkInstance
 			connector.stop();
 		}
 		connector = new Connector();
-		communicator = new Communicator(username);
+		communicator = new Communicator(username, true);
 		prepared = true;
 	}
 

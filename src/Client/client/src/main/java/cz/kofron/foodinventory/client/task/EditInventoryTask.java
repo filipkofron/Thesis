@@ -69,11 +69,11 @@ public class EditInventoryTask extends AsyncTask<Object, Void, Void>
 
 		if(param.adding)
 		{
-			Toast.makeText(context, "Added.", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "Added.", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT);
+			Toast.makeText(context, "Saved.", Toast.LENGTH_SHORT).show();
 		}
 
 		if (param == null)

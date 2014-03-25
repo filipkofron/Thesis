@@ -124,11 +124,11 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 
 		if(param.adding)
 		{
-			Toast.makeText(activity, "Added.", Toast.LENGTH_SHORT);
+			Toast.makeText(activity, "Added.", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(activity, "Saved.", Toast.LENGTH_SHORT);
+			Toast.makeText(activity, "Saved.", Toast.LENGTH_SHORT).show();
 		}
 
 		if (param == null)

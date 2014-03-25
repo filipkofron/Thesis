@@ -1,5 +1,6 @@
 package cz.kofron.foodinventory.client.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.background.AlarmScheduler;
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.AccountSelectDialogFragment;
 import cz.kofron.foodinventory.client.fragment.AddScanFragment;
 import cz.kofron.foodinventory.client.fragment.FoodSearchFragment;
@@ -18,6 +21,7 @@ import cz.kofron.foodinventory.client.fragment.InventoryListFragment;
 import cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment;
 import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.MessageInitializer;
 
 public class MainActivity extends ActionBarActivity
@@ -56,7 +60,18 @@ public class MainActivity extends ActionBarActivity
 				R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 
+
+		ConnectionDialogManager.initialize(this);
 		tryConnect();
+
+		boolean firstLaunch = Preferences.getPreferences(this).getBoolean("firstLaunch", true);
+		if(firstLaunch)
+		{
+			AlarmScheduler.scheduleAlarm(this);
+			SharedPreferences.Editor editor = Preferences.getPreferences(this).edit();
+			editor.putBoolean("firstLaunch", false);
+			editor.commit();
+		}
 	}
 
 	public void tryConnect()
@@ -69,7 +84,7 @@ public class MainActivity extends ActionBarActivity
 		@Override
 		public void run()
 		{
-			String account = getSharedPreferences("account", MainActivity.MODE_PRIVATE).getString("username", "");
+			String account = Preferences.getPreferences(MainActivity.this).getString("username", "");
 			if(account == null || account.trim().length() < 3)
 			{
 				new AccountSelectDialogFragment().show(MainActivity.this);
@@ -194,4 +209,10 @@ public class MainActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		ConnectionDialogManager.initialize(this);
+	}
 }

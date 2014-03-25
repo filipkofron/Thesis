@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
+
 /**
  * @author kofee
  */
@@ -17,6 +19,7 @@ public class Connector
 {
 	private final static int KEEP_ALIVE_PERIOD_MS = 20000;
 	public final static String SERVER_ADDR = "foodinventory.halt.cz";
+	public final static int SERVER_PORT = 4040;
 	private ConnectorThread connectorThread = new ConnectorThread();
 	private Connection connection;
 	private long lastKeepAlive = 0;
@@ -33,7 +36,7 @@ public class Connector
 	private Connection createConnection()
 	{
 		System.out.println("Connecting...");
-		Connection newConnection = new Connection(SERVER_ADDR, 4040);
+		Connection newConnection = new Connection(SERVER_ADDR, SERVER_PORT, true);
 		newConnection.addConnectionListener(NetworkInstance.communicator);
 		return newConnection;
 	}
@@ -91,6 +94,11 @@ public class Connector
 				}
 			}
 		}
+	}synchronized
+
+	public void forceCheck()
+	{
+		connectorThread.check();
 	}
 
 	public void stop()
@@ -112,6 +120,7 @@ public class Connector
 		{
 			while (!stopped)
 			{
+				onCheck();
 				try
 				{
 					synchronized (this)
@@ -123,7 +132,14 @@ public class Connector
 				{
 
 				}
-				onCheck();
+			}
+		}
+
+		public void check()
+		{
+			synchronized (this)
+			{
+				notify();
 			}
 		}
 

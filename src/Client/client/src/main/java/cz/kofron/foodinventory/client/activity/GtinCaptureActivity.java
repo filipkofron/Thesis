@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.GtinCaptureScanFragment;
 
 /**
@@ -58,4 +59,10 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 		return false;
 	}
 
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		ConnectionDialogManager.initialize(this);
+	}
 }

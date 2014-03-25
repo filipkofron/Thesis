@@ -11,6 +11,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
+
 /**
  * @author kofee
  */
@@ -21,16 +23,22 @@ public class Connection
 	private final int port;
 	private final List<ConnectionListener> connectionListeners;
 	private Socket socket;
+	private boolean showDialog;
 
-	public Connection(String addr, int port)
+	public Connection(String addr, int port, boolean showDialog)
 	{
 		this.connectionListeners = new ArrayList<ConnectionListener>();
 		this.addr = addr;
 		this.port = port;
+		this.showDialog = showDialog;
 	}
 
 	public void connect() throws IOException
 	{
+		if(showDialog)
+		{
+			ConnectionDialogManager.showDialog();
+		}
 		socket = new Socket(addr, port);
 		socket.setSoTimeout(TIMEOUT);
 

@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.FoodListAdapter;
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.task.SearchFoodTask;
 import cz.kofron.foodinventory.client.task.param.SearchFoodParam;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
@@ -117,5 +118,12 @@ public class FoodListActivity extends ListActionBarActivity
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		ConnectionDialogManager.initialize(this);
 	}
 }

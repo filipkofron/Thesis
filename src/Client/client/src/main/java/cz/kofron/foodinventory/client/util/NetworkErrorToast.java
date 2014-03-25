@@ -12,6 +12,6 @@ public class NetworkErrorToast
 {
 	public static void showError(Context context)
 	{
-		Toast.makeText(context, R.string.network_error_toast, Toast.LENGTH_LONG);
+		Toast.makeText(context, R.string.network_error_toast, Toast.LENGTH_LONG).show();
 	}
 }

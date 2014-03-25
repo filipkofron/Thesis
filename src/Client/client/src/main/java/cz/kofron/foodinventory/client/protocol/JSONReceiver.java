@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.util.Atomics;
 
 /**
@@ -47,6 +48,7 @@ public class JSONReceiver
 		}
 		catch (Exception e)
 		{
+			NetworkInstance.connector.forceCheck();
 			e.printStackTrace();
 		}
 		return null;

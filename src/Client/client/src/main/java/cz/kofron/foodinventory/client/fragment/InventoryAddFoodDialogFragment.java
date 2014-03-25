@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -49,8 +50,11 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 							((MainActivity) getActivity()).onNavigationDrawerItemSelected(3);
 							break;
 						case R.id.radio_search_food:
-							intent = new Intent(getActivity(), FoodListActivity.class);
-							getActivity().startActivity(intent);
+							FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+							fragmentManager.beginTransaction()
+									.replace(R.id.container, new FoodSearchFragment())
+									.commit();
+							((MainActivity) getActivity()).onSectionAttached(2);
 							break;
 					}
 				}

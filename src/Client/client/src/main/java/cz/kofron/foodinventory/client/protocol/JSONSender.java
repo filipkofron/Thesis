@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.util.Atomics;
 
 /**
@@ -40,6 +41,7 @@ public class JSONSender
 		}
 		catch (NullPointerException e)
 		{
+			NetworkInstance.connector.forceCheck();
 			throw new IOException(e);
 		}
 	}

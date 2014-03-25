@@ -29,6 +29,7 @@ import java.util.List;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.ImageEditAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.VendorDialogFragment;
 import cz.kofron.foodinventory.client.model.AmountType;
 import cz.kofron.foodinventory.client.model.Category;
@@ -384,5 +385,12 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 				gtin.invalidate();
 			}
 		});
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		ConnectionDialogManager.initialize(this);
 	}
 }

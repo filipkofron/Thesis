@@ -113,7 +113,7 @@
                     android:layout_marginTop="3dp"
                     android:ems="10"
                     android:inputType="number"
-                    android:text="56483544736"/>
+                    android:text="0000000"/>
 
                 <Button
                     android:id="@+id/scan_barcode"

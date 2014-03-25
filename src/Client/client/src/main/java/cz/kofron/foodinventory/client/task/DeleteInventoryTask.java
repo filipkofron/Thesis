@@ -63,7 +63,7 @@ public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 
 		pd.dismiss();
 
-		Toast.makeText(context, "Deleted.", Toast.LENGTH_SHORT);
+		Toast.makeText(context, "Deleted.", Toast.LENGTH_SHORT).show();
 
 		if (param == null)
 		{

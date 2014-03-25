@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.MainActivity;
+import cz.kofron.foodinventory.client.preference.Preferences;
 
 /**
  * Created by kofee on 19.3.14.
@@ -121,7 +122,7 @@ public class AccountSelectDialogFragment extends DialogFragment
 		@Override
 		public void onClick(DialogInterface dialogInterface, int pos)
 		{
-			SharedPreferences.Editor editor = getActivity().getSharedPreferences("account", MainActivity.MODE_PRIVATE).edit();
+			SharedPreferences.Editor editor = Preferences.getPreferences(getActivity()).edit();
 			editor.putString("username", names[pos]);
 			editor.commit();
 			repeat();

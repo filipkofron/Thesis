@@ -20,6 +20,7 @@ import java.util.Date;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.ImageViewAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.ReviewDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodReview;
@@ -263,5 +264,12 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 	public void update()
 	{
 		loadContent();
+	}
+
+	@Override
+	protected void onPostResume()
+	{
+		super.onPostResume();
+		ConnectionDialogManager.initialize(this);
 	}
 }

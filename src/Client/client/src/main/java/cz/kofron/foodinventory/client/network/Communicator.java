@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodHelper;
 import cz.kofron.foodinventory.client.protocol.JSONReceiver;
@@ -51,9 +52,12 @@ public class Communicator implements ConnectionListener
 
 	private String username;
 
-	public Communicator(String username)
+	private boolean showDialog;
+
+	public Communicator(String username, boolean showDialog)
 	{
 		this.username = username;
+		this.showDialog = showDialog;
 	}
 
 	public LoginResponse login(String name) throws IOException
@@ -229,6 +233,10 @@ public class Communicator implements ConnectionListener
 			FoodHelper.vendors = gfbr.getVendors();
 			FoodHelper.categories = gfbr.getCategories();
 
+			if(showDialog)
+			{
+				ConnectionDialogManager.hideDialog();
+			}
 		}
 		catch (IOException ex)
 		{
