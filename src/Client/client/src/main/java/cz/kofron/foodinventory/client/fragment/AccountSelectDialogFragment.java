@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,7 +46,7 @@ public class AccountSelectDialogFragment extends DialogFragment
 	private String [] getAccountNames()
 	{
 		Account [] accounts = getAccounts();
-		ArrayList<String> names = new ArrayList<>();
+		TreeSet<String> names = new TreeSet<>();
 
 		for(Account account : accounts)
 		{
