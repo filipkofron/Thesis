@@ -43,7 +43,7 @@ import cz.kofron.foodinventory.client.util.GtinUtil;
 /**
  * Created by kofee on 3/4/14.
  */
-public class FoodEditActivity extends ActionBarActivity implements VendorDialogFragment.VendorDialogListener
+public class FoodEditActivity extends ActionBarActivity implements VendorDialogFragment.VendorDialogListener, OnGtinSelectListener
 {
 	private View view;
 
@@ -143,6 +143,16 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			public void onClick(View view)
 			{
 				showSelectVendorDialog();
+			}
+		});
+		((Button) view.findViewById(R.id.scan_barcode)).setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				GtinCaptureActivity.initialOnGtinSelectListener = FoodEditActivity.this;
+				Intent foodEditIntent = new Intent(FoodEditActivity.this, GtinCaptureActivity.class);
+				startActivity(foodEditIntent);
 			}
 		});
 		Spinner spinner = (Spinner) view.findViewById(R.id.category_spinner);
@@ -358,5 +368,21 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void onGtinSelected(String gtin)
+	{
+		final String fGtin = gtin;
+		runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				EditText gtin = (EditText) view.findViewById(R.id.gtin);
+				gtin.setText(fGtin);
+				gtin.invalidate();
+			}
+		});
 	}
 }

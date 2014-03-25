@@ -5,6 +5,9 @@ set(handler_source_files
   LoginHandler.hpp
   LoginHandler.cpp
 
+  KeepAliveHandler.hpp
+  KeepAliveHandler.cpp
+
   GetInventoryHandler.hpp
   GetInventoryHandler.cpp
 

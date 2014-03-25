@@ -71,14 +71,12 @@ public class Connector
 			{
 				if ((System.currentTimeMillis() - lastKeepAlive) > KEEP_ALIVE_PERIOD_MS)
 				{
-					try
+					if(NetworkInstance.communicator.keepAlive())
 					{
-						NetworkInstance.communicator.keepAlive();
 						lastKeepAlive = System.currentTimeMillis();
 					}
-					catch (IOException e)
+					else
 					{
-						e.printStackTrace();
 						try
 						{
 							connection.disconnect();

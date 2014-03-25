@@ -1,5 +1,5 @@
 #include "KeepAlive.hpp"
-#include "../Handler/NullHandler.hpp"
+#include "../Handler/KeepAliveHandler.hpp"
 
 KeepAlive::KeepAlive()
 {
@@ -23,7 +23,7 @@ std::string KeepAlive::getHeader()
 
 Handler *KeepAlive::createHandler()
 {
-    return new NullHandler();
+    return new KeepAliveHandler(this);
 }
 
 void KeepAlive::_dejsonize(Json::Value &content)

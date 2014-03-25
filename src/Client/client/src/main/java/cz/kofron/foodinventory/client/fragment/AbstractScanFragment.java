@@ -1,5 +1,6 @@
 package cz.kofron.foodinventory.client.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
@@ -338,14 +339,18 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 
 	public void setResult(final String text)
 	{
-		getActivity().runOnUiThread(new Runnable()
+		Activity activity = getActivity();
+		if(activity != null)
 		{
-			@Override
-			public void run()
+			getActivity().runOnUiThread(new Runnable()
 			{
-				onGtin(text);
-			}
-		});
+				@Override
+				public void run()
+				{
+					onGtin(text);
+				}
+			});
+		}
 	}
 
 	@Override

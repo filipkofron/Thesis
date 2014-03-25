@@ -192,12 +192,21 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
-	public void keepAlive() throws IOException
+	public boolean keepAlive()
 	{
 		synchronized (this)
 		{
-			JSONSender.send(os, new KeepAlive().jsonize());
-			System.out.println("KeepAlive!");
+			try
+			{
+				JSONSender.send(os, new KeepAlive().jsonize());
+				System.out.println("KeepAlive!");
+				KeepAlive result = (KeepAlive) Message.dejsonize(JSONReceiver.receive(is));
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+			return true;
 		}
 	}
 
