@@ -33,7 +33,7 @@ public class LoadInventoryTask extends AsyncTask<LoadInventoryParam, Void, Void>
 		{
 			gir = NetworkInstance.communicator.getInventory(false, 0, param.foodName, param.foodGtin);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			gir = null;
