@@ -26,7 +26,10 @@ public abstract class Message
 			String header = (String) obj.get("header");
 			Message factoryMessage = messageChilds.get(header);
 			Message message = factoryMessage.newMessage();
-			message.dejsonizeContent((JSONObject) obj.get("content"));
+			if(!obj.isNull("content"))
+			{
+				message.dejsonizeContent((JSONObject) obj.get("content"));
+			}
 			return message;
 		}
 		catch (Exception e)
