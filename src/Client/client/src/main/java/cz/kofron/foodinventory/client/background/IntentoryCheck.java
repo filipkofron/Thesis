@@ -77,7 +77,10 @@ public class IntentoryCheck
 
 		ArrayList<InventoryItem> items = checkThread.getItems();
 
-		processItems(context, items);
+		if(items != null)
+		{
+			processItems(context, items);
+		}
 	}
 
 	private static void processItems(Context context, ArrayList<InventoryItem> items)
