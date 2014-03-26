@@ -53,13 +53,9 @@ void GetInventoryHandler::handle(Context &context)
         tried = true;
     }
 
-    std::cout << "Trying inventories searching by gtin: " << request->gtin << std::endl;
-
     if(request->gtin.length() > 2)
     {
-        std::cout << "Requesting inventories searching by gtin: " << request->gtin << std::endl;
         inventories = inventoryDao->searchInventoryByGtin(context.getUserId(), request->gtin);
-        std::cout << "Got " << inventories.size() << " results." << std::endl;
         tried = true;
     }
 
