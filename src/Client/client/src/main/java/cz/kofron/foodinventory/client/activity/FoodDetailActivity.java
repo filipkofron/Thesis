@@ -240,9 +240,9 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		populateReviews(foodDetail);
 
 		name.setText(foodDetail.getName());
-		category.setText(foodDetail.getCategory());
-		vendor.setText(foodDetail.getVendor());
-		gtin.setText(GtinUtil.getReadableGtin(foodDetail.getGtin()));
+		category.setText(" - " + foodDetail.getCategory());
+		vendor.setText("Vendor: " + foodDetail.getVendor());
+		gtin.setText("GTIN: " + GtinUtil.getReadableGtin(foodDetail.getGtin()));
 		description.setText(foodDetail.getDescription());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date(foodDetail.getDefaultUseBy()));

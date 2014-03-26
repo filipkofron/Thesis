@@ -7,6 +7,7 @@
 #include "../Entity/DAO/FoodDAO.hpp"
 #include "../Entity/DAO/ImageDAO.hpp"
 #include "../Network/MessageSender.hpp"
+#include <iostream>
 
 GetInventoryHandler::GetInventoryHandler(GetInventoryRequest *request)
     : request(request)
@@ -51,9 +52,14 @@ void GetInventoryHandler::handle(Context &context)
         inventories = inventoryDao->searchInventoryByFoodName(context.getUserId(), request->food);
         tried = true;
     }
+
+    std::cout << "Trying inventories searching by gtin: " << request->gtin << std::endl;
+
     if(request->gtin.length() > 2)
     {
+        std::cout << "Requesting inventories searching by gtin: " << request->gtin << std::endl;
         inventories = inventoryDao->searchInventoryByGtin(context.getUserId(), request->gtin);
+        std::cout << "Got " << inventories.size() << " results." << std::endl;
         tried = true;
     }
 
