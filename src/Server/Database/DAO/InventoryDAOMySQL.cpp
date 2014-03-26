@@ -12,8 +12,8 @@ static const char *UPDATE_INVENTORY = "UPDATE Inventory SET user_id = ?, food_id
 static const char *INVENTORY_BY_ID = "SELECT id, user_id, food_id, use_by FROM Inventory WHERE id = ?";
 static const char *INVENTORIES_BY_USERID = "SELECT id, user_id, food_id, use_by FROM Inventory WHERE user_id = ?";
 static const char *INVENTORIES_BY_FOODID = "SELECT id, user_id, food_id, use_by FROM Inventory WHERE food_id = ?";
-static const char *INVENTORIES_SEARCH_FOODNAME = "SELECT Inventory.id, Inventory.user_id, Inventory.food_id, Inventory.use_by FROM Inventory JOIN Food ON Inventory.food_id = id WHERE Inventory.user_id = ? AND name COLLATE UTF8_GENERAL_CI LIKE ?";
-static const char *INVENTORIES_SEARCH_GTIN = "SELECT Inventory.id, Inventory.user_id, Inventory.food_id, Inventory.use_by FROM Inventory JOIN Food ON Inventory.food_id = id WHERE Inventory.user_id = ? AND gtin COLLATE UTF8_GENERAL_CI LIKE ?";
+static const char *INVENTORIES_SEARCH_FOODNAME = "SELECT Inventory.id, Inventory.user_id, Inventory.food_id, Inventory.use_by FROM Inventory JOIN Food ON Inventory.food_id = Food.id WHERE Inventory.user_id = ? AND name COLLATE UTF8_GENERAL_CI LIKE ?";
+static const char *INVENTORIES_SEARCH_GTIN = "SELECT Inventory.id, Inventory.user_id, Inventory.food_id, Inventory.use_by FROM Inventory JOIN Food ON Inventory.food_id = Food.id WHERE Inventory.user_id = ? AND gtin COLLATE UTF8_GENERAL_CI LIKE ?";
 
 void InventoryDAOMySQL::addInventory(Inventory &inventory, int &newId)
 {
