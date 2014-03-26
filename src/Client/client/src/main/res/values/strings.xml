@@ -36,5 +36,6 @@
     <string name="title_food_edit">Food edit</string>
     <string name="title_search_results">Search results</string>
     <string name="title_gtin_capture">Scan barcode GTIN number</string>
+    <string name="title_imported_new_food">Import and add food</string>
 
 </resources>

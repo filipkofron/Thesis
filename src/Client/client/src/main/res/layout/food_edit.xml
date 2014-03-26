@@ -221,7 +221,6 @@
                     android:layout_marginTop="3dp"
                     android:ems="10"
                     android:lines="3"
-                    android:text="Some text. Some text.Some text.Some text.Some text.Some text."
                     android:textAlignment="viewStart"
                     android:inputType="textMultiLine"
                     android:gravity="top"/>
@@ -427,7 +426,7 @@
                     android:layout_toRightOf="@+id/textView14"
                     android:ems="10"
                     android:inputType="number|numberDecimal"
-                    android:text="1.99"/>
+                    android:text="1.00"/>
             </RelativeLayout>
 
         </LinearLayout>

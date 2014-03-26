@@ -6,6 +6,7 @@ import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Surface;
@@ -14,6 +15,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -53,7 +56,36 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		surfaceHolder.addCallback(this);
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
+		final EditText editText = (EditText) view.findViewById(R.id.gtin);
+
+		Button button = (Button) view.findViewById(R.id.search_button);
+		button.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				Editable text = editText.getText();
+				if(text != null)
+				{
+					onManualSearch(text.toString());
+				}
+			}
+		});
 		return view;
+	}
+
+	public void onManualSearch(String text)
+	{
+		if(text == null)
+		{
+			return;
+		}
+		text = text.trim();
+		if(text.length() < 1)
+		{
+			return;
+		}
+		setResult(text);
 	}
 
 	@Override

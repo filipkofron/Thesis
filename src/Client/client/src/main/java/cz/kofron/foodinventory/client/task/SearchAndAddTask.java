@@ -10,16 +10,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.fragment.AddImportedFoodDialogFragment;
 import cz.kofron.foodinventory.client.fragment.AddNewFoodDialogFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryAddFoodDialogFragment;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodItem;
+import cz.kofron.foodinventory.client.model.PODResult;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.task.param.SearchPODParam;
 
 /**
  * Created by kofee on 18.3.14.
  */
-public class SearchAndAddTask extends AsyncTask<Object, Void, Void>
+public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements SearchPODTask.PODResultListener
 {
 	private Context context;
 	private String gtin;
@@ -80,7 +83,23 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void>
 		}
 		else
 		{
+			SearchPODParam searchPODParam = new SearchPODParam(gtin, this);
+
+			SearchPODTask searchPODTask = new SearchPODTask(searchPODParam, context);
+			searchPODTask.execute();
+		}
+	}
+
+	@Override
+	public void onResults(ArrayList<PODResult> results)
+	{
+		if(results == null || results.size() < 1)
+		{
 			new AddNewFoodDialogFragment(onDone, gtin).show((FragmentActivity) context);
+		}
+		else
+		{
+			new AddImportedFoodDialogFragment(onDone, results.get(0)).show((FragmentActivity) context);
 		}
 	}
 }

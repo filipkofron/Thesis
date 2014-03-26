@@ -35,6 +35,7 @@ import cz.kofron.foodinventory.client.model.AmountType;
 import cz.kofron.foodinventory.client.model.Category;
 import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodHelper;
+import cz.kofron.foodinventory.client.model.PODResult;
 import cz.kofron.foodinventory.client.model.Vendor;
 import cz.kofron.foodinventory.client.task.EditFoodTask;
 import cz.kofron.foodinventory.client.task.param.EditFoodParam;
@@ -51,12 +52,14 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	public static FoodDetail initialFoodDetail;
 	public static String initialGtin;
 	public static ReloadCallback initialReloadCallback;
+	public static PODResult initialPodResult;
 
 	private FoodDetail foodDetail;
 	private ArrayList<Category> categories = FoodHelper.categories;
 	private ArrayList<Vendor> vendors = FoodHelper.vendors;
 	private String givenGtin;
 	private ReloadCallback reloadCallback;
+	private PODResult podResult;
 	private int selectedCategory;
 	private ImageEditAdapter imageEditAdapter;
 
@@ -136,6 +139,8 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		initialGtin = null;
 		reloadCallback = initialReloadCallback;
 		initialReloadCallback = null;
+		podResult = initialPodResult;
+		initialPodResult = null;
 
 		view = LayoutInflater.from(this).inflate(R.layout.food_edit, null);
 		((Button) view.findViewById(R.id.vendor_button)).setOnClickListener(new View.OnClickListener()
@@ -188,18 +193,40 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		}
 		else
 		{
+			imageEditAdapter.populate(new ArrayList<String>());
 			if(givenGtin != null)
 			{
 				EditText gtin = (EditText) view.findViewById(R.id.gtin);
 				gtin.setText(givenGtin);
 			}
-			imageEditAdapter.populate(new ArrayList<String>());
+			else
+			{
+				if(podResult != null)
+				{
+					populatePODResult();
+				}
+			}
 			view.invalidate();
 		}
 
 		getSupportActionBar().setTitle(R.string.title_food_edit);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(view);
+	}
+
+	private void populatePODResult()
+	{
+		EditText gtin = (EditText) view.findViewById(R.id.gtin);
+		gtin.setText(podResult.getGtin());
+		if(podResult.getImage() != null)
+		{
+			imageEditAdapter.onImageBitmap(podResult.getImage());
+		}
+		EditText name = (EditText) view.findViewById(R.id.name);
+		EditText vendor = (EditText) view.findViewById(R.id.vendor);
+
+		name.setText(podResult.getName());
+		vendor.setText(podResult.getVendor());
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class AddImageRequest extends Message
 	private final String makeImageData(Bitmap bitmap)
 	{
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.JPEG, 85, baos);
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
 		byte [] bytes = baos.toByteArray();
 		return Base64.encodeToString(bytes, Base64.NO_WRAP);
 	}
