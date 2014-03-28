@@ -48,7 +48,7 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 				foodItem = foods.get(0);
 			}
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			foodItem = null;

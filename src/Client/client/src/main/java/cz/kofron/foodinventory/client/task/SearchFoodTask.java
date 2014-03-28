@@ -42,7 +42,7 @@ public class SearchFoodTask extends AsyncTask<SearchFoodParam, Void, Void>
 			{
 				resultArray.addAll(NetworkInstance.communicator.getFoodItem(false, 0, "", constr, 0).getFoods());
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 				return new ArrayList<>();

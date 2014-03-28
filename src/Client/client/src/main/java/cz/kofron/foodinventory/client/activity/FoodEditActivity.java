@@ -37,10 +37,12 @@ import cz.kofron.foodinventory.client.model.FoodDetail;
 import cz.kofron.foodinventory.client.model.FoodHelper;
 import cz.kofron.foodinventory.client.model.PODResult;
 import cz.kofron.foodinventory.client.model.Vendor;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.EditFoodTask;
 import cz.kofron.foodinventory.client.task.param.EditFoodParam;
 import cz.kofron.foodinventory.client.util.DateUtil;
 import cz.kofron.foodinventory.client.util.GtinUtil;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 3/4/14.
@@ -324,6 +326,8 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 			@Override
 			public void run()
 			{
+				NetworkInstance.connector.forceCheck();
+				NetworkErrorToast.showError(FoodEditActivity.this);
 			}
 		};
 

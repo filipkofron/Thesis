@@ -34,7 +34,7 @@ public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 		{
 			result = NetworkInstance.communicator.deleteInventory(param.id);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			result = false;

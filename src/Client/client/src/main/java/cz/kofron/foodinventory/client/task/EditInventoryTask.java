@@ -51,7 +51,7 @@ public class EditInventoryTask extends AsyncTask<Object, Void, Void>
 		{
 			result = NetworkInstance.communicator.editFoodItem(param.adding, param.id, param.foodId, param.useBy, param.count);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			result = false;

@@ -23,9 +23,11 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodDetailActivity;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.model.FoodItem;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.EditInventoryTask;
 import cz.kofron.foodinventory.client.task.param.EditInventoryParam;
 import cz.kofron.foodinventory.client.util.DateUtil;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 3/5/14.
@@ -82,6 +84,8 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			if(onDone != null)
 			{
 				onDone.run();
+				NetworkInstance.connector.forceCheck();
+				NetworkErrorToast.showError(getActivity());
 			}
 		}
 	}

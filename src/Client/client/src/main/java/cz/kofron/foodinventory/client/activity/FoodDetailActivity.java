@@ -28,6 +28,7 @@ import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.LoadFoodDetailTask;
 import cz.kofron.foodinventory.client.task.param.LoadFoodDetailParam;
 import cz.kofron.foodinventory.client.util.GtinUtil;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 3/3/14.
@@ -91,6 +92,8 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 			{
 				toggleProgressBar(false);
 				showContent(false);
+				NetworkInstance.connector.forceCheck();
+				NetworkErrorToast.showError(FoodDetailActivity.this);
 			}
 		};
 

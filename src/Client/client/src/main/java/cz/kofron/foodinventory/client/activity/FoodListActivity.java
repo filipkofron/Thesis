@@ -13,6 +13,7 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.FoodListAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.SearchFoodTask;
 import cz.kofron.foodinventory.client.task.param.SearchFoodParam;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
@@ -79,6 +80,7 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 			public void run()
 			{
 				toggleProgressBar(false);
+				NetworkInstance.connector.forceCheck();
 				NetworkErrorToast.showError(FoodListActivity.this);
 			}
 		};

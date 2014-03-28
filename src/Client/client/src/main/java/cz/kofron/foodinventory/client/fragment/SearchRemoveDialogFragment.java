@@ -16,8 +16,10 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodEditActivity;
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.LoadInventoryTask;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 18.3.14.
@@ -128,7 +130,8 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		@Override
 		public void run()
 		{
-
+			NetworkInstance.connector.forceCheck();
+			NetworkErrorToast.showError(getActivity());
 		}
 	};
 }

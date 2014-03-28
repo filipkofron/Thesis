@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.LoadInventoryTask;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
@@ -57,6 +58,7 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 			public void run()
 			{
 				toggleProgressBar(false);
+				NetworkInstance.connector.forceCheck();
 				NetworkErrorToast.showError(getActivity());
 			}
 		};

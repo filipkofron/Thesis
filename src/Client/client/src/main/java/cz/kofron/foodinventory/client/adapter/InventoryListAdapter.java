@@ -20,10 +20,12 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.fragment.InventoryFoodDialogFragment;
 import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.DeleteInventoryTask;
 import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.DeleteInventoryParam;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
 /**
@@ -138,7 +140,8 @@ public class InventoryListAdapter extends ArrayAdapter
 				@Override
 				public void run()
 				{
-
+					NetworkInstance.connector.forceCheck();
+					NetworkErrorToast.showError(context);
 				}
 			};
 

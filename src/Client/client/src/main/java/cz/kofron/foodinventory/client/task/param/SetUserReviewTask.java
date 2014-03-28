@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 /**
  * Created by kofee on 24.3.14.
@@ -47,6 +48,10 @@ public class SetUserReviewTask extends AsyncTask<Object, Void, Void>
 			{
 				reloadCallback.update();
 			}
+		}
+		else
+		{
+			NetworkInstance.connector.forceCheck();
 		}
 	}
 }

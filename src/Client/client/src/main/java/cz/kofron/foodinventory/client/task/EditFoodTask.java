@@ -106,7 +106,7 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 				});
 			}
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			result = false;

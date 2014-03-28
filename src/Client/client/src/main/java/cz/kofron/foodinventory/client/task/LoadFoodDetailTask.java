@@ -35,7 +35,7 @@ public class LoadFoodDetailTask extends AsyncTask<LoadFoodDetailParam, Void, Voi
 		{
 			gfdr = NetworkInstance.communicator.getFoodDetail(param.foodId);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			gfdr = null;

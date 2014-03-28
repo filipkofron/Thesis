@@ -94,9 +94,8 @@ public class Connector
 				}
 			}
 		}
-	}synchronized
-
-	public void forceCheck()
+	}
+	public synchronized void forceCheck()
 	{
 		connectorThread.check();
 	}
