@@ -1,31 +1,26 @@
-#include <iostream>
 #include <cppconn/driver.h>
 #include <cppconn/connection.h>
 #include <cppconn/exception.h>
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 #include <jsoncpp/json/writer.h>
-
 #include "Entity/DAO/DAOException.hpp"
-
 #include "Entity/Food.hpp"
-
 #include "Util/SHA256.hpp"
-
 #include "Protocol/LoginRequest.hpp"
 #include "Database/MySQLManager.hpp"
-
 #include "Database/DAO/UserDAOMySQL.hpp"
-
 #include "Network/Server.hpp"
+#include "Util/Log.hpp"
+
+#include <csignal>
+#include <unistd.h>
 
 using namespace std;
 
 void json_exception_test()
 {
-    std::cout << __FILE__ << ":" << __LINE__
-              <<" if the following exits this program, you need to upgrade the JSONCPP library to use exceptions" << std::endl;
-
+    Log::info("Checking whether the JSON library throws exceptions, thus catching them is possible.");
     Json::Value test;
     test = "fuck";
     try
@@ -34,7 +29,6 @@ void json_exception_test()
     }
     catch(std::runtime_error &e)
     {
-        std::cerr << "error: " << e.what() << std::endl;
     }
 
     try
@@ -43,21 +37,40 @@ void json_exception_test()
     }
     catch(std::runtime_error &e)
     {
-        std::cerr << "error: " << e.what() << std::endl;
     }
+    Log::info("JSON library passed the test.");
+}
+
+static Server server;
+
+static void onSigInt(int s)
+{
+    Log::info("Kill signal received! => Stopping server.");
+    server.setStopped(true);
+}
+
+static void initSignals()
+{
+    struct sigaction sigIntHandler;
+
+    sigIntHandler.sa_handler = onSigInt;
+    sigemptyset(&sigIntHandler.sa_mask);
+    sigIntHandler.sa_flags = 0;
+
+    sigaction(SIGINT, &sigIntHandler, NULL);
+    signal(SIGPIPE, SIG_IGN);
 }
 
 int main()
 {
-    std::cout << "> [Food inventory server]" << std::endl;
-    std::cout << "> Author: Filip Kofron (filip.kofron.cz@gmail.com)" << std::endl;
-    std::cout << "> Build: " << __DATE__ << " " << __TIME__ << std::endl;
-    std::cout << std::endl;
+    initSignals();
+
+    Log::info("> [Food inventory server]");
+    Log::info("> Author: Filip Kofron (filip.kofron.cz@gmail.com)");
+    Log::info(std::string("> Build: ") + std::string(__DATE__) + std::string(" ") + std::string(__TIME__));
+    Log::info("====================================================");
     json_exception_test();
 
-    std::cout << "> [test]: " << Food::fixGtin("90490880") << std::endl;
-
-    Server server;
     server.initialize();
     server.run();
 

@@ -2,18 +2,19 @@
 #include "ServerException.hpp"
 #include "../Config/Configurator.hpp"
 #include "../Client/ClientThread.hpp"
-#include <sys/socket.h>
 #include <cstdio>
 #include <thread>
 #include <mutex>
 #include <cstdlib>
 #include <sys/ioctl.h>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <errno.h>
 #include <unistd.h>
 #include <cstring>
-#include <iostream>
+#include "../Util/Log.hpp"
 
 Server::Server()
     : stopped(false), clientNum(0)
@@ -50,7 +51,6 @@ void Server::initialize()
        throw ServerException("bind() failed!");
     }
 
-    std::cout << "DEBUG: server will timeout after 20minutes!" << std::endl;
     acceptTimeout.tv_sec  = 20 * 60;
     acceptTimeout.tv_usec = 0;
 
@@ -68,7 +68,7 @@ void Server::initialize()
        throw ServerException("listen() failed!");
     }
 
-    std::cout << "Started server on port " << port << std::endl;
+    Log::info(std::string("Started server on port ") + std::to_string(port));
 }
 
 void Server::addrToStr(char *buffer, int bufLen, const sockaddr_in &addr)
@@ -109,13 +109,9 @@ void Server::run()
     {
         int clientSD = accept(listenSD, (sockaddr *) &clientAddr, &clientAddrSize);
 
-        std::cout << "Accept res: " << clientSD << std::endl;
-
         if (clientSD < 0)
         {
-            std::cout << "Time out.." << std::endl;
             continue;
-            //stopped = true;
         }
         else
         {
@@ -124,6 +120,8 @@ void Server::run()
 
         clearFinishedContexts();
     }
+
+    Log::info("Server stopped.");
 
     close(listenSD);
 }
@@ -154,8 +152,6 @@ void Server::clearFinishedContexts()
 
     while(finishedContexts.size() > 0)
     {
-        std::cout << "Cleaning up client..." << std::endl;
-        std::cout.flush();
         std::shared_ptr<Context> context = finishedContexts.back();
         finishedContexts.pop_back();
 
@@ -167,8 +163,6 @@ void Server::clearFinishedContexts()
         }
 
         context->getThread()->join();
-
-        std::cout << "Client cleaned up!" << std::endl;
     }
 }
 

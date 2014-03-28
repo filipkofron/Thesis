@@ -32,7 +32,7 @@ void DeleteImageHandler::handle(Context &context)
 
     int foodId = image.getFoodId();
 
-    Edit edit = Edit::makeEdit(context.getUserId(), foodId, Date::unixTimeToMysqlString(Date::currentTimeMilis()), "User deleted image.", *editDao);
+    Edit edit = Edit::makeEdit(context.getUserId(), foodId, Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), "User deleted image.", *editDao);
 
     int imgId = image.getId();
     imageDao->deleteImage(image);

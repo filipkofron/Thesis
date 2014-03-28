@@ -63,7 +63,7 @@ void EditFoodHandler::handle(Context &context)
 
     const char *msg = request->adding ? "User added food." : "User edited food.";
 
-    Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), msg, *editDao);
+    Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), msg, *editDao);
 
     EditFoodResponse response(true, food.getId());
     MessageSender::sendMessage(context, response);

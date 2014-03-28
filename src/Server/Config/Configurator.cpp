@@ -48,6 +48,11 @@ std::string Configurator::getMySQLServerDatabase()
     return root["database"]["mysql"]["database"].asString();
 }
 
+std::string getLogFile()
+{
+    return "log.txt";
+}
+
 int Configurator::getNetworkClientMaxBuffer()
 {
     return root["network"]["client"]["max_buffer"].asInt();

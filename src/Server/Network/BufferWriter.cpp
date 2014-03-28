@@ -2,7 +2,6 @@
 #include "WriteException.hpp"
 #include <cstring>
 #include <unistd.h>
-#include <iostream>
 
 void BufferWriter::writeSize(const int &sd, const int &size)
 {

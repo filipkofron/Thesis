@@ -3,7 +3,7 @@
 #include "../Entity/DAO/DAOException.hpp"
 #include "../Network/MessageSender.hpp"
 #include "../Protocol/LoginResponse.hpp"
-#include <iostream>
+#include "../Util/Log.hpp"
 
 LoginHandler::LoginHandler(LoginRequest *request)
     : request(request)
@@ -13,8 +13,6 @@ LoginHandler::LoginHandler(LoginRequest *request)
 
 void LoginHandler::handle(Context &context)
 {
-    std::cout << "LoginHandler: Would handle login with username: " << request->username << std::endl;
-
     context.setLoggedIn(false);
 
     if(request->username.empty())
@@ -33,7 +31,7 @@ void LoginHandler::handle(Context &context)
     }
     catch(DAOException &e)
     {
-        std::cout << "Registering user new user: '" << request->username << "'" << std::endl;
+        Log::debug(std::string("Registering user new user: '") + request->username + std::string("'"));
         user = User::makeUser(request->username, *dao);
     }
 

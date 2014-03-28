@@ -9,18 +9,18 @@
 #include "../Entity/DAO/DAOException.hpp"
 #include <cppconn/exception.h>
 
-#include <iostream>
+#include "../Util/Log.hpp"
 #include <unistd.h>
 #include <jsoncpp/json/reader.h>
 #include <jsoncpp/json/value.h>
 
 void ClientThread::run(std::shared_ptr<Context> context)
 {
-    std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " contected!" << std::endl;
+    Log::info(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" contected!"));
 
     communicate(context);
 
-    std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " Disconnected!" << std::endl;
+    Log::info(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Disconnected!"));
     /* Clean up when finished */
 
     close(context->getClientSD());
@@ -38,34 +38,26 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
         while(!context->getFinished())
         {
             BufferReader::readBuffer(*context);
-
-
             bool parseRes = reader.parse(std::string(context->getBuffer().getBytes()), root);
-
-            std::cout << "parseRes: " << parseRes << std::endl;
 
             if(!parseRes)
             {
-                std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " Parsing JSON failed!" << std::endl;
+                Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" parsing JSON failed!"));
                 context->setFinished(true);
                 continue;
-            }
-            else
-            {
-                std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " Parsing JSON successful!" << std::endl;
             }
 
             std::shared_ptr<Message> msg(Message::dejsonize(root));
             if(msg.get())
             {
-                std::cout << "Got message: '" << typeid(msg).name() << "'" << std::endl;
+                Log::debug(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Received message: ") + msg->getHeader());
 
                 std::shared_ptr<Handler> handler(msg->createHandler());
                 handler->handle(*context);
             }
             else
             {
-                std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " Invalid message!" << std::endl;
+                Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Invalid message!"));
                 context->setFinished(true);
                 continue;
             }
@@ -73,30 +65,30 @@ void ClientThread::communicate(std::shared_ptr<Context> context)
     }
     catch(ReadException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " read error!" << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" read error!"));
     }
     catch(WriteException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << " write error!" << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" write error!"));
     }
     catch(BufferException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Buffer error:" << e.what() << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Buffer error: ") + std::string(e.what()));
     }
     catch(DAOException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": DAO error:" << e.what() << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" DAO error: ") + std::string(e.what()));
     }
     catch(sql::SQLException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": SQL error:" << e.what() << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" SQL error: ") + std::string(e.what()));
     }
     catch(HandlerException &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Handler error:" << e.message << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Handler error: ") + std::string(e.message));
     }
     catch(std::runtime_error &e)
     {
-        std::cout << "[" << context->getAddr() << ":" << context->getPort() << "] Client #" << context->getServer()->getClientNum() << ": Runtime error:" << e.what() << std::endl;
+        Log::error(std::string("[") + std::string(context->getAddr()) + std::string(":") + std::to_string(context->getPort()) + std::string("] Client #") + std::to_string(context->getServer()->getClientNum()) + std::string(" Runtime error: ") + std::string(e.what()));
     }
 }

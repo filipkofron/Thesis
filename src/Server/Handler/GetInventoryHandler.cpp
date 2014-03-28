@@ -7,7 +7,6 @@
 #include "../Entity/DAO/FoodDAO.hpp"
 #include "../Entity/DAO/ImageDAO.hpp"
 #include "../Network/MessageSender.hpp"
-#include <iostream>
 
 GetInventoryHandler::GetInventoryHandler(GetInventoryRequest *request)
     : request(request)

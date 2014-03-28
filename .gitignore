@@ -32,3 +32,17 @@ proguard/
 /src/TestClient/dist/
 
 src/Server/CMakeLists.txt.user
+/src/Server/CMakeLists.txt.user
+
+/build/
+/db/model.mwb.bak
+/doc/Thesis.aux
+/doc/Thesis.bbl
+/doc/Thesis.blg
+/doc/Thesis.lof
+/doc/Thesis.log
+/doc/Thesis.out
+/doc/Thesis.pdf
+/doc/Thesis.synctex.gz
+/doc/Thesis.toc
+/nohup.out

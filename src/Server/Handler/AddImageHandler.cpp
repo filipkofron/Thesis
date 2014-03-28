@@ -6,7 +6,6 @@
 #include "../Util/Date.hpp"
 #include "../Util/Base64.hpp"
 #include <stdio.h>
-#include <iostream>
 
 AddImageHandler::AddImageHandler(AddImageRequest *request)
     : request(request)
@@ -34,11 +33,9 @@ void AddImageHandler::handle(Context &context)
     Food food = foodDao->getFoodById(request->foodId);
 
     Image image = Image::makeImage("", food.getId(), context.getUserId(), *imageDao);
-    Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), "User added image.", *editDao);
+    Edit edit = Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), "User added image.", *editDao);
 
     std::string path = Configurator::getInstance()->getImageDir() + "/" + std::to_string(image.getId()) + ".jpg";
-
-    std::cout << "Decoding: '" << request->image << "'" << std::endl;
 
     const char *encoded = request->image.c_str();
     int size = Base64decode_len(encoded) + 1;

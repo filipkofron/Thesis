@@ -7,5 +7,7 @@ set(util_source_files
   Date.cpp
   Base64.hpp
   Base64.cpp
+  Log.hpp
+  Log.cpp
 )
 add_library(util ${util_source_files})

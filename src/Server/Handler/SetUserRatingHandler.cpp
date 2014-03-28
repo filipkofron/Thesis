@@ -43,14 +43,14 @@ void SetUserRatingHandler::handle(Context &context)
 
     if(!request->deleteReview)
     {
-        Review::makeReview(context.getUserId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), request->text, food.getId(), request->rating, *reviewDao);
-        Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), "User added review.", *editDao);
+        Review::makeReview(context.getUserId(), Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), request->text, food.getId(), request->rating, *reviewDao);
+        Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), "User added review.", *editDao);
     }
     else
     {
         if(deleted)
         {
-            Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis()), "User deleted review.", *editDao);
+            Edit::makeEdit(context.getUserId(), food.getId(), Date::unixTimeToMysqlString(Date::currentTimeMilis() / 1000), "User deleted review.", *editDao);
         }
     }
 

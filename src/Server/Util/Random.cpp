@@ -1,11 +1,9 @@
 #include "Random.hpp"
 #include <time.h>
 #include <stdlib.h>
-#include <iostream>
 
 RandomInitializer::RandomInitializer()
 {
-    std::cout << "DEBUG> Initializing random!" << std::endl;
     check();
 }
 

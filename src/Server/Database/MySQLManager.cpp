@@ -1,6 +1,5 @@
 #include "MySQLManager.hpp"
 
-#include <iostream>
 #include <memory>
 
 #include <cppconn/exception.h>
@@ -8,6 +7,8 @@
 #include <cppconn/resultset.h>
 
 #include "../Config/Configurator.hpp"
+
+#include "../Util/Log.hpp"
 
 MySQLManager::MySQLManager()
 {
@@ -24,7 +25,7 @@ void MySQLManager::closeAll()
     std::lock_guard<std::mutex> lock(queueMutex);
     while (!connections.empty())
     {
-        std::cout << "Closing a connection!" << std::endl;
+        Log::debug("MySQL Manager: Closing a connection!");
         connections.front()->close();
         delete connections.front();
         connections.pop();
@@ -64,7 +65,7 @@ sql::Connection *MySQLManager::getConnection()
         }
         catch(sql::SQLException &e)
         {
-            std::cerr << "Cannot open new connection to the MySQL Server!: " << e.what() << std::endl;
+            Log::error(std::string("Cannot open new connection to the MySQL Server!: ") + std::string(e.what()));
             connection = nullptr;
         }
     }
@@ -74,9 +75,7 @@ sql::Connection *MySQLManager::getConnection()
 
 sql::Connection *MySQLManager::openNewConnection()
 {
-    std::cout << "Opening a new connection with: " << Configurator::getInstance()->getMySQLServerAddress() << " - " <<
-                 Configurator::getInstance()->getMySQLServerUsername() << " - " <<
-                 Configurator::getInstance()->getMySQLServerPassword() << std::endl;
+    Log::debug("MySQL Manager: Opening a connection!");
     sql::Connection *conn = driver->connect(Configurator::getInstance()->getMySQLServerAddress(),
                                             Configurator::getInstance()->getMySQLServerUsername(),
                                             Configurator::getInstance()->getMySQLServerPassword());
