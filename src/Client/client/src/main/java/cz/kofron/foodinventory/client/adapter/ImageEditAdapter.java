@@ -175,7 +175,7 @@ public class ImageEditAdapter
 			}
 		};
 
-		LoadImageParam lip = new LoadImageParam(id, image, onLoaded);
+		LoadImageParam lip = new LoadImageParam(activity, id, image, onLoaded);
 		LoadImageTask lit = new LoadImageTask(lip);
 		lit.execute();
 

@@ -53,7 +53,7 @@ public class FoodListAdapter extends ArrayAdapter
 		ImageView image = (ImageView) card.findViewById(R.id.image);
 		image.setImageResource(R.drawable.loading);
 
-		LoadImageParam lip = new LoadImageParam(foodItem.getImageId(), image, null);
+		LoadImageParam lip = new LoadImageParam(context, foodItem.getImageId(), image, null);
 		LoadImageTask lit = new LoadImageTask(lip);
 		lit.execute();
 

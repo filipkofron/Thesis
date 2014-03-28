@@ -57,7 +57,7 @@ public class InventoryListAdapter extends ArrayAdapter
 		ImageView image = (ImageView) card.findViewById(R.id.image);
 		image.setImageResource(R.drawable.loading);
 
-		LoadImageParam lip = new LoadImageParam(String.valueOf(item.getImageId()), image, null);
+		LoadImageParam lip = new LoadImageParam(context, String.valueOf(item.getImageId()), image, null);
 		LoadImageTask lit = new LoadImageTask(lip);
 		lit.execute();
 
