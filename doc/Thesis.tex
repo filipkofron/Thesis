@@ -52,25 +52,31 @@
 
 \begin{introduction}
 
-Plýtvání potravin je celosvětový problém, který má přímé následky v plýtvání zdrojů k výrobě potravin, lidského času a sil. Tato činnost je pro mnohé výrobce a zprostředkovatele potravin peněžně výnosná, avšak pro samotnou přírodu včetně fauny a flóry zajisté ne. K chovu zvěře jsou nutné plodiny. Pro růst plodin je třeba prostor, který musíme zabrat na úkor ostatních rostlin a živočichů. Dle British Institution of Mechanical Engineers (IME) byla v roce 2013 odhadnuta skutečnost, že polovinou veškerých potravin na světě je plýtváno ~\cite{fakta}.
+Plýtvání potravin je celosvětový problém, který má přímé následky v plýtvání zdrojů k výrobě potravin, lidského času a sil. Tato činnost je pro mnohé výrobce a zprostředkovatele potravin peněžně výnosná, avšak pro samotnou přírodu včetně fauny a flóry zajisté ne. K chovu zvěře jsou nutné plodiny. Pro růst plodin je třeba prostor, který musíme zabrat na úkor ostatních rostlin a živočichů. Dle British Institution of Mechanical Engineers (IME) byla v roce 2013 odhadnuta skutečnost, že polovinou veškerých potravin na světě je plýtváno~\cite{fakta}.
 
+Během posledních let vzniklo několik projektů, které se různými způsoby snaží tento problém řešit. Jsou to například způsoby domluvy různých lidí o nespotřebovaných potravinách, kdy lidé nabízí co mají navíc a za jiných okolností by vyhodili. Ostatní se mohou domluvit a jídlo si bezplatně či za výhodnou cenu převzít. Tento způsob používa mnoho webovch i mobilních aplikací.
+
+Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům zabránit plýtvání potravin a nabídne jednoduché a rychlé rozhraní, díky kterému bude na uživatele kladena minímální časová náročnost.
 
 V rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich ceny nejsou pro běžné občany likvidační, jak je tomu naopak v některých rozvojových zemích. Přesto se však mnozí lidé snaží ušetřit jejich jmění a nakupovat co nejlevněji. To ovšem například znamená nakupování velkého množství aktuálně cenově výhodných potravin. Takové množství potravin se nemusí vždy podařit včas spotřebovat a lidem tak zůstanou prošlé potraviny, které buď dodatečně spotřebují nebo, pokud si nejsou jistí možnou závadností, potraviny vyhodí do odpadu.
 
-Chytré mobilní telefony má dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému plýtváním potravinami skrze mobilní aplikaci. Vzhledem k tomu, že cílem mých studií je softwarové inženýrství, bych rád navrhl aplikaci, která by nejen řešila zmíněný problém, ale také umožnila uživatelům přístup k dalším užitečným funkcím, které by bylo možné použít pro lepší informovanost o kupovaných potravinách, jejich obsahu a nabídnout dále možnost poskytnout zkušenost s danou potravinou dalším uživatelům.
+Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v podobě evidence potravin, která uživateli nabídne přehled o trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončí, či pokud se tak stane v blízké době.
 
-V této práci popíši vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Vzhledem k faktu, že celý tento proces je uskutečňován pouze jedinou osobou, budou obsahem práce pouze ty části vývoje, které jsou vhodné pro realizaci mimo tým lidí. Obvykle je totiž softwarový produkt dílem mnoha lidí a vývoj je značně odlišný kvůli efektivitě, nutnosti spolehlivé komunikace mezi členy a hierarchie řízení vývoje. Přesto však budu postupovat podle běžných zvyklostí v softwarových projektech.
-
-Práce využívá znalosti získané během mého studia z předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
+V této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Práce využívá znalosti získané během mého studia z předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
 
 \end{introduction}
 
 \chapter{Analýza}
 
-	\section{Analýza konkurence}
-	
-Pro úspěšný návrh musí process vývoje nejprve projít několika následnujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které jsou potřeba při návrhu, finalní verifikaci výsledné implementace a jejím testovánim.
+Process vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které jsou potřeba při návrhu, finalní verifikaci výsledné implementace a jejím testovánim. 
 
+Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
+
+\section{Analýza konkurence}
+
+Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti a ke konci sepsat souhrn, který zhodnotí všechny dosavadní řešení a jejich hlavní nedostatky. Informace z této sekce jsou velice důležité pro finální aplikaci. Můžou velice pomoci při hledání cesty k ještě lepšímu řešení než kterými jsou ty konkurenční lze takto sebrat důležité poznatky o jejich kladech i záporech, které vyplynou z vlastního otestování (pokud to bude možné)
+
+V počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací naleznutelných i když, jak se později ukázalo, vzniklo a rozšířilo se během následující činnosti
 
 \chapter{Realizace}
 
