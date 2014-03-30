@@ -173,12 +173,14 @@ Funkční požadavky této aplikace, které plynou z daného problému a výše 
   \item čtení čárového kódu pomocí kamery mobilního telefonu
   \item upozornění na jídlo, jehož spotřební doba se ocitla v krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
   \item nastavení intervalu pro upozornění o spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
+  \item získávání informací o neznámých potravinách z otevřené databáze čárových kódů
 \end{itemize}
+
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se v na obalech objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
 Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
 Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod svobodnými licencemi. Samotný kód aplikace autor hodlá publikovat jako svoboný software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
-
 
 Seznam nefunkčních požadavků:
 
@@ -190,6 +192,7 @@ Seznam nefunkčních požadavků:
   \item nenáročnost serveru
   \item výkonová škálovatelnost serveru
   \item využití svobodného software
+  \item podpora různě dlouhých čárových kódů
 \end{itemize}
 
 
