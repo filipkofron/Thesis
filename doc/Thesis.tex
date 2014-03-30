@@ -133,9 +133,67 @@ Autor však shledal nutnost aplikaci umožnit používat jakémukoliv členu rod
 
 Pro širší skupinu použití je vhodné u potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, kteří mají problém přečíst název potraviny, jejíž obrázek však rozpoznají jednodušeji. Autor nepředpokládá, že by tyto cílové skupiny potraviny přímo zadávali, a proto není nutné řešit problém zadání datumu spotřeby i pro tyto uživatele.
 
-\section{Případy užití}
+\clearpage
 
-Pro nalezení všech požadavků na aplikaci a pro jednodušší návrh uživatelského rozhraní je nutné nalézt připady užití uživateli. Pomůžou též při návrhu architektury i testování aplikace pro všechnu požadovanou funkcionalitu, která z případů užití vyplyne..
+\section{Analýza požadavků}
+
+Jako základ dalšího postupu aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, kterému se tato aplikace snaží nalézt řešení.
+
+Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z různých internetových zdrojů lze nalézt, že nejrozšířenější platforma na mobilních telefonech. Protože u žádného z těchto zdrojů nebylo možné zajistit autentičnost, byla k této práci vypracován krátký dotazník, na který odpovědělo 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality. Výsledek rozšíření platforem mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.8]{charts/survey_os}
+  \caption{Rošíření mobilních platforem}
+  \label{fig:SurveyOS}
+\end{figure}
+
+Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější, dává si za cíl tato práce poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společené úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
+
+Vzhledem k tomu, že většina potravin disponuje čárovým kódem a k tomuto kódu můžou být dohledány informace o zboží, které identifikuje, lze aplikaci vybavit čtečkou čárových kódu, která usnadní manuální zadávání názvu či tohoto kódu. Aby tato informace nebyla jen tak nadhozena, byla do dotazníku přidána další sekce. Na obrázku ~\ref{fig:SurveyScan} lze pozorovat poměr mezi dotázanými, kteří by využili možnosti zadávat jídlo pomocí čtečky a těmi, kteří by toho nevyužili.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.8]{charts/survey_scan}
+  \caption{Žádanost zadávání potravin pomocí čtečky čárového kódu}
+  \label{fig:SurveyScan}
+\end{figure}
+
+Funkční požadavky této aplikace, které plynou z daného problému a výše uvedených výsledků dotazníku jsou:
+
+\begin{itemize}
+  \item přidávání nových potravin
+  \item sdílení známých potravin
+  \item specifikace běžné doby spotřeby potraviny
+  \item zaznamenání fotografie potraviny
+  \item zaznamenávání potravin do inventáře
+  \item odebírání potravin z intentáře
+  \item zaznamenání data spotřeby
+  \item hledání potraviny pomocí čárového kódu nebo názvu
+  \item čtení čárového kódu pomocí kamery mobilního telefonu
+  \item upozornění na jídlo, jehož spotřební doba se ocitla v krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
+  \item nastavení intervalu pro upozornění o spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
+\end{itemize}
+
+Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+
+Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod svobodnými licencemi. Samotný kód aplikace autor hodlá publikovat jako svoboný software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
+
+
+Seznam nefunkčních požadavků:
+
+\begin{itemize}
+  \item přidávání nových potravin
+  \item platforma OS Android
+  \item rychlost zadávání potravin do inventáře
+  \item multiplatformní protokol pro mobilní aplikaci a externí úložiště dat
+  \item nenáročnost serveru
+  \item výkonová škálovatelnost serveru
+  \item využití svobodného software
+\end{itemize}
+
+
+\section{Případy užití}
 
 \chapter{Návrh}
 
