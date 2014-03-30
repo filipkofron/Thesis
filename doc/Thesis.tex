@@ -74,11 +74,70 @@ Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné
 
 \section{Analýza konkurence}
 
-Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti a ke konci sepsat souhrn, který zhodnotí všechny dosavadní řešení a jejich hlavní nedostatky. Informace z této sekce jsou velice důležité pro finální aplikaci. Můžou velice pomoci při hledání cesty k ještě lepšímu řešení než kterými jsou ty konkurenční lze takto sebrat důležité poznatky o jejich kladech i záporech, které vyplynou z vlastního otestování (pokud to bude možné)
+Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky. Informace z této sekce jsou velice důležité pro finální aplikaci. Můžou velice pomoci při hledání cesty k ještě lepšímu řešení než kterými jsou ty konkurenční. Takto lze posbírat důležité poznatky o jejich kladech i záporech, které vyplynou z vlastního otestování (pokud to bude možné) na následujícím seznamu zařízeních, které má autor k dispozici:
+\begin{itemize}
+  \item{Nexus 7, Android 4.4.2}
+  \item{HTC Evo 3D, Android 2.3.3}
+  \item{Vodafone 845 (Huawei U8120), Android 2.3.4}
+\end{itemize}
 
-V počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací naleznutelných i když, jak se později ukázalo, vzniklo a rozšířilo se během následující činnosti
+V počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací k naleznutí. Jak se však později ukázalo, vzniklo a rozšířilo se během následujících činností několik dalších aplikací, které jen s maálo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-\chapter{Realizace}
+Tato část byla zprvu velice krátka, neboť jediné bližší aplikace neposkytovali vhodné srovnání ani zisk vhodných informací. V závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnou tak čtenáři jistý nadhled nad daným tématem i v průběhu následujícího čtení. Dalším důvodem jejich zmiňky je autorovo zmýlení v jejich existenci v počátku, jelikož aplikace byly nedávno uvedené a nebylo dostatek vodítek k jejich naleznutí.
+
+\subsection{Best before}
+
+Aplikace Best Before je zdarma dostupná jak pro zařízení s iOS, tak pro zařízení s OS Android. Na první pohled je aplikace totožná na obou platformách. Při bližším zkoumání verze pro OS Android však bylo zjištěno, že aplikace využívá čisté prvky OS Android v částech jako jsou dialogy a některé běžné komponenty. Toto vytváří silný kontrast v rozhraní, který nemusí být pro uživatele OS Android příjemný přesto, že aplikace je jinak po stránce stylu více než na dobré úrovni.
+
+Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v pořadí, v jakém jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace lze tlačítkem v horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z dialogu vybrat datum spotřeby.Nelze však zadat již existující potravinu a pokud uživatel zadává více potravin, může takto ztrávit poměrně dlouhou dobu.
+
+Z vlastního testování však byly zjištěny zásadní nedostatky v ošetření různách chyb a stabilitě. Na žádném z použitých zařízení aplikace nebylo možné přidat obrázek potraviny, a při ukládání potraviny došlo při každém k pokusu k pádu, potravina se ve 4 z 5ti pokusů přidala, v jednom došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z hodnocení na Google Play Store ???? vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k použitelnosti je tato hodnota spíše překvapivá.
+
+Ve výsledku lze z této aplikace převzít zejména pozitivní přístup uživatelů k hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze autorův názor, pro ověření by však bylo třeba širšího testování mezi různými uživateli, které ale je příliš časově náročné.
+
+\subsection{Food Safe}
+
+Další aplikací určenou pro Android OS je Food Safe ????, která se objevila na Play Store teprve nedávno, v době psaní tohoto textu přibližne 20 dní. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o této aplikaci byly získány pouze z Play Store z toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k dispozici při jejím testování v této práci. 
+
+Aplikace není dostupná zadarmo. Je třeba ji zakoupit za částku, která v době psaní tohoto textu činí 20,40 Kč.
+
+U této aplikace lze zaznamenávat potraviny pomocí jména a datumu spotřeby. Aplikace zdá se nabízí i možnost skenování čárových kódů, z hodnocení Play Store je ale zřejmé, že aplikace získává informace o potravinách od uživatelů a zaznamenává je do externí databáze. První uživatelé tedy budou nuceni zadávat ručně detaily všech jednotlivých potravin.
+
+\subsection{Love Food Hate Waste}
+
+Stejně jako aplikace Best Before je tato ve verzích pro iOS i Android OS. Rozhraní aplikace je témeř identické v obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled dává velmi dobrý dojem 
+o aplikaci.
+
+Nabízená funkcionalita zahrnuje:
+\begin{itemize}
+  \item{Recepty}
+  \item{Množstevní plán}
+  \item{Jídelníček}
+  \item{Kuchyň - inventář potravin}
+  \item{Nákupní lístek}
+\end{itemize}
+
+Z popisu aplikace není dostatek informací o jejich skutečné použitelnosti, z hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky vedli uživatele Play Store k celkovému hodnocení 2.5, tedy průměrnou hodnotu.
+
+\subsection{Souhrn analýzy konkurence}
+
+Ze všech výše uvedených aplikací je nejvíce podobná aplikaci této práce aplikace Food Safe. Nabízí možnosti, které usnadňují evidenci potravin, nenutí uživatele zadávat zbytečné informace a sbírá již zadaná data uživateli, aby je mohli použít i ostatní uživatelé. Přesto, že tato aplikace je velice podobná, aplikace této práce má snahu přinést ještě jednodušší způsob zadávání potravin, jejich společné sdílení a pokusit se disponovat více informacemi o potravinách, které do aplikace ještě žádný uživatel nezadal a umožnit takto jednodušší a především rychlejší zadání nové potraviny.
+
+Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Autor si takto troufá tvrdit nejen proto, že informace o čárových kódech jsou dostupné volně na internetu, jak bude dále popsáno, ale také proto, že naprostá většina potravin, které lze koupit v běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
+
+\section{Cílová skupina uživatelů}
+
+Nepředpokládá se, že by se tato aplikace používala široce napřiklad v restauračních a jiných zařízeních disponujících závodními kuchyněmi, kterými prochází mnoho potravin a mobilní telefon pro tuto skupinu uživatelů nebude příliš pohodlný. Přesto však může aplikace stačit nějakému malému podniku, pokud si chce vést jednoduchou evidenci, jen aby předešel plýtvání, které by pro menší kapitál mohl znamenat veliký problém.
+
+Autor však shledal nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
+
+Pro širší skupinu použití je vhodné u potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, kteří mají problém přečíst název potraviny, jejíž obrázek však rozpoznají jednodušeji. Autor nepředpokládá, že by tyto cílové skupiny potraviny přímo zadávali, a proto není nutné řešit problém zadání datumu spotřeby i pro tyto uživatele.
+
+\section{Případy užití}
+
+Pro nalezení všech požadavků na aplikaci a pro jednodušší návrh uživatelského rozhraní je nutné nalézt připady užití uživateli. Pomůžou též při návrhu architektury i testování aplikace pro všechnu požadovanou funkcionalitu, která z případů užití vyplyne..
+
+\chapter{Návrh}
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
