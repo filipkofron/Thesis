@@ -46,3 +46,4 @@ src/Server/CMakeLists.txt.user
 /doc/Thesis.synctex.gz
 /doc/Thesis.toc
 /nohup.out
+/src/PhpProject1/nbproject/private/

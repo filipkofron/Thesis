@@ -144,7 +144,7 @@ Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace do
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.8]{charts/survey_os}
-  \caption{Rošíření mobilních platforem}
+  \caption{Rozšíření mobilních platforem}
   \label{fig:SurveyOS}
 \end{figure}
 
@@ -173,12 +173,14 @@ Funkční požadavky této aplikace, které plynou z daného problému a výše 
   \item čtení čárového kódu pomocí kamery mobilního telefonu
   \item upozornění na jídlo, jehož spotřební doba se ocitla v krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
   \item nastavení intervalu pro upozornění o spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
+  \item získávání informací o neznámých potravinách z otevřené databáze čárových kódů
 \end{itemize}
+
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se v na obalech objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
 Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
 Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod svobodnými licencemi. Samotný kód aplikace autor hodlá publikovat jako svoboný software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
-
 
 Seznam nefunkčních požadavků:
 
@@ -190,12 +192,44 @@ Seznam nefunkčních požadavků:
   \item nenáročnost serveru
   \item výkonová škálovatelnost serveru
   \item využití svobodného software
+  \item podpora různě dlouhých čárových kódů
 \end{itemize}
 
+\clearpage
 
 \section{Případy užití}
 
+Výše uvedené funkční požadavky se přimo promítají do případů užití. Tento diagram slouží pří návrhu UI i jako scénáře pro uživatelské testování, které ověří, zda daný návrh je pro uživatele dostatečne jednoduchý a zda-li je uživatel schopen v aplikaci dosáhnout všech daných cílu.
+
+Inventář a vyhledání potraviny jsou základnami, ze kterých se dále odvíjejí ostatní činnosti. Jednotlivé případy vystihují přesně ty činnosti, které bude uživatel provádět během používání aplikace.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{diagrams/use_case}
+  \caption{Diagram případů užití}
+  \label{fig:UseCase}
+\end{figure}
+
 \chapter{Návrh}
+
+Kapitola návrh poskytne kompletní soubor informací o následné implementaci. Požadavky, které byly sepsány v kapitole Analýza, budou pevně diktovat jeho obsah. Struktura návrhu se týká návrhu architektury, doménového modelu, databázového modelu, bussiness modelu, class diagramu a popis komunikačního protokolu.
+
+
+\section{Architektura}
+
+Vzhledem nutnosti použít pro mobilní aplikaci server bude nejvhodnější model architektury klient - server. Tento model vyžaduje specifikovat komunikaci mezi obouma stranami a dále při vhodném navrhnutí lze uvažovat i o klientech pro více platforem. Vhodná platforma pro jiný typ aplikace by mohla být webová aplikace, která by zpřístupňovala aplikaci na všech ostatních platformách skrze webový prohlížeč. Touto cestou by však nebylo možné uživatele jednoduše upozorňovat o trvanlivosti přímo z webové stránky i v době, kdy uživatel stránku nepoužívá.
+
+\subsection{Klient}
+
+Z nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s pomocí jeho SDK. Existují multiplatformní SDK nabízející bežné API, avšak nutnost vytváření upozornění a snímaní čárových kódů je čistě specifická záležitost pro kažou platformu zvlášť. Tuto možnost autor předpokládá jako časově náročnou, proto se tato práce soustředí pouze na Android SDK.
+
+\subsection{Server}
+
+Jako jeden z hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku autorova studia obsahovali především algoritmizace v jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v jazyce C++. Bližší detaily jeho návrhu budou priblíženy dále.
+
+\section{Komunikační protokol}
+
+Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou mezi sebou komunikovat klient a server. Android SDK diktuje pro mobilního klienta použití jazyku Java, který sice lze nahradit pomocí C/C++, toho se však doporučuje jen v aplikací či knihovnách s potřebou vysokého výkonu nebo přístupu k hardware ~\cite{android_ndk}.
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
@@ -210,6 +244,8 @@ Seznam nefunkčních požadavků:
 % \printglossaries
 \begin{description}
 	\item[OS] Operační systém
+	\item[SDK] Software Development Kit
+	\item[API] Application Programming Interface
 \end{description}
 
 
