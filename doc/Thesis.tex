@@ -91,7 +91,7 @@ Aplikace Best Before je zdarma dostupná jak pro zařízení s iOS, tak pro zař
 
 Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v pořadí, v jakém jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace lze tlačítkem v horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z dialogu vybrat datum spotřeby.Nelze však zadat již existující potravinu a pokud uživatel zadává více potravin, může takto ztrávit poměrně dlouhou dobu.
 
-Z vlastního testování však byly zjištěny zásadní nedostatky v ošetření různách chyb a stabilitě. Na žádném z použitých zařízení aplikace nebylo možné přidat obrázek potraviny, a při ukládání potraviny došlo při každém k pokusu k pádu, potravina se ve 4 z 5ti pokusů přidala, v jednom došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z hodnocení na Google Play Store ???? vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k použitelnosti je tato hodnota spíše překvapivá.
+Z vlastního testování však byly zjištěny zásadní nedostatky v ošetření různách chyb a stabilitě. Na žádném z použitých zařízení aplikace nebylo možné přidat obrázek potraviny, a při ukládání potraviny došlo při každém k pokusu k pádu, potravina se ve 4 z 5ti pokusů přidala, v jednom došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z hodnocení na Google Play Store ~\cite{play_store} vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k použitelnosti je tato hodnota spíše překvapivá.
 
 Ve výsledku lze z této aplikace převzít zejména pozitivní přístup uživatelů k hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze autorův názor, pro ověření by však bylo třeba širšího testování mezi různými uživateli, které ale je příliš časově náročné.
 
@@ -197,6 +197,61 @@ Seznam nefunkčních požadavků:
 
 \clearpage
 
+\section{Čtečka čárových kódu}
+
+Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovou to funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat svobodný software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
+
+Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, které pak lze dále použít v návrhu a implementaci.
+
+Čtečka čárových kódu by mohla být implentována pouze jako externí aplikace. Zde však tento způsob naráží v možnostech rychlosti zadáváná čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v tomto přípaďe spouštění externí aplikace není možný.
+
+\subsection{Zbar ~\cite{zbar}}
+
+Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v roce 2010. Kód není dále aktivně vyvíjen.
+
+Z jednoduchého dema knihovny vyšlo najevo, že oproti jiným nemá tak dobré výsledky. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny však autorovi nepříde jako dostatek pro použitelnou aplikaci. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
+
+\subsection{ZXing ~\cite{zxing}}
+
+Od autorů této knihovny je na Play Store k dispozici aplikace Barcode Scanner ~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v jazyce Java. Touto cestou je knihovna snadno implementovatelná do všech platforem podporujících Javu byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik VM používající Android.
+
+Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódu, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře pouslouží jako užitečný zdroj informací o implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožnuje s výsledky provádět spoustu činností, jako vyhledávat kód v různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle autora této práce nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s knihovnou podporuje, takže použití bude velice úzké a autor této práce došel k závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
+
+Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do budoucna počítat se spolehlivějším načítáním kódu i vyšší efektivitou knihovny. Veškeré zdrojové kódy jak knihovny ZXing a její implementující aplikace Barcode Scanner jsou k dispozici pod stejnou licencí. Je tedy možné využít jakoukoliv část těchto kódu i v rámci této práce. 
+
+\subsection{Implementace prototypu}
+
+Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s její strukturou a vniřními mechanismy. Při studování kódu lze odhalit základní komponenty skenovácího mechanismu, které jsou dále podrobněji popsány.
+
+\clearpage
+
+\subsubsection{Camera}
+
+Komponenta Camera detekuje dostupné snímací čipy zařízení a přizpůsobuje jejich nastavení potřebám aplikace. Je zde nastaveno zaostřování na automatické a vhodným algoritmem zvolená velikost rozlišení náhledu. Také se zde nastavuje blesk, neboli trvalé osvícení scény, které se ale při podrobném zkoumání ke čtení kódu z potravin příliš nehodí, neboť povrch většiny potravin býva lesklý a způsobuje tak oslnění snímacího čipu v bodě odrazu paprsků světla, které znemožní přečtení čárového kódu. Data ze snímacího čipu jsou naslouchána implementací rozhraní Camera.PreviewCallback, které poskytuje data ve zde zvoleném formátu NV21 ~\cite{nv21}, který je výchozím nastaveným.
+
+\subsubsection{Capture}
+
+Pro samotné zobrazení náhledu a dalších prvků uživatelského rozhraní slouží aktivita CaptureActivity, kterou nazveme komponentou Capture. V této komponentě je umístěn prvek SurfaceView, který zobrazuje živy náhled ze snímacího čipu ve stejném rozlišení, jako jsou získávána data přes rozhraní Camera.PreviewCallback. Změna velikosti prvku SurfaceView vždy vedla k deformaci obrazu, pokud nepokrýval plochu celého displaye a zároveň měl jiný poměr stran, než který byl dán rozlišením náhledu. Tuto vadu se ani v průběhu práce nepovedlo autorovi vyřešit, pouze potlačit vhodným rozmístěním ostatních prvků. V tomto prototypu je prvek zmenšen vertikálně o téměř polovinu na většině zařízeních, tudíž je obraz velmi zdeformovaný. Zdeformovanost však nezpůsobuje žádné potíže při skenování. Je to tedy pouze kosmetický nedostatek, který se autor rozhodl dále neřešit.
+
+\subsubsection{Decoder}
+
+Tato komponenta slouží k dekódování načteného obrazu. Je tvořena vláknem, které běží nezávisle na vlákně manipulujícím a vykreslujícím uživatelské rozhraní. Práce vláknu je předávána pomocí zpráv přes třídu Handler. Výsledek úspěšného načtení je dále poslán do komponenty Capture, kde je zobrazen. Dekódovací vlákno je tím dočasně zastaveno.
+
+\subsubsection{Výsledek implementace}
+
+Vytvořen byl prototyp obsahující výše zmíněné SurfaceView, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá časti kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiným způsobem prezentace výsledků. Původní komunikace mezi komponentami zůstaly stejné, mnoho tříd však bylo odděděno z důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, které způsobují velice špatnou upravitelnosta udržovatelnost kódu. Na základě prototypu se autor rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+
+Změna na vyšší rozlišení se z používaní prototypu pro skenování různých potravin ukázala jako vhodná na věech zmíněných zařízení. Zařízeni Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.3]{screenshots/scan_prototype.png}
+  \caption{Prototyp snímaní čárových kódů}
+  \label{fig:ScanPrototype}
+\end{figure}
+
+\clearpage
+
 \section{Případy užití}
 
 Výše uvedené funkční požadavky se přimo promítají do případů užití. Tento diagram slouží pří návrhu UI i jako scénáře pro uživatelské testování, které ověří, zda daný návrh je pro uživatele dostatečne jednoduchý a zda-li je uživatel schopen v aplikaci dosáhnout všech daných cílu.
@@ -245,6 +300,8 @@ Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou me
 \begin{description}
 	\item[OS] Operační systém
 	\item[SDK] Software Development Kit
+	\item[NDK] Native Development Kit
+	\item[VM] Virtual Machine
 	\item[API] Application Programming Interface
 \end{description}
 
