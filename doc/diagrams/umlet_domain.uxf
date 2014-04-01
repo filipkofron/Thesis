@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>120</x>
+      <y>500</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Inventory
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>490</x>
+      <y>500</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Vendor
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>320</x>
+      <y>500</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Category
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>390</x>
+      <y>90</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Image
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>220</x>
+      <y>330</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Review
+
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>440</x>
+      <y>310</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Food
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>130</x>
+      <y>110</y>
+      <w>150</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>User
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>300</x>
+      <y>200</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Edit
+
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>160</x>
+      <y>150</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=edited
+</panel_attributes>
+    <additional_attributes>140;60;30;60;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>250</x>
+      <y>90</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=added
+</panel_attributes>
+    <additional_attributes>140;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>150</x>
+      <y>150</y>
+      <w>140</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=wrote</panel_attributes>
+    <additional_attributes>120;180;120;140;30;140;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>250</x>
+      <y>140</y>
+      <w>292</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=added
+</panel_attributes>
+    <additional_attributes>270;170;270;30;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>510</x>
+      <y>100</y>
+      <w>80</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=shown in</panel_attributes>
+    <additional_attributes>30;30;50;30;50;210</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>370</x>
+      <y>250</y>
+      <w>90</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=changed by</panel_attributes>
+    <additional_attributes>50;30;50;120;70;120</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>360</x>
+      <y>360</y>
+      <w>168</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=categorizes</panel_attributes>
+    <additional_attributes>120;30;120;110;30;110;30;140</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>530</x>
+      <y>360</y>
+      <w>50</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=made</panel_attributes>
+    <additional_attributes>30;30;30;140</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>120</x>
+      <y>150</y>
+      <w>50</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=has</panel_attributes>
+    <additional_attributes>30;350;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>200</x>
+      <y>360</y>
+      <w>270</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n
+r1=stored in</panel_attributes>
+    <additional_attributes>40;140;40;90;250;90;250;30</additional_attributes>
+  </element>
+</diagram>

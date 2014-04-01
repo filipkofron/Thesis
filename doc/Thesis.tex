@@ -18,6 +18,12 @@
 \usepackage{float}
 \usepackage{wrapfig}
 \usepackage{caption}
+\usepackage{listings}
+
+\usepackage{courier}
+
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt}
 
 % % list of acronyms
 % \usepackage[acronym,nonumberlist,toc,numberedsection=autolabel]{glossaries}
@@ -180,6 +186,8 @@ Funkční požadavky této aplikace, které plynou z daného problému a výše 
 
 Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
+Server budé dále umožňovat připojení z více zařízení v rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v rámci rodiny. 
+
 Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod svobodnými licencemi. Samotný kód aplikace autor hodlá publikovat jako svoboný software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
 
 Seznam nefunkčních požadavků:
@@ -191,6 +199,7 @@ Seznam nefunkčních požadavků:
   \item multiplatformní protokol pro mobilní aplikaci a externí úložiště dat
   \item nenáročnost serveru
   \item výkonová škálovatelnost serveru
+  \item dostupnost serveru z více zařízení jedním účtem uživatele
   \item využití svobodného software
   \item podpora různě dlouhých čárových kódů
 \end{itemize}
@@ -213,7 +222,7 @@ Z jednoduchého dema knihovny vyšlo najevo, že oproti jiným nemá tak dobré 
 
 \subsection{ZXing ~\cite{zxing}}
 
-Od autorů této knihovny je na Play Store k dispozici aplikace Barcode Scanner ~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v jazyce Java. Touto cestou je knihovna snadno implementovatelná do všech platforem podporujících Javu byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik VM používající Android.
+Od autorů teamu ZXing (``Zebra Crossing'') této knihovny je na Play Store k dispozici aplikace Barcode Scanner ~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v jazyce Java. Touto cestou je knihovna snadno implementovatelná do všech platforem podporujících Javu byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik VM používající Android.
 
 Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódu, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře pouslouží jako užitečný zdroj informací o implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožnuje s výsledky provádět spoustu činností, jako vyhledávat kód v různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle autora této práce nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s knihovnou podporuje, takže použití bude velice úzké a autor této práce došel k závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
 
@@ -222,8 +231,6 @@ Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do 
 \subsection{Implementace prototypu}
 
 Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s její strukturou a vniřními mechanismy. Při studování kódu lze odhalit základní komponenty skenovácího mechanismu, které jsou dále podrobněji popsány.
-
-\clearpage
 
 \subsubsection{Camera}
 
@@ -239,9 +246,9 @@ Tato komponenta slouží k dekódování načteného obrazu. Je tvořena vlákne
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující výše zmíněné SurfaceView, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá časti kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiným způsobem prezentace výsledků. Původní komunikace mezi komponentami zůstaly stejné, mnoho tříd však bylo odděděno z důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, které způsobují velice špatnou upravitelnosta udržovatelnost kódu. Na základě prototypu se autor rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující výše zmíněné SurfaceView, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiným způsobem prezentace výsledků. Původní komunikace mezi komponentami zůstaly stejné, mnoho tříd však bylo odděděno z důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
-Změna na vyšší rozlišení se z používaní prototypu pro skenování různých potravin ukázala jako vhodná na věech zmíněných zařízení. Zařízeni Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz.
+Změna na vyšší rozlišení se z používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízení. Zařízeni Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Změna rozlišení na vyšší u původní aplikace Barcode Scanner však znamenala pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů.
 
 \begin{figure}[H]
   \centering
@@ -258,6 +265,8 @@ Výše uvedené funkční požadavky se přimo promítají do případů užití
 
 Inventář a vyhledání potraviny jsou základnami, ze kterých se dále odvíjejí ostatní činnosti. Jednotlivé případy vystihují přesně ty činnosti, které bude uživatel provádět během používání aplikace.
 
+Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější činnosti uživatele, které lze očekávat. V závěru práce dojde ke zhodnocení zde navrhnutých scénářů a přípádné návrhy na změnu do budoucnosti.
+
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.75]{diagrams/use_case}
@@ -267,8 +276,7 @@ Inventář a vyhledání potraviny jsou základnami, ze kterých se dále odvíj
 
 \chapter{Návrh}
 
-Kapitola návrh poskytne kompletní soubor informací o následné implementaci. Požadavky, které byly sepsány v kapitole Analýza, budou pevně diktovat jeho obsah. Struktura návrhu se týká návrhu architektury, doménového modelu, databázového modelu, bussiness modelu, class diagramu a popis komunikačního protokolu.
-
+Kapitola návrh poskytne soubor informací k následné implementaci. Požadavky sepsány v kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka návrhu architektury, doménového modelu, databázového modelu, bussiness modelu, class diagramu a popis komunikačního protokolu.
 
 \section{Architektura}
 
@@ -282,9 +290,99 @@ Z nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s
 
 Jako jeden z hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku autorova studia obsahovali především algoritmizace v jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v jazyce C++. Bližší detaily jeho návrhu budou priblíženy dále.
 
-\section{Komunikační protokol}
+\section{Doménový model}
 
-Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou mezi sebou komunikovat klient a server. Android SDK diktuje pro mobilního klienta použití jazyku Java, který sice lze nahradit pomocí C/C++, toho se však doporučuje jen v aplikací či knihovnách s potřebou vysokého výkonu nebo přístupu k hardware ~\cite{android_ndk}.
+Na obrázku doménovém modelu ~\ref{fig:ScanPrototype} lze spatřit vztahy mezi všemi entitami, jejichž význam zde popíšu.
+
+\subsection{Category}
+\subsection{Edit}
+\subsection{Food}
+\subsection{Image}
+\subsection{Inventory}
+\subsection{Review}
+\subsection{User}
+\subsection{Vendor}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.75]{diagrams/model}
+  \caption{Doménový model}
+  \label{fig:DomainModel}
+\end{figure}
+
+\section{Databázový model}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=1.20]{diagrams/relational_model}
+  \caption{Relační model}
+  \label{fig:RelationalModel}
+\end{figure}
+
+
+\section{Komunikační formát a protokol}
+
+Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou mezi sebou komunikovat klient a server. Android SDK diktuje pro mobilního klienta použití jazyku Java, který sice lze nahradit pomocí C/C++, toho se však doporučuje jen v aplikací či knihovnách s potřebou vysokého výkonu nebo přístupu k hardware ~\cite{android_ndk}. Tato odlišnost vyžaduje použít platformě nezávislý protokol na bázi například textu.
+
+\subsection{XML}
+
+Mnoho protokolů využíva ke komunikaci textový formát v XML. Tento formát je podobný HTML, je platformě nezávislý a široce podporován. V C/C++ ho implementují různé knihovny, které jsou dostupné jako svobodný software. Protokol však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
+
+\subsection{JSON}
+
+Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z JavaScriptové notace a lze ho s bezpečnostními opatřeními načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
+
+\subsection{Porovnání a zvolení formátu}
+
+Oba formáty jsou přímo podporovány v Android API a tak jsou vhodnými kandidáty. Od obou formátu jsou k dispozici různé kompaktnější verze, které ještě více data zhušťují nebo využívají jiné kompresní algoritmy pro snížení velikosti jejich dat. Využití takovýchto vylepšení je však omezující jeho podporou různých prostředí a neumožňují lidsky čitelný formát, který je vhodný pro vývoj a odhalování chyb.
+
+Různé knihovny implementují tyto formáty i do C++, které jejich podporu ve standardních knihovnách neobsahuje. Jelikož jediný patrný rozdíl je ve větší kompaktnosti, byl zvolen JSON jako formát protokolu pro tuto aplikaci.
+
+\subsection{Struktura protokolu}
+
+Protokol budou tvořit zprávy, které budou mít pevný tvar. Kvůli možnosti budoucího vylepšení protokolu a jednoduchosti jeho načtení ze síťového proudu je vhodné poslat přesný počet bytů každé zprávy vepvně daném pořadí. Zpráva bude mít teoreticky neomezenou velikost, avšak server bude mít možnost tuto velikost omezit kvůli zabránění zahlcení serveru jednoduchým útokem, který by zaplnil celou dostupnou pamět a způsobil pád serveru. Maximální velikost zprávy bude možné nastavit v serveru a bude také hodnota, která s dalšími vlastnostmi určí maximální množství uživatelů, který je server schopen v extrémním případě obsloužit.
+
+Komunikaci budou tvořit zprávy přenesené v přesném pořadí jako:
+
+\begin{itemize}
+  \item{4 byty určující celé číslo N v Big Endian pořadí, stejné jako Network Byte Order}
+  \item{N bytů textové UTF-8 zprávy}
+\end{itemize}
+
+Zprávy budou mít dále již v JSON formátu strukturu:
+\begin{lstlisting}
+{
+  "header" : "NazevZpravy",
+  "content" :
+    {
+      .. dalsi obsah zpravy ..
+    }
+}
+\end{lstlisting}
+
+\begin{itemize}
+  \item{položka header určuje název zprávy, který bude popsán dále}
+  \item{položka content obsahuje položky určité zprávy}
+\end{itemize}
+
+Zprávy budou mít povahu požadavku a odpovědi na něj. Klient bude posílat serveru požadavky a ten mu na ně příslušně odpovídat. Neznámé zprávy způsobí ukončení komunikace.
+
+Jednotlivé zprávy byly navrženy již s ohledem na funkce uživatelského rozhraní. Tyto zprávy budou dále popsány, jejich pevnou strukturu však bude možné zjistit ze zdrojového kódu, neboť rozsah této práce takovouto specifikaci neumožňuje. Zprávy kromě poslední KeepAlive jsou dvojice Request a Respond, např. pro zprávu Login to je LoginRequest a LoginResponse.
+
+\begin{itemize}
+  \item{\textbf{Login} - přihlásí uživatele pod jménem (e-mailem) a vrátí odpověď jako boolean, zda-li tak proběhlo}
+  \item{\textbf{GetInventory} - vyhledá a vrátí množinu položek inventáře podle zadaného jména nebo kódu GTIN}
+  \item{\textbf{GetFoodDetail} - vratí veškeré detaily potraviny}
+  \item{\textbf{GetFoodItem} - vyhledá vrátí množinu potravin podle jména nebo GTIN kódu}
+  \item{\textbf{EditInventory} - upraví položku inventáře}
+  \item{\textbf{DeleteInventory} - smaže položku inventáře}
+  \item{\textbf{EditFood} - upraví detail potraviny}
+  \item{\textbf{GetFoodBase} - vrátí podklady k zadání potraviny: výrobce a kategorie}
+  \item{\textbf{AddImage} - nahraje nový obrázek potraviny}
+  \item{\textbf{DeleteImage} - smaže zadaný obrázek potraviny}
+  \item{\textbf{SetUserReview} - nastaví nebo smaže uživatelovu recenzi}
+  \item{\textbf{KeepAlive} - příkaz udržující spojení po dobu od posledního}
+\end{itemize}
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
@@ -298,11 +396,14 @@ Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou me
 \chapter{Seznam použitých zkratek}
 % \printglossaries
 \begin{description}
+	\item[API] Application Programming Interface
+	\item[HTML] HyperText Markup Language
+	\item[JSON] JavaScript Object Notation
+	\item[NDK] Native Development Kit
 	\item[OS] Operační systém
 	\item[SDK] Software Development Kit
-	\item[NDK] Native Development Kit
 	\item[VM] Virtual Machine
-	\item[API] Application Programming Interface
+	\item[XML] Extensible Markup Language
 \end{description}
 
 
