@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client.activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -17,6 +18,9 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.network.NetworkInstance;
+import cz.kofron.foodinventory.client.preference.Accounts;
+import cz.kofron.foodinventory.client.preference.Preferences;
 
 import java.util.List;
 
@@ -70,19 +74,31 @@ public class SettingsActivity extends PreferenceActivity {
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_notification);
 
-        // Add 'data and sync' preferences, and a corresponding header.
-        fakeHeader = new PreferenceCategory(this);
-        fakeHeader.setTitle(R.string.pref_header_data_sync);
-        getPreferenceScreen().addPreference(fakeHeader);
-        addPreferencesFromResource(R.xml.pref_data_sync);
+	    bindPreferenceSummaryToValue(findPreference("username"));
+        bindPreferenceSummaryToValue(findPreference("notifications_check_frequency"));
+	    bindPreferenceSummaryToValue(findPreference("notifications_notify_days"));
 
-        // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-        // their values. When their values change, their summaries are updated
-        // to reflect the new value, per the Android Design guidelines.
-        bindPreferenceSummaryToValue(findPreference("example_text"));
-        bindPreferenceSummaryToValue(findPreference("example_list"));
-        bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-        bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+	    ListPreference usernamePreference = (ListPreference) findPreference("username");
+	    usernamePreference.setEntries(Accounts.getAccountNames(this));
+	    usernamePreference.setEntryValues(Accounts.getAccountNames(this));
+	    usernamePreference.setDefaultValue(Preferences.getPreferences(this).getString("username", ""));
+	    usernamePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+	    {
+		    @Override
+		    public boolean onPreferenceChange(Preference preference, Object o)
+		    {
+			    SharedPreferences.Editor editor = Preferences.getPreferences(SettingsActivity.this).edit();
+			    editor.putString("username", (String) o);
+			    editor.commit();
+			    String str = Preferences.getPreferences(SettingsActivity.this).getString("username", "");
+			    if(str.length() >= 3)
+			    {
+				    NetworkInstance.prepare(str);
+				    NetworkInstance.connector.start();
+			    }
+			    return true;
+		    }
+	    });
     }
 
     /** {@inheritDoc} */
@@ -205,13 +221,6 @@ public class SettingsActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("example_text"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
         }
     }
 
@@ -225,31 +234,6 @@ public class SettingsActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_notification);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
-        }
-    }
-
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
         }
     }
 }

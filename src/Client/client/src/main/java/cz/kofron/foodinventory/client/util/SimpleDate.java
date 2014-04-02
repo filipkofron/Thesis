@@ -15,4 +15,5 @@ public class SimpleDate
 		Date date = new Date(time);
 		return sdf.format(date);
 	}
+
 }

@@ -3,11 +3,12 @@ package cz.kofron.foodinventory.client.task;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
-import cz.kofron.foodinventory.client.cache.DiskLruCache;
 import cz.kofron.foodinventory.client.cache.DiskLruImageCache;
 import cz.kofron.foodinventory.client.network.Connector;
+import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.Download;
 
@@ -23,6 +24,8 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 	private final static String DIR_NAME = "food_images";
 	private final static int MAX_SIZE = 1024 * 1024 * 16;
 	private final static int QUALITY = 90;
+	private final static int MAX_BITMAPS_SIZE = 8 * 1024 * 1024;
+	private static LruCache<String, Bitmap> cachedBitmaps;
 
 	private static DiskLruImageCache getImageCache(Context context)
 	{
@@ -36,6 +39,24 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		return imageCache;
 	}
 
+	private static LruCache<String, Bitmap> getCache()
+	{
+		synchronized (lock)
+		{
+			if (cachedBitmaps == null)
+			{
+				cachedBitmaps = new LruCache<String, Bitmap>(MAX_BITMAPS_SIZE)
+				{
+					protected int sizeOf(String key, Bitmap value)
+					{
+						return value.getWidth() * value.getHeight() * 4;
+					}
+				};
+			}
+		}
+		return cachedBitmaps;
+	}
+
 	public LoadImageTask(LoadImageParam param)
 	{
 		this.param = param;
@@ -44,17 +65,27 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 	@Override
 	protected Void doInBackground(Object... objects)
 	{
-
-		synchronized (lock)
+		synchronized (getCache())
 		{
-			if(getImageCache(param.context).containsKey(param.id))
+			bitmap = getCache().get(param.id);
+		}
+
+		if(bitmap == null)
+		{
+			synchronized (lock)
 			{
-				bitmap = imageCache.getBitmap(param.id);
+				if (getImageCache(param.context).containsKey(param.id))
+				{
+					bitmap = imageCache.getBitmap(param.id);
+				}
 			}
 		}
 		if(bitmap == null)
 		{
-			bitmap = Download.downloadImage("http://" + Connector.SERVER_ADDR + "/img/" + param.id + ".jpg");
+			if(Preferences.getPreferences(param.context).getBoolean("download_images", true))
+			{
+				bitmap = Download.downloadImage("http://" + Connector.SERVER_ADDR + "/img/" + param.id + ".jpg");
+			}
 
 			if(bitmap != null)
 			{
@@ -64,6 +95,18 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 				}
 			}
 		}
+
+		if(bitmap != null)
+		{
+			synchronized (getCache())
+			{
+				if(getCache().get(param.id) == null)
+				{
+					getCache().put(param.id, bitmap);
+				}
+			}
+		}
+
 
 		return null;
 	}

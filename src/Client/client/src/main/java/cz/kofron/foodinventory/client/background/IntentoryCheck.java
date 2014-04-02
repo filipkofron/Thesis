@@ -85,11 +85,13 @@ public class IntentoryCheck
 
 	private static void processItems(Context context, ArrayList<InventoryItem> items)
 	{
+		int days = Preferences.getPreferences(context).getInt("notifications_notify_days", 1);
+
 		ArrayList<InventoryItem> expiringItems = new ArrayList<>();
 		for(InventoryItem item : items)
 		{
 			long expires = item.getUseBy();
-			long soon = System.currentTimeMillis() + 24 * 60 * 60 * 1000;
+			long soon = System.currentTimeMillis() + days * 24 * 60 * 60 * 1000;
 			if(expires <= soon)
 			{
 				expiringItems.add(item);

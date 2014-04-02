@@ -40,17 +40,40 @@
             android:text="name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/item_title"
-            android:textStyle="bold"
             android:typeface="normal"/>
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="54dp"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_toLeftOf="@+id/delete_button"
+            android:background="@android:color/darker_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="1dp"
+            android:id="@+id/left_div"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="54dp"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_toLeftOf="@+id/frame_layout"
+            android:background="@android:color/darker_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="2dp"
+            android:id="@+id/right_div"/>
+
         <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="wrap_content"
+            android:id="@+id/frame_layout"
+            android:layout_width="70dp"
             android:layout_height="fill_parent"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="false"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true">
+            android:layout_marginRight="10dp"
+            android:background="#ff7171">
 
             <TextView
                 android:id="@+id/date_view"
@@ -60,19 +83,40 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:layout_toRightOf="@+id/textView2"
-                android:text="20.09.2013"
+                android:text="33"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Days"
+                android:id="@+id/days_text"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="12sp"/>
         </FrameLayout>
 
         <ImageButton
             android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/frameLayout"
-            android:src="@drawable/ic_action_remove"/>
+            android:layout_toLeftOf="@+id/right_div"
+            android:src="@drawable/ic_action_discard"
+            android:scaleType="centerCrop"
+            android:background="@drawable/button_undecor"/>
 
     </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="10dp"
+        android:layout_height="60dp"
+        android:id="@+id/color_line"
+        android:layout_gravity="center|right"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#b21b00"/>
 
 </FrameLayout>

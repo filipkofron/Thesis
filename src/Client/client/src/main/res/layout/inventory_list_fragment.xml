@@ -12,7 +12,9 @@
         android:background="@color/item_background_color"
         android:dividerHeight="0dp"
         android:paddingBottom="4dp"
-        android:paddingTop="4dp">
+        android:paddingTop="4dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false">
 
     </cz.kofron.foodinventory.client.view.NowLikeListView>
 

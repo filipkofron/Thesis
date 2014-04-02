@@ -14,8 +14,46 @@ import java.net.URL;
  */
 public class Download
 {
+	private final static int MAX_DOWNLOADS = 4;
+	private static Integer downloads = new Integer(0);
+
+	private static void out()
+	{
+		synchronized (downloads)
+		{
+			downloads--;
+			try
+			{
+				downloads.notifyAll();
+			}
+			catch(IllegalMonitorStateException e)
+			{
+
+			}
+		}
+	}
+
+	private static void in()
+	{
+		synchronized (downloads)
+		{
+			while(downloads > 4)
+			{
+				try
+				{
+					downloads.wait();
+				}
+				catch (InterruptedException e)
+				{
+				}
+			}
+			downloads++;
+		}
+	}
+
 	public static Bitmap downloadImage(String urlStr)
 	{
+		in();
 		Bitmap bmp = null;
 		try
 		{
@@ -34,8 +72,11 @@ public class Download
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
+			out();
 			return null;
 		}
+		out();
 		return bmp;
 	}
 

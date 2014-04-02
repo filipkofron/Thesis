@@ -10,6 +10,10 @@ import java.util.Date;
  */
 public class DateUtil
 {
+	public final static long ROUGH_MS_PER_DAY = 1000 * 60 * 60 * 24;
+	public final static long ROUGH_MS_PER_MONTH = ROUGH_MS_PER_DAY * 30;
+	public final static long ROUGH_MS_PER_YEAR = ROUGH_MS_PER_MONTH * 12;
+
 	public static Date getDateFromDatePicket(DatePicker datePicker){
 		int day = datePicker.getDayOfMonth();
 		int month = datePicker.getMonth();

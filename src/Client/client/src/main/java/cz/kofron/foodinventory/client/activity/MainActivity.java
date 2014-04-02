@@ -155,10 +155,17 @@ public class MainActivity extends ActionBarActivity
 
 		currentFragment = fragment;
 
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.container, fragment)
-				.commit();
+		try
+		{
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.container, fragment)
+					.commit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override

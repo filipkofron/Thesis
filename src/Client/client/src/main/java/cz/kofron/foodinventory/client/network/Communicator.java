@@ -47,6 +47,8 @@ public class Communicator implements ConnectionListener
 
 	private Connection connection;
 
+	private boolean connected;
+
 	private OutputStream os;
 	private InputStream is;
 
@@ -58,6 +60,26 @@ public class Communicator implements ConnectionListener
 	{
 		this.username = username;
 		this.showDialog = showDialog;
+	}
+
+	public boolean isConnected()
+	{
+		return connected;
+	}
+
+	private void waitForConnection()
+	{
+		if(!connected)
+		{
+			try
+			{
+				Thread.sleep(500);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public LoginResponse login(String name) throws IOException
@@ -78,6 +100,7 @@ public class Communicator implements ConnectionListener
 
 	public GetInventoryResponse getInventory(boolean direct, int id, String foodName, String foodGtin) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new GetInventoryRequest(direct, id, foodName, foodGtin).jsonize());
@@ -90,6 +113,7 @@ public class Communicator implements ConnectionListener
 
 	public GetFoodDetailResponse getFoodDetail(int id) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new GetFoodDetailRequest(id).jsonize());
@@ -102,6 +126,7 @@ public class Communicator implements ConnectionListener
 
 	public boolean deleteInventory(int id) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new DeleteInventoryRequest(id).jsonize());
@@ -114,6 +139,7 @@ public class Communicator implements ConnectionListener
 
 	public boolean editFoodItem(boolean adding, int id, int foodId, long useBy, int count) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new EditInventoryRequest(adding, id, foodId, useBy, count).jsonize());
@@ -126,6 +152,7 @@ public class Communicator implements ConnectionListener
 
 	public GetFoodItemResponse getFoodItem(boolean direct, int id, String name, String gtin, int skip) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new GetFoodItemRequest(direct, id, name, gtin, skip).jsonize());
@@ -150,6 +177,7 @@ public class Communicator implements ConnectionListener
 
 	public EditFoodResponse editFood(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new EditFoodRequest(adding, id, name, vendor, categoryId, gtin, description, defaultUseBy, amountType, amount, usualPrice).jsonize());
@@ -162,6 +190,7 @@ public class Communicator implements ConnectionListener
 
 	public boolean addImage(Bitmap bitmap, int id) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new AddImageRequest(bitmap, id).jsonize());
@@ -174,6 +203,7 @@ public class Communicator implements ConnectionListener
 
 	public boolean deleteImage(int id) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new DeleteImageRequest(id).jsonize());
@@ -186,6 +216,7 @@ public class Communicator implements ConnectionListener
 
 	public boolean setUserReview(float rating, boolean delete, int foodId, String text) throws IOException
 	{
+		waitForConnection();
 		synchronized (this)
 		{
 			JSONSender.send(os, new SetUserReviewRequest(rating, delete, foodId, text).jsonize());
@@ -244,12 +275,13 @@ public class Communicator implements ConnectionListener
 			Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
+		connected = true;
 	}
 
 	@Override
 	public void onDisconnected(Connection connection)
 	{
-
+		connected = false;
 	}
 
 	public String getUsername()

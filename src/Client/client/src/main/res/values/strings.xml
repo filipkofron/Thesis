@@ -38,4 +38,13 @@
     <string name="title_gtin_capture">Scan barcode GTIN number</string>
     <string name="title_imported_new_food">Import and add food</string>
 
+    <string name="days_text_day">Day</string>
+    <string name="days_text_days">Days</string>
+    <string name="days_text_month">Month</string>
+    <string name="days_text_months">Months</string>
+    <string name="days_text_year">Year</string>
+    <string name="days_text_years">Years</string>
+    <string name="expired_msg">Expired</string>
+
+
 </resources>
