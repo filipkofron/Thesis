@@ -292,16 +292,31 @@ Jako jeden z hlavních požadavků na server je jeho malý paměťový otisk. Na
 
 \section{Doménový model}
 
-Na obrázku doménovém modelu ~\ref{fig:ScanPrototype} lze spatřit vztahy mezi všemi entitami, jejichž význam zde popíšu.
+Na obrázku doménovém modelu ~\ref{fig:ScanPrototype} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
 
 \subsection{Category}
+Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v rámci této práce je informace o kategorii pouze shromažďována. 
+
 \subsection{Edit}
+Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k blokování škodlivých uživatelů.
+
 \subsection{Food}
+Entita food popisuje potravinu.
+
 \subsection{Image}
+Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů.
+
 \subsection{Inventory}
+Položka inventáře spojující uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
+
 \subsection{Review}
+Jednoduché hodnocení potraviny od 0 do 5 s volitelným textem recenze uživatele. Každý uživatel může nabýt nejvíce 1 hodnocení.
+
 \subsection{User}
+Entita uživatele, uchovávající pouze uživatelské jméno. Tuto entitu bude nutné v budoucnu rozšířit o příslušné vlastnosti pokud bude třeba uživatelská data více zabezpečit.
+
 \subsection{Vendor}
+Výrobce je specifikován jako samostatná entita, v budoucnu lze také použít pro filtrování vyhledávání stejně jako je tomu u kategorie.
 
 \begin{figure}[H]
   \centering
@@ -405,6 +420,7 @@ Jednotlivé zprávy byly navrženy již s ohledem na funkce uživatelského rozh
 	\item[VM] Virtual Machine
 	\item[XML] Extensible Markup Language
 \end{description}
+
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
