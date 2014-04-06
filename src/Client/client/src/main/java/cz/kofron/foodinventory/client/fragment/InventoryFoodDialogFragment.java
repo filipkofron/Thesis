@@ -35,7 +35,6 @@ import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 public class InventoryFoodDialogFragment extends DialogFragment
 {
 	private FoodItem foodItem;
-	private TextView foodName;
 	private DatePicker datePicker;
 	private TextView count;
 	private Button plusButton;
@@ -174,7 +173,6 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 
 		View view = inflater.inflate(R.layout.inventory_food_dialog, null);
-		foodName = (TextView) view.findViewById(R.id.food_name);
 		datePicker = (DatePicker) view.findViewById(R.id.date_picker);
 
 		plusButton = (Button) view.findViewById(R.id.plus_button);
@@ -192,13 +190,13 @@ public class InventoryFoodDialogFragment extends DialogFragment
 			setupCount();
 		}
 
-		foodName.setText(foodItem.getName());
 		Date date = new Date(foodItem.getDefaultUseBy() + System.currentTimeMillis());
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		datePicker.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
 		Button detailsButton = (Button) view.findViewById(R.id.details_button);
+		detailsButton.setText(foodItem.getName());
 
 		detailsButton.setOnClickListener(new View.OnClickListener()
 		{

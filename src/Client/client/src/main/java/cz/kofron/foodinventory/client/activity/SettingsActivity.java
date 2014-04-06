@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import cz.kofron.foodinventory.client.R;
+import cz.kofron.foodinventory.client.background.AlarmScheduler;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.preference.Accounts;
 import cz.kofron.foodinventory.client.preference.Preferences;
@@ -75,7 +76,21 @@ public class SettingsActivity extends PreferenceActivity {
         addPreferencesFromResource(R.xml.pref_notification);
 
 	    bindPreferenceSummaryToValue(findPreference("username"));
-        bindPreferenceSummaryToValue(findPreference("notifications_check_frequency"));
+
+	    ListPreference checkFrequencyPreference = (ListPreference) findPreference("notifications_check_frequency");
+	    bindPreferenceSummaryToValue(checkFrequencyPreference);
+		checkFrequencyPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+		{
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object o)
+			{
+				AlarmScheduler.cancelAlarm(SettingsActivity.this);
+				AlarmScheduler.scheduleAlarm(SettingsActivity.this);
+				return true;
+			}
+		});
+
+
 	    bindPreferenceSummaryToValue(findPreference("notifications_notify_days"));
 
 	    ListPreference usernamePreference = (ListPreference) findPreference("username");

@@ -5,19 +5,33 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import cz.kofron.foodinventory.client.preference.Preferences;
+
 
 /**
  * Created by kofee on 25.3.14.
  */
 public class AlarmScheduler
 {
+	private static PendingIntent makePendingIntent(Context context)
+	{
+		Intent intent = new Intent(context, AlarmReceiver.class);
+		return PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+	}
+
 	public static void scheduleAlarm(Context context)
 	{
 		//Long time = new GregorianCalendar().getTimeInMillis() + 12 * 60 * 60 * 1000;
 
-		Intent intentAlarm = new Intent(context, AlarmReceiver.class);
 		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 		//alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(context, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 6 * 60 * 60 * 1000, PendingIntent.getBroadcast(context, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+		int hours = Preferences.getPreferences(context).getInt("notifications_check_frequency", 6);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), hours * 60 * 60 * 1000, makePendingIntent(context));
+	}
+
+	public static void cancelAlarm(Context context)
+	{
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(makePendingIntent(context));
 	}
 }

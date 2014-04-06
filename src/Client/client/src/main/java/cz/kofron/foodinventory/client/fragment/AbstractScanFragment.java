@@ -42,6 +42,10 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	private boolean rotated;
 	private long lastResult;
 
+	private int FOCUS_INTERVAL_MS = 2000;
+	private Camera.AutoFocusCallback focusCallback;
+	private long lastFocus = 0;
+
 	public abstract void onGtin(String gtin);
 
 	@Override
@@ -279,6 +283,21 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 					try
 					{
 						parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+						focusCallback = new Camera.AutoFocusCallback()
+						{
+							@Override
+							public void onAutoFocus(boolean success, Camera camera)
+							{
+								if(success)
+								{
+									FOCUS_INTERVAL_MS = 4500;
+								}
+								else
+								{
+									FOCUS_INTERVAL_MS = 1000;
+								}
+							}
+						};
 						camera.setParameters(parameters);
 					}
 					catch (RuntimeException e2)
@@ -298,6 +317,13 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 			camera.addCallbackBuffer(bytes);
 			return;
 		}
+
+		if(focusCallback != null && (System.currentTimeMillis() - lastFocus) > FOCUS_INTERVAL_MS)
+		{
+			lastFocus = System.currentTimeMillis();
+			camera.autoFocus(focusCallback);
+		}
+
 		Camera.Parameters params = camera.getParameters();
 
 		DecodeThread dt = decodeThread;

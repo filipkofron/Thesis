@@ -47,3 +47,4 @@ src/Server/CMakeLists.txt.user
 /doc/Thesis.toc
 /nohup.out
 /src/PhpProject1/nbproject/private/
+/src/WebClient/nbproject/private/
