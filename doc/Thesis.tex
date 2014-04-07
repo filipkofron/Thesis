@@ -133,7 +133,7 @@ Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čá
 
 \section{Cílová skupina uživatelů}
 
-Nepředpokládá se, že by se tato aplikace používala široce napřiklad v restauračních a jiných zařízeních disponujících závodními kuchyněmi, kterými prochází mnoho potravin a mobilní telefon pro tuto skupinu uživatelů nebude příliš pohodlný. Přesto však může aplikace stačit nějakému malému podniku, pokud si chce vést jednoduchou evidenci, jen aby předešel plýtvání, které by pro menší kapitál mohl znamenat veliký problém.
+Nepředpokládá se, že by se tato aplikace používala široce například v restauračních a jiných zařízeních disponujících závodními kuchyněmi, kterými prochází mnoho potravin a mobilní telefon pro tuto skupinu uživatelů nebude příliš pohodlný. Přesto však může aplikace stačit nějakému malému podniku, pokud si chce vést jednoduchou evidenci, jen aby předešel plýtvání, které by pro menší kapitál mohl znamenat veliký problém.
 
 Autor však shledal nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
 
@@ -327,6 +327,8 @@ Výrobce je specifikován jako samostatná entita, v budoucnu lze také použít
 
 \section{Databázový model}
 
+Z protředků cílového stroje určeného k nasazení serveru této aplikace je jako databázový software zvolen MySQL. K návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z doménového. Entity tedy zůstávají stejné. Detaily jednotlivých entit jsou plně zřetelné z relačního modelu a není třeba je dále rozepisovat.
+
 \begin{figure}[H]
   \centering
   \includegraphics[scale=1.20]{diagrams/relational_model}
@@ -398,6 +400,61 @@ Jednotlivé zprávy byly navrženy již s ohledem na funkce uživatelského rozh
   \item{\textbf{SetUserReview} - nastaví nebo smaže uživatelovu recenzi}
   \item{\textbf{KeepAlive} - příkaz udržující spojení po dobu od posledního}
 \end{itemize}
+
+\section{Server}
+
+Z výše uvedených požadavků lze vypsat tyto vlastnosti, které musí server splňovat:
+
+\begin{itemize}
+  \item{Implementace v C++}
+  \item{Škálovatelnost}
+  \item{Zdroj dat z MySQL}
+  \item{Implementace protokolu s JSON formátem}
+\end{itemize}
+
+Následující podsekce popisují zvolené detaily těchto vlasntostí.
+
+\subsection{C++}
+
+Implementace v C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu vláknování. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobné na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
+
+\subsection{Škálovatelnost}
+
+Aby bylo možné server přizpůsobit výkonějšímu hardware, je třeba příslušné škálovatelnosti. V případě této práce se jako její nejjednodušší forma jeví použití vlákna pro každého připojeného uživatele zvlášť. Je však také nutné zajistit, že další prostředky jako například připojení k databázi bude pro vlákna dostupné soubežně a tím umožní zpracovávat více databázových dotazů současně. Je to důležite zejména proto, že tyto operace jsou obecně časově nejnáročnější. Tato forma škálovatelnosti však umožní získat vyšší výkon pouze za předpokladu, že dojde ke zvýšení počtu výpočetních jednotek, které mohou provádět instrukce jednotlivých vláken současně.
+
+Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení větší dostupné dynamické paměti. Zde jde třeba zdůraznit, že navrhnutý komunikační protokol vyžaduje určitou paměťovou režii kvůli dále zmíněné knihovně pro podporu JSON. Server tedy bude mít možnost upravit maximální počet současně obshluhovaných uživatelů, které bude závislé na dostupné paměti.
+
+\subsection{MySQL}
+
+Pro pohodlné a jednoduché použití MySQL v C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++. Tato knihovna nabízí rozhraní velmi podobné s tím, co je dostupné pro použití v jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v rámci jejího použití. Je tedy vhodná pro objektový návržený server. Kromě těchto vlastností umí také poskytovat více připojení k samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z podsekce výše.
+
+\subsection{JSON}
+
+Knihoven podpory JSON pro použití jazykem C++ je mnoho. Po delším uvažování byla vybrána knihovna JsonCpp. Tato umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušit jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
+
+Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá. Jelikož zkompilovaná verze, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny a v případě, že tomu tak není následně upozorní uživatele.
+
+Pro podporu vyjímek byl zřízen speciální repozitář~\cite{json_ex_repo} s aplikovaným patchem pro tuto vlastnost. Použití této upravené verze je tedy nutnost pro bezchybný běh serveru.
+
+\subsection{Návrh tříd}
+
+Protože návrh tříd je příliš rozsáhlý, není vhodné ho zde prezentovat. Detailnější informace jsou dostupné v rámci hlavičkových souborů v poskytnutých zdrojových kódech k této práci.
+
+Třídy serveru však lze rozlišit na základní kategorie, které také učí kořenovou strukturu zdrojových kódů:
+
+\begin{itemize}
+  \item{\textbf{Client} - třídy pro obsluhu klientů}
+  \item{\textbf{Config} - třídy poskytující nastavení serveru}
+  \item{\textbf{Database} - obsluha připojení do databázového serveru a implementace jednotlivých tříd poskytujících správu entit}
+  \item{\textbf{Entity} - třídy jednotlivách entit a rozhraní jejich správy}
+  \item{\textbf{Handler} - třídy pro obsluhu příkazů ze zpráv komunikace}
+  \item{\textbf{Network} - třídy socketového serveru}
+  \item{\textbf{Protocol} - třídy zpráv}
+  \item{\textbf{Util} - obecné a pomocné třídy}
+\end{itemize}
+
+
+\section{Client}
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
