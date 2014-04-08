@@ -294,7 +294,7 @@ Jako jeden z hlavních požadavků na server je jeho malý paměťový otisk. Na
 
 \section{Doménový model}
 
-Na obrázku doménovém modelu ~\ref{fig:ScanPrototype} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
+Na obrázku doménovém modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
 
 \subsection{Category}
 Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v rámci této práce je informace o kategorii pouze shromažďována. 
@@ -472,13 +472,126 @@ Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživa
 
 Dále jsou popsány jednotlivé obrazovky zajímavé pro uživatele.
 
-\subsection{Přihlášení uživatele.}
+\subsubsection{Menu}
+
+První obrazovkou, kterou uživatel po spuštění aplikace uvidí, je toto ~\ref{fig:AppMenu} menu. Je přímo dostupné ze všech cílu položek tohoto menu stiskem tlačítka v horní levé části nebo posunutím ukazatele (prstu) od okraje obrazovky do jejího středu. Z ostatních podpoložek se lze dostat zpět standardně tlačítkem zpět, případně tlačítkem v horním panelu, tzv. ActionBaru.
+
+Důvod existence pouze těchto položek spočívá v jednoduchosti navigace. Scénář použití vždy začíná v jedné z těchto položek. Nastavení je standardně přes stisk klávesy menu nebo přes ikonu menu v ActionBaru, proto není zbytečně umístěno také zde. Stejné je to s nastavením i na ostatních obrazovkách.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_menu.png}
+  \caption{Menu aplikace}
+  \label{fig:AppMenu}
+\end{figure}
+
+\subsubsection{Inventář}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_inventory.png}
+  \caption{Inventář}
+  \label{fig:AppInventory}
+\end{figure}
+
+\subsubsection{Detail inventáře}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_inventory_detail.jpg}
+  \caption{Detail inventáře}
+  \label{fig:AppInventoryDetail}
+\end{figure}
+
+\subsubsection{Vyhledávání potravin}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_search.png}
+  \caption{Vyhledávání potravin}
+  \label{fig:AppSearch}
+\end{figure}
+
+\subsubsection{Seznam výsledků hledání potravin}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_search_results.png}
+  \caption{Seznam výsledků hledání potravin}
+  \label{fig:AppSearchResults}
+\end{figure}
+
+\subsubsection{Přidání potraviny do inventáře}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_scan_add_food.jpg}
+  \caption{Dialog přidání potraviny do inventáře}
+  \label{fig:AppScanAddFood}
+\end{figure}
+
+\subsubsection{Detail potraviny}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_food_detail.png}
+  \caption{Detail potraviny}
+  \label{fig:AppFoodDetail}
+\end{figure}
+
+\subsubsection{Editace potraviny}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_food_edit.png}
+  \caption{Editace potraviny}
+  \label{fig:AppFoodEdit}
+\end{figure}
+
+\subsubsection{Přidání potraviny do inventáře čárovým kódem}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_scan_add.png}
+  \caption{Skenování čárového kódu pro přidání potraviny}
+  \label{fig:AppScanAdd}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_scan_add_import.png}
+  \caption{Import informací z externí databáze Product Open Data}
+  \label{fig:AppScanAddImport}
+\end{figure}
+
+\subsubsection{Odebrání potraviny z inventáře čárovým kódem}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_scan_remove_list.jpg}
+  \caption{Seznam naleznutých potravin s daným čárovým kódem}
+  \label{fig:AppScanRemoveList}
+\end{figure}
+
+\subsubsection{Nastavení}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{screenshots/app_settings.jpg}
+  \caption{Nastavení}
+  \label{fig:AppSettings}
+\end{figure}
+
+\subsection{Identifikace uživatele}
 
 
 \subsection{Obrázky}
 
 
 \subsection{Knihovny}
+
+
+\subsection{Vyhledávání čárového kódu v externí databázi}
 
 
 
