@@ -41,7 +41,6 @@ public class VendorDialogFragment extends DialogFragment
 		{
 			public void onClick(DialogInterface dialog, int which)
 			{
-				System.out.println("Selected vendor at " + which);
 				((VendorDialogListener) getActivity()).onVendorSelected(which);
 			}
 		});

@@ -16,7 +16,6 @@ import com.google.zxing.common.HybridBinarizer;
  */
 public class Decoder
 {
-	int debugTest = 0;
 	private ResultCallback callBack;
 	private MultiFormatReader multiFormatReader;
 	private byte[] rotationDataBuffer;
@@ -62,7 +61,6 @@ public class Decoder
 
 	public void decode(byte[] data, int width, int height, boolean rotated)
 	{
-		System.out.println("Decoding.." + (debugTest++));
 		String someResult = "";
 
 		PlanarYUVLuminanceSource source = buildLuminanceSource(data, width, height, rotated);

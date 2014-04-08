@@ -89,11 +89,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new LoginRequest(name).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			LoginResponse lr = (LoginResponse) msg;
-			System.out.println("LoginResponse: " + lr);
-			if (lr != null)
-			{
-				System.out.println("LoginResponse: success: " + lr.isSuccess() + " message: " + lr.getMessage());
-			}
 			return lr;
 		}
 	}
@@ -106,7 +101,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new GetInventoryRequest(direct, id, foodName, foodGtin).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			GetInventoryResponse gir = (GetInventoryResponse) msg;
-			System.out.println("GetInventoryResponse: " + gir);
 			return gir;
 		}
 	}
@@ -119,7 +113,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new GetFoodDetailRequest(id).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			GetFoodDetailResponse gfdr = (GetFoodDetailResponse) msg;
-			System.out.println("GetFoodDetailResponse: " + gfdr);
 			return gfdr;
 		}
 	}
@@ -132,7 +125,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new DeleteInventoryRequest(id).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			DeleteInventoryResponse dir = (DeleteInventoryResponse) msg;
-			System.out.println("DeleteInventoryResponse: " + dir);
 			return dir.isSuccess();
 		}
 	}
@@ -145,7 +137,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new EditInventoryRequest(adding, id, foodId, useBy, count).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			EditInventoryResponse eir = (EditInventoryResponse) msg;
-			System.out.println("EditInventoryResponse: " + eir);
 			return eir.isSuccess();
 		}
 	}
@@ -158,7 +149,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new GetFoodItemRequest(direct, id, name, gtin, skip).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			GetFoodItemResponse gfir = (GetFoodItemResponse) msg;
-			System.out.println("GetFoodItemResponse: " + gfir);
 			return gfir;
 		}
 	}
@@ -170,7 +160,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new GetFoodBaseRequest().jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			GetFoodBaseResponse gfbs = (GetFoodBaseResponse) msg;
-			System.out.println("GetFoodBaseResponse: " + gfbs);
 			return gfbs;
 		}
 	}
@@ -183,7 +172,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new EditFoodRequest(adding, id, name, vendor, categoryId, gtin, description, defaultUseBy, amountType, amount, usualPrice).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			EditFoodResponse efr = (EditFoodResponse) msg;
-			System.out.println("EditFoodResponse: " + efr);
 			return efr;
 		}
 	}
@@ -196,7 +184,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new AddImageRequest(bitmap, id).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			AddImageResponse air = (AddImageResponse) msg;
-			System.out.println("AddImageResponse: " + air);
 			return air.isSuccess();
 		}
 	}
@@ -209,7 +196,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new DeleteImageRequest(id).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			DeleteImageResponse dir = (DeleteImageResponse) msg;
-			System.out.println("DeleteImageResponse: " + dir);
 			return dir.isSuccess();
 		}
 	}
@@ -222,7 +208,6 @@ public class Communicator implements ConnectionListener
 			JSONSender.send(os, new SetUserReviewRequest(rating, delete, foodId, text).jsonize());
 			Message msg = Message.dejsonize(JSONReceiver.receive(is));
 			SetUserReviewResponse surr = (SetUserReviewResponse) msg;
-			System.out.println("SetUserReviewResponse: " + surr);
 			return surr.isSuccess();
 		}
 	}
@@ -234,7 +219,6 @@ public class Communicator implements ConnectionListener
 			try
 			{
 				JSONSender.send(os, new KeepAlive().jsonize());
-				System.out.println("KeepAlive!");
 				KeepAlive result = (KeepAlive) Message.dejsonize(JSONReceiver.receive(is));
 			}
 			catch(Exception e)
@@ -260,7 +244,6 @@ public class Communicator implements ConnectionListener
 
 			GetFoodBaseResponse gfbr = getFoodBase();
 
-			System.out.println("Got vendors, categories: " + gfbr.getVendors().size() + ", " + gfbr.getCategories().size());
 			FoodHelper.vendors = gfbr.getVendors();
 			FoodHelper.categories = gfbr.getCategories();
 

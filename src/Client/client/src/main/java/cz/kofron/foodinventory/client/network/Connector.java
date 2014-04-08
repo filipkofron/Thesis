@@ -35,7 +35,6 @@ public class Connector
 
 	private Connection createConnection()
 	{
-		System.out.println("Connecting...");
 		Connection newConnection = new Connection(SERVER_ADDR, SERVER_PORT, true);
 		newConnection.addConnectionListener(NetworkInstance.communicator);
 		return newConnection;

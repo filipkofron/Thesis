@@ -33,15 +33,6 @@ public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlob
 	private void initLayoutObserver()
 	{
 		getViewTreeObserver().addOnGlobalLayoutListener(this);
-
-		setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-			{
-				System.out.println("position " + i);
-			}
-		});
 	}
 
 	@Override

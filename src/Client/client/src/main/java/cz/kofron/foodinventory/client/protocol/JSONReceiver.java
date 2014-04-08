@@ -34,14 +34,10 @@ public class JSONReceiver
 
 			int size = Atomics.integerFromBytes(bytes);
 
-			System.out.println("GOT size: " + size);
-
 			bytes = new byte[size];
 			BufferReader.readFully(bytes, size, is);
 
 			str = new String(bytes, utf8Charser);
-
-			System.out.println("GOT str: " + str);
 
 			JSONObject obj = new JSONObject(str);
 			return obj;

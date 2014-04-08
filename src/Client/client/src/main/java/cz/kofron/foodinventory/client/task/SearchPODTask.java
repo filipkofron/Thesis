@@ -53,21 +53,9 @@ public class SearchPODTask extends AsyncTask<Object, Void, Void>
 
 		String data = Download.downloadString(query);
 
-		System.out.println("Downloaded: '" + data + "'");
-
 		if(data != null)
 		{
 			results = PODParser.parsePODs(data);
-		}
-
-		if(results != null)
-		{
-			System.out.println("Got " + results.size() + " results.");
-
-			for (PODResult result : results)
-			{
-				System.out.println("Result: " + result.toString());
-			}
 		}
 
 		return null;

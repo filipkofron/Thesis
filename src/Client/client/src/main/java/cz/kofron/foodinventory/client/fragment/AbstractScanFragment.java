@@ -172,7 +172,6 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 			{
 				try
 				{
-					System.out.println("Opening cam back " + camIdx);
 					camera = Camera.open(camIdx);
 					break;
 				}
@@ -193,7 +192,6 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 				{
 					try
 					{
-						System.out.println("Opening cam front " + camIdx);
 						camera = Camera.open(camIdx);
 						break;
 					}
@@ -210,7 +208,6 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		{
 			try
 			{
-				System.out.println("Opening default camera.");
 				camera = Camera.open();
 			}
 			catch (RuntimeException e)
@@ -371,7 +368,6 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 			public void presentResult(String result)
 			{
 				lastResult = System.currentTimeMillis();
-				System.out.println("Presenting result: " + result);
 
 				final String res = result;
 				new Thread(new Runnable()

@@ -50,7 +50,6 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		@Override
 		public void onClick(DialogInterface dialogInterface, int i)
 		{
-			System.out.println("Canceled.");
 
 			if(onDone != null)
 			{
@@ -94,7 +93,6 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		@Override
 		public void onClick(DialogInterface dialogInterface, int i)
 		{
-			System.out.println("Ok.");
 			AsyncTask at = new EditInventoryTask(getActivity(), new EditInventoryParam(new Success(), new Fail(), !edit, inventoryId, foodItem.getId(), DateUtil.getDateFromDatePicket(datePicker).getTime(), getCount()));
 			at.execute();
 			if(onDone != null)

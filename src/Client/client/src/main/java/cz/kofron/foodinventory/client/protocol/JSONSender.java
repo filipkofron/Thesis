@@ -26,7 +26,6 @@ public class JSONSender
 	public static void send(OutputStream os, JSONObject obj) throws IOException
 	{
 		String jsonString = obj.toString();
-		System.out.println("jsonString: " + jsonString);
 		byte[] msgBytes = jsonString.getBytes(utf8Charser);
 		int size = msgBytes.length;
 		byte[] bytes = new byte[4];

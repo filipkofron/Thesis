@@ -16,6 +16,7 @@ import cz.kofron.foodinventory.client.network.Connection;
 import cz.kofron.foodinventory.client.network.Connector;
 import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
+import cz.kofron.foodinventory.client.util.DateUtil;
 
 /**
  * Created by kofee on 25.3.14.
