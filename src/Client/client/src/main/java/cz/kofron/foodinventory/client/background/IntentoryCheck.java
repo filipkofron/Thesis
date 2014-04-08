@@ -90,9 +90,11 @@ public class IntentoryCheck
 		ArrayList<InventoryItem> expiringItems = new ArrayList<>();
 		for(InventoryItem item : items)
 		{
-			long expires = item.getUseBy();
-			long soon = System.currentTimeMillis() + days * 24 * 60 * 60 * 1000;
-			if(expires <= soon)
+			long msMax = days * DateUtil.ROUGH_MS_PER_DAY;
+			
+			long msToEnd = item.getUseBy() - System.currentTimeMillis();
+			
+			if(msMax >= msToEnd)
 			{
 				expiringItems.add(item);
 			}
