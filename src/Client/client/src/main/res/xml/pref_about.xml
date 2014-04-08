@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="about_version"
+        android:enabled="false"
+        android:summary="?android:attr/versionName"
+        android:title="@string/version_title"/>
+
+    <EditTextPreference
+        android:enabled="false"
+        android:summary="@string/developers_info"
+        android:title="@string/developers_about"/>
+
+</PreferenceScreen>

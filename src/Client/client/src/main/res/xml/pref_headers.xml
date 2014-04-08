@@ -10,4 +10,8 @@
         android:fragment="cz.kofron.foodinventory.client.activity.SettingsActivity$NotificationPreferenceFragment"
         android:title="@string/pref_header_notifications" />
 
+    <header
+        android:fragment="cz.kofron.foodinventory.client.activity.SettingsActivity$AboutPreferenceFragment"
+        android:title="@string/about_app" />
+
 </preference-headers>

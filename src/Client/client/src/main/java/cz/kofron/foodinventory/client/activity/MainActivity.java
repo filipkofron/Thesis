@@ -24,6 +24,7 @@ import cz.kofron.foodinventory.client.fragment.RemoveScanFragment;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.MessageInitializer;
+import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks, ReloadCallback
@@ -64,6 +65,7 @@ public class MainActivity extends ActionBarActivity
 
 
 		ConnectionDialogManager.initialize(this);
+		NetworkErrorToast.suppressFor(1000 * 5);
 		tryConnect();
 
 		boolean firstLaunch = Preferences.getPreferences(this).getBoolean("firstLaunch", true);
@@ -102,6 +104,7 @@ public class MainActivity extends ActionBarActivity
 			String account = Preferences.getPreferences(MainActivity.this).getString("username", "");
 			if(account == null || account.trim().length() < 3)
 			{
+				NetworkErrorToast.suppressFor(1000 * 10);
 				new AccountSelectDialogFragment().show(MainActivity.this);
 			}
 			else

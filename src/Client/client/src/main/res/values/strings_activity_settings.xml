@@ -69,4 +69,11 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- About-->
+
+    <string name="about_app">About</string>
+    <string name="developers_about">Developed by</string>
+    <string name="developers_info">This application was developed as a product of bachelor thesis at FIT CTU by Filip Kofron - filip.kofron.cz@gmail.com</string>
+    <string name="version_title">Version</string>
 </resources>

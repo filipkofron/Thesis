@@ -10,8 +10,18 @@ import cz.kofron.foodinventory.client.R;
  */
 public class NetworkErrorToast
 {
+	private static long suppressUntil = 0;
+
+	public static void suppressFor(long milis)
+	{
+		suppressUntil = System.currentTimeMillis() + milis;
+	}
+
 	public static void showError(Context context)
 	{
-		Toast.makeText(context, R.string.network_error_toast, Toast.LENGTH_LONG).show();
+		if(System.currentTimeMillis() >= suppressUntil)
+		{
+			Toast.makeText(context, R.string.network_error_toast, Toast.LENGTH_LONG).show();
+		}
 	}
 }

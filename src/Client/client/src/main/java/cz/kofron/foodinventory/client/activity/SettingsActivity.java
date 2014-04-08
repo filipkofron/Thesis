@@ -3,12 +3,14 @@ package cz.kofron.foodinventory.client.activity;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -114,6 +116,17 @@ public class SettingsActivity extends PreferenceActivity {
 			    return true;
 		    }
 	    });
+	    addPreferencesFromResource(R.xml.pref_about);
+
+	    EditTextPreference editTextPreference = (EditTextPreference) findPreference("about_version");
+	    try
+	    {
+		    editTextPreference.setSummary(this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName);
+	    }
+	    catch (PackageManager.NameNotFoundException e)
+	    {
+		    e.printStackTrace();
+	    }
     }
 
     /** {@inheritDoc} */
@@ -251,4 +264,17 @@ public class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.pref_notification);
         }
     }
+
+	/**
+	 * This fragment shows about preferences only. It is used when the
+	 * activity is showing a two-pane settings UI.
+	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public static class AboutPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.pref_about);
+		}
+	}
 }

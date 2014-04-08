@@ -83,7 +83,7 @@ Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné
 Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky. Informace z této sekce jsou velice důležité pro finální aplikaci. Můžou velice pomoci při hledání cesty k ještě lepšímu řešení než kterými jsou ty konkurenční. Takto lze posbírat důležité poznatky o jejich kladech i záporech, které vyplynou z vlastního otestování (pokud to bude možné) na následujícím seznamu zařízeních, které má autor k dispozici:
 \begin{itemize}
   \item{Nexus 7, Android 4.4.2}
-  \item{HTC Evo 3D, Android 2.3.3}
+  \item{HTC Evo 3D, Android 2.3.4}
   \item{Vodafone 845 (Huawei U8120), Android 2.3.4}
 \end{itemize}
 
@@ -154,7 +154,7 @@ Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace do
   \label{fig:SurveyOS}
 \end{figure}
 
-Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější, dává si za cíl tato práce poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společené úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
+Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si dává za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společené úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
 
 Vzhledem k tomu, že většina potravin disponuje čárovým kódem a k tomuto kódu můžou být dohledány informace o zboží, které identifikuje, lze aplikaci vybavit čtečkou čárových kódu, která usnadní manuální zadávání názvu či tohoto kódu. Aby tato informace nebyla jen tak nadhozena, byla do dotazníku přidána další sekce. Na obrázku ~\ref{fig:SurveyScan} lze pozorovat poměr mezi dotázanými, kteří by využili možnosti zadávat jídlo pomocí čtečky a těmi, kteří by toho nevyužili.
 
@@ -181,6 +181,8 @@ Funkční požadavky této aplikace, které plynou z daného problému a výše 
   \item nastavení intervalu pro upozornění o spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
   \item získávání informací o neznámých potravinách z otevřené databáze čárových kódů
 \end{itemize}
+
+Android OS se na cílových zařízeních nachází v různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o rošířených verzích lze zhlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s sebou přináší některé odlišnosti a je třeba brát v úvahu, že některé prvky API na nich nejsou k dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpoře těch starších.
 
 Čárové kódy na obalech potravin bývají různého formátu. Obecně se v na obalech objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
@@ -453,8 +455,32 @@ Třídy serveru však lze rozlišit na základní kategorie, které také učí 
   \item{\textbf{Util} - obecné a pomocné třídy}
 \end{itemize}
 
+\section{Klient}
 
-\section{Client}
+Jelikož klient této aplikace slouží jako rozhraní pro uživatele, je třeba dbát na návrh uživatelského rozhraní co nejvíce. Návrh klienta dále popisuje další klíčové oblasti, které je nutné správně navrhnout.
+
+\subsection{Uživatelské rozhraní}
+
+Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživatelského rozhraní je možná v různém softwaru. V případě OS Android je však návrh proveditelný přímo do spustitelné podoby s pomocí vývojářských nástrojů. Tento postup s sebou přínáší následující výhody:
+
+\begin{itemize}
+  \item{Jednoduchost návrhu - nástroje velmi intuitivní}
+  \item{Nástroje umožňují předem získat přehled o vzhledu na různých typech obrazovek}
+  \item{Vytvořený návrh lze okamžitě testovat mezi dobrovolníky zasláním aplikace}
+  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh}
+\end{itemize}
+
+Dále jsou popsány jednotlivé obrazovky zajímavé pro uživatele.
+
+\subsection{Přihlášení uživatele.}
+
+
+\subsection{Obrázky}
+
+
+\subsection{Knihovny}
+
+
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
