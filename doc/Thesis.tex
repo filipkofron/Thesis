@@ -485,6 +485,8 @@ Důvod existence pouze těchto položek spočívá v jednoduchosti navigace. Sc�
   \label{fig:AppMenu}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Inventář}
 
 Inventář se stejně jako menu zobrazí při prvním spuštění, avšak zůstane v jeho pozadí. Zachycuje ho obrazovka ~\ref{fig:AppInventory}. Lze zde pozorovat seznam potravin, který vlastní uživatel. Tyto položky inventáře dále disponují datumem spotřeby, díky kterému docházi k seřazení a následně je u potravin barevně vyznačen jejich status trvanlivosti. Červeně jsou vyznačeny potraviny s končící trvanlivostí a postupně přechodem do zelené ty, které jsou od konce trvanlivosti vzdáleny více než týden.
@@ -500,7 +502,15 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppInventory}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Detail inventáře}
+
+Obrazovka~\ref{fig:AppInventoryDetail} zobrazená po stisku položky inventáře ukazuje dialog obsahující detail položky inventáře, kde lze upravit datum spotřeby a případně přejít na detail potraviny, která je položkou tohoto inventáře. Při navigaci zpět zůstává dialog zobrazený stejně jako změny provedené uvnitř.
+
+Tlačítky Ok a Cancel lze uložit či zrušit zvolenou změnu datumu. Uložení způsobí nové stahnutí položek inventáře ze serveru.
+
+Samotné načítaní inventáře probíhá za zobrazení standardního ukazatele průběhu, který je schován spolu s plně načteným inventářem a jeho zobrazením.
 
 \begin{figure}[H]
   \centering
@@ -509,7 +519,17 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppInventoryDetail}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Vyhledávání potravin}
+
+Z menu nebo z tlačítka přidání v inventáři se uživatel může dostat do obrazovky vyhledání potravin~\ref{fig:AppSearch}. Pro vyhledávání je zde přítomen jeden jediný textové políčko, které napovídá uživateli, že může vyhledávat pomocí jména potraviny či jejího čárového kódu.
+
+Při psaní textu do políčka vyhledávání je dále zobrazována nápověda jako seznam potravin, které by byly zobrazeny při aktuálním textu v políčku po stisku klávesy. Pokud uživatel na položku nápovědy klikne, vybraný text se vyplní do políčka.
+
+Pro samotné vyhledání podle políčka stiskne uživatel klávesu Search, která zobrazí obrazovku~\ref{AppSearchResults}.
+
+V této obrazovce je do budoucna dále možné uvést filtraci výsledků pomocí jména výrobce, kategorie či jiných parametrů, které jsou již navrženy v aktuálním databázovém modelu.
 
 \begin{figure}[H]
   \centering
@@ -518,7 +538,15 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppSearch}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Seznam výsledků hledání potravin}
+
+Tato obrazovka~\ref{fig:AppSearchResults} zobrazena po vyhledávání v obrazovce~\ref{fig:AppSearch} zobrazuje seznam nalezených výsledků. Při probíhajícím vyhledávání je seznam nahrazen prvkem ukazující probíhající činnost, který je zpět schován a zobrazen seznam výsledků při dokončení.
+
+V tomto seznamu výsledků se v pravém horním rohu nabízí tlačítko plus, které umožní uživateli přidat novou potravinu, neboť je to místo, kde uživatel zjistí, že taková to potravina neexistuje. Přidání potraviny potom probíha stejně jako při editaci~\ref{fig:AppFoodEdit}.
+
+V seznamu výsledků je dále možné zobrazit detail potraviny~\ref{fig:AppFoodDetail} nebo přidání této potraviny do inventáře stisknutím tlačítka plus, které se nachází napravo v položce seznamu. Toto stisknutí zobrazí dialog~\ref{fig:AppScanAddFood}.
 
 \begin{figure}[H]
   \centering
@@ -527,7 +555,15 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppSearchResults}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Přidání potraviny do inventáře}
+
+V tomto dialogu~\ref{fig:AppScanAddFood} je zobrazen název potraviny, výběr datumu spotřeby a počet takových kusů. Každý takový kus bude přidán jako jedna položka inventáře.
+
+Stisk tlačítka s názvem potraviny uživatele přesune do detailu potraviny~\ref{fig:AppFoodDetail}, ze kterého se navigací zpět dostane zpátky do tohoto dialogu.
+
+Tento Dialog se zobrazuje při přidávání z výsledků hledání potravin i ze čtení čárového kódu za tímto účelem.
 
 \begin{figure}[H]
   \centering
@@ -536,7 +572,15 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppScanAddFood}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Detail potraviny}
+
+Obrazovka~\ref{fig:AppFoodDetail} ukazuje částečný detail potraviny. V tomto místě je možné si potravinu detailnějí prohlédnout a hodnotit. Také z této obrazovky lze potravinu upravit pomocí tlačítka tužky v pravém horním rohu.
+
+Hodnocení potraviny probíha pomocí dialogu, který se dotáže na číselné ohodnocení spolu s volitelným textem recenze. Pro uložení uživatel stiskne tlačítko Rate, v opačném případě uživatel stiskne delete, který odstraní hodnocení, pokud existuje. Každý uživatel může potravinu hodnotit maximálně jednou.
+
+Ve spodní části jsou dále vidět 2 uživatelé. První je ten, kdo potravinu přidal jako první a druhý ten, kdo potravinu naposledny upravil.
 
 \begin{figure}[H]
   \centering
@@ -545,32 +589,59 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppFoodDetail}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Editace potraviny}
+
+K editaci potraviny slouží obrazovka~\ref{fig:AppFoodEdit}. Stejně tak slouží i pro přidání potraviny pouze s tím, že všechny položky jsou nastavené na výchozí hodnoty nebo hodnoty takové, které se porařilo zajistit jiným způsobem. Zde je možné nastavit jméno, výrobce i předem určené obecně uznávané kategorie potravin, čárový kód, obrázky potraviny, hmotnost nebo objem a výchozí datum spotřeby.
+
+Výber kategorie i výrobce poskytuje dialog. Pro výrobce je však možné určit název manuálně, čímž dojde k přidání výrobce do seznamu všech.
+
+Nastavení čárového kódu je možné buď manuálně, či je vedle něj tlačíkto, které zobrazí stejnou obrazovku jako při přidání potraviny~\ref{fig:AppScanAdd}, která po načtení čárového kódu zanikne a vyplní číslo čárového kódu tím načteným.
+
+Obrázky je možné přidávat tlačítkem Add image a mazat pomocí tlačítka delete již existující obrázky.
+
+Pro samotné uložení změn potraviny (nebo vytvoření nové) slouží tlačítko v podobě diskety v pravém horním rohu na panelu ActionBar. Uložení proběhne se zobrazeným dialogem průběhu, neboť nahrávání obrázků může trvat delší dobu.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{screenshots/app_food_edit.png}
+  \includegraphics[scale=0.35]{screenshots/app_food_edit.png}
   \caption{Editace potraviny}
   \label{fig:AppFoodEdit}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Přidání potraviny do inventáře čárovým kódem}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.4]{screenshots/app_scan_add.png}
-  \caption{Skenování čárového kódu pro přidání potraviny}
-  \label{fig:AppScanAdd}
-\end{figure}
+Pro samotne přidání potraviny pomocí čárového kódu slouží obrazovka~\ref{fig:AppScanAdd}. Uživatel je pobídnut k položení čárového kódu do náhledu kamery. Pokud dojde k úspěšnému načtení, spustí se vyhledání potraviny na serveru, které je signalizováno dialogem pruběhu.
+
+V případě úspešného nalezení potraviny se zobrazí dialog pro přidání potraviny~\ref{fig:AppScanAdd} stejný jako v případě manuálního hledání potraviny. Po zrušení dialogu či jeho potvrzení se vrátí obrazovka načítaní čárového kódu, aby mohla být načtena další potravina.
+
+Pokud však potravina naleznuta nebyla, spustí se dále hledání v externí databázi, které bude popsáno dále v této sekci. Signalizováno je také pomocí dialogu průbehu. Při nalezení či nenalezení v externi databázi se zobrazí dialog, který buď pobízí vytvoření nové potraviny s importem nalezených informací~\ref{fig:AppScanAddImport} nebo k pouhému vytvoření nové potraviny. Do té bude přenesen načtený kód nebo další informace získané z externí databáze. Přidání potraviny probíhá stejně jako při jejím vytváření při vyhledávání. Po přidání či odmítnutí přidání potraviny se znovu zobrazí obrazovka pro načtení čárového kódu, aby mohl uživatel dále pokračovat v načítání.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.4]{screenshots/app_scan_add_import.png}
-  \caption{Import informací z externí databáze Product Open Data}
-  \label{fig:AppScanAddImport}
+  \begin{minipage}{0.5\linewidth} 
+    \centering
+    \includegraphics[scale=0.3]{screenshots/app_scan_add.png}
+    \caption{Skenování čárového kódu pro přidání potraviny}
+    \label{fig:AppScanAdd}
+  \end{minipage}
+  \begin{minipage}{0.5\linewidth} 
+    \centering
+    \includegraphics[scale=0.3]{screenshots/app_scan_add_import.png}
+    \caption{Import informací z externí databáze Product Open Data}
+    \label{fig:AppScanAddImport}
+  \end{minipage} 
 \end{figure}
+
+\clearpage
 
 \subsubsection{Odebrání potraviny z inventáře čárovým kódem}
+
+Podobně jako obrazovka pro načtení čárového kódu pro přidání potraviny~\ref{fig:AppScanAdd} vypadá i tato pro její odebrání z inventáře.
+
+Při načtení čárového kódu dojde k vyhledání v uživatelově inventáři a zobrazení seznamu potravin ~\ref{fig:AppScanRemoveList}, který je stejný jako z obrazovky zobrazení celého inventáře ~\ref{fig:AppInventory}. Smazání položky seznamu tedy probíha stejně.
 
 \begin{figure}[H]
   \centering
@@ -579,7 +650,15 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \label{fig:AppScanRemoveList}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Nastavení}
+
+Pro změnu volitelných vlastností aplikace slouží obrazovka ~\ref{fig:AppInventoryDetail}.
+
+Zde je možné změnit účet uživatele, zakázat stahování obrázků potravin, povolit notifikace a jejich časování.
+
+Zmíněna je zde také verze spolu s autorem aplikace.
 
 \begin{figure}[H]
   \centering
@@ -587,6 +666,8 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
   \caption{Nastavení}
   \label{fig:AppSettings}
 \end{figure}
+
+\clearpage
 
 \subsection{Identifikace uživatele}
 
