@@ -677,10 +677,33 @@ Vzhledem k jednoduchosti aplikace a nízkému nebezpečí zneužití dat uživat
 
 \subsection{Vyhledávání čárového kódu v externí databázi}
 
-Databáze potravin této aplikace bude ze začátku neobsahovat žádné potraviny.
-Pro GTIN kódy existují databáze produktů, zejména POD - Product Open Data~\cite{pod}.
+Databáze potravin této aplikace bude ze začátku neobsahovat žádné potraviny. Jelikož může být přidání nové potraviny pro uživatele otravné, je vhodné najít cestu, která by zadávání přinejmenším zjednodušila nebo zcela nahradila.
 
-\chapter{Analýza}
+Jednotlivé potraviny výrobců však není jednoduché získat. Díky zaznamenávání potravin pomocí GTIN kódu se však nabízí možnost získat informace o potravinách z veřejné a otevřené databáze produktů POD - Product Open Data~\cite{pod}. V této databázi je možné k začátku roku 2014 nalézt stovky tisíců záznamů. Informace v databázi obsahují u některých potravin složení, ale u některých naopak pouze jejich výrobce. Možství dat, které se při náhodné analýze této databáze podařilo získat, bylo nedostatečné pro vyplňění většiny potravin. Je zde však možnost využít i pouze částečné informace a ty k potravině doplňit.
+
+\subsubsection{Připojení k Product Open Data}
+
+Databázi Product Open Data zpřístupňují online v době psaní toho textu 3 různé projekty. Jedná se o:
+\begin{itemize}
+  \item{LSA - http://www.pod.lsa-conso.fr/}
+  \item{Mingle IO - https://mingle.io/explore?f=product}
+  \item{OpenDataSoft - http://pod.opendatasoft.com/explore/}
+\end{itemize}
+
+Projekty Mingle IO a OpenDataSoft spojuje podobné API, se kterým lze komunikovat ve formátu JSON, pomocí kterého se lze dotazovat na čárové kódy.všech produktů v databázi. Projekt LSA je pouze webový vyhledávač.
+
+Mezi OpenDataSoft a Mingle IO nebylo příliš rozdílů, kterými by bylo možné vybrat ten vhodnější. Autor tím pádem zvolil projekt, který se zdál být lépe zdokumentovaný a tím pádem snadnější na implementaci, čímž byl projekt OpenDataSoft.
+
+\subsubsection{Integrace v aplikaci}
+
+Integrování vyhledávání v této externí databázi je, jak již bylo zmíněné v návrhu uživatelského rozhraní, pouze dodatečné vyhledání při nenalezeném produktu, který doplňí podporované informace z produktu do vytvářené potraviny. U testovaných potravin v domácnosti autora této práce bylo nalezeno pouze nepatrné množství potravin, u kterých navíc bylo uvedeno pouze jméno a obrázek. I takto základní informace však usnadnila přidávání.
+
+\chapter{Implementace}
+
+\section{Vývojové nástroje}
+\subsection{Databáze}
+\subsection{Klient}
+\subsection{Server}
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
