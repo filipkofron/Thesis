@@ -700,10 +700,28 @@ Integrování vyhledávání v této externí databázi je, jak již bylo zmín�
 
 \chapter{Implementace}
 
+Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v průběhu práce vyskytly.
+
 \section{Vývojové nástroje}
-\subsection{Databáze}
-\subsection{Klient}
+V této sekci lze nalézt všechny použité nástroje při implementaci.
+
+\subsection{Verzovací software a repozitář}
+
+Jelikož byl vývoj uskutečňován na více zařízeních, bylo třeba zajistit vhodné sdílení materiálů a kvůli správě změn také verzování. Jelikož autor již déle používa software Mercurial~\cite{hg}, bylo vhodné, aby pro tuto práci vyzkoušel konkurenční Git~\cite{git}. Oba tyto verzovací nástroje jsousi navzájem velmi podobné s tím rozdílem, že se jen trochu odlišněji ovládají.
+
+Pro sdílení všech materiálů této práce byl zvolen veřejný repozitář pomocí~\cite{repo} služby Github~\cite{github}.
+
+\subsection{Správa a úpravy databáze}
+
+Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s MySQL. Některé úpravy však byli prováděny v softwaru PhpMyAdmin~\cite{phpmyadmin} v případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z webového prohlížeče, a tak bylo možné upravovat databázi i bez přístupu k příkazové řádce.
+
+\subsection{Android klient}
+
+Pro tvorbu klienta pro Android OS se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní, používat známý verzovací sooftware. Díky jeho multiplatformnosti mohl autor aplikaci vyvíjet v různých operačních systémech.
+
 \subsection{Server}
+
+Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
@@ -726,8 +744,6 @@ Integrování vyhledávání v této externí databázi je, jak již bylo zmín�
 	\item[VM] Virtual Machine
 	\item[XML] Extensible Markup Language
 \end{description}
-
-
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % Tuto kapitolu z výsledné práce ODSTRAŇTE.
