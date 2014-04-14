@@ -721,7 +721,7 @@ Pro tvorbu klienta pro Android OS se jevilo jako vhodné vývojové prostředí 
 
 \subsection{Prostředí pro server}
 
-Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}.
+Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto 
 
 \section{Server}
 
@@ -772,12 +772,73 @@ Detailní implementace všech částí serveru probíhala průbežně s aplikac�
 Implementace klientské aplikace tvořila 2 části:
 
 \begin{itemize}
-	\item{Tou první bylo vytvoření síťové vrstvy, která nezasahovala ještě do návrhu uživatelského rozhraní a sloužila také zároveň k testování počínající implementace serveru. Byl pro to vytvořen projekt TestClient, který lze nalézt ve zdrojových kódech této práce.}
-	\item{Druhou částí byla implementace samotné funkcionality UI a napojení síťové vrstvy. Tato část bude níže rozepsána.}
+	\item{Vytvoření síťové vrstvy, která nezasahovala ještě do návrhu uživatelského rozhraní a sloužila také zároveň k testování počínající implementace serveru. Byl pro to vytvořen projekt TestClient, který lze nalézt ve zdrojových kódech této práce.}
+	\item{Implementace samotné funkcionality UI a napojení síťové vrstvy. Tato část bude níže rozepsána.}
 \end{itemize}
 
 \subsection{Struktura zdrojového kódu}
 
+Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s uživatelským rozhraním seskupeny, jak ukázuje následující seznam:
+
+\begin{itemize}
+	\item{Model}
+	\item{Adapter}
+	\item{Network}
+	\item{Task}
+	\item{Barcode}
+	\item{Util}
+	\item{Cache}
+	\item{UI prvky - Activity, Fragment, Dialog, Preference, View}
+	\item{Background}
+\end{itemize}
+
+Každá část je dále detailněji popsána jako v případě serveru. Autor by rád zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o každé části je třeba navštívit přímo zdrojový kód.
+
+\subsubsection{Model}
+
+Entity využité v klientské části aplikace jsou umístěny v této části.
+
+\subsubsection{Adapter}
+
+Některé části uživatelského rozhraní pro zobrazení dat vyžadují adaptery~\cite{adapter} - třídy, které zprostředkovávají jednotlivé prvky dat, které UI prvky pomocí těchto adapterů přimo získávají a následně prezentují uživateli. 
+
+Adapterů je v této aplikaci více, proto jim byla věnována samotná část.
+
+\subsubsection{Network}
+
+Síťová komunikace byla převzata z projektu TestClient uvedeného dříve. Stará se o příjem a odesílání syrových dat po síťi, stejně jako vytváření a udržování spojení.
+
+\subsubsection{Protocol}
+
+Požadavky a odpovědi, které tvoří zprávy v komunikaci, zde mají svou stejnou reprezentaci jako v případě serveru.
+
+\subsubsection{Task}
+
+Každá operace trvající déle či operace, která vyžaduje komunikaci po síti, je potomkem třídy AsyncTask~\cite{async_task} z Android API. Pomocí implementací potomků této třídy lze jednoduše vytvářet asynchronně probíhající úlohy, jejichž hlavní předností oproti vláknům je zabudovaná synchronizace před spuštěním a po dokončení s hlavním vláknem, jež je nutné pro přístup k prvkům UI.
+
+\subsubsection{Barcode}
+
+Třídy využívající knihovnu ZXing, která byla popsána výše, lze nalézt v této části. Jejich zodpovědnost je pouze dekódování načteného snímku a oznámení výsledku volajícímu.
+
+\subsubsection{Util}
+
+Všechny ostatní třídy, které nezapadají do ostatních částí, lze nalézt v zde. Jedná se zejména o zpracování časových a jiných údajů.
+
+\subsubsection{Cache}
+
+Jelikož jednotlivé potraviny mohou disponovat obrázky, je nutné tyto obrázky uchovávat v zařízení s aplikací, aby nedocházelo k plýtvání přenosu dat na síťi.
+
+\subsubsection{UI prvky - Activity, Fragment, Dialog, Preference, View}
+
+V této části jsou kategoricky umístěny části prvků UI, které jsou použity ve všech částech klientské aplikace.
+
+Protože jsou tyto prvky v aplikaci rozšířeny mnohočetně, bylo nutné prvky seskupit podle daných abstraktních tříd. Významy jednotlivých názvů uvedených v nadpise lze nalézt v dokumentaci Android API~\cite{android_api}. 
+
+\subsubsection{Background}
+
+Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit zvláštní část background. Zde lze nalézt registrace událostí pro AlarmManager\cite{alarm_manager}, který způsobí volání těchto operací opakovaně.
+
+Pro získání dat inventáře je zde zjednodušené použití úloh z části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v té době aktivní.
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
@@ -798,6 +859,7 @@ Implementace klientské aplikace tvořila 2 části:
 	\item[OS] Operační systém
 	\item[SDK] Software Development Kit
 	\item[VM] Virtual Machine
+	\item[UI] User Interface
 	\item[XML] Extensible Markup Language
 	\item[DAO] Data Access Object
 \end{description}
