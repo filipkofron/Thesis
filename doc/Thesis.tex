@@ -240,7 +240,7 @@ Komponenta Camera detekuje dostupné snímací čipy zařízení a přizpůsobuj
 
 \subsubsection{Capture}
 
-Pro samotné zobrazení náhledu a dalších prvků uživatelského rozhraní slouží aktivita CaptureActivity, kterou nazveme komponentou Capture. V této komponentě je umístěn prvek SurfaceView, který zobrazuje živy náhled ze snímacího čipu ve stejném rozlišení, jako jsou získávána data přes rozhraní Camera.PreviewCallback. Změna velikosti prvku SurfaceView vždy vedla k deformaci obrazu, pokud nepokrýval plochu celého displaye a zároveň měl jiný poměr stran, než který byl dán rozlišením náhledu. Tuto vadu se ani v průběhu práce nepovedlo autorovi vyřešit, pouze potlačit vhodným rozmístěním ostatních prvků. V tomto prototypu je prvek zmenšen vertikálně o téměř polovinu na většině zařízeních, tudíž je obraz velmi zdeformovaný. Zdeformovanost však nezpůsobuje žádné potíže při skenování. Je to tedy pouze kosmetický nedostatek, který se autor rozhodl dále neřešit.
+Pro samotné zobrazení náhledu a dalších prvků uživatelského rozhraní slouží aktivita CaptureActivity, kterou nazveme komponentou Capture. V této komponentě je umístěn prvek SurfaceView, který zobrazuje živý náhled ze snímacího čipu ve stejném rozlišení, jako jsou získávána data přes rozhraní Camera.PreviewCallback. Změna velikosti prvku SurfaceView vždy vedla k deformaci obrazu, pokud nepokrýval plochu celého displaye a zároveň měl jiný poměr stran, než který byl dán rozlišením náhledu. Tuto vadu se ani v průběhu práce nepovedlo autorovi vyřešit, pouze potlačit vhodným rozmístěním ostatních prvků. V tomto prototypu je prvek zmenšen vertikálně o téměř polovinu na většině zařízeních, tudíž je obraz velmi zdeformovaný. Zdeformovanost však nezpůsobuje žádné potíže při skenování. Je to tedy pouze kosmetický nedostatek, který se autor rozhodl dále neřešit.
 
 \subsubsection{Decoder}
 
@@ -700,7 +700,7 @@ Integrování vyhledávání v této externí databázi je, jak již bylo zmín�
 
 \chapter{Implementace}
 
-Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v průběhu práce vyskytly.
+Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v průběhu práce vyskytly. Nakonec bude popsán průběh testování a jeho souhrn poznatků.
 
 \section{Vývojové nástroje}
 V této sekci lze nalézt všechny použité nástroje při implementaci.
@@ -715,13 +715,69 @@ Pro sdílení všech materiálů této práce byl zvolen veřejný repozitář p
 
 Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s MySQL. Některé úpravy však byli prováděny v softwaru PhpMyAdmin~\cite{phpmyadmin} v případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z webového prohlížeče, a tak bylo možné upravovat databázi i bez přístupu k příkazové řádce.
 
-\subsection{Android klient}
+\subsection{Prostředí pro klienta v Android OS}
 
 Pro tvorbu klienta pro Android OS se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní, používat známý verzovací sooftware. Díky jeho multiplatformnosti mohl autor aplikaci vyvíjet v různých operačních systémech.
 
-\subsection{Server}
+\subsection{Prostředí pro server}
 
-Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}
+Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}.
+
+\section{Server}
+
+Jako první částí implementace byl vytvořen základ serveru. Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Sekce tvoří následující seznam:
+\begin{itemize}
+	\item{Client}
+	\item{Config}
+	\item{Database}
+	\item{Entity}
+	\item{Handler}
+	\item{Network}
+	\item{Protocol}
+	\item{Util}
+\end{itemize}
+
+Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
+
+\subsection{Client}
+Název Client může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s klientem. Zde dochází k přijímaní zpráv serveru a k ošetřování chyb, které mohou nastat při komunikaci s klientem. Mezi ně patří i chyby ze strany serveru.
+
+Důležité pro tuto sekci je, aby nemohlo dojít k pádu server. Jelikož server používá spoustu vyjímek, je zde pokryto velké množství těch, které lze odchytnout a které by za určitých okolností způsobily pád serveru.
+
+\subsection{Config}
+Zde jsou umístěny soubory pro načítání konfigurace a pro jejich získání za běhu serveru. Konfigurace používá formát JSON a při neposkytnutí konfiguračního souboru jsou nastaveny výchozí hodnoty použité pro lokální testování, které server znepřístupňuje veřejnosti.
+
+\subsection{Database}
+V sekci Database jsou implementovány všechny DAO rozhraní, které jsou popsány níže v podsekci Entity. Jejich implementace využívá MySQL Manager, který je také umístěn v této sekci. Jeho úkolem je udržovat již existující a neaktivní spojení do databázového serveru, tím recyklovat jejich instance pro další použití novými požadavky klientů. Toto je velmi důležité, neboť připojení na server je časově náročná operace, jak se ukázalo v průběhu implementace a testování.
+
+\subsection{Entity}
+Každá entita doménového modelu vlastní třídu podobného jména obsahující její atributy. Dále jsou zde umístěny všechny rozhraní DAO objektů, které každé entitě přiřazují množinu databázových operací.
+
+\subsection{Handler}
+Pro každou zprávu je v sekci Handler umístěna shodně pojmenovaná obslužná třída, která dle přijaté zprávy dále zpracovává klientské požadavky a sama se postará o jeho zaslání zpět v podobě odpovědi.
+
+\subsection{Network}
+Soubory síťového socketu serveru a soubory pro uskutečnění odesílání i přijímání dat jsou umístěny v sekci Network. 
+
+\subsection{Protocol}
+Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpověd. Jejich popis atributy je popsán v sekci Protocol.
+
+\subsection{Util}
+Pro jednodušší práci s časovými daty, pro testování a debugování byla vyotvořena sekce Util, kde se nalézají všechny zbylé třídy, které přimo nesouvisí s ostatními sekcemi.
+
+Detailní implementace všech částí serveru probíhala průbežně s aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
+
+\section{Klient}
+
+Implementace klientské aplikace tvořila 2 části:
+
+\begin{itemize}
+	\item{Tou první bylo vytvoření síťové vrstvy, která nezasahovala ještě do návrhu uživatelského rozhraní a sloužila také zároveň k testování počínající implementace serveru. Byl pro to vytvořen projekt TestClient, který lze nalézt ve zdrojových kódech této práce.}
+	\item{Druhou částí byla implementace samotné funkcionality UI a napojení síťové vrstvy. Tato část bude níže rozepsána.}
+\end{itemize}
+
+\subsection{Struktura zdrojového kódu}
+
 
 \begin{conclusion}
 	%sem napište závěr Vaší práce
@@ -743,6 +799,7 @@ Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcr
 	\item[SDK] Software Development Kit
 	\item[VM] Virtual Machine
 	\item[XML] Extensible Markup Language
+	\item[DAO] Data Access Object
 \end{description}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
