@@ -44,8 +44,8 @@
 \authorWithDegrees{Filip Kofroň} %jméno autora včetně současných akademických titulů
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
-\abstractCS{Tato bakalářská práce seznamuje čtenáře s globálním problémem plýtvání potravin. Popisuje možné řešení v podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v prostředí OS Android a serverovou částí využívající svobodný software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s případnými vylepšeními, které přinesla odezva při nasazení aplikace u skutečných uživatelů.}
-\abstractEN{Sem doplňte ekvivalent abstraktu Vaší práce v~angličtině.}
+\abstractCS{Tato bakalářská práce seznamuje čtenáře s globálním problémem plýtvání potravin. Popisuje možné řešení v podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s případnými vylepšeními, které přinesla odezva při nasazení aplikace u skutečných uživatelů.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity to implementation of the mobile application on top of the Android OS and a server component using open-source sofware followed by a testing of the whole solution. This work also evaluates the final solution and gives a perspective for the future development with enhancements, which are gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
 \keywordsCS{Nahraďte seznamem klíčových slov v češtině oddělených čárkou.}
@@ -190,7 +190,7 @@ Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasaze
 
 Server budé dále umožňovat připojení z více zařízení v rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v rámci rodiny. 
 
-Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod svobodnými licencemi. Samotný kód aplikace autor hodlá publikovat jako svoboný software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
+Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace autor hodlá publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
 
 Seznam nefunkčních požadavků:
 
@@ -202,7 +202,7 @@ Seznam nefunkčních požadavků:
   \item nenáročnost serveru
   \item výkonová škálovatelnost serveru
   \item dostupnost serveru z více zařízení jedním účtem uživatele
-  \item využití svobodného software
+  \item využití open-source software
   \item podpora různě dlouhých čárových kódů
 \end{itemize}
 
@@ -210,7 +210,7 @@ Seznam nefunkčních požadavků:
 
 \section{Čtečka čárových kódu}
 
-Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovou to funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat svobodný software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
+Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovou to funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
 
 Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, které pak lze dále použít v návrhu a implementaci.
 
@@ -345,7 +345,7 @@ Z důvodu zvolené architektury je nutné specifikovat protokol, jakým budou me
 
 \subsection{XML}
 
-Mnoho protokolů využíva ke komunikaci textový formát v XML. Tento formát je podobný HTML, je platformě nezávislý a široce podporován. V C/C++ ho implementují různé knihovny, které jsou dostupné jako svobodný software. Protokol však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
+Mnoho protokolů využíva ke komunikaci textový formát v XML. Tento formát je podobný HTML, je platformě nezávislý a široce podporován. V C/C++ ho implementují různé knihovny, které jsou dostupné jako open-source software. Protokol však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
 
 \subsection{JSON}
 
@@ -840,6 +840,14 @@ Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit
 
 Pro získání dat inventáře je zde zjednodušené použití úloh z části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v té době aktivní.
 
+\section{Nasazení}
+
+Nasazení probíhalo v rámci integrace v průběhu celé implementace.
+
+Server byl nasazen na autorem vlastněný virtuální server, který běžel již od počátku implementace, aby bylo možné vyvíjenou klientskou aplikaci testovat co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem. Kompilace serveru probíhala přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
+
+Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s Android OS verze 2.3 a vyšší nainstalovat. 
+
 \section{Testování}
 
 Každou část aplikace je třeba otestovat, aby byla zajištěna správná funkčnost při nasazení aplikace o produkce. Je tedy nutné testovat jak server tak klientskou aplikaci.
@@ -868,10 +876,38 @@ Vydáním beta verze aplikace na Play Store byla plně naimplementovaná aplikac
 
 Průběh tohoto testování záležel na samotných uživatelích. Uživatelé měli možnost se k aplikaci vyjádřit na přání autora.
 
-Při tomto testování byla objevena pouze jedna vážná chyba, která nastane při skenování nové potraviny. Novou potravinu uživatel uloží, ale potravina musí být naskenována znovu, aby ji bylo možné přidat do inventáře. Je to závažnější problém proto, že některé potraviny je velmi obtížné naskenovat a tím pádem to práci s aplikací velmi znepříjemní. Zejména v době začátku aplikace, kdy je v databázi velmi málo potravin a uživatel musí zadávat potravin více.
+Při tomto testování byly do doby psaní tohoto textu objeveny tyto nedostatky:
+
+\begin{itemize}
+	\item{Při skenování nové potraviny uživatel na výzvu přidání potraviny ji uloží, ale potravina musí být naskenována znovu, aby ji bylo možné přidat do inventáře. Je to závažnější problém proto, že některé potraviny je velmi obtížné naskenovat a tím pádem to práci s aplikací velmi znepříjemní. Zejména v době začátku aplikace, kdy je v databázi velmi málo potravin a uživatel musí zadávat potravin více.}
+	\item{Nemožnost zvolit kameru, která je použita pro snímání potravin. Některé mobilní telefony totiž mají zadní i přední snímací čip obrazu a někteří uživatelé vyjádřili touhu po této funkcionalitě. Výchozí totiž byla zadní kamera, jelikož obvykle mívá vyšší rozlišení.}
+	\item{Zasekávání kamery. Tato chyba vzniká při uspání aktivity pro skenování čárového kódu a následném probuzení.}
+	\item{Samovolné uspání zařízení z neaktivity uživatele. Stává se tak obvykle při delším neúspěšném skenování čárového kódu potraviny.}
+\end{itemize}
+
+Opravení těchto nedostatků již proběhne mimo rámec této práce.
 
 \begin{conclusion}
-	%sem napište závěr Vaší práce
+Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v podobě mobilní aplikace na platformě Android. Bylo nutné řešení nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňuje spolu.
+	
+Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a server, který byl naimplementován pomocí multiplatformních knihoven v jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
+
+Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
+
+V době psaní tohoto textu je aplikace nasazena v testovací beta verzi již veřejně dostupné každému k vyzkoušení.
+
+\section{Budoucí vývoj}
+
+Aplikace, která vznikla v rámci této práce, má mnoho nedostatků. Zde se pokusím popsat ty, které lze do budoucna vyřešit.
+
+Jedním z nich je nedokonalost knihovny ZXing, která čtení čárových sice zvládá, ale testováním uživateli vyšlo najevo, že ne dostatečně. Do budoucna by tedy bylo vhodné zvážit i jiné například komerční řešení nebo vyvinout vlastní řešení založeném na jiném algoritmu, který by umožňoval načítaní čárových kódu potravin spolehlivěji.
+
+Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, nění toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy Android OS. V budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výberu uživateli.
+
+Další nedostatek je v cílovém stroji na nasazení serveru. Pokud by aplikace měla v budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonější stroj.
+
+Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvynout pro aplikaci také webovou verzi, který by byla dostupná i na jiných zařízeních, které nedisponují operařním systémem Android.
+
 \end{conclusion}
 
 \bibliographystyle{csn690}
