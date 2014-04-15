@@ -840,6 +840,38 @@ Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit
 
 Pro získání dat inventáře je zde zjednodušené použití úloh z části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v té době aktivní.
 
+\section{Testování}
+
+Každou část aplikace je třeba otestovat, aby byla zajištěna správná funkčnost při nasazení aplikace o produkce. Je tedy nutné testovat jak server tak klientskou aplikaci.
+
+Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným programátorem (autorem práce) při implementaci. Ta druhá probíhala mezi uživateli, kteří zkoušeli aplikaci v alfa verzích s autorovým dozorem. Poslední třetí fáze probíhala před a po dokončení psaní této práce přímo vydáním beta verze aplikace na Play Store.
+
+\subsection{Testování programátorem}
+
+Průběh testování spočíval v psaní testů nad částmi, které nebylo možné testovat jako celek. Cílem testů bylo ověřit správnost implementace různých abstraktních tříd a rozhraní v serveru i klientské aplikaci.
+
+Další testování programátorem spočívalo v přímém testování aplikace, čímž bylo ověřena aplikace jako celek a odhaleny zásadní chyby v implementaci, zejména v komunikaci protokolem se serverem.
+
+Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synchronizační problémy vláken. Všechny tyto chyby bylo možné rychle opravit rovnou při probíhající implementaci a urychlit tak vývoj aplikace i serveru.
+
+\subsection{Pozorované testování vybranými uživateli}
+
+Toto testování mělo za účel odhalit chyby v uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
+
+Testování probíhalo tak, že uživatelé byli dotázáni na různé případy užití a případné zmatení či ztracení uživatele v navigaci se projevilo při změně rozvržení uživatelského rozhraní. Jejich pocity a názory byli poté autorem zaznamenány. Tím byl zpětně upravován návrh UI aplikace.
+
+Problémy odhalené v této části testování zahrnovaly především nízkou informovanost uživatele o probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o průběhu jejich akcí.
+
+\subsection{Testování vydáním na Play Store}
+
+Vydáním beta verze aplikace na Play Store byla plně naimplementovaná aplikace testována přímo samotnými uživateli. V době psaní této práce se tohoto testování zučastnilo 5 osob různých věkových kategorií.
+
+Průběh tohoto testování záležel na samotných uživatelích. Uživatelé měli možnost se k aplikaci vyjádřit na přání autora.
+
+Poznatky z tohoto testování zahrnovali ..
+
+\subsection
+
 \begin{conclusion}
 	%sem napište závěr Vaší práce
 \end{conclusion}
