@@ -45,7 +45,7 @@
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
 \abstractCS{Tato bakalářská práce seznamuje čtenáře s globálním problémem plýtvání potravin. Popisuje možné řešení v podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s případnými vylepšeními, které přinesla odezva při nasazení aplikace u skutečných uživatelů.}
-\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity to implementation of the mobile application on top of the Android OS and a server component using open-source sofware followed by a testing of the whole solution. This work also evaluates the final solution and gives a perspective for the future development with enhancements, which are gained by the deployment of the application between real users.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity to implementation of the mobile application on top of the Android OS and a server component using open-source sofware followed by testing of the whole solution. This work also evaluates the final solution and gives a perspective for the future development with enhancements, which are gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
 \keywordsCS{Nahraďte seznamem klíčových slov v češtině oddělených čárkou.}
@@ -68,7 +68,7 @@ V rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich
 
 Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v podobě evidence potravin, která uživateli nabídne přehled o trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončí, či pokud se tak stane v blízké době.
 
-V této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Práce využívá znalosti získané během mého studia z předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
+V této práci autor popisuje vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Práce využívá znalosti získané během autorova studia z předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
 
 \end{introduction}
 
@@ -87,9 +87,11 @@ Tato sekce popisuje aplikace, které více či méně konkurují výsledné apli
   \item{Vodafone 845 (Huawei U8120), Android 2.3.4}
 \end{itemize}
 
-V počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací k naleznutí. Jak se však později ukázalo, vzniklo a rozšířilo se během následujících činností několik dalších aplikací, které jen s maálo rozdíly splňují požadavky aplikace výsledkem této práce.
+V počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací k naleznutí. Jak se však později ukázalo, vzniklo a rozšířilo se během následujících činností několik dalších aplikací, které jen s málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tato část byla zprvu velice krátka, neboť jediné bližší aplikace neposkytovali vhodné srovnání ani zisk vhodných informací. V závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnou tak čtenáři jistý nadhled nad daným tématem i v průběhu následujícího čtení. Dalším důvodem jejich zmiňky je autorovo zmýlení v jejich existenci v počátku, jelikož aplikace byly nedávno uvedené a nebylo dostatek vodítek k jejich naleznutí.
+Tato část byla zprvu velice krátka, neboť jediné bližší aplikace neposkytovali vhodné srovnání ani zisk vhodných informací. V závěru však autor usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnou tak čtenáři jistý nadhled nad daným tématem i v průběhu následujícího čtení. Dalším důvodem jejich zmiňky je autorovo zmýlení v jejich existenci v počátku, jelikož aplikace byly nedávno uvedené a nebylo dostatek vodítek k jejich naleznutí.
+
+Všechny následující aplikace lze podle názvu nalézt na Google Play Store ~\cite{play_store}.
 
 \subsection{Best before}
 
@@ -97,13 +99,13 @@ Aplikace Best Before je zdarma dostupná jak pro zařízení s iOS, tak pro zař
 
 Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v pořadí, v jakém jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace lze tlačítkem v horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z dialogu vybrat datum spotřeby.Nelze však zadat již existující potravinu a pokud uživatel zadává více potravin, může takto ztrávit poměrně dlouhou dobu.
 
-Z vlastního testování však byly zjištěny zásadní nedostatky v ošetření různách chyb a stabilitě. Na žádném z použitých zařízení aplikace nebylo možné přidat obrázek potraviny, a při ukládání potraviny došlo při každém k pokusu k pádu, potravina se ve 4 z 5ti pokusů přidala, v jednom došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z hodnocení na Google Play Store ~\cite{play_store} vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k použitelnosti je tato hodnota spíše překvapivá.
+Z vlastního testování však byly zjištěny zásadní nedostatky v ošetření různách chyb a stabilitě. Na žádném z použitých zařízení nebylo možné přidat obrázek potraviny a při ukládání potraviny došlo při každém pokusu k pádu. Potravina se ve 4 z 5ti pokusů přidala, v jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z hodnocení na Play Store vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k použitelnosti je tato hodnota spíše překvapivá.
 
-Ve výsledku lze z této aplikace převzít zejména pozitivní přístup uživatelů k hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze autorův názor, pro ověření by však bylo třeba širšího testování mezi různými uživateli, které ale je příliš časově náročné.
+Ve výsledku lze z této aplikace převzít zejména pozitivní přístup uživatelů k hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze autorův názor, pro ověření by bylo ovšem třeba širšího testování mezi různými uživateli, které ale je příliš časově náročné.
 
 \subsection{Food Safe}
 
-Další aplikací určenou pro Android OS je Food Safe ????, která se objevila na Play Store teprve nedávno, v době psaní tohoto textu přibližne 20 dní. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o této aplikaci byly získány pouze z Play Store z toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k dispozici při jejím testování v této práci. 
+Další aplikací určenou pro Android OS je Food Safe ????, která se objevila na Play Store teprve nedávno, v době psaní tohoto textu přibližne úřed 20 dní. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o této aplikaci byly získány pouze z Play Store z toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k dispozici při jejím testování v této práci. 
 
 Aplikace není dostupná zadarmo. Je třeba ji zakoupit za částku, která v době psaní tohoto textu činí 20,40 Kč.
 
@@ -137,7 +139,7 @@ Nepředpokládá se, že by se tato aplikace používala široce například v r
 
 Autor však shledal nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
 
-Pro širší skupinu použití je vhodné u potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, kteří mají problém přečíst název potraviny, jejíž obrázek však rozpoznají jednodušeji. Autor nepředpokládá, že by tyto cílové skupiny potraviny přímo zadávali, a proto není nutné řešit problém zadání datumu spotřeby i pro tyto uživatele.
+Pro širší skupinu použití je vhodné u potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, jež mají problém přečíst název potraviny, jejíž obrázek však rozpoznají jednodušeji. Autor nepředpokládá, že by tyto cílové skupiny potraviny přímo zadávali, a proto není nutné řešit problém zadání datumu spotřeby i pro tyto uživatele.
 
 \clearpage
 
@@ -145,7 +147,7 @@ Pro širší skupinu použití je vhodné u potravin evidovat i jejich jeden neb
 
 Jako základ dalšího postupu aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, kterému se tato aplikace snaží nalézt řešení.
 
-Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z různých internetových zdrojů lze nalézt, že nejrozšířenější platforma na mobilních telefonech. Protože u žádného z těchto zdrojů nebylo možné zajistit autentičnost, byla k této práci vypracován krátký dotazník, na který odpovědělo 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality. Výsledek rozšíření platforem mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
+Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z různých internetových zdrojů lze nalézt, že nejrozšířenější platforma na mobilních telefonech je OS Android. Protože u žádného z těchto zdrojů nebylo možné zajistit autentičnost, byl k této práci vypracován krátký dotazník, na který odpovědělo 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality. Výsledek rozšíření platforem mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
 
 \begin{figure}[H]
   \centering
@@ -154,7 +156,7 @@ Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace do
   \label{fig:SurveyOS}
 \end{figure}
 
-Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si dává za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společené úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
+Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si dává za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společné úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
 
 Vzhledem k tomu, že většina potravin disponuje čárovým kódem a k tomuto kódu můžou být dohledány informace o zboží, které identifikuje, lze aplikaci vybavit čtečkou čárových kódu, která usnadní manuální zadávání názvu či tohoto kódu. Aby tato informace nebyla jen tak nadhozena, byla do dotazníku přidána další sekce. Na obrázku ~\ref{fig:SurveyScan} lze pozorovat poměr mezi dotázanými, kteří by využili možnosti zadávat jídlo pomocí čtečky a těmi, kteří by toho nevyužili.
 
@@ -184,7 +186,7 @@ Funkční požadavky této aplikace, které plynou z daného problému a výše 
 
 Android OS se na cílových zařízeních nachází v různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o rošířených verzích lze zhlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s sebou přináší některé odlišnosti a je třeba brát v úvahu, že některé prvky API na nich nejsou k dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpoře těch starších.
 
-Čárové kódy na obalech potravin bývají různého formátu. Obecně se v na obalech objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
 Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
