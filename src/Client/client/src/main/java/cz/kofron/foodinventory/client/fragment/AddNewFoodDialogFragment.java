@@ -22,11 +22,13 @@ public class AddNewFoodDialogFragment extends DialogFragment
 	private View view;
 	private Dialog dialog;
 	private Runnable onDone;
+	private Runnable onAdded;
 	private String gtin;
 
-	public AddNewFoodDialogFragment(Runnable onDone, String gtin)
+	public AddNewFoodDialogFragment(Runnable onDone, Runnable onAdded, String gtin)
 	{
 		this.onDone = onDone;
+		this.onAdded = onAdded;
 		this.gtin = gtin;
 	}
 
@@ -52,6 +54,7 @@ public class AddNewFoodDialogFragment extends DialogFragment
 				public void run()
 				{
 					FoodEditActivity.initialGtin = gtin;
+					FoodEditActivity.onSavedCallback = onAdded;
 					Intent foodEditIntent = new Intent(getActivity(), FoodEditActivity.class);
 					startActivity(foodEditIntent);
 					if(onDone != null)

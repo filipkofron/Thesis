@@ -27,14 +27,16 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 	private Context context;
 	private String gtin;
 	private Runnable onDone;
+	private Runnable onAddedFood;
 	private ProgressDialog pd;
 	private FoodItem foodItem;
 
-	public SearchAndAddTask(Context context, String gtin, Runnable onDone)
+	public SearchAndAddTask(Context context, String gtin, Runnable onDone, Runnable onAddedFood)
 	{
 		this.context = context;
 		this.gtin = gtin;
 		this.onDone = onDone;
+		this.onAddedFood = onAddedFood;
 	}
 
 	@Override
@@ -95,11 +97,11 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 	{
 		if(results == null || results.size() < 1)
 		{
-			new AddNewFoodDialogFragment(onDone, gtin).show((FragmentActivity) context);
+			new AddNewFoodDialogFragment(onDone, onAddedFood, gtin).show((FragmentActivity) context);
 		}
 		else
 		{
-			new AddImportedFoodDialogFragment(onDone, results.get(0)).show((FragmentActivity) context);
+			new AddImportedFoodDialogFragment(onDone, onAddedFood, results.get(0)).show((FragmentActivity) context);
 		}
 	}
 }

@@ -16,6 +16,7 @@ import cz.kofron.foodinventory.client.task.SearchAndAddTask;
 public class AddScanFragment extends AbstractScanFragment
 {
 	private boolean accept = true;
+	private String lastGtin = "";
 
 	private Runnable onDone = new Runnable()
 	{
@@ -25,6 +26,21 @@ public class AddScanFragment extends AbstractScanFragment
 			accept = true;
 		}
 	};
+	private Runnable onAddedFood = new Runnable()
+	{
+		@Override
+		public void run()
+		{
+			getActivity().runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					onGtin(lastGtin);
+				}
+			});
+		}
+	};
 
 	@Override
 	public void onGtin(String gtin)
@@ -32,7 +48,8 @@ public class AddScanFragment extends AbstractScanFragment
 		if(accept)
 		{
 			accept = false;
-			SearchAndAddTask saat = new SearchAndAddTask(getActivity(), gtin, onDone);
+			lastGtin = gtin;
+			SearchAndAddTask saat = new SearchAndAddTask(getActivity(), gtin, onDone, onAddedFood);
 
 			saat.execute();
 		}

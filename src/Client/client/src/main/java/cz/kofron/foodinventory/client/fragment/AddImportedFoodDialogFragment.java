@@ -23,11 +23,13 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 	private View view;
 	private Dialog dialog;
 	private Runnable onDone;
+	private Runnable onAdded;
 	private PODResult podResult;
 
-	public AddImportedFoodDialogFragment(Runnable onDone, PODResult podResult)
+	public AddImportedFoodDialogFragment(Runnable onDone, Runnable onAdded, PODResult podResult)
 	{
 		this.onDone = onDone;
+		this.onAdded = onAdded;
 		this.podResult = podResult;
 	}
 
@@ -53,6 +55,7 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 				public void run()
 				{
 					FoodEditActivity.initialPodResult = podResult;
+					FoodEditActivity.onSavedCallback = onAdded;
 					Intent foodEditIntent = new Intent(getActivity(), FoodEditActivity.class);
 					startActivity(foodEditIntent);
 					if(onDone != null)

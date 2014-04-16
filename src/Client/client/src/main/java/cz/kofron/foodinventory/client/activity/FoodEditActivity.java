@@ -54,6 +54,7 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 	public static FoodDetail initialFoodDetail;
 	public static String initialGtin;
 	public static ReloadCallback initialReloadCallback;
+	public static Runnable onSavedCallback;
 	public static PODResult initialPodResult;
 
 	private FoodDetail foodDetail;
@@ -310,11 +311,17 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 
 	private EditFoodParam makeParam()
 	{
+		final Runnable onSaved = onSavedCallback;
+		onSavedCallback = null;
 		Runnable success = new Runnable()
 		{
 			@Override
 			public void run()
 			{
+				if(onSaved != null)
+				{
+					onSaved.run();
+				}
 				if(reloadCallback != null)
 				{
 					reloadCallback.update();
