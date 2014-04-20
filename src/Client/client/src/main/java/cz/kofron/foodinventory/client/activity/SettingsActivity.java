@@ -77,6 +77,7 @@ public class SettingsActivity extends PreferenceActivity {
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_notification);
 
+	    bindPreferenceSummaryToValue(findPreference("download_images"));
 	    bindPreferenceSummaryToValue(findPreference("username"));
 
 	    ListPreference checkFrequencyPreference = (ListPreference) findPreference("notifications_check_frequency");

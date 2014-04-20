@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.DeleteInventoryParam;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.DateUtil;
+import cz.kofron.foodinventory.client.util.Download;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
@@ -67,7 +69,14 @@ public class InventoryListAdapter extends ArrayAdapter
 
 		LoadImageParam lip = new LoadImageParam(context, String.valueOf(item.getImageId()), image, null);
 		LoadImageTask lit = new LoadImageTask(lip);
-		lit.execute();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+		{
+			lit.executeOnExecutor(Download.getExecutorService());
+		}
+		else
+		{
+			lit.execute();
+		}
 
 		int d = 255;
 		if ((position & 1) == 1)

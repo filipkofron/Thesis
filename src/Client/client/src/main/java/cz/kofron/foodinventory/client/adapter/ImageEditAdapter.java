@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import cz.kofron.foodinventory.client.fragment.ImageZoomDialogFragment;
 import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.EditImagesParam;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
+import cz.kofron.foodinventory.client.util.Download;
 
 /**
  * Created by kofee on 23.3.14.
@@ -177,7 +179,14 @@ public class ImageEditAdapter
 
 		LoadImageParam lip = new LoadImageParam(activity, id, image, onLoaded);
 		LoadImageTask lit = new LoadImageTask(lip);
-		lit.execute();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+		{
+			lit.executeOnExecutor(Download.getExecutorService());
+		}
+		else
+		{
+			lit.execute();
+		}
 
 		layout.addView(imageLayout);
 		layout.invalidate();

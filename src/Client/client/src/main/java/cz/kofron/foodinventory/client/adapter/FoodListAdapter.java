@@ -3,6 +3,7 @@ package cz.kofron.foodinventory.client.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import cz.kofron.foodinventory.client.model.FoodItem;
 import cz.kofron.foodinventory.client.model.InventoryItem;
 import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
+import cz.kofron.foodinventory.client.util.Download;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 
 /**
@@ -55,7 +57,15 @@ public class FoodListAdapter extends ArrayAdapter
 
 		LoadImageParam lip = new LoadImageParam(context, foodItem.getImageId(), image, null);
 		LoadImageTask lit = new LoadImageTask(lip);
-		lit.execute();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+		{
+			lit.executeOnExecutor(Download.getExecutorService());
+		}
+		else
+		{
+			lit.execute();
+		}
 
 		ImageButton ob = (ImageButton) view.findViewById(R.id.add_button);
 		final int positionNow = position;

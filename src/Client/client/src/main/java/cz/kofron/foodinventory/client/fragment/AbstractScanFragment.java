@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.view.Display;
@@ -55,6 +56,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		View view = inflater.inflate(R.layout.scan_fragment, null);
 
 		surfaceView = (SurfaceView) view.findViewById(R.id.surface_view);
+        surfaceView.setKeepScreenOn(true);
 		final SurfaceHolder surfaceHolder = surfaceView.getHolder();
 
 		surfaceHolder.addCallback(this);

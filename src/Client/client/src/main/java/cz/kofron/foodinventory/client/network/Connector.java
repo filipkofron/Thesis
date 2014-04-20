@@ -76,6 +76,10 @@ public class Connector
 					if(NetworkInstance.communicator.keepAlive())
 					{
 						lastKeepAlive = System.currentTimeMillis();
+						if(ConnectionDialogManager.hideDialog())
+						{
+							ConnectionDialogManager.reloadActivity();
+						}
 					}
 					else
 					{

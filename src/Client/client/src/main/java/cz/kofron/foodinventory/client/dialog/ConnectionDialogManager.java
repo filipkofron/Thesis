@@ -2,6 +2,8 @@ package cz.kofron.foodinventory.client.dialog;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.view.KeyEvent;
 
 import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.network.Communicator;
@@ -73,6 +75,15 @@ public class ConnectionDialogManager
 
 						pd.setMessage("Connecting to server..");
 						pd.setCancelable(false);
+						pd.setOnKeyListener(new DialogInterface.OnKeyListener()
+						{
+							@Override
+							public boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent)
+							{
+								System.exit(0);
+								return true;
+							}
+						});
 						pd.setIndeterminate(true);
 						pd.show();
 					}
@@ -92,7 +103,11 @@ public class ConnectionDialogManager
 		}
 	}
 
-	public static synchronized void hideDialog()
+	/**
+	 *
+	 * @return true whether the dialog was shown before we hid it.
+	 */
+	public static synchronized boolean hideDialog()
 	{
 		final ProgressDialog thisPd = pd;
 		if (thisPd != null)
@@ -105,11 +120,12 @@ public class ConnectionDialogManager
 					public void run()
 					{
 						thisPd.dismiss();
-
 					}
 				});
 				pd = null;
 			}
+			return true;
 		}
+		return false;
 	}
 }

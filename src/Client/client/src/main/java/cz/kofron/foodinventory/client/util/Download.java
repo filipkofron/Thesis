@@ -8,14 +8,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by kofee on 26.3.14.
  */
 public class Download
 {
-	private final static int MAX_DOWNLOADS = 4;
+	private final static int MAX_DOWNLOADS = 3;
 	private static Integer downloads = new Integer(0);
+
+	private static ExecutorService executorService = Executors.newCachedThreadPool();
+
+	public static ExecutorService getExecutorService()
+	{
+		return executorService;
+	}
 
 	private static void out()
 	{
