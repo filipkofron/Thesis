@@ -60,6 +60,7 @@ public class DecodeThread extends Thread
 		try
 		{
 			decoder.decode(data, width, height, rotated);
+			decoder.decode(data, width, height, !rotated);
 		}
 		catch (Exception e)
 		{

@@ -35,6 +35,7 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 {
 
 	private final static int RESULT_PERIOD_MS = 1500;
+	private final static int MAX_AREA = 1000 * 1000;
 	private boolean lockCameraUse = false;
 	private SurfaceView surfaceView;
 	private Camera camera;
@@ -233,9 +234,13 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 				}
 				else
 				{
-					if (size.width * size.height > targetSize.width * targetSize.height)
+					int area = size.width * size.height;
+					if(area < MAX_AREA)
 					{
-						targetSize = size;
+						if (size.width * size.height > targetSize.width * targetSize.height)
+						{
+							targetSize = size;
+						}
 					}
 				}
 			}
