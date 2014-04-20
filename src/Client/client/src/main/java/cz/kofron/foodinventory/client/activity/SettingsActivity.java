@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -77,7 +78,21 @@ public class SettingsActivity extends PreferenceActivity {
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_notification);
 
-	    bindPreferenceSummaryToValue(findPreference("download_images"));
+	    final CheckBoxPreference checkBoxPreference = (CheckBoxPreference) findPreference("download_images");
+	    checkBoxPreference.setChecked(Preferences.getPreferences(SettingsActivity.this).getBoolean("download_images", true));
+	    checkBoxPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+	    {
+		    @Override
+		    public boolean onPreferenceChange(Preference preference, Object o)
+		    {
+			    SharedPreferences.Editor editor = Preferences.getPreferences(SettingsActivity.this).edit();
+			    editor.putBoolean("download_images", (Boolean) o);
+			    editor.commit();
+			    checkBoxPreference.setChecked((Boolean) o);
+			    return true;
+		    }
+	    });
+
 	    bindPreferenceSummaryToValue(findPreference("username"));
 
 	    ListPreference checkFrequencyPreference = (ListPreference) findPreference("notifications_check_frequency");

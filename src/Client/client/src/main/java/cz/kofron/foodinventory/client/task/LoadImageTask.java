@@ -60,6 +60,10 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 	public LoadImageTask(LoadImageParam param)
 	{
 		this.param = param;
+		if(!Preferences.getPreferences(param.context).getBoolean("download_images", true))
+		{
+			param.id = "0";
+		}
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		}
 		if(bitmap == null)
 		{
-			if(Preferences.getPreferences(param.context).getBoolean("download_images", true))
+			if(Preferences.getPreferences(param.context).getBoolean("download_images", true) || param.id.equals("0"))
 			{
 				bitmap = Download.downloadImage("http://" + Connector.SERVER_ADDR + "/img/" + param.id + ".jpg");
 			}
