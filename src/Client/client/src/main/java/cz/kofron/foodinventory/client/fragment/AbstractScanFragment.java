@@ -2,6 +2,7 @@ package cz.kofron.foodinventory.client.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -27,6 +31,8 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.barcode.DecodeThread;
 import cz.kofron.foodinventory.client.barcode.Decoder;
 import cz.kofron.foodinventory.client.barcode.ResultCallback;
+import cz.kofron.foodinventory.client.preference.Preferences;
+import cz.kofron.foodinventory.client.view.SuspendableSurfaceView;
 
 /**
  * Created by kofee on 3/9/14.
@@ -37,7 +43,8 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	private final static int RESULT_PERIOD_MS = 1500;
 	private final static int MAX_AREA = 1000 * 1000;
 	private boolean lockCameraUse = false;
-	private SurfaceView surfaceView;
+	private SuspendableSurfaceView surfaceView;
+	private ViewGroup cont;
 	private Camera camera;
 	private boolean previewRunning = false;
 	private DecodeThread decodeThread;
@@ -56,16 +63,42 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	{
 		View view = inflater.inflate(R.layout.scan_fragment, null);
 
-		surfaceView = (SurfaceView) view.findViewById(R.id.surface_view);
-        surfaceView.setKeepScreenOn(true);
-		final SurfaceHolder surfaceHolder = surfaceView.getHolder();
+		cont = (ViewGroup) view.findViewById(R.id.container);
 
-		surfaceHolder.addCallback(this);
-		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		View content = view.findViewById(R.id.content);
 
-		final EditText editText = (EditText) view.findViewById(R.id.gtin);
 
-		Button button = (Button) view.findViewById(R.id.search_button);
+		initializeContent(content);
+
+		return view;
+	}
+
+	private void initializeContent(View content)
+	{
+		surfaceView = (SuspendableSurfaceView) content.findViewById(R.id.surface_view);
+		initializeSurfaceView();
+
+		final ImageButton cameraSwapButton = (ImageButton) content.findViewById(R.id.camera_swap_button);
+		cameraSwapButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				boolean prev = Preferences.getPreferences(AbstractScanFragment.this.getActivity()).getBoolean("camera_back", true);
+				SharedPreferences.Editor editor = Preferences.getPreferences(AbstractScanFragment.this.getActivity()).edit();
+				editor.putBoolean("camera_back", !prev);
+				editor.commit();
+
+
+				stopCameraScan();
+				startCameraScan();
+				recreateView();
+			}
+		});
+
+		final EditText editText = (EditText) content.findViewById(R.id.gtin);
+
+		Button button = (Button) content.findViewById(R.id.search_button);
 		button.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -78,7 +111,36 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 				}
 			}
 		});
-		return view;
+	}
+
+	private void recreateView()
+	{
+		LayoutInflater li = LayoutInflater.from(getActivity());
+		ViewGroup viewGroup = (ViewGroup) li.inflate(R.layout.scan_fragment, null);
+
+		View content = viewGroup.findViewById(R.id.content);
+		viewGroup.removeView(content);
+
+		cont.removeAllViews();
+
+		initializeContent(content);
+
+		RelativeLayout.LayoutParams layoutParams =
+				new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+						ViewGroup.LayoutParams.FILL_PARENT);
+
+		cont.addView(content, layoutParams);
+	}
+
+	private void initializeSurfaceView()
+	{
+		surfaceView.setKeepScreenOn(true);
+		final SurfaceHolder surfaceHolder = surfaceView.getHolder();
+
+		surfaceHolder.removeCallback(this);
+
+		surfaceHolder.addCallback(this);
+		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 
 	public void onManualSearch(String text)
@@ -168,20 +230,25 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	{
 		Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
 		int cameraCount = Camera.getNumberOfCameras();
-		for (int camIdx = 0; camIdx < cameraCount; camIdx++)
+		boolean back = Preferences.getPreferences(AbstractScanFragment.this.getActivity()).getBoolean("camera_back", true);
+
+		if(back)
 		{
-			Camera.getCameraInfo(camIdx, cameraInfo);
-			if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK)
+			for (int camIdx = 0; camIdx < cameraCount; camIdx++)
 			{
-				try
+				Camera.getCameraInfo(camIdx, cameraInfo);
+				if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK)
 				{
-					camera = Camera.open(camIdx);
-					break;
-				}
-				catch (RuntimeException e)
-				{
-					camera = null;
-					e.printStackTrace();
+					try
+					{
+						camera = Camera.open(camIdx);
+						break;
+					}
+					catch (RuntimeException e)
+					{
+						camera = null;
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -368,6 +435,34 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 	public void onResume()
 	{
 		super.onResume();
+		startCameraScan();
+	}
+
+	public void setResult(final String text)
+	{
+		Activity activity = getActivity();
+		if(activity != null)
+		{
+			getActivity().runOnUiThread(new Runnable()
+			{
+				@Override
+				public void run()
+				{
+					onGtin(text);
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onPause()
+	{
+		super.onPause();
+		stopCameraScan();
+	}
+
+	public void startCameraScan()
+	{
 		turnOnCamera();
 		decodeThread = new DecodeThread(camera, new Decoder(new ResultCallback()
 		{
@@ -398,26 +493,8 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		decodeThread.start();
 	}
 
-	public void setResult(final String text)
+	public void stopCameraScan()
 	{
-		Activity activity = getActivity();
-		if(activity != null)
-		{
-			getActivity().runOnUiThread(new Runnable()
-			{
-				@Override
-				public void run()
-				{
-					onGtin(text);
-				}
-			});
-		}
-	}
-
-	@Override
-	public void onPause()
-	{
-		super.onPause();
 		previewRunning = false;
 		DecodeThread dt = decodeThread;
 		decodeThread = null;

@@ -60,7 +60,7 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 	public LoadImageTask(LoadImageParam param)
 	{
 		this.param = param;
-		if(!Preferences.getPreferences(param.context).getBoolean("download_images", true))
+		if (!Preferences.getPreferences(param.context).getBoolean("download_images", true))
 		{
 			param.id = "0";
 		}
@@ -74,37 +74,52 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 			bitmap = getCache().get(param.id);
 		}
 
-		if(bitmap == null)
+
+		if (bitmap == null)
 		{
 			synchronized (lock)
 			{
-				if (getImageCache(param.context).containsKey(param.id))
+				try
 				{
-					bitmap = imageCache.getBitmap(param.id);
+					if (getImageCache(param.context).containsKey(param.id))
+					{
+						bitmap = imageCache.getBitmap(param.id);
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
 				}
 			}
 		}
-		if(bitmap == null)
+		if (bitmap == null)
 		{
-			if(Preferences.getPreferences(param.context).getBoolean("download_images", true) || param.id.equals("0"))
+			if (Preferences.getPreferences(param.context).getBoolean("download_images", true) || param.id.equals("0"))
 			{
 				bitmap = Download.downloadImage("http://" + Connector.SERVER_ADDR + "/img/" + param.id + ".jpg");
 			}
 
-			if(bitmap != null)
+			if (bitmap != null)
 			{
-				synchronized (lock)
+				try
 				{
-					getImageCache(param.context).put(param.id, bitmap);
+					synchronized (lock)
+					{
+						getImageCache(param.context).put(param.id, bitmap);
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
 				}
 			}
 		}
 
-		if(bitmap != null)
+		if (bitmap != null)
 		{
 			synchronized (getCache())
 			{
-				if(getCache().get(param.id) == null)
+				if (getCache().get(param.id) == null)
 				{
 					getCache().put(param.id, bitmap);
 				}
@@ -119,14 +134,14 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 	protected void onPostExecute(Void aVoid)
 	{
 		ImageView iv = param.imageView.get();
-		if(iv == null)
+		if (iv == null)
 		{
 			return;
 		}
-		if(bitmap != null)
+		if (bitmap != null)
 		{
 			iv.setImageBitmap(bitmap);
-			if(param.callback != null)
+			if (param.callback != null)
 			{
 				param.callback.onBitmap(bitmap);
 			}
