@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/back_layout">
+        android:id="@+id/back_layout"
+        android:visibility="gone">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -20,8 +21,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="You have removed a food."
-                android:id="@+id/textView"
+                android:text="@string/undo_delete_food_text"
+                android:id="@+id/undo_delete_text"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"/>
 
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Undo"
-                android:id="@+id/button"
+                android:id="@+id/undo_button"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"/>

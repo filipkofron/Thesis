@@ -251,6 +251,13 @@ public class InventoryFoodDialogFragment extends DialogFragment
 
 	public void show(FragmentActivity activity)
 	{
-		show(activity.getSupportFragmentManager(), "invetory_food_dialog");
+		try
+		{
+			show(activity.getSupportFragmentManager(), "invetory_food_dialog");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

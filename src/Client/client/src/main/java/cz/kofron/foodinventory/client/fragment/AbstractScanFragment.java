@@ -392,10 +392,15 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		if(focusCallback != null && (System.currentTimeMillis() - lastFocus) > FOCUS_INTERVAL_MS)
 		{
 			lastFocus = System.currentTimeMillis();
-			camera.autoFocus(focusCallback);
+			try
+			{
+				camera.autoFocus(focusCallback);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
-
-		Camera.Parameters params = camera.getParameters();
 
 		DecodeThread dt = decodeThread;
 
@@ -422,8 +427,17 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 
 		if (dt != null)
 		{
-			if (!dt.scheduleJobIfFree(bytes, params.getPreviewSize().width, params.getPreviewSize().height, rotated))
+			try
 			{
+				Camera.Parameters params = camera.getParameters();
+				if (!dt.scheduleJobIfFree(bytes, params.getPreviewSize().width, params.getPreviewSize().height, rotated))
+				{
+					camera.addCallbackBuffer(bytes);
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
 				camera.addCallbackBuffer(bytes);
 			}
 		}

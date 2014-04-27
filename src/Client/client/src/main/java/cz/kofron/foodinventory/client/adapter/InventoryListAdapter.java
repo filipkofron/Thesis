@@ -40,13 +40,15 @@ public class InventoryListAdapter extends ArrayAdapter
 	private Context context;
 	private ArrayList<InventoryItem> items;
 	private ReloadCallback reloadCallback;
+	private DeleteInventoryListener deleteInventoryListener;
 
-	public InventoryListAdapter(Context context, ReloadCallback fragment)
+	public InventoryListAdapter(Context context, ReloadCallback fragment, DeleteInventoryListener deleteInventoryListener)
 	{
 		super(context, R.layout.inventory_list_item);
 		items = new ArrayList<>();
 		this.context = context;
 		this.reloadCallback = fragment;
+		this.deleteInventoryListener = deleteInventoryListener;
 	}
 
 	@Override
@@ -221,6 +223,10 @@ public class InventoryListAdapter extends ArrayAdapter
 					if(reloadCallback != null)
 					{
 						reloadCallback.update();
+					}
+					if(deleteInventoryListener != null)
+					{
+						deleteInventoryListener.onDeleteItem(item, reloadCallback);
 					}
 				}
 			};

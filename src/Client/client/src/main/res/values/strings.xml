@@ -45,5 +45,6 @@
     <string name="days_text_year">Year</string>
     <string name="days_text_years">Years</string>
     <string name="expired_msg">Expired</string>
+    <string name="undo_delete_food_text">You have removed</string>
 
 </resources>
