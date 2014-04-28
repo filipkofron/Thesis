@@ -11,13 +11,17 @@ import android.widget.TextView;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.adapter.InventoryListAdapter;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 10.3.14.
  */
 public class RemoveScanFragment extends AbstractScanFragment
 {
+	
+	/** The accept. */
 	private boolean accept = true;
 
+	/** The on done. */
 	private Runnable onDone = new Runnable()
 	{
 		@Override
@@ -27,6 +31,9 @@ public class RemoveScanFragment extends AbstractScanFragment
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.fragment.AbstractScanFragment#onGtin(java.lang.String)
+	 */
 	@Override
 	public void onGtin(String gtin)
 	{
@@ -38,6 +45,9 @@ public class RemoveScanFragment extends AbstractScanFragment
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.fragment.AbstractScanFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{

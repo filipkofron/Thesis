@@ -16,14 +16,20 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.activity.MainActivity;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/5/14.
  */
 public class InventoryAddFoodDialogFragment extends DialogFragment
 {
 
+	/** The view. */
 	private View view;
+	
+	/** The dialog. */
 	private Dialog dialog;
+	
+	/** The on cancel listener. */
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -31,6 +37,8 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 		{
 		}
 	};
+	
+	/** The on ok listener. */
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -62,6 +70,9 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -81,6 +92,11 @@ public class InventoryAddFoodDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "invetory_add_food_dialog");

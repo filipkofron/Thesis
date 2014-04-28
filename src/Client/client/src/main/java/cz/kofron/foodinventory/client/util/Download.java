@@ -11,21 +11,35 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 26.3.14.
  */
 public class Download
 {
+	
+	/** The Constant MAX_DOWNLOADS. */
 	private final static int MAX_DOWNLOADS = 3;
+	
+	/** The downloads. */
 	private static Integer downloads = new Integer(0);
 
+	/** The executor service. */
 	private static ExecutorService executorService = Executors.newCachedThreadPool();
 
+	/**
+	 * Gets the executor service.
+	 *
+	 * @return the executor service
+	 */
 	public static ExecutorService getExecutorService()
 	{
 		return executorService;
 	}
 
+	/**
+	 * Out.
+	 */
 	private static void out()
 	{
 		synchronized (downloads)
@@ -42,6 +56,9 @@ public class Download
 		}
 	}
 
+	/**
+	 * In.
+	 */
 	private static void in()
 	{
 		synchronized (downloads)
@@ -60,6 +77,12 @@ public class Download
 		}
 	}
 
+	/**
+	 * Download image.
+	 *
+	 * @param urlStr the url str
+	 * @return the bitmap
+	 */
 	public static Bitmap downloadImage(String urlStr)
 	{
 		in();
@@ -89,6 +112,12 @@ public class Download
 		return bmp;
 	}
 
+	/**
+	 * Download string.
+	 *
+	 * @param urlStr the url str
+	 * @return the string
+	 */
 	public static String downloadString(String urlStr)
 	{
 		StringBuffer res = new StringBuffer();

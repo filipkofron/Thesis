@@ -9,14 +9,24 @@ import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.network.Communicator;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 25.3.14.
  */
 public class ConnectionDialogManager
 {
+	
+	/** The activity. */
 	private static Activity activity;
+	
+	/** The pd. */
 	private static ProgressDialog pd;
 
+	/**
+	 * Initialize.
+	 *
+	 * @param activity the activity
+	 */
 	public static void initialize(Activity activity)
 	{
 		ConnectionDialogManager.activity = activity;
@@ -27,8 +37,10 @@ public class ConnectionDialogManager
 		}
 	}
 
+	/** The disable checker thread. */
 	private static Thread disableCheckerThread;
 
+	/** The disable checker. */
 	private static Runnable disableChecker = new Runnable()
 	{
 		private final static int MS_WAIT = 300;
@@ -59,6 +71,9 @@ public class ConnectionDialogManager
 		}
 	};
 
+	/**
+	 * Show dialog.
+	 */
 	public static synchronized void showDialog()
 	{
 		if (pd == null)
@@ -92,6 +107,9 @@ public class ConnectionDialogManager
 		}
 	}
 
+	/**
+	 * Reload activity.
+	 */
 	public static synchronized void reloadActivity()
 	{
 		if(activity != null && !activity.isFinishing())
@@ -104,6 +122,7 @@ public class ConnectionDialogManager
 	}
 
 	/**
+	 * Hide dialog.
 	 *
 	 * @return true whether the dialog was shown before we hid it.
 	 */

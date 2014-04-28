@@ -25,14 +25,24 @@ import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.Download;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Filip Kofron on 3/1/14.
  */
 public class FoodListAdapter extends ArrayAdapter
 {
+	
+	/** The items. */
 	private ArrayList<FoodItem> items;
+	
+	/** The context. */
 	private Context context;
 
+	/**
+	 * Instantiates a new food list adapter.
+	 *
+	 * @param context the context
+	 */
 	public FoodListAdapter(Context context)
 	{
 		super(context, R.layout.food_list_item);
@@ -40,6 +50,9 @@ public class FoodListAdapter extends ArrayAdapter
 		this.context = context;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -102,6 +115,11 @@ public class FoodListAdapter extends ArrayAdapter
 		return view;
 	}
 
+	/**
+	 * Update content.
+	 *
+	 * @param items the items
+	 */
 	public void updateContent(ArrayList<FoodItem> items)
 	{
 		clear();
@@ -110,21 +128,45 @@ public class FoodListAdapter extends ArrayAdapter
 		notifyDataSetChanged();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getCount()
+	 */
 	@Override
 	public int getCount()
 	{
 		return items.size();
 	}
 
+	/**
+	 * The listener interface for receiving rowClick events.
+	 * The class that is interested in processing a rowClick
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addRowClickListener<code> method. When
+	 * the rowClick event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see RowClickEvent
+	 */
 	private class RowClickListener implements View.OnClickListener
 	{
+		
+		/** The position. */
 		private int position;
 
+		/**
+		 * Instantiates a new row click listener.
+		 *
+		 * @param position the position
+		 */
 		private RowClickListener(int position)
 		{
 			this.position = position;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.View.OnClickListener#onClick(android.view.View)
+		 */
 		@Override
 		public void onClick(View view)
 		{

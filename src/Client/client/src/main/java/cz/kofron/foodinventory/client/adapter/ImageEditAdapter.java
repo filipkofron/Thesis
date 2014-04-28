@@ -23,39 +23,78 @@ import cz.kofron.foodinventory.client.task.param.EditImagesParam;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.Download;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 23.3.14.
  */
 public class ImageEditAdapter
 {
+	
+	/** The layout. */
 	private LinearLayout layout;
+	
+	/** The activity. */
 	private Activity activity;
+	
+	/** The deleted ids. */
 	private TreeSet<String> deletedIds = new TreeSet<>();
+	
+	/**
+	 * The Class Pair.
+	 */
 	private class Pair
 	{
+		
+		/** The bitmap. */
 		public Bitmap bitmap;
+		
+		/** The view. */
 		public View view;
 
+		/**
+		 * Instantiates a new pair.
+		 *
+		 * @param bitmap the bitmap
+		 * @param view the view
+		 */
 		private Pair(Bitmap bitmap, View view)
 		{
 			this.bitmap = bitmap;
 			this.view = view;
 		}
 	}
+	
+	/** The new bitmaps. */
 	private ArrayList<Pair> newBitmaps = new ArrayList<>();
+	
+	/** The Constant REQUEST_CODE. */
 	public final static int REQUEST_CODE = 13463;
 
+	/**
+	 * Instantiates a new image edit adapter.
+	 *
+	 * @param layout the layout
+	 * @param activity the activity
+	 */
 	public ImageEditAdapter(LinearLayout layout, Activity activity)
 	{
 		this.layout = layout;
 		this.activity = activity;
 	}
 
+	/**
+	 * Adds the bitmap.
+	 *
+	 * @param bitmap the bitmap
+	 */
 	private void addBitmap(Bitmap bitmap)
 	{
 
 	}
 
+	/**
+	 * Populate add new.
+	 */
 	private void populateAddNew()
 	{
 		View newImage = LayoutInflater.from(activity).inflate(R.layout.image_edit_new_item, null);
@@ -87,6 +126,11 @@ public class ImageEditAdapter
 		layout.addView(newImage);
 	}
 
+	/**
+	 * Populate image.
+	 *
+	 * @param bitmap the bitmap
+	 */
 	private void populateImage(Bitmap bitmap)
 	{
 		final View imageLayout = LayoutInflater.from(activity).inflate(R.layout.image_edit_item, null);
@@ -136,6 +180,11 @@ public class ImageEditAdapter
 		layout.invalidate();
 	}
 
+	/**
+	 * Populate image.
+	 *
+	 * @param id the id
+	 */
 	private void populateImage(String id)
 	{
 		final View imageLayout = LayoutInflater.from(activity).inflate(R.layout.image_edit_item, null);
@@ -192,6 +241,11 @@ public class ImageEditAdapter
 		layout.invalidate();
 	}
 
+	/**
+	 * On image bitmap.
+	 *
+	 * @param bitmap the bitmap
+	 */
 	public void onImageBitmap(Bitmap bitmap)
 	{
 		int w = bitmap.getWidth();
@@ -215,11 +269,21 @@ public class ImageEditAdapter
 		populateImage(resizedBitmap);
 	}
 
+	/**
+	 * On image stream.
+	 *
+	 * @param is the is
+	 */
 	public void onImageStream(InputStream is)
 	{
 		onImageBitmap(BitmapFactory.decodeStream(is));
 	}
 
+	/**
+	 * Populate.
+	 *
+	 * @param images the images
+	 */
 	public void populate(ArrayList<String> images)
 	{
 		layout.removeAllViews();
@@ -230,6 +294,11 @@ public class ImageEditAdapter
 		}
 	}
 
+	/**
+	 * Make edit param.
+	 *
+	 * @return the edits the images param
+	 */
 	public EditImagesParam makeEditParam()
 	{
 		ArrayList<String> deleteIds = new ArrayList<>();

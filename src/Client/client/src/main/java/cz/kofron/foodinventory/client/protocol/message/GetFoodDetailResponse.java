@@ -8,34 +8,54 @@ import java.util.ArrayList;
 
 import cz.kofron.foodinventory.client.model.FoodDetail;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 14.3.14.
  */
 public class GetFoodDetailResponse extends Message
 {
+	
+	/** The food details. */
 	private ArrayList<FoodDetail> foodDetails;
 
+	/**
+	 * Instantiates a new gets the food detail response.
+	 */
 	public GetFoodDetailResponse()
 	{
 	}
 
+	/**
+	 * Instantiates a new gets the food detail response.
+	 *
+	 * @param foodDetails the food details
+	 */
 	public GetFoodDetailResponse(ArrayList<FoodDetail> foodDetails)
 	{
 		this.foodDetails = foodDetails;
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#getHeader()
+	 */
 	@Override
 	public String getHeader()
 	{
 		return "GetFoodDetailResponse";
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#newMessage()
+	 */
 	@Override
 	public Message newMessage()
 	{
 		return new GetFoodDetailResponse();
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#dejsonizeContent(org.json.JSONObject)
+	 */
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
@@ -58,6 +78,9 @@ public class GetFoodDetailResponse extends Message
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#jsonizeContent()
+	 */
 	@Override
 	protected JSONObject jsonizeContent() throws JSONException
 	{
@@ -76,6 +99,11 @@ public class GetFoodDetailResponse extends Message
 		return obj;
 	}
 
+	/**
+	 * Gets the food details.
+	 *
+	 * @return the food details
+	 */
 	public ArrayList<FoodDetail> getFoodDetails()
 	{
 		return foodDetails;

@@ -26,6 +26,10 @@ import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.MessageInitializer;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainActivity.
+ */
 public class MainActivity extends ActionBarActivity
 		implements NavigationDrawerFragment.NavigationDrawerCallbacks, ReloadCallback
 {
@@ -34,12 +38,16 @@ public class MainActivity extends ActionBarActivity
 	 * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
 	 */
 	private NavigationDrawerFragment mNavigationDrawerFragment;
+	
+	/** The current fragment. */
 	private Fragment currentFragment;
 
 	/**
 	 * Used to store the last screen title. For use in {@link #restoreActionBar()}.
 	 */
 	private CharSequence mTitle;
+	
+	/** The last position. */
 	private int lastPosition = 0;
 
 	static
@@ -47,6 +55,9 @@ public class MainActivity extends ActionBarActivity
 		MessageInitializer.initialize();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -78,11 +89,17 @@ public class MainActivity extends ActionBarActivity
 		}
 	}
 
+	/**
+	 * Try connect.
+	 */
 	public void tryConnect()
 	{
 		runOnUiThread(new AccountEnforcer());
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{
@@ -96,8 +113,15 @@ public class MainActivity extends ActionBarActivity
 		});
 	}
 
+	/**
+	 * The Class AccountEnforcer.
+	 */
 	private class AccountEnforcer implements Runnable
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -115,6 +139,9 @@ public class MainActivity extends ActionBarActivity
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onDestroy()
+	 */
 	@Override
 	protected void onDestroy()
 	{
@@ -126,6 +153,9 @@ public class MainActivity extends ActionBarActivity
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment.NavigationDrawerCallbacks#onNavigationDrawerItemSelected(int)
+	 */
 	@Override
 	public void onNavigationDrawerItemSelected(int position)
 	{
@@ -171,6 +201,9 @@ public class MainActivity extends ActionBarActivity
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.fragment.NavigationDrawerFragment.NavigationDrawerCallbacks#onSectionAttached(int)
+	 */
 	@Override
 	public void onSectionAttached(int number)
 	{
@@ -192,6 +225,9 @@ public class MainActivity extends ActionBarActivity
 		getSupportActionBar().setTitle(mTitle);
 	}
 
+	/**
+	 * Restore action bar.
+	 */
 	public void restoreActionBar()
 	{
 		ActionBar actionBar = getSupportActionBar();
@@ -201,6 +237,9 @@ public class MainActivity extends ActionBarActivity
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -217,6 +256,9 @@ public class MainActivity extends ActionBarActivity
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -233,6 +275,9 @@ public class MainActivity extends ActionBarActivity
 		return super.onOptionsItemSelected(item);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onResume()
+	 */
 	@Override
 	protected void onResume()
 	{

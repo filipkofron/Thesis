@@ -8,11 +8,19 @@ import java.util.ArrayList;
 
 import cz.kofron.foodinventory.client.model.PODResult;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 26.3.14.
  */
 public class PODParser
 {
+	
+	/**
+	 * Parses the po ds.
+	 *
+	 * @param data the data
+	 * @return the array list
+	 */
 	public static ArrayList<PODResult> parsePODs(String data)
 	{
 		ArrayList<PODResult> results = new ArrayList<>();
@@ -48,6 +56,13 @@ public class PODParser
 		return results;
 	}
 
+	/**
+	 * Parses the result.
+	 *
+	 * @param obj the obj
+	 * @return the POD result
+	 * @throws JSONException the JSON exception
+	 */
 	private static PODResult parseResult(JSONObject obj) throws JSONException
 	{
 		PODResult pod = new PODResult(obj.getString("gtin_cd"));

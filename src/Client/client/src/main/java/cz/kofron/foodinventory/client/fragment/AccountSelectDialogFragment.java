@@ -23,13 +23,19 @@ import cz.kofron.foodinventory.client.activity.MainActivity;
 import cz.kofron.foodinventory.client.preference.Accounts;
 import cz.kofron.foodinventory.client.preference.Preferences;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 19.3.14.
  */
 public class AccountSelectDialogFragment extends DialogFragment
 {
+	
+	/** The dialog. */
 	private Dialog dialog;
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -73,15 +79,28 @@ public class AccountSelectDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * The Class OnClick.
+	 */
 	private class OnClick implements DialogInterface.OnClickListener
 	{
+		
+		/** The names. */
 		final String [] names;
 
+		/**
+		 * Instantiates a new on click.
+		 *
+		 * @param names the names
+		 */
 		private OnClick(String[] names)
 		{
 			this.names = names;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.content.DialogInterface.OnClickListener#onClick(android.content.DialogInterface, int)
+		 */
 		@Override
 		public void onClick(DialogInterface dialogInterface, int pos)
 		{
@@ -92,11 +111,19 @@ public class AccountSelectDialogFragment extends DialogFragment
 		}
 	}
 
+	/**
+	 * Repeat.
+	 */
 	public void repeat()
 	{
 		((MainActivity) getActivity()).tryConnect();
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "select_account_dialog");

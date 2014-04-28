@@ -34,29 +34,62 @@ import cz.kofron.foodinventory.client.barcode.ResultCallback;
 import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.view.SuspendableSurfaceView;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/9/14.
  */
 public abstract class AbstractScanFragment extends Fragment implements SurfaceHolder.Callback, Camera.PreviewCallback
 {
 
+	/** The Constant RESULT_PERIOD_MS. */
 	private final static int RESULT_PERIOD_MS = 1500;
+	
+	/** The Constant MAX_AREA. */
 	private final static int MAX_AREA = 1000 * 1000;
+	
+	/** The lock camera use. */
 	private boolean lockCameraUse = false;
+	
+	/** The surface view. */
 	private SuspendableSurfaceView surfaceView;
+	
+	/** The cont. */
 	private ViewGroup cont;
+	
+	/** The camera. */
 	private Camera camera;
+	
+	/** The preview running. */
 	private boolean previewRunning = false;
+	
+	/** The decode thread. */
 	private DecodeThread decodeThread;
+	
+	/** The rotated. */
 	private boolean rotated;
+	
+	/** The last result. */
 	private long lastResult;
 
+	/** The focus interval ms. */
 	private int FOCUS_INTERVAL_MS = 2000;
+	
+	/** The focus callback. */
 	private Camera.AutoFocusCallback focusCallback;
+	
+	/** The last focus. */
 	private long lastFocus = 0;
 
+	/**
+	 * On gtin.
+	 *
+	 * @param gtin the gtin
+	 */
 	public abstract void onGtin(String gtin);
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
 			savedInstanceState)
@@ -73,6 +106,11 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		return view;
 	}
 
+	/**
+	 * Initialize content.
+	 *
+	 * @param content the content
+	 */
 	private void initializeContent(View content)
 	{
 		surfaceView = (SuspendableSurfaceView) content.findViewById(R.id.surface_view);
@@ -113,6 +151,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		});
 	}
 
+	/**
+	 * Recreate view.
+	 */
 	private void recreateView()
 	{
 		LayoutInflater li = LayoutInflater.from(getActivity());
@@ -132,6 +173,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		cont.addView(content, layoutParams);
 	}
 
+	/**
+	 * Initialize surface view.
+	 */
 	private void initializeSurfaceView()
 	{
 		surfaceView.setKeepScreenOn(true);
@@ -143,6 +187,11 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 	}
 
+	/**
+	 * On manual search.
+	 *
+	 * @param text the text
+	 */
 	public void onManualSearch(String text)
 	{
 		if(text == null)
@@ -157,11 +206,17 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		setResult(text);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.SurfaceHolder.Callback#surfaceCreated(android.view.SurfaceHolder)
+	 */
 	@Override
 	public void surfaceCreated(SurfaceHolder surfaceHolder)
 	{
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.SurfaceHolder.Callback#surfaceChanged(android.view.SurfaceHolder, int, int, int)
+	 */
 	@Override
 	public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3)
 	{
@@ -171,6 +226,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		initCamera(surfaceHolder);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.view.SurfaceHolder.Callback#surfaceDestroyed(android.view.SurfaceHolder)
+	 */
 	@Override
 	public void surfaceDestroyed(SurfaceHolder surfaceHolder)
 	{
@@ -178,6 +236,11 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		destroyCamera();
 	}
 
+	/**
+	 * Inits the camera.
+	 *
+	 * @param surfaceHolder the surface holder
+	 */
 	private void initCamera(SurfaceHolder surfaceHolder)
 	{
 		if (camera != null)
@@ -207,6 +270,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 	}
 
+	/**
+	 * Destroy camera.
+	 */
 	private void destroyCamera()
 	{
 		if (camera != null)
@@ -217,6 +283,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 	}
 
+	/**
+	 * Turn off camera.
+	 */
 	private void turnOffCamera()
 	{
 		if (camera != null)
@@ -226,6 +295,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 	}
 
+	/**
+	 * Turn on camera.
+	 */
 	private void turnOnCamera()
 	{
 		Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
@@ -380,6 +452,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.hardware.Camera.PreviewCallback#onPreviewFrame(byte[], android.hardware.Camera)
+	 */
 	@Override
 	public synchronized void onPreviewFrame(byte[] bytes, Camera camera)
 	{
@@ -445,6 +520,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		lockCameraUse = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onResume()
+	 */
 	@Override
 	public void onResume()
 	{
@@ -452,6 +530,11 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		startCameraScan();
 	}
 
+	/**
+	 * Sets the result.
+	 *
+	 * @param text the new result
+	 */
 	public void setResult(final String text)
 	{
 		Activity activity = getActivity();
@@ -468,6 +551,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onPause()
+	 */
 	@Override
 	public void onPause()
 	{
@@ -475,6 +561,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		stopCameraScan();
 	}
 
+	/**
+	 * Start camera scan.
+	 */
 	public void startCameraScan()
 	{
 		turnOnCamera();
@@ -507,6 +596,9 @@ public abstract class AbstractScanFragment extends Fragment implements SurfaceHo
 		decodeThread.start();
 	}
 
+	/**
+	 * Stop camera scan.
+	 */
 	public void stopCameraScan()
 	{
 		previewRunning = false;

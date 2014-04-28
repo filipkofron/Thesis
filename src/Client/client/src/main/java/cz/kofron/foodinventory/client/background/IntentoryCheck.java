@@ -18,22 +18,38 @@ import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.util.DateUtil;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 25.3.14.
  */
 public class IntentoryCheck
 {
 
+	/**
+	 * The Class CheckThread.
+	 */
 	private static class CheckThread extends Thread
 	{
+		
+		/** The context. */
 		private Context context;
+		
+		/** The items. */
 		private ArrayList<InventoryItem> items;
 
+		/**
+		 * Instantiates a new check thread.
+		 *
+		 * @param context the context
+		 */
 		private CheckThread(Context context)
 		{
 			this.context = context;
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -57,12 +73,22 @@ public class IntentoryCheck
 			}
 		}
 
+		/**
+		 * Gets the items.
+		 *
+		 * @return the items
+		 */
 		public ArrayList<InventoryItem> getItems()
 		{
 			return items;
 		}
 	}
 
+	/**
+	 * Check inventory.
+	 *
+	 * @param context the context
+	 */
 	public static void checkInventory(Context context)
 	{
 		CheckThread checkThread = new CheckThread(context);
@@ -84,6 +110,12 @@ public class IntentoryCheck
 		}
 	}
 
+	/**
+	 * Process items.
+	 *
+	 * @param context the context
+	 * @param items the items
+	 */
 	private static void processItems(Context context, ArrayList<InventoryItem> items)
 	{
 		int days = Preferences.getPreferences(context).getInt("notifications_notify_days", 1);
@@ -107,6 +139,12 @@ public class IntentoryCheck
 		}
 	}
 
+	/**
+	 * Present expiring.
+	 *
+	 * @param context the context
+	 * @param items the items
+	 */
 	private static void presentExpiring(Context context, ArrayList<InventoryItem> items)
 	{
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
+// TODO: Auto-generated Javadoc
 /**
  * Buffers input from an {@link InputStream} for reading lines.
  *
@@ -43,10 +44,17 @@ import java.nio.charset.Charset;
  * The default charset is US_ASCII.
  */
 class StrictLineReader implements Closeable {
+	
+	/** The Constant CR. */
 	private static final byte CR = (byte) '\r';
+	
+	/** The Constant LF. */
 	private static final byte LF = (byte) '\n';
 
+	/** The in. */
 	private final InputStream in;
+	
+	/** The charset. */
 	private final Charset charset;
 
 	/*
@@ -55,8 +63,13 @@ class StrictLineReader implements Closeable {
 	   * an unterminated line, we set end == -1, otherwise end == pos. If the underlying
 	   * {@code InputStream} throws an {@code IOException}, end may remain as either pos or -1.
 	   */
+	/** The buf. */
 	private byte[] buf;
+	
+	/** The pos. */
 	private int pos;
+	
+	/** The end. */
 	private int end;
 
 	/**
@@ -65,8 +78,6 @@ class StrictLineReader implements Closeable {
 	 * @param in the {@code InputStream} to read data from.
 	 * @param charset the charset used to decode data. Only US-ASCII, UTF-8 and ISO-8859-1 are
 	 * supported.
-	 * @throws NullPointerException if {@code in} or {@code charset} is null.
-	 * @throws IllegalArgumentException if the specified charset is not supported.
 	 */
 	public StrictLineReader(InputStream in, Charset charset) {
 		this(in, 8192, charset);
@@ -79,9 +90,6 @@ class StrictLineReader implements Closeable {
 	 * @param capacity the capacity of the buffer.
 	 * @param charset the charset used to decode data. Only US-ASCII, UTF-8 and ISO-8859-1 are
 	 * supported.
-	 * @throws NullPointerException if {@code in} or {@code charset} is null.
-	 * @throws IllegalArgumentException if {@code capacity} is negative or zero
-	 * or the specified charset is not supported.
 	 */
 	public StrictLineReader(InputStream in, int capacity, Charset charset) {
 		if (in == null || charset == null) {
@@ -120,7 +128,6 @@ class StrictLineReader implements Closeable {
 	 *
 	 * @return the next line from the input.
 	 * @throws IOException for underlying {@code InputStream} errors.
-	 * @throws EOFException for the end of source stream.
 	 */
 	public String readLine() throws IOException {
 		synchronized (in) {
@@ -179,6 +186,8 @@ class StrictLineReader implements Closeable {
 	/**
 	 * Reads new input data into the buffer. Call only with pos == end or end == -1,
 	 * depending on the desired outcome if the function throws.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void fillBuf() throws IOException {
 		int result = in.read(buf, 0, buf.length);

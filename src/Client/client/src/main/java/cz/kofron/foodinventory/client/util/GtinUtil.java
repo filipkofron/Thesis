@@ -1,10 +1,13 @@
 package cz.kofron.foodinventory.client.util;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 16.3.14.
  */
 public class GtinUtil
 {
+	
+	/** The Constant prefixes. */
 	public final static String prefixes[] =
 	{
 		"Z", // 0
@@ -24,6 +27,12 @@ public class GtinUtil
 		"D", // 14
 	};
 
+	/**
+	 * Gets the readable gtin.
+	 *
+	 * @param src the src
+	 * @return the readable gtin
+	 */
 	public static String getReadableGtin(String src)
 	{
 		src = src.toUpperCase();

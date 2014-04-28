@@ -9,26 +9,40 @@ import java.util.ArrayList;
 import cz.kofron.foodinventory.client.model.Category;
 import cz.kofron.foodinventory.client.model.Vendor;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 22.3.14.
  */
 public class GetFoodBaseResponse extends Message
 {
+	
+	/** The vendors. */
 	private ArrayList<Vendor> vendors;
+	
+	/** The categories. */
 	private ArrayList<Category> categories;
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#getHeader()
+	 */
 	@Override
 	public String getHeader()
 	{
 		return "GetFoodBaseResponse";
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#newMessage()
+	 */
 	@Override
 	public Message newMessage()
 	{
 		return new GetFoodBaseResponse();
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#dejsonizeContent(org.json.JSONObject)
+	 */
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
@@ -69,6 +83,9 @@ public class GetFoodBaseResponse extends Message
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#jsonizeContent()
+	 */
 	@Override
 	protected JSONObject jsonizeContent() throws JSONException
 	{
@@ -97,11 +114,21 @@ public class GetFoodBaseResponse extends Message
 		return obj;
 	}
 
+	/**
+	 * Gets the vendors.
+	 *
+	 * @return the vendors
+	 */
 	public ArrayList<Vendor> getVendors()
 	{
 		return vendors;
 	}
 
+	/**
+	 * Gets the categories.
+	 *
+	 * @return the categories
+	 */
 	public ArrayList<Category> getCategories()
 	{
 		return categories;

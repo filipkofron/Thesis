@@ -6,32 +6,89 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 14.3.14.
  */
 public class FoodDetail extends AbstractEntity
 {
+	
+	/** The name. */
 	private String name;
+	
+	/** The category. */
 	String category;
+	
+	/** The category id. */
 	int categoryId;
+	
+	/** The vendor. */
 	private String vendor;
+	
+	/** The vendor id. */
 	private int vendorId;
+	
+	/** The gtin. */
 	private String gtin;
+	
+	/** The image ids. */
 	private ArrayList<String> imageIds;
+	
+	/** The description. */
 	private String description;
+	
+	/** The default use by. */
 	private long defaultUseBy;
+	
+	/** The amount type. */
 	private int amountType;
+	
+	/** The amount. */
 	private float amount;
+	
+	/** The usual price. */
 	private float usualPrice;
+	
+	/** The reviews. */
 	private ArrayList<FoodReview> reviews;
+	
+	/** The added by. */
 	private String addedBy;
+	
+	/** The last edited by. */
 	private String lastEditedBy;
 
+	/**
+	 * Instantiates a new food detail.
+	 *
+	 * @param id the id
+	 */
 	public FoodDetail(int id)
 	{
 		super(id, true);
 	}
 
+	/**
+	 * Instantiates a new food detail.
+	 *
+	 * @param id the id
+	 * @param exists the exists
+	 * @param name the name
+	 * @param category the category
+	 * @param categoryId the category id
+	 * @param vendor the vendor
+	 * @param vendorId the vendor id
+	 * @param gtin the gtin
+	 * @param imageIds the image ids
+	 * @param description the description
+	 * @param defaultUseBy the default use by
+	 * @param amountType the amount type
+	 * @param amount the amount
+	 * @param usualPrice the usual price
+	 * @param reviews the reviews
+	 * @param addedBy the added by
+	 * @param lastEditedBy the last edited by
+	 */
 	public FoodDetail(int id, boolean exists, String name, String category, int categoryId, String vendor, int vendorId, String gtin, ArrayList<String> imageIds, String description, long defaultUseBy, int amountType, float amount, float usualPrice, ArrayList<FoodReview> reviews, String addedBy, String lastEditedBy)
 	{
 		super(id, exists);
@@ -52,6 +109,13 @@ public class FoodDetail extends AbstractEntity
 		this.lastEditedBy = lastEditedBy;
 	}
 
+	/**
+	 * From json.
+	 *
+	 * @param obj the obj
+	 * @return the food detail
+	 * @throws JSONException the JSON exception
+	 */
 	public static FoodDetail fromJson(JSONObject obj) throws JSONException
 	{
 		FoodDetail fd = new FoodDetail(obj.getInt("id"));
@@ -112,6 +176,9 @@ public class FoodDetail extends AbstractEntity
 		return fd;
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.model.AbstractEntity#makeJSONObject()
+	 */
 	@Override
 	protected JSONObject makeJSONObject() throws JSONException
 	{
@@ -156,86 +223,171 @@ public class FoodDetail extends AbstractEntity
 		return obj;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
+	/**
+	 * Gets the vendor.
+	 *
+	 * @return the vendor
+	 */
 	public String getVendor()
 	{
 		return vendor;
 	}
 
+	/**
+	 * Gets the vendor id.
+	 *
+	 * @return the vendor id
+	 */
 	public int getVendorId()
 	{
 		return vendorId;
 	}
 
+	/**
+	 * Gets the gtin.
+	 *
+	 * @return the gtin
+	 */
 	public String getGtin()
 	{
 		return gtin;
 	}
 
+	/**
+	 * Gets the image ids.
+	 *
+	 * @return the image ids
+	 */
 	public ArrayList<String> getImageIds()
 	{
 		return imageIds;
 	}
 
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription()
 	{
 		return description;
 	}
 
+	/**
+	 * Gets the default use by.
+	 *
+	 * @return the default use by
+	 */
 	public long getDefaultUseBy()
 	{
 		return defaultUseBy;
 	}
 
+	/**
+	 * Gets the amount type.
+	 *
+	 * @return the amount type
+	 */
 	public int getAmountType()
 	{
 		return amountType;
 	}
 
+	/**
+	 * Gets the amount.
+	 *
+	 * @return the amount
+	 */
 	public float getAmount()
 	{
 		return amount;
 	}
 
+	/**
+	 * Gets the usual price.
+	 *
+	 * @return the usual price
+	 */
 	public float getUsualPrice()
 	{
 		return usualPrice;
 	}
 
+	/**
+	 * Gets the reviews.
+	 *
+	 * @return the reviews
+	 */
 	public ArrayList<FoodReview> getReviews()
 	{
 		return reviews;
 	}
 
+	/**
+	 * Gets the added by.
+	 *
+	 * @return the added by
+	 */
 	public String getAddedBy()
 	{
 		return addedBy;
 	}
 
+	/**
+	 * Gets the last edited by.
+	 *
+	 * @return the last edited by
+	 */
 	public String getLastEditedBy()
 	{
 		return lastEditedBy;
 	}
 
+	/**
+	 * Gets the category.
+	 *
+	 * @return the category
+	 */
 	public String getCategory()
 	{
 		return category;
 	}
 
+	/**
+	 * Sets the category.
+	 *
+	 * @param category the new category
+	 */
 	public void setCategory(String category)
 	{
 		this.category = category;
 	}
 
+	/**
+	 * Gets the category id.
+	 *
+	 * @return the category id
+	 */
 	public int getCategoryId()
 	{
 		return categoryId;
 	}
 
+	/**
+	 * Sets the category id.
+	 *
+	 * @param categoryId the new category id
+	 */
 	public void setCategoryId(int categoryId)
 	{
 		this.categoryId = categoryId;

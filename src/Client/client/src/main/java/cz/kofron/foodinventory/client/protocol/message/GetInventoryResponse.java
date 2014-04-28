@@ -8,35 +8,55 @@ import java.util.ArrayList;
 
 import cz.kofron.foodinventory.client.model.InventoryItem;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 13.3.14.
  */
 public class GetInventoryResponse extends Message
 {
+	
+	/** The intentory items. */
 	private ArrayList<InventoryItem> intentoryItems;
 
+	/**
+	 * Instantiates a new gets the inventory response.
+	 *
+	 * @param intentoryItems the intentory items
+	 */
 	public GetInventoryResponse(ArrayList<InventoryItem> intentoryItems)
 	{
 		this.intentoryItems = intentoryItems;
 	}
 
+	/**
+	 * Instantiates a new gets the inventory response.
+	 */
 	public GetInventoryResponse()
 	{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#getHeader()
+	 */
 	@Override
 	public String getHeader()
 	{
 		return "GetInventoryResponse";
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#newMessage()
+	 */
 	@Override
 	public Message newMessage()
 	{
 		return new GetInventoryResponse();
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#dejsonizeContent(org.json.JSONObject)
+	 */
 	@Override
 	protected void dejsonizeContent(JSONObject obj) throws JSONException
 	{
@@ -60,6 +80,9 @@ public class GetInventoryResponse extends Message
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.protocol.message.Message#jsonizeContent()
+	 */
 	@Override
 	protected JSONObject jsonizeContent() throws JSONException
 	{
@@ -78,6 +101,11 @@ public class GetInventoryResponse extends Message
 		return obj;
 	}
 
+	/**
+	 * Gets the intentory items.
+	 *
+	 * @return the intentory items
+	 */
 	public ArrayList<InventoryItem> getIntentoryItems()
 	{
 		return intentoryItems;
