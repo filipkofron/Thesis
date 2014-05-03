@@ -11,14 +11,22 @@ import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailRequest;
 import cz.kofron.foodinventory.client.protocol.message.GetFoodDetailResponse;
 import cz.kofron.foodinventory.client.task.param.LoadFoodDetailParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 16.3.14.
  */
 public class LoadFoodDetailTask extends AsyncTask<LoadFoodDetailParam, Void, Void>
 {
+	
+	/** The param. */
 	private LoadFoodDetailParam param;
+	
+	/** The gfdr. */
 	private GetFoodDetailResponse gfdr;
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(LoadFoodDetailParam... loadFoodDetailParams)
 	{
@@ -44,6 +52,9 @@ public class LoadFoodDetailTask extends AsyncTask<LoadFoodDetailParam, Void, Voi
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

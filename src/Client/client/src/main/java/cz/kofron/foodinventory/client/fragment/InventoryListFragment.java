@@ -28,21 +28,37 @@ import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
 import cz.kofron.foodinventory.client.util.DateUtil;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/2/14.
  */
 public class InventoryListFragment extends ListFragment implements ReloadCallback, DeleteInventoryListener
 {
+	
+	/** The adapter. */
 	private InventoryListAdapter adapter;
+	
+	/** The progress bar. */
 	private ProgressBar progressBar;
 
+	/** The deleted item. */
 	private InventoryItem deletedItem;
+	
+	/** The reload call back on delete. */
 	private ReloadCallback reloadCallBackOnDelete;
 
+	/** The undo layout. */
 	private RelativeLayout undoLayout;
+	
+	/** The undu button. */
 	private Button unduButton;
+	
+	/** The undo text view. */
 	private TextView undoTextView;
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -56,6 +72,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		load();
 	}
 
+	/**
+	 * Load.
+	 */
 	private void load()
 	{
 		LoadInventoryTask lit = new LoadInventoryTask();
@@ -83,6 +102,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		lit.execute(new LoadInventoryParam("", "", adapter, success, fail));
 	}
 
+	/**
+	 * Hide undo.
+	 */
 	private void hideUndo()
 	{
 		TranslateAnimation animate = new TranslateAnimation(0,0,0, -unduButton.getHeight());
@@ -92,8 +114,15 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		undoLayout.setVisibility(RelativeLayout.GONE);
 	}
 
+	/**
+	 * The Class FinishedUndoDelete.
+	 */
 	private class FinishedUndoDelete implements Runnable
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -104,8 +133,12 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		}
 	}
 
+	/** The finished undo delete. */
 	private FinishedUndoDelete finishedUndoDelete = new FinishedUndoDelete();
 
+	/**
+	 * Undo.
+	 */
 	private void undo()
 	{
 		getActivity().runOnUiThread(new Runnable()
@@ -123,6 +156,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	public void update()
 	{
 		getActivity().runOnUiThread(new Runnable()
@@ -137,6 +173,11 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		});
 	}
 
+	/**
+	 * Toggle progress bar.
+	 *
+	 * @param on the on
+	 */
 	public void toggleProgressBar(boolean on)
 	{
 		if (progressBar == null)
@@ -153,6 +194,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -175,6 +219,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		return view;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -186,6 +233,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		return super.onOptionsItemSelected(item);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -195,6 +245,9 @@ public class InventoryListFragment extends ListFragment implements ReloadCallbac
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.DeleteInventoryListener#onDeleteItem(cz.kofron.foodinventory.client.model.InventoryItem, cz.kofron.foodinventory.client.adapter.ReloadCallback)
+	 */
 	@Override
 	public void onDeleteItem(InventoryItem item, ReloadCallback reloadCallBackOnDelete)
 	{

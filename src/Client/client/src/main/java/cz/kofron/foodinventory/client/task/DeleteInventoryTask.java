@@ -11,22 +11,40 @@ import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.param.DeleteInventoryParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 18.3.14.
  */
 public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 {
+	
+	/** The param. */
 	private DeleteInventoryParam param;
+	
+	/** The context. */
 	private Context context;
+	
+	/** The pd. */
 	private ProgressDialog pd;
+	
+	/** The result. */
 	private boolean result;
 
+	/**
+	 * Instantiates a new delete inventory task.
+	 *
+	 * @param context the context
+	 * @param param the param
+	 */
 	public DeleteInventoryTask(Context context, DeleteInventoryParam param)
 	{
 		this.param = param;
 		this.context = context;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(Object... objects)
 	{
@@ -43,6 +61,9 @@ public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute()
 	{
@@ -56,6 +77,9 @@ public class DeleteInventoryTask extends AsyncTask<Object, Void, Void>
 		pd.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

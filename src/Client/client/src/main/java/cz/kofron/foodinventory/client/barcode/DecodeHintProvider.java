@@ -9,11 +9,14 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 9.3.14.
  */
 public class DecodeHintProvider
 {
+	
+	/** The Constant PRODUCT_FORMATS. */
 	public static final Set<BarcodeFormat> PRODUCT_FORMATS;
 
 	static
@@ -26,6 +29,11 @@ public class DecodeHintProvider
 				BarcodeFormat.RSS_EXPANDED);
 	}
 
+	/**
+	 * Provide hints.
+	 *
+	 * @return the map
+	 */
 	public static Map<DecodeHintType, Object> provideHints()
 	{
 		Map<DecodeHintType, Object> hints = new EnumMap<>(DecodeHintType.class);

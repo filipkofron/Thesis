@@ -32,16 +32,32 @@ import cz.kofron.foodinventory.client.util.Download;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 import cz.kofron.foodinventory.client.util.SimpleDate;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/2/14.
  */
 public class InventoryListAdapter extends ArrayAdapter
 {
+	
+	/** The context. */
 	private Context context;
+	
+	/** The items. */
 	private ArrayList<InventoryItem> items;
+	
+	/** The reload callback. */
 	private ReloadCallback reloadCallback;
+	
+	/** The delete inventory listener. */
 	private DeleteInventoryListener deleteInventoryListener;
 
+	/**
+	 * Instantiates a new inventory list adapter.
+	 *
+	 * @param context the context
+	 * @param fragment the fragment
+	 * @param deleteInventoryListener the delete inventory listener
+	 */
 	public InventoryListAdapter(Context context, ReloadCallback fragment, DeleteInventoryListener deleteInventoryListener)
 	{
 		super(context, R.layout.inventory_list_item);
@@ -51,6 +67,9 @@ public class InventoryListAdapter extends ArrayAdapter
 		this.deleteInventoryListener = deleteInventoryListener;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
@@ -128,6 +147,12 @@ public class InventoryListAdapter extends ArrayAdapter
 		return view;
 	}
 
+	/**
+	 * Make line red.
+	 *
+	 * @param days the days
+	 * @return the int
+	 */
 	private int makeLineRed(int days)
 	{
 		int red = (days * (-255 / 5) + 255);
@@ -137,6 +162,14 @@ public class InventoryListAdapter extends ArrayAdapter
 		return red;
 	}
 
+	/**
+	 * Gets the correct text.
+	 *
+	 * @param days the days
+	 * @param months the months
+	 * @param years the years
+	 * @return the correct text
+	 */
 	private int getCorrectText(int days, int months, int years)
 	{
 		if(years > 0)
@@ -171,6 +204,11 @@ public class InventoryListAdapter extends ArrayAdapter
 		return R.string.days_text_days;
 	}
 
+	/**
+	 * Update content.
+	 *
+	 * @param items the items
+	 */
 	public void updateContent(ArrayList<InventoryItem> items)
 	{
 		clear();
@@ -197,21 +235,37 @@ public class InventoryListAdapter extends ArrayAdapter
 		notifyDataSetChanged();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getCount()
+	 */
 	@Override
 	public int getCount()
 	{
 		return items.size();
 	}
 
+	/**
+	 * The Class OnItemDelete.
+	 */
 	private class OnItemDelete implements View.OnClickListener
 	{
+		
+		/** The item. */
 		private InventoryItem item;
 
+		/**
+		 * Instantiates a new on item delete.
+		 *
+		 * @param item the item
+		 */
 		private OnItemDelete(InventoryItem item)
 		{
 			this.item = item;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.View.OnClickListener#onClick(android.view.View)
+		 */
 		@Override
 		public void onClick(View view)
 		{
@@ -247,15 +301,28 @@ public class InventoryListAdapter extends ArrayAdapter
 		}
 	}
 
+	/**
+	 * The Class OnItemClick.
+	 */
 	private class OnItemClick implements View.OnClickListener
 	{
+		
+		/** The item. */
 		private InventoryItem item;
 
+		/**
+		 * Instantiates a new on item click.
+		 *
+		 * @param item the item
+		 */
 		private OnItemClick(InventoryItem item)
 		{
 			this.item = item;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.View.OnClickListener#onClick(android.view.View)
+		 */
 		@Override
 		public void onClick(View view)
 		{

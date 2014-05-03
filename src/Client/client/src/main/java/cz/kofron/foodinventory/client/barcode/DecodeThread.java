@@ -2,36 +2,71 @@ package cz.kofron.foodinventory.client.barcode;
 
 import android.hardware.Camera;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 9.3.14.
  */
 public class DecodeThread extends Thread
 {
+	
+	/** The stopped. */
 	private boolean stopped = false;
+	
+	/** The working. */
 	private boolean working = false;
 
+	/** The rotated. */
 	private boolean rotated;
+	
+	/** The data. */
 	private byte[] data;
+	
+	/** The width. */
 	private int width;
+	
+	/** The height. */
 	private int height;
 
+	/** The returned buffer. */
 	private boolean returnedBuffer = true;
 
+	/** The decoder. */
 	private Decoder decoder;
 
+	/** The camera. */
 	private Camera camera;
 
+	/**
+	 * Instantiates a new decode thread.
+	 *
+	 * @param camera the camera
+	 * @param decoder the decoder
+	 */
 	public DecodeThread(Camera camera, Decoder decoder)
 	{
 		this.camera = camera;
 		this.decoder = decoder;
 	}
 
+	/**
+	 * Sets the stopped.
+	 *
+	 * @param stopped the new stopped
+	 */
 	public void setStopped(boolean stopped)
 	{
 		this.stopped = stopped;
 	}
 
+	/**
+	 * Schedule job if free.
+	 *
+	 * @param data the data
+	 * @param width the width
+	 * @param height the height
+	 * @param rotated the rotated
+	 * @return true, if successful
+	 */
 	public boolean scheduleJobIfFree(byte[] data, int width, int height, boolean rotated)
 	{
 		if (working)
@@ -55,6 +90,9 @@ public class DecodeThread extends Thread
 		return true;
 	}
 
+	/**
+	 * Do job.
+	 */
 	private void doJob()
 	{
 		try
@@ -74,6 +112,9 @@ public class DecodeThread extends Thread
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run()
 	{
@@ -103,6 +144,11 @@ public class DecodeThread extends Thread
 		}
 	}
 
+	/**
+	 * Checks for returned buffer.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasReturnedBuffer()
 	{
 		return returnedBuffer;

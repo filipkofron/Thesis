@@ -12,27 +12,54 @@ import java.util.logging.Logger;
 
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Connector.
+ *
  * @author kofee
  */
 public class Connector
 {
+	
+	/** The Constant KEEP_ALIVE_PERIOD_MS. */
 	private final static int KEEP_ALIVE_PERIOD_MS = 20000;
+	
+	/** The Constant SERVER_ADDR. */
 	public final static String SERVER_ADDR = "foodinventory.halt.cz";
+	
+	/** The Constant SERVER_PORT. */
 	public final static int SERVER_PORT = 4040;
+	
+	/** The connector thread. */
 	private ConnectorThread connectorThread = new ConnectorThread();
+	
+	/** The connection. */
 	private Connection connection;
+	
+	/** The last keep alive. */
 	private long lastKeepAlive = 0;
+	
+	/**
+	 * Instantiates a new connector.
+	 */
 	public Connector()
 	{
 	}
 
+	/**
+	 * Start.
+	 */
 	public void start()
 	{
 		connectorThread.stopped = false;
 		connectorThread.start();
 	}
 
+	/**
+	 * Creates the connection.
+	 *
+	 * @return the connection
+	 */
 	private Connection createConnection()
 	{
 		Connection newConnection = new Connection(SERVER_ADDR, SERVER_PORT, true);
@@ -40,6 +67,9 @@ public class Connector
 		return newConnection;
 	}
 
+	/**
+	 * On check.
+	 */
 	private void onCheck()
 	{
 		if (connection == null)
@@ -98,25 +128,45 @@ public class Connector
 			}
 		}
 	}
+	
+	/**
+	 * Force check.
+	 */
 	public synchronized void forceCheck()
 	{
 		connectorThread.check();
 	}
 
+	/**
+	 * Stop.
+	 */
 	public void stop()
 	{
 		connectorThread.safeStop();
 	}
 
+	/**
+	 * The Class ConnectorThread.
+	 */
 	private class ConnectorThread extends Thread
 	{
+		
+		/** The Constant THREAD_SLEEP. */
 		private final static int THREAD_SLEEP = 3000;
+		
+		/** The stopped. */
 		public boolean stopped;
 
+		/**
+		 * Instantiates a new connector thread.
+		 */
 		public ConnectorThread()
 		{
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Thread#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -137,6 +187,9 @@ public class Connector
 			}
 		}
 
+		/**
+		 * Check.
+		 */
 		public void check()
 		{
 			synchronized (this)
@@ -145,6 +198,9 @@ public class Connector
 			}
 		}
 
+		/**
+		 * Safe stop.
+		 */
 		public void safeStop()
 		{
 			synchronized (this)

@@ -12,21 +12,46 @@ import cz.kofron.foodinventory.client.preference.Preferences;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.Download;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 23.3.14.
  */
 public class LoadImageTask extends AsyncTask<Object, Void, Void>
 {
+	
+	/** The param. */
 	private LoadImageParam param;
+	
+	/** The bitmap. */
 	private Bitmap bitmap = null;
+	
+	/** The image cache. */
 	private static DiskLruImageCache imageCache;
+	
+	/** The lock. */
 	private static Object lock = new Object();
+	
+	/** The Constant DIR_NAME. */
 	private final static String DIR_NAME = "food_images";
+	
+	/** The Constant MAX_SIZE. */
 	private final static int MAX_SIZE = 1024 * 1024 * 16;
+	
+	/** The Constant QUALITY. */
 	private final static int QUALITY = 90;
+	
+	/** The Constant MAX_BITMAPS_SIZE. */
 	private final static int MAX_BITMAPS_SIZE = 8 * 1024 * 1024;
+	
+	/** The cached bitmaps. */
 	private static LruCache<String, Bitmap> cachedBitmaps;
 
+	/**
+	 * Gets the image cache.
+	 *
+	 * @param context the context
+	 * @return the image cache
+	 */
 	private static DiskLruImageCache getImageCache(Context context)
 	{
 		synchronized (lock)
@@ -39,6 +64,11 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		return imageCache;
 	}
 
+	/**
+	 * Gets the cache.
+	 *
+	 * @return the cache
+	 */
 	private static LruCache<String, Bitmap> getCache()
 	{
 		synchronized (lock)
@@ -57,6 +87,11 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		return cachedBitmaps;
 	}
 
+	/**
+	 * Instantiates a new load image task.
+	 *
+	 * @param param the param
+	 */
 	public LoadImageTask(LoadImageParam param)
 	{
 		this.param = param;
@@ -66,6 +101,9 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(Object... objects)
 	{
@@ -130,6 +168,9 @@ public class LoadImageTask extends AsyncTask<Object, Void, Void>
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

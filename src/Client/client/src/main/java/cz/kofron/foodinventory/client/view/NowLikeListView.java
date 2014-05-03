@@ -10,12 +10,19 @@ import android.widget.ListView;
 
 import cz.kofron.foodinventory.client.R;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/1/14.
  */
 public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlobalLayoutListener
 {
 
+	/**
+	 * Instantiates a new now like list view.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
+	 */
 	public NowLikeListView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
@@ -23,6 +30,11 @@ public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlob
 		initLayoutObserver();
 	}
 
+	/**
+	 * Instantiates a new now like list view.
+	 *
+	 * @param context the context
+	 */
 	public NowLikeListView(Context context)
 	{
 		super(context);
@@ -30,11 +42,17 @@ public class NowLikeListView extends ListView implements ViewTreeObserver.OnGlob
 	}
 
 
+	/**
+	 * Inits the layout observer.
+	 */
 	private void initLayoutObserver()
 	{
 		getViewTreeObserver().addOnGlobalLayoutListener(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.widget.AbsListView#onGlobalLayout()
+	 */
 	@Override
 	public void onGlobalLayout()
 	{

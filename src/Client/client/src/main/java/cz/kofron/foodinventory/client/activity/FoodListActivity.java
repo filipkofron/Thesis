@@ -18,15 +18,25 @@ import cz.kofron.foodinventory.client.task.SearchFoodTask;
 import cz.kofron.foodinventory.client.task.param.SearchFoodParam;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by Filip Kofron on 3/1/14.
  */
 public class FoodListActivity extends ListActionBarActivity implements ReloadCallback
 {
+	
+	/** The progress bar. */
 	private ProgressBar progressBar;
+	
+	/** The search string. */
 	private String searchString;
+	
+	/** The adapter. */
 	private FoodListAdapter adapter;
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -61,6 +71,9 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		setContentView(view);
 	}
 
+	/**
+	 * Load content.
+	 */
 	private void loadContent()
 	{
 		SearchFoodTask sft = new SearchFoodTask();
@@ -88,6 +101,11 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		sft.execute(new SearchFoodParam(searchString, adapter, success, fail));
 	}
 
+	/**
+	 * Toggle progress bar.
+	 *
+	 * @param on the on
+	 */
 	public void toggleProgressBar(boolean on)
 	{
 		if (progressBar == null)
@@ -104,6 +122,9 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -112,6 +133,9 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -130,6 +154,9 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		return super.onOptionsItemSelected(item);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onResume()
+	 */
 	@Override
 	protected void onResume()
 	{
@@ -137,6 +164,9 @@ public class FoodListActivity extends ListActionBarActivity implements ReloadCal
 		ConnectionDialogManager.initialize(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{

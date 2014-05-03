@@ -13,18 +13,40 @@ import java.util.List;
 
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Connection.
+ *
  * @author kofee
  */
 public class Connection
 {
+	
+	/** The Constant TIMEOUT. */
 	private final static int TIMEOUT = 30000;
+	
+	/** The addr. */
 	private final String addr;
+	
+	/** The port. */
 	private final int port;
+	
+	/** The connection listeners. */
 	private final List<ConnectionListener> connectionListeners;
+	
+	/** The socket. */
 	private Socket socket;
+	
+	/** The show dialog. */
 	private boolean showDialog;
 
+	/**
+	 * Instantiates a new connection.
+	 *
+	 * @param addr the addr
+	 * @param port the port
+	 * @param showDialog the show dialog
+	 */
 	public Connection(String addr, int port, boolean showDialog)
 	{
 		this.connectionListeners = new ArrayList<ConnectionListener>();
@@ -33,6 +55,11 @@ public class Connection
 		this.showDialog = showDialog;
 	}
 
+	/**
+	 * Connect.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void connect() throws IOException
 	{
 		if(showDialog)
@@ -51,6 +78,9 @@ public class Connection
 		}
 	}
 
+	/**
+	 * Disconnect.
+	 */
 	public void disconnect()
 	{
 		if (socket != null)
@@ -74,11 +104,21 @@ public class Connection
 		}
 	}
 
+	/**
+	 * Gets the socket.
+	 *
+	 * @return the socket
+	 */
 	public Socket getSocket()
 	{
 		return socket;
 	}
 
+	/**
+	 * Checks if is connected.
+	 *
+	 * @return true, if is connected
+	 */
 	public boolean isConnected()
 	{
 		Socket tempSocket = socket;
@@ -90,6 +130,11 @@ public class Connection
 		return tempSocket.isConnected();
 	}
 
+	/**
+	 * Adds the connection listener.
+	 *
+	 * @param connectionListener the connection listener
+	 */
 	public void addConnectionListener(ConnectionListener connectionListener)
 	{
 		synchronized (connectionListeners)
@@ -98,6 +143,11 @@ public class Connection
 		}
 	}
 
+	/**
+	 * Removes the connection listener.
+	 *
+	 * @param connectionListener the connection listener
+	 */
 	public void removeConnectionListener(ConnectionListener connectionListener)
 	{
 		synchronized (connectionListeners)

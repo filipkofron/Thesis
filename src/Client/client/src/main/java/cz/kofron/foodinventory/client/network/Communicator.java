@@ -39,34 +39,58 @@ import cz.kofron.foodinventory.client.protocol.message.SetUserReviewRequest;
 import cz.kofron.foodinventory.client.protocol.message.SetUserReviewResponse;
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Communicator.
+ *
  * @author kofee
  */
 public class Communicator implements ConnectionListener
 {
 
+	/** The connection. */
 	private Connection connection;
 
+	/** The connected. */
 	private boolean connected;
 
+	/** The os. */
 	private OutputStream os;
+	
+	/** The is. */
 	private InputStream is;
 
+	/** The username. */
 	private String username;
 
+	/** The show dialog. */
 	private boolean showDialog;
 
+	/**
+	 * Instantiates a new communicator.
+	 *
+	 * @param username the username
+	 * @param showDialog the show dialog
+	 */
 	public Communicator(String username, boolean showDialog)
 	{
 		this.username = username;
 		this.showDialog = showDialog;
 	}
 
+	/**
+	 * Checks if is connected.
+	 *
+	 * @return true, if is connected
+	 */
 	public boolean isConnected()
 	{
 		return connected;
 	}
 
+	/**
+	 * Wait for connection.
+	 */
 	private void waitForConnection()
 	{
 		if(!connected)
@@ -82,6 +106,13 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Login.
+	 *
+	 * @param name the name
+	 * @return the login response
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public LoginResponse login(String name) throws IOException
 	{
 		synchronized (this)
@@ -93,6 +124,16 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Gets the inventory.
+	 *
+	 * @param direct the direct
+	 * @param id the id
+	 * @param foodName the food name
+	 * @param foodGtin the food gtin
+	 * @return the inventory
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public GetInventoryResponse getInventory(boolean direct, int id, String foodName, String foodGtin) throws IOException
 	{
 		waitForConnection();
@@ -105,6 +146,13 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Gets the food detail.
+	 *
+	 * @param id the id
+	 * @return the food detail
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public GetFoodDetailResponse getFoodDetail(int id) throws IOException
 	{
 		waitForConnection();
@@ -117,6 +165,13 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Delete inventory.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean deleteInventory(int id) throws IOException
 	{
 		waitForConnection();
@@ -129,6 +184,17 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Edits the food item.
+	 *
+	 * @param adding the adding
+	 * @param id the id
+	 * @param foodId the food id
+	 * @param useBy the use by
+	 * @param count the count
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean editFoodItem(boolean adding, int id, int foodId, long useBy, int count) throws IOException
 	{
 		waitForConnection();
@@ -141,6 +207,17 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Gets the food item.
+	 *
+	 * @param direct the direct
+	 * @param id the id
+	 * @param name the name
+	 * @param gtin the gtin
+	 * @param skip the skip
+	 * @return the food item
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public GetFoodItemResponse getFoodItem(boolean direct, int id, String name, String gtin, int skip) throws IOException
 	{
 		waitForConnection();
@@ -153,6 +230,12 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Gets the food base.
+	 *
+	 * @return the food base
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public GetFoodBaseResponse getFoodBase() throws IOException
 	{
 		synchronized (this)
@@ -164,6 +247,23 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Edits the food.
+	 *
+	 * @param adding the adding
+	 * @param id the id
+	 * @param name the name
+	 * @param vendor the vendor
+	 * @param categoryId the category id
+	 * @param gtin the gtin
+	 * @param description the description
+	 * @param defaultUseBy the default use by
+	 * @param amountType the amount type
+	 * @param amount the amount
+	 * @param usualPrice the usual price
+	 * @return the edits the food response
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public EditFoodResponse editFood(boolean adding, int id, String name, String vendor, int categoryId, String gtin, String description, long defaultUseBy, int amountType, float amount, float usualPrice) throws IOException
 	{
 		waitForConnection();
@@ -176,6 +276,14 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Adds the image.
+	 *
+	 * @param bitmap the bitmap
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean addImage(Bitmap bitmap, int id) throws IOException
 	{
 		waitForConnection();
@@ -188,6 +296,13 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Delete image.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean deleteImage(int id) throws IOException
 	{
 		waitForConnection();
@@ -200,6 +315,16 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Sets the user review.
+	 *
+	 * @param rating the rating
+	 * @param delete the delete
+	 * @param foodId the food id
+	 * @param text the text
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean setUserReview(float rating, boolean delete, int foodId, String text) throws IOException
 	{
 		waitForConnection();
@@ -212,6 +337,11 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/**
+	 * Keep alive.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean keepAlive()
 	{
 		synchronized (this)
@@ -229,6 +359,9 @@ public class Communicator implements ConnectionListener
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.network.ConnectionListener#onConnected(cz.kofron.foodinventory.client.network.Connection)
+	 */
 	@Override
 	public void onConnected(Connection connection)
 	{
@@ -261,12 +394,20 @@ public class Communicator implements ConnectionListener
 		connected = true;
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.network.ConnectionListener#onDisconnected(cz.kofron.foodinventory.client.network.Connection)
+	 */
 	@Override
 	public void onDisconnected(Connection connection)
 	{
 		connected = false;
 	}
 
+	/**
+	 * Gets the username.
+	 *
+	 * @return the username
+	 */
 	public String getUsername()
 	{
 		return username;

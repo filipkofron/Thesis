@@ -16,19 +16,40 @@ import java.io.OutputStream;
 
 import cz.kofron.foodinventory.client.BuildConfig;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 28.3.14.
  */
 public class DiskLruImageCache
 {
 
+	/** The m disk cache. */
 	private DiskLruCache mDiskCache;
+	
+	/** The m compress format. */
 	private Bitmap.CompressFormat mCompressFormat = Bitmap.CompressFormat.JPEG;
+	
+	/** The m compress quality. */
 	private int mCompressQuality = 70;
+	
+	/** The Constant APP_VERSION. */
 	private static final int APP_VERSION = 1;
+	
+	/** The Constant VALUE_COUNT. */
 	private static final int VALUE_COUNT = 1;
+	
+	/** The Constant TAG. */
 	private static final String TAG = "DiskLruImageCache";
 
+	/**
+	 * Instantiates a new disk lru image cache.
+	 *
+	 * @param context the context
+	 * @param uniqueName the unique name
+	 * @param diskCacheSize the disk cache size
+	 * @param compressFormat the compress format
+	 * @param quality the quality
+	 */
 	public DiskLruImageCache(Context context, String uniqueName, int diskCacheSize,
 	                         Bitmap.CompressFormat compressFormat, int quality)
 	{
@@ -45,6 +66,15 @@ public class DiskLruImageCache
 		}
 	}
 
+	/**
+	 * Write bitmap to file.
+	 *
+	 * @param bitmap the bitmap
+	 * @param editor the editor
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws FileNotFoundException the file not found exception
+	 */
 	private boolean writeBitmapToFile(Bitmap bitmap, DiskLruCache.Editor editor)
 			throws IOException, FileNotFoundException
 	{
@@ -63,6 +93,13 @@ public class DiskLruImageCache
 		}
 	}
 
+	/**
+	 * Gets the disk cache dir.
+	 *
+	 * @param context the context
+	 * @param uniqueName the unique name
+	 * @return the disk cache dir
+	 */
 	private File getDiskCacheDir(Context context, String uniqueName)
 	{
 
@@ -77,6 +114,12 @@ public class DiskLruImageCache
 		return new File(cachePath + File.separator + uniqueName);
 	}
 
+	/**
+	 * Put.
+	 *
+	 * @param key the key
+	 * @param data the data
+	 */
 	public void put(String key, Bitmap data)
 	{
 
@@ -127,6 +170,12 @@ public class DiskLruImageCache
 
 	}
 
+	/**
+	 * Gets the bitmap.
+	 *
+	 * @param key the key
+	 * @return the bitmap
+	 */
 	public Bitmap getBitmap(String key)
 	{
 
@@ -169,6 +218,12 @@ public class DiskLruImageCache
 
 	}
 
+	/**
+	 * Contains key.
+	 *
+	 * @param key the key
+	 * @return true, if successful
+	 */
 	public boolean containsKey(String key)
 	{
 
@@ -195,6 +250,9 @@ public class DiskLruImageCache
 
 	}
 
+	/**
+	 * Clear cache.
+	 */
 	public void clearCache()
 	{
 		if (BuildConfig.DEBUG)
@@ -211,6 +269,11 @@ public class DiskLruImageCache
 		}
 	}
 
+	/**
+	 * Gets the cache folder.
+	 *
+	 * @return the cache folder
+	 */
 	public File getCacheFolder()
 	{
 		return mDiskCache.getDirectory();

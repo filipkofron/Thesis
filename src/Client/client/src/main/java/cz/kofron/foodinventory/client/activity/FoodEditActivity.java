@@ -44,33 +44,66 @@ import cz.kofron.foodinventory.client.util.DateUtil;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/4/14.
  */
 public class FoodEditActivity extends ActionBarActivity implements VendorDialogFragment.VendorDialogListener, OnGtinSelectListener, ReloadCallback
 {
+	
+	/** The view. */
 	private View view;
 
+	/** The initial food detail. */
 	public static FoodDetail initialFoodDetail;
+	
+	/** The initial gtin. */
 	public static String initialGtin;
+	
+	/** The initial reload callback. */
 	public static ReloadCallback initialReloadCallback;
+	
+	/** The on saved callback. */
 	public static Runnable onSavedCallback;
+	
+	/** The initial pod result. */
 	public static PODResult initialPodResult;
 
+	/** The food detail. */
 	private FoodDetail foodDetail;
+	
+	/** The categories. */
 	private ArrayList<Category> categories = FoodHelper.categories;
+	
+	/** The vendors. */
 	private ArrayList<Vendor> vendors = FoodHelper.vendors;
+	
+	/** The given gtin. */
 	private String givenGtin;
+	
+	/** The reload callback. */
 	private ReloadCallback reloadCallback;
+	
+	/** The pod result. */
 	private PODResult podResult;
+	
+	/** The selected category. */
 	private int selectedCategory;
+	
+	/** The image edit adapter. */
 	private ImageEditAdapter imageEditAdapter;
 
+	/**
+	 * Show select vendor dialog.
+	 */
 	public void showSelectVendorDialog()
 	{
 		new VendorDialogFragment(vendors).show(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.fragment.VendorDialogFragment.VendorDialogListener#onVendorSelected(int)
+	 */
 	@Override
 	public void onVendorSelected(final int vendorId)
 	{
@@ -84,6 +117,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		});
 	}
 
+	/**
+	 * Populate edit.
+	 */
 	private void populateEdit()
 	{
 		EditText name = (EditText) view.findViewById(R.id.name);
@@ -131,6 +167,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		price.setText("" + foodDetail.getUsualPrice());
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -217,6 +256,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		setContentView(view);
 	}
 
+	/**
+	 * Populate pod result.
+	 */
 	private void populatePODResult()
 	{
 		EditText gtin = (EditText) view.findViewById(R.id.gtin);
@@ -232,6 +274,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		vendor.setText(podResult.getVendor());
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -240,6 +285,11 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	/**
+	 * Gets the selected category id.
+	 *
+	 * @return the selected category id
+	 */
 	private int getSelectedCategoryId()
 	{
 		Spinner category = (Spinner) view.findViewById(R.id.category_spinner);
@@ -247,6 +297,11 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return categories.get(category.getSelectedItemPosition()).getId();
 	}
 
+	/**
+	 * Gets the default use by time.
+	 *
+	 * @return the default use by time
+	 */
 	private long getDefaultUseByTime()
 	{
 		EditText years = (EditText) view.findViewById(R.id.use_years);
@@ -287,6 +342,11 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return DateUtil.getTimeFromValues(year, month, day);
 	}
 
+	/**
+	 * Gets the selected amount type.
+	 *
+	 * @return the selected amount type
+	 */
 	private int getSelectedAmountType()
 	{
 		RadioGroup rg = (RadioGroup) view.findViewById(R.id.amount_type);
@@ -309,6 +369,11 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return selected;
 	}
 
+	/**
+	 * Make param.
+	 *
+	 * @return the edits the food param
+	 */
 	private EditFoodParam makeParam()
 	{
 		final Runnable onSaved = onSavedCallback;
@@ -361,6 +426,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return new EditFoodParam(addingP, idP, nameP, vendorP, categoryIdP, gtinP, descriptionP, defaultUseByP, amountTypeP, amountP, usualPriceP, success, fail);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -379,6 +447,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onActivityResult(int, int, android.content.Intent)
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -409,6 +480,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.activity.OnGtinSelectListener#onGtinSelected(java.lang.String)
+	 */
 	@Override
 	public void onGtinSelected(String gtin)
 	{
@@ -425,6 +499,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onResume()
+	 */
 	@Override
 	protected void onResume()
 	{
@@ -432,6 +509,9 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		ConnectionDialogManager.initialize(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{

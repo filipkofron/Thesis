@@ -30,30 +30,56 @@ import cz.kofron.foodinventory.client.task.param.EditInventoryParam;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 18.3.14.
  */
 public class SearchRemoveDialogFragment extends DialogFragment implements ReloadCallback, DeleteInventoryListener
 {
+	
+	/** The view. */
 	private View view;
+	
+	/** The dialog. */
 	private Dialog dialog;
+	
+	/** The gtin. */
 	private String gtin;
+	
+	/** The on done. */
 	private Runnable onDone;
+	
+	/** The adapter. */
 	private InventoryListAdapter adapter;
 
+	/** The deleted item. */
 	private InventoryItem deletedItem;
+	
+	/** The reload call back on delete. */
 	private ReloadCallback reloadCallBackOnDelete;
 
+	/** The undo layout. */
 	private RelativeLayout undoLayout;
+	
+	/** The undu button. */
 	private Button unduButton;
+	
+	/** The undo text view. */
 	private TextView undoTextView;
 
+	/**
+	 * Instantiates a new search remove dialog fragment.
+	 *
+	 * @param gtin the gtin
+	 * @param onDone the on done
+	 */
 	public SearchRemoveDialogFragment(String gtin, Runnable onDone)
 	{
 		this.gtin = gtin;
 		this.onDone = onDone;
 	}
 
+	/** The on ok listener. */
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -66,8 +92,15 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		}
 	};
 
+	/**
+	 * The Class FinishedUndoDelete.
+	 */
 	private class FinishedUndoDelete implements Runnable
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -78,8 +111,12 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		}
 	}
 
+	/** The finished undo delete. */
 	private FinishedUndoDelete finishedUndoDelete = new FinishedUndoDelete();
 
+	/**
+	 * Hide undo.
+	 */
 	private void hideUndo()
 	{
 		TranslateAnimation animate = new TranslateAnimation(0,0,0, -unduButton.getHeight());
@@ -89,6 +126,9 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		undoLayout.setVisibility(RelativeLayout.GONE);
 	}
 
+	/**
+	 * Undo.
+	 */
 	private void undo()
 	{
 		getActivity().runOnUiThread(new Runnable()
@@ -106,6 +146,9 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -174,11 +217,19 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "search_remove_food_dialog");
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{
@@ -186,6 +237,7 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		lit.execute(new LoadInventoryParam("", gtin, adapter, onSuccess, onFail));
 	}
 
+	/** The on success. */
 	private Runnable onSuccess = new Runnable()
 	{
 		@Override
@@ -195,6 +247,7 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		}
 	};
 
+	/** The on fail. */
 	private Runnable onFail = new Runnable()
 	{
 		@Override
@@ -205,6 +258,9 @@ public class SearchRemoveDialogFragment extends DialogFragment implements Reload
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.DeleteInventoryListener#onDeleteItem(cz.kofron.foodinventory.client.model.InventoryItem, cz.kofron.foodinventory.client.adapter.ReloadCallback)
+	 */
 	@Override
 	public void onDeleteItem(InventoryItem item, ReloadCallback reloadCallBackOnDelete)
 	{

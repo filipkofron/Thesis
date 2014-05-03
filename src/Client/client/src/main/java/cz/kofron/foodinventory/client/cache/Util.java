@@ -11,19 +11,30 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 28.3.14.
  */
 public class Util
 {
+	
+	/** The Constant IO_BUFFER_SIZE. */
 	public static final int IO_BUFFER_SIZE = 8 * 1024;
 
+	/**
+	 * Instantiates a new util.
+	 */
 	private Util()
 	{
 	}
 
 	;
 
+	/**
+	 * Checks if is external storage removable.
+	 *
+	 * @return true, if is external storage removable
+	 */
 	public static boolean isExternalStorageRemovable()
 	{
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD)
@@ -33,6 +44,12 @@ public class Util
 		return true;
 	}
 
+	/**
+	 * Gets the external cache dir.
+	 *
+	 * @param context the context
+	 * @return the external cache dir
+	 */
 	public static File getExternalCacheDir(Context context)
 	{
 		if (hasExternalCacheDir())
@@ -45,14 +62,29 @@ public class Util
 		return new File(Environment.getExternalStorageDirectory().getPath() + cacheDir);
 	}
 
+	/**
+	 * Checks for external cache dir.
+	 *
+	 * @return true, if successful
+	 */
 	public static boolean hasExternalCacheDir()
 	{
 		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
 	}
 
+	/** The Constant US_ASCII. */
 	static final Charset US_ASCII = Charset.forName("US-ASCII");
+	
+	/** The Constant UTF_8. */
 	static final Charset UTF_8 = Charset.forName("UTF-8");
 
+	/**
+	 * Read fully.
+	 *
+	 * @param reader the reader
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	static String readFully(Reader reader) throws IOException {
 		try {
 			StringWriter writer = new StringWriter();
@@ -70,6 +102,9 @@ public class Util
 	/**
 	 * Deletes the contents of {@code dir}. Throws an IOException if any file
 	 * could not be deleted, or if {@code dir} is not a readable directory.
+	 *
+	 * @param dir the dir
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	static void deleteContents(File dir) throws IOException
 	{
@@ -87,6 +122,11 @@ public class Util
 		}
 	}
 
+	/**
+	 * Close quietly.
+	 *
+	 * @param closeable the closeable
+	 */
 	static void closeQuietly(/*Auto*/Closeable closeable) {
 		if (closeable != null) {
 			try {

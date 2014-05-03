@@ -13,13 +13,19 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodListActivity;
 import cz.kofron.foodinventory.client.adapter.FoodSearchAutoCompleteAdapter;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/7/14.
  */
 public class FoodSearchFragment extends Fragment
 {
+	
+	/** The actv. */
 	private AutoCompleteTextView actv;
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
