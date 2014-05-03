@@ -1,4 +1,3 @@
-#include "Base64.hpp"
 /*
  * Copyright (c) 2003 Apple Computer, Inc. All rights reserved.
  *
@@ -79,6 +78,7 @@
  * project, please see <http://www.apache.org/>.
  *
  */
+#include "Base64.hpp"
 
 #include <cstring>
 
