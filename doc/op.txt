@@ -11,22 +11,20 @@ Analyza
 	
 	ctecka carovych kodu, rozdelit do podkapitol
 	
-	Z jednoducheho dema - slangovy vyraz
-	
-	zbar -
-	
 	implementace prototypu - nerozepisovat tridy
 	
 	vysledek tabulkou
 		
 3)
 
+standardy android
 
 
 domenovy model - rozepsat (food moc malo)
 
 
 4)
+zaloha, jak lepsi do zaveru
 zaver - kategorie
 
 
@@ -37,12 +35,9 @@ JSON - bezpecnost
 
 zabezpeceni do zaveru
 
-zaloha, jak lepsi do zaveru
+
 
 protokol - zpravy vice rozepsat, co se prenasi
-
-
-c++ - vlaknovani - multithreading
 
 MySQL - proc ne clietske knihovny
 JSONcpp z jakych a proc
@@ -56,14 +51,7 @@ prechodovy diagram UI obrazovek, navigace
 
 srovnat s wireframy, subjektivne zkusenost
 
-pU8w3au2 WTF nastaven :D :D 
-
 prostredi pro vyvoj software
-
-
-strohy seznam v implementaci odstranit, rozepisy staci
-
-Connected client misto client
 
 
 Log do implementace zminit
@@ -71,7 +59,7 @@ Log do implementace zminit
 proc je seznam v navrhy u klienta ?
 
 
-nasazeni: zverejneni kodu + more..
+nasazeni: zverejneni kodu + more.. (zaloha current)
 
 
 vice rozepsat to testovani podle typu, v programatorovy

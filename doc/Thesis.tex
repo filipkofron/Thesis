@@ -103,7 +103,7 @@ Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému úče
 
 Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různách chyb a stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že někteřým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem ke zkušenosti s používaním je tato hodnota spíše překvapivá.
 
-Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatel. Tato činnost by však byla příliš časově náročná.
+Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatelů. Tato činnost se mi však nezdá příliš přínosná.
 
 \subsection{Food Safe}
 
@@ -115,7 +115,7 @@ U~této aplikace lze zaznamenávat potraviny pomocí jména a datumu spotřeby. 
 
 \subsection{Love Food Hate Waste}
 
-Stejně jako aplikace Best Before je také tato dostupná ve verzi pro iOS i OS Android. Rozhraní aplikace je témeř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled považuji také za velmí dobrý.
+Stejně jako aplikace Best Before je také tato dostupná ve verzi pro iOS i OS Android. Rozhraní aplikace je témeř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled aplikace považuji také za velmí dobrý.
 
 Nabízená funkcionalita zahrnuje:
 \begin{itemize}
@@ -127,6 +127,30 @@ Nabízená funkcionalita zahrnuje:
 \end{itemize}
 
 Z~popisu aplikace není dostatek informací o~její skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky dovedly uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
+
+
+
+
+
+
+
+
+////////////////////////////////////////// HERE GONE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Souhrn analýzy konkurence}
 
@@ -223,7 +247,7 @@ Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale při
 
 Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k~aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v~roce 2010. Kód není dále aktivně vyvíjen.
 
-Z~jednoduchého dema knihovny vyšlo najevo, že oproti jiným nemá tak dobré výsledky. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny však autorovi nepřijde jako dostatek pro použitelnou aplikaci. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
+Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
 
 \subsection{ZXing ~\cite{zxing}}
 
@@ -235,19 +259,7 @@ Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do 
 
 \subsection{Implementace prototypu}
 
-Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. Při studování kódu lze odhalit základní komponenty skenovácího mechanismu, které jsou dále podrobněji popsány.
-
-\subsubsection{Camera}
-
-Komponenta Camera detekuje dostupné snímací čipy zařízení a přizpůsobuje jejich nastavení potřebám aplikace. Je zde nastaveno zaostřování na automatické a vhodným algoritmem zvolená velikost rozlišení náhledu. Také se zde nastavuje blesk, neboli trvalé osvícení scény, které se ale při podrobném zkoumání ke čtení kódu z~potravin příliš nehodí, neboť povrch většiny potravin býva lesklý a způsobuje tak oslnění snímacího čipu v~bodě odrazu paprsků světla, které znemožní přečtení čárového kódu. Data ze snímacího čipu jsou naslouchána implementací rozhraní Camera.PreviewCallback, které poskytuje data ve zde zvoleném formátu NV21 ~\cite{nv21}, který je výchozím nastaveným.
-
-\subsubsection{Capture}
-
-Pro samotné zobrazení náhledu a dalších prvků uživatelského rozhraní slouží aktivita CaptureActivity, kterou nazveme komponentou Capture. V~této komponentě je umístěn prvek SurfaceView, který zobrazuje živý náhled ze snímacího čipu ve stejném rozlišení, jako jsou získávána data přes rozhraní Camera.PreviewCallback. Změna velikosti prvku SurfaceView vždy vedla k~deformaci obrazu, pokud nepokrýval plochu celého displaye a zároveň měl jiný poměr stran, než který byl dán rozlišením náhledu. Tuto vadu se ani v~průběhu práce nepovedlo autorovi vyřešit, pouze potlačit vhodným rozmístěním ostatních prvků. V~tomto prototypu je prvek zmenšen vertikálně o~téměř polovinu na většině zařízeních, tudíž je obraz velmi zdeformovaný. Zdeformovanost však nezpůsobuje žádné potíže při skenování. Je to tedy pouze kosmetický nedostatek, který se autor rozhodl dále neřešit.
-
-\subsubsection{Decoder}
-
-Tato komponenta slouží k~dekódování načteného obrazu. Je tvořena vláknem, které běží nezávisle na vlákně manipulujícím a vykreslujícím uživatelské rozhraní. Práce vláknu je předávána pomocí zpráv přes třídu Handler. Výsledek úspěšného načtení je dále poslán do komponenty Capture, kde je zobrazen. Dekódovací vlákno je tím dočasně zastaveno.
+Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. 
 
 \subsubsection{Výsledek implementace}
 
@@ -420,7 +432,7 @@ Následující podsekce popisují zvolené detaily těchto vlasntostí.
 
 \subsection{C++}
 
-Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu vláknování. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
+Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
 
 \subsection{Škálovatelnost}
 
@@ -430,7 +442,7 @@ Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení vět
 
 \subsection{MySQL}
 
-Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
+Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
 
 \subsection{JSON}
 
@@ -443,19 +455,6 @@ Pro podporu vyjímek byl zřízen speciální repozitář~\cite{json_ex_repo} s~
 \subsection{Návrh tříd}
 
 Protože návrh tříd je příliš rozsáhlý, není vhodné ho zde prezentovat. Detailnější informace jsou dostupné v~rámci hlavičkových souborů v~poskytnutých zdrojových kódech k~této práci.
-
-Třídy serveru však lze rozlišit na základní kategorie, které také učí kořenovou strukturu zdrojových kódů:
-
-\begin{itemize}
-  \item{\textbf{Client} - třídy pro obsluhu klientů}
-  \item{\textbf{Config} - třídy poskytující nastavení serveru}
-  \item{\textbf{Database} - obsluha připojení do databázového serveru a implementace jednotlivých tříd poskytujících správu entit}
-  \item{\textbf{Entity} - třídy jednotlivách entit a rozhraní jejich správy}
-  \item{\textbf{Handler} - třídy pro obsluhu příkazů ze zpráv komunikace}
-  \item{\textbf{Network} - třídy socketového serveru}
-  \item{\textbf{Protocol} - třídy zpráv}
-  \item{\textbf{Util} - obecné a pomocné třídy}
-\end{itemize}
 
 \section{Klient}
 
@@ -666,7 +665,7 @@ Zmíněna je zde také verze spolu s~autorem aplikace.
   \centering
   \includegraphics[scale=0.4]{screenshots/app_settings.jpg}
   \caption{Nastavení}
-  \label{fig:AppSettings}http://pastebin.com/pU8w3au2
+  \label{fig:AppSettings}
 \end{figure}
 
 \clearpage
@@ -727,22 +726,12 @@ Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcr
 
 \section{Server}
 
-Jako první částí implementace byl vytvořen základ serveru. Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Sekce tvoří následující seznam:
-\begin{itemize}
-	\item{Client}
-	\item{Config}
-	\item{Database}
-	\item{Entity}
-	\item{Handler}
-	\item{Network}
-	\item{Protocol}
-	\item{Util}
-\end{itemize}
+Jako první částí implementace byl vytvořen základ serveru. Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
 
-Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
+Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
 
-\subsection{Client}
-Název Client může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s~klientem. Zde dochází k~přijímaní zpráv serveru a k~ošetřování chyb, které mohou nastat při komunikaci s~klientem. Mezi ně patří i chyby ze strany serveru.
+\subsection{ConnectedClient}
+Název ConnectedClient může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s~klientem. Zde dochází k~přijímaní zpráv serveru a k~ošetřování chyb, které mohou nastat při komunikaci s~klientem. Mezi ně patří i chyby ze strany serveru.
 
 Důležité pro tuto sekci je, aby nemohlo dojít k~pádu server. Jelikož server používá spoustu vyjímek, je zde pokryto velké množství těch, které lze odchytnout a které by za určitých okolností způsobily pád serveru.
 
@@ -766,8 +755,6 @@ Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpov�
 
 \subsection{Util}
 Pro jednodušší práci s~časovými daty, pro testování a debugování byla vyotvořena sekce Util, kde se nalézají všechny zbylé třídy, které přimo nesouvisí s~ostatními sekcemi.
-
-Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
 
 \section{Klient}
 
