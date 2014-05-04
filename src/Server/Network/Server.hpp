@@ -29,7 +29,7 @@ class Server;
 #include <deque>
 #include <inttypes.h>
 
-#include "../Client/Context.hpp"
+#include "../ConnectedClient/Context.hpp"
 
 class Server
 {

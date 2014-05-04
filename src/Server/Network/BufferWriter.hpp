@@ -21,8 +21,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class BufferWriter;
 
-#include "../Client/Buffer.hpp"
-#include "../Client/Context.hpp"
+#include "../ConnectedClient/Buffer.hpp"
+#include "../ConnectedClient/Context.hpp"
 
 class BufferWriter
 {

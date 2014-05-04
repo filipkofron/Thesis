@@ -1,0 +1,90 @@
+1)
+Uvod - rozsirit
+
+2)
+Analyza
+	- pozadavky, vice z dotazniku (jaka vekova kategorie)
+	
+	rozdelit kategorie, pozadavky - vice rozepsat
+	
+	carove kody vsechny - funkcni pozadavek (nebo naopak)
+	
+	ctecka carovych kodu, rozdelit do podkapitol
+	
+	Z jednoducheho dema - slangovy vyraz
+	
+	zbar -
+	
+	implementace prototypu - nerozepisovat tridy
+	
+	vysledek tabulkou
+		
+3)
+
+
+
+domenovy model - rozepsat (food moc malo)
+
+
+4)
+zaver - kategorie
+
+
+
+default_use_by - popsat
+
+JSON - bezpecnost
+
+zabezpeceni do zaveru
+
+zaloha, jak lepsi do zaveru
+
+protokol - zpravy vice rozepsat, co se prenasi
+
+
+c++ - vlaknovani - multithreading
+
+MySQL - proc ne clietske knihovny
+JSONcpp z jakych a proc
+
+Kudy putuje zprava - schema na abstraktnich tridach
+
+zpusob - 
+
+
+prechodovy diagram UI obrazovek, navigace
+
+srovnat s wireframy, subjektivne zkusenost
+
+pU8w3au2 WTF nastaven :D :D 
+
+prostredi pro vyvoj software
+
+
+strohy seznam v implementaci odstranit, rozepisy staci
+
+Connected client misto client
+
+
+Log do implementace zminit
+
+proc je seznam v navrhy u klienta ?
+
+
+nasazeni: zverejneni kodu + more..
+
+
+vice rozepsat to testovani podle typu, v programatorovy
+
+
+
+zaver bude vice poznamek
+
+keywords - seznam
+
+\hypersetup
+
+
+
+
+

@@ -262,7 +262,10 @@ Změna na vyšší rozlišení se z~používaní prototypu pro skenování různ
   \label{fig:ScanPrototype}
 \end{figure}
 
-\clearpage
+
+\chapter{Návrh}
+
+Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
 
 \section{Případy užití}
 
@@ -278,10 +281,6 @@ Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější či
   \caption{Diagram případů užití}
   \label{fig:UseCase}
 \end{figure}
-
-\chapter{Návrh}
-
-Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
 
 \section{Architektura}
 
@@ -703,7 +702,7 @@ Integrování vyhledávání v~této externí databázi je, jak již bylo zmín�
 
 \chapter{Implementace}
 
-Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v~průběhu práce vyskytly. Nakonec bude popsán průběh testování a jeho souhrn poznatků.
+Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v~průběhu práce vyskytly.
 
 \section{Vývojové nástroje}
 V~této sekci lze nalézt všechny použité nástroje při implementaci.
@@ -843,7 +842,7 @@ Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit
 
 Pro získání dat inventáře je zde zjednodušené použití úloh z~části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v~té době aktivní.
 
-\section{Nasazení}
+\chapter{Nasazení}
 
 Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
@@ -851,13 +850,13 @@ Server byl nasazen na autorem vlastněný virtuální server, který běžel ji�
 
 Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. 
 
-\section{Testování}
+\chapter{Testování}
 
 Každou část aplikace je třeba otestovat, aby byla zajištěna správná funkčnost při nasazení aplikace o~produkce. Je tedy nutné testovat jak server tak klientskou aplikaci.
 
 Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným programátorem (autorem práce) při implementaci. Ta druhá probíhala mezi uživateli, kteří zkoušeli aplikaci v~alfa verzích s~autorovým dozorem. Poslední třetí fáze probíhala před a po dokončení psaní této práce přímo vydáním beta verze aplikace na Play Store.
 
-\subsection{Testování programátorem}
+\section{Testování programátorem}
 
 Průběh testování spočíval v~psaní testů nad částmi, které nebylo možné testovat jako celek. Cílem testů bylo ověřit správnost implementace různých abstraktních tříd a rozhraní v~serveru i klientské aplikaci.
 
@@ -865,7 +864,7 @@ Další testování programátorem spočívalo v~přímém testování aplikace,
 
 Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synchronizační problémy vláken. Všechny tyto chyby bylo možné rychle opravit rovnou při probíhající implementaci a urychlit tak vývoj aplikace i serveru.
 
-\subsection{Pozorované testování vybranými uživateli}
+\section{Pozorované testování vybranými uživateli}
 
 Toto testování mělo za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
 
@@ -873,7 +872,7 @@ Testování probíhalo tak, že uživatelé byli dotázáni na různé případy
 
 Problémy odhalené v~této části testování zahrnovaly především nízkou informovanost uživatele o~probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o~průběhu jejich akcí.
 
-\subsection{Testování vydáním na Play Store}
+\section{Testování vydáním na Play Store}
 
 Vydáním beta verze aplikace na Play Store byla plně naimplementovaná aplikace testována přímo samotnými uživateli. V~době psaní této práce se tohoto testování zúčastnilo 5 osob různých věkových kategorií.
 

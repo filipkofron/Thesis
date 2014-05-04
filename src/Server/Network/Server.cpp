@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "Server.hpp"
 #include "ServerException.hpp"
 #include "../Config/Configurator.hpp"
-#include "../Client/ClientThread.hpp"
+#include "../ConnectedClient/ClientThread.hpp"
 #include <cstdio>
 #include <thread>
 #include <mutex>

@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class MessageSender;
 
 #include "../Protocol/Message.hpp"
-#include "../Client/Context.hpp"
+#include "../ConnectedClient/Context.hpp"
 
 class MessageSender
 {
