@@ -4,23 +4,13 @@ Uvod - rozsirit
 2)
 Analyza
 	- pozadavky, vice z dotazniku (jaka vekova kategorie)
-	
 	rozdelit kategorie, pozadavky - vice rozepsat
-	
 	carove kody vsechny - funkcni pozadavek (nebo naopak)
-	
 	ctecka carovych kodu, rozdelit do podkapitol
-	
 	implementace prototypu - nerozepisovat tridy
-	
 	vysledek tabulkou
 		
 3)
-
-standardy android
-
-
-domenovy model - rozepsat (food moc malo)
 
 
 4)
@@ -33,40 +23,25 @@ default_use_by - popsat
 
 JSON - bezpecnost
 
-zabezpeceni do zaveru
+
 
 
 
 protokol - zpravy vice rozepsat, co se prenasi
-
-MySQL - proc ne clietske knihovny
 JSONcpp z jakych a proc
-
 Kudy putuje zprava - schema na abstraktnich tridach
-
 zpusob - 
-
-
-prechodovy diagram UI obrazovek, navigace
 
 srovnat s wireframy, subjektivne zkusenost
 
 prostredi pro vyvoj software
-
-
 Log do implementace zminit
 
-proc je seznam v navrhy u klienta ?
-
-
 nasazeni: zverejneni kodu + more.. (zaloha current)
-
-
 vice rozepsat to testovani podle typu, v programatorovy
 
-
-
-zaver bude vice poznamek
+zaver bude vice poznamek, kategorie (podkategorie)
+zabezpeceni do zaveru
 
 keywords - seznam
 

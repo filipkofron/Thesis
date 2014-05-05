@@ -68,7 +68,7 @@ V~rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich
 
 Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v~podobě evidence potravin, která uživateli nabídne přehled o~trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončí, či pokud se tak stane v~blízké době.
 
-V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Práce využívá znalosti získané během mého studia z~předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
+V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení nasazení její implementace. Práce využívá znalosti získané během mého studia z~předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
 
 \end{introduction}
 
@@ -76,11 +76,11 @@ V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení 
 
 Process vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které je potřeba znát při návrhu a výsledné implementace i oveření její funkčnosti testovánim. 
 
-Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
+Důraz analýzy je kladu především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
 
 \section{Analýza konkurence}
 
-Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky.
+V Této sekci popisuji aplikace, které více či méně konkurují výsledné aplikaci této práce a snažím se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky.
 
 Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou výrazně pomoci při hledání cesty k~ještě lepšímu řešení než kterými jsou ty konkurenční. Takto lze posbírat důležité poznatky o~jejich kladech i záporech, které vyplynou z~vlastního otestování (pokud to bude možné) na následujícím seznamu zařízeních, které mám k~dispozici:
 \begin{itemize}
@@ -91,7 +91,7 @@ Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou v�
 
 V~počátku tvorby této práce a implementace aplikace nebylo příliš mnoho konkurenčních aplikací k~nalezení. Jak se však později ukázalo, vzniklo a rozšířilo se v průběhu tvorby této práce několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tato část byla dodatečně rozšířena, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk vhodných informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnou tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmiňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
+Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmiňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
 
 Všechny následující aplikace lze podle jejich názvu nalézt na Google Play Store ~\cite{play_store}.
 
@@ -101,7 +101,7 @@ Aplikace Best Before je zdarma dostupná jak pro zařízení s~iOS, tak pro zař
 
 Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, jak jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace je umožněno tlačítkem v~horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby. Nelze však zadat již existující a zadanou potravinu. Pokud uživatel zadává více potravin, může takto strávit poměrně dlouhou dobu.
 
-Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různách chyb a stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že někteřým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem ke zkušenosti s používaním je tato hodnota spíše překvapivá.
+Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem ke zkušenosti s používaním je tato hodnota spíše překvapivá.
 
 Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatelů. Tato činnost se mi však nezdá příliš přínosná.
 
@@ -128,35 +128,11 @@ Nabízená funkcionalita zahrnuje:
 
 Z~popisu aplikace není dostatek informací o~její skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky dovedly uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
 
-
-
-
-
-
-
-
-////////////////////////////////////////// HERE GONE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Souhrn analýzy konkurence}
 
 Ze všech výše uvedených aplikací je nejvíce podobná aplikaci této práce aplikace Food Safe. Nabízí možnosti, které usnadňují evidenci potravin, nenutí uživatele zadávat zbytečné informace a sbírá již zadaná data uživateli, aby je mohli použít i ostatní uživatelé. Přesto, že tato aplikace je velice podobná, aplikace této práce má snahu přinést ještě jednodušší způsob zadávání potravin, jejich společné sdílení a pokusit se disponovat více informacemi o~potravinách, které do aplikace ještě žádný uživatel nezadal a umožnit takto jednodušší a především rychlejší zadání nové potraviny.
 
-Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Autor si takto troufá tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak bude dále popsáno, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
+Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Troufám si to tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak bude dále popíši, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
 
 \section{Cílová skupina uživatelů}
 
@@ -308,22 +284,22 @@ Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Na
 
 \section{Doménový model}
 
-Na obrázku doménovém modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
+Na obrázku doménového modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
 
 \subsection{Category}
-Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v~rámci této práce je informace o~kategorii pouze shromažďována. 
+Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v~rámci této práce je informace o~kategorii pouze shromažďována jako název.
 
 \subsection{Edit}
-Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů.
+Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů a k nahrazení dat, které tyto uživatele poškodili.
 
 \subsection{Food}
-Entita food popisuje potravinu.
+Entita food popisuje potravinu jako název, výchozí trvanlivost, běžnou cenu, kategorii, výrobce a uživatele, který potravinu do aplikace přidal.
 
 \subsection{Image}
-Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů.
+Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů. Zde je zaznamenán pouze uživatel, který obrázek k potravině přidal.
 
 \subsection{Inventory}
-Položka inventáře spojující uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
+Položka inventáře spojujuje uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
 
 \subsection{Review}
 Jednoduché hodnocení potraviny od 0 do 5 s~volitelným textem recenze uživatele. Každý uživatel může nabýt nejvíce jednoho hodnocení.
@@ -468,10 +444,19 @@ Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživa
   \item{Jednoduchost návrhu - nástroje jsou velmi intuitivní}
   \item{Nástroje umožňují předem získat přehled o~vzhledu na různých typech a velikostech obrazovek}
   \item{Vytvořený návrh lze okamžitě testovat mezi dobrovolníky zasláním aplikace}
-  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh}
+  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro}
 \end{itemize}
 
-Dále jsou popsány jednotlivé obrazovky zajímavé pro uživatele.
+Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níž popsány vybrané obrazovky zajímavé pro uživatele.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.85]{diagrams/ui.pdf}
+  \caption{UI Diagram s obrazovkami v zaoblených obdélnících a akcemi v ostatních}
+  \label{fig:UIDiagram}
+\end{figure}
+
+\clearpage
 
 \subsubsection{Menu}
 
@@ -767,21 +752,11 @@ Implementace klientské aplikace tvořila 2 části:
 
 \subsection{Struktura zdrojového kódu}
 
-Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s~uživatelským rozhraním seskupeny, jak ukázuje následující seznam:
+Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s prvky uživatelského rozhraní seskupeny.
 
-\begin{itemize}
-	\item{Model}
-	\item{Adapter}
-	\item{Network}
-	\item{Task}
-	\item{Barcode}
-	\item{Util}
-	\item{Cache}
-	\item{UI prvky - Activity, Fragment, Dialog, Preference, View}
-	\item{Background}
-\end{itemize}
+Každá část je níže detailněji popsána jako v~případě serveru. Autor by rád zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V~rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
 
-Každá část je dále detailněji popsána jako v~případě serveru. Autor by rád zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V~rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
+Při psaní kódu jsem však dbal na zvyklosti při psaní aplikací pro OS Android, které jsem získal vlastní zkušeností.
 
 \subsubsection{Model}
 
