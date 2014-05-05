@@ -422,7 +422,7 @@ Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní 
 
 \subsection{JSON}
 
-Knihoven podpory JSON pro použití jazykem C++ je mnoho. Po delším uvažování byla vybrána knihovna JsonCpp. Tato umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušit jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
+Knihoven podpory JSON pro použití jazykem C++ je mnoho. Nejrozšířenější knihovny, které se mi podařilo nalézt jsou: rapidjson, JsonCpp, LibJSON. Knihovny jsou si velmi podobné, neboť specifikace formátu JSON není příliš rozsáhlá. Po delším prohlížení zdrojových kódů jednotlivých knihoven a jejich příkladů použití jsem si vybral knihovnu JsonCpp, která se mi jevila jako nejjednodušší a nejsrozumitelnější. Tato knihovna umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušuje jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
 
 Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá. Jelikož zkompilovaná verze, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny a v~případě, že tomu tak není následně upozorní uživatele, který server spouští.
 
@@ -446,6 +446,8 @@ Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživa
   \item{Vytvořený návrh lze okamžitě testovat mezi dobrovolníky zasláním aplikace}
   \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro}
 \end{itemize}
+
+Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejne složitá jako rozmístění prvků UI v těchto nástrojích.
 
 Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níž popsány vybrané obrazovky zajímavé pro uživatele.
 
@@ -701,13 +703,13 @@ Pro sdílení všech materiálů této práce byl zvolen veřejný repozitář p
 
 Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s~MySQL. Některé úpravy však byli prováděny v~softwaru PhpMyAdmin~\cite{phpmyadmin} v~případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z~webového prohlížeče, a tak bylo možné upravovat databázi i bez přístupu k~příkazové řádce.
 
-\subsection{Prostředí pro klienta v~OS Android}
+\subsection{Prostředí pro vývoj klientské aplikace v~OS Android}
 
 Pro tvorbu klienta pro OS Android se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní, používat známý verzovací sooftware. Díky jeho multiplatformnosti mohl autor aplikaci vyvíjet v~různých operačních systémech.
 
-\subsection{Prostředí pro server}
+\subsection{Prostředí pro vývoj serverové aplikace v C++}
 
-Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto 
+Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto lze serverovou aplikaci sestavit na všech rozšířených platformách a vyexportovat případné projektové soubory do dalších vývojových prostředí, které CMake podporuje.
 
 \section{Server}
 
@@ -739,11 +741,13 @@ Soubory síťového socketu serveru a soubory pro uskutečnění odesílání i 
 Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpověd. Jejich popis atributy je popsán v~sekci Protocol.
 
 \subsection{Util}
-Pro jednodušší práci s~časovými daty, pro testování a debugování byla vyotvořena sekce Util, kde se nalézají všechny zbylé třídy, které přimo nesouvisí s~ostatními sekcemi.
+Pro jednodušší práci s~časovými daty, logování událostí, testování a pro debugování byla vyotvořena sekce Util, kde se nalézají také všechny zbylé třídy, které přimo nesouvisí s výše uvedenými sekcemi.
+
+Logování událostí na serveru zde zdůrazním, neboť je velmi důležité sledovat jeho provoz. Tím lze také sesbírat různé informace o pádech a jiných chybách serveru v průběhu testování i při finalním nasazení. Logování bylo zpřístupňeno jako statické metody třídy Log zahrnující výpis chybových, debugovacích a čistě informativních zpráv.
 
 \section{Klient}
 
-Implementace klientské aplikace tvořila 2 části:
+Implementace klientské aplikace tvořily dvě části:
 
 \begin{itemize}
 	\item{Vytvoření síťové vrstvy, která nezasahovala ještě do návrhu uživatelského rozhraní a sloužila také zároveň k~testování počínající implementace serveru. Byl pro to vytvořen projekt TestClient, který lze nalézt ve zdrojových kódech této práce.}
@@ -808,9 +812,11 @@ Pro získání dat inventáře je zde zjednodušené použití úloh z~části T
 
 Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
-Server byl nasazen na autorem vlastněný virtuální server, který běžel již od počátku implementace, aby bylo možné vyvíjenou klientskou aplikaci testovat co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem. Kompilace serveru probíhala přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
+Server byl nasazen na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
 
-Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. 
+Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí ůložiště, odkud lze při ůtoku na aplikaci provést obnovení dat.
+
+Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. Později byla aplikace přejmenována pouze na Food Inventory~\cite{food_inventory_playstore}.
 
 \chapter{Testování}
 

@@ -28,14 +28,8 @@ JSON - bezpecnost
 
 
 protokol - zpravy vice rozepsat, co se prenasi
-JSONcpp z jakych a proc
 Kudy putuje zprava - schema na abstraktnich tridach
 zpusob - 
-
-srovnat s wireframy, subjektivne zkusenost
-
-prostredi pro vyvoj software
-Log do implementace zminit
 
 nasazeni: zverejneni kodu + more.. (zaloha current)
 vice rozepsat to testovani podle typu, v programatorovy
