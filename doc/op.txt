@@ -31,7 +31,6 @@ protokol - zpravy vice rozepsat, co se prenasi
 Kudy putuje zprava - schema na abstraktnich tridach
 zpusob - 
 
-nasazeni: zverejneni kodu + more.. (zaloha current)
 vice rozepsat to testovani podle typu, v programatorovy
 
 zaver bude vice poznamek, kategorie (podkategorie)
