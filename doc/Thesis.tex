@@ -181,6 +181,7 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item zaznamenání data spotřeby
   \item hledání potraviny pomocí čárového kódu nebo názvu
   \item čtení čárového kódu pomocí kamery mobilního telefonu
+  \item čtení různě dlouhých čárových kódů
   \item upozornění na jídlo, jehož spotřební doba se ocitla v~krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
   \item nastavení intervalu pro upozornění o~spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
   \item získávání informací o~neznámých potravinách z~otevřené databáze čárových kódů
@@ -188,7 +189,20 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
 
 OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze zhlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpoře těch starších.
 
-Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
+\begin{table}[h]
+      \begin{tabular}{|l|l|l|}
+      \hline
+      Název   & Počet číslic & Alternativní (starší) názvy \\ \hline
+      GTIN-14 & 14           & DUN-14, ITF                 \\ \hline
+      GTIN-13 & 13           & EAN·UCC-13, EAN-13, CIP     \\ \hline
+      GTIN-12 & 12           & EAN·UCC-12, UCC-12, UPC     \\ \hline
+      GTIN-8  & 8            & EAN·UCC-8, EAN-8            \\ \hline
+      \end{tabular}
+      \caption{Varianty čárových kódů typu GTIN}
+      \label{table:carkod}
+\end{table}
+Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
 Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
@@ -206,7 +220,6 @@ Seznam nefunkčních požadavků:
   \item výkonová škálovatelnost serveru
   \item dostupnost serveru z~více zařízení jedním účtem uživatele
   \item využití open-source software
-  \item podpora různě dlouhých čárových kódů
 \end{itemize}
 
 \clearpage
@@ -217,7 +230,9 @@ Požadavek na čtení čárového kódu vyžaduje použití knihovny, která tak
 
 Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, které pak lze dále použít v~návrhu a implementaci.
 
-Čtečka čárových kódu by mohla být implentována pouze jako externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadáváná čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto přípaďe spouštění externí aplikace není možný.
+\subsection{Externí aplikace}
+
+Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto přípaďe spouštění externí aplikace není možný.
 
 \subsection{Zbar ~\cite{zbar}}
 
@@ -239,7 +254,7 @@ Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikac
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující výše zmíněné SurfaceView, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiným způsobem prezentace výsledků. Původní komunikace mezi komponentami zůstaly stejné, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
 Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízení. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Změna rozlišení na vyšší u~původní aplikace Barcode Scanner však znamenala pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů.
 
@@ -319,7 +334,36 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné. Detaily jednotlivých entit jsou plně zřetelné z~relačního modelu a není třeba je dále rozepisovat.
+Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+
+Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
+
+\subsection{Edit}
+
+Atribut \textbf{message} zaznamenává zprávu editace. V té server ukládá informaci o tom, jaká editace byla provedena. Případně se tam mohou objevit další zajímavé informace, které poslouží při správě dat o potravinách, tedy k blokování uživatelů, jak již bylo výše zmíněno.
+
+\subsection{Food}
+
+\textbf{gtin} zaznamenává kód GTIN v mém vlastním formátu, který tvoří dohromady 15 znaků. První znak označuje typ čárového kódu v pořadí. Tyto znaky mohou být A, B, C, D nebo Z, které přímo odlišují ve stejném pořadí délky GTIN kódů 8, 12, 13 nebo 14 znaků. Zbylých 14 znaků je vždy samotný kód GTIN doplněný o počáteční nuly do celkové délky.
+
+\textbf{default\_use\_by} zaznamenává dobu běžné spotřeby v milisekundách. Tento typ formátu jsem zvolil pro jednoduchost uložení časového období a následného počítaní s ním.
+
+\textbf{amount\_measure} pro atribut \textbf{amount}, který zaznamenává nějaké množství, popisuje jakým typem množství tato potravina disponuje. Níže je seznam popisující jednotlivé typy.
+
+\begin{itemize}
+  \item 0 s názvem konstanty AMOUNT\_TYPE\_GRAMS popisuje množství v počtu gramů
+  \item 1 s názvem konstanty AMOUNT\_TYPE\_LITRES popisuje množství v počtu litrů
+  \item 2 s názvem konstanty AMOUNT\_TYPE\_PIECES popisuje množství v počtu kusů
+\end{itemize}
+
+\textbf{price} ukládá běžnou cenu potraviny jako hodnotu v americkém dolaru.
+
+\subsection{Inventory}
+V atributu \textbf{use\_by} je uložen datum, do kterého by se měla dná potravina s klíčem v atributu \textbf{food\_id} spotřebovat.
+
+\subsection{Review}
+\textbf{rating} atribut zaznamenává reálnou hodnotu hodnocení potraviny \textbf{food\_id} v rozsahu 0 až 5.
+
 
 \begin{figure}[H]
   \centering
@@ -889,15 +933,16 @@ Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvy
 % \printglossaries
 \begin{description}
 	\item[API] Application Programming Interface
+	\item[DAO] Data Access Object
+	\item[GTIN] Global Trade Item Number
 	\item[HTML] HyperText Markup Language
 	\item[JSON] JavaScript Object Notation
 	\item[NDK] Native Development Kit
 	\item[OS] Operační systém
 	\item[SDK] Software Development Kit
-	\item[VM] Virtual Machine
 	\item[UI] User Interface
+	\item[VM] Virtual Machine
 	\item[XML] Extensible Markup Language
-	\item[DAO] Data Access Object
 \end{description}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % 

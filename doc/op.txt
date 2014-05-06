@@ -5,10 +5,8 @@ Uvod - rozsirit
 Analyza
 	- pozadavky, vice z dotazniku (jaka vekova kategorie)
 	rozdelit kategorie, pozadavky - vice rozepsat
-	carove kody vsechny - funkcni pozadavek (nebo naopak)
 	ctecka carovych kodu, rozdelit do podkapitol
-	implementace prototypu - nerozepisovat tridy
-	vysledek tabulkou
+	implementace prototypu vysledek tabulkou
 		
 3)
 
@@ -17,14 +15,10 @@ Analyza
 zaloha, jak lepsi do zaveru
 zaver - kategorie
 
-
-
-default_use_by - popsat
-
 JSON - bezpecnost
 
 
-
+fix UI diagram
 
 
 protokol - zpravy vice rozepsat, co se prenasi
