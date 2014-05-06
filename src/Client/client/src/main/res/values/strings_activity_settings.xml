@@ -6,8 +6,8 @@
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
 
-    <string name="pref_title_download_images">Enable downloading images</string>
-    <string name="pref_description_download_images_recom">Disabling downloading images will reduce amount of data transferred from server</string>
+    <string name="pref_title_download_images">Enable downloading of images</string>
+    <string name="pref_description_download_images_recom">Downloading of images can use a lot of data. Disable if you are on a limited data plan.</string>
 
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
@@ -63,8 +63,8 @@
 
     <string name="pref_title_notify_expired">Expired food notifications</string>
 
-    <string name="pref_check_frequency">Check frequency</string>
-    <string name="pref_notify_days">Days left until expiration to notify</string>
+    <string name="pref_check_frequency">Frequency of checking for expired food</string>
+    <string name="pref_notify_days">Notify of expiring food ahead by</string>
 
     <string name="pref_ringtone_silent">Silent</string>
 

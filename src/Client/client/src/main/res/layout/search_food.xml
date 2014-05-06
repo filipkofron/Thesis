@@ -18,7 +18,7 @@
         android:layout_marginTop="16dp"
         android:editable="true"
         android:enabled="true"
-        android:hint="Food name or GTIN (barcode)"
+        android:hint="@string/search_food_autocomplete_hint"
         android:maxLines="1"/>
 
     <Button
