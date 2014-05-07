@@ -14,17 +14,35 @@ import cz.kofron.foodinventory.client.protocol.message.EditFoodResponse;
 import cz.kofron.foodinventory.client.task.param.EditFoodParam;
 import cz.kofron.foodinventory.client.task.param.EditImagesParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 23.3.14.
  */
 public class EditFoodTask extends AsyncTask<Object, Void, Void>
 {
+	
+	/** The pd. */
 	private ProgressDialog pd;
+	
+	/** The param. */
 	private EditFoodParam param;
+	
+	/** The activity. */
 	private Activity activity;
+	
+	/** The result. */
 	private boolean result = false;
+	
+	/** The images param. */
 	private EditImagesParam imagesParam;
 
+	/**
+	 * Instantiates a new edits the food task.
+	 *
+	 * @param param the param
+	 * @param imagesParam the images param
+	 * @param activity the activity
+	 */
 	public EditFoodTask(EditFoodParam param, EditImagesParam imagesParam, Activity activity)
 	{
 		this.param = param;
@@ -32,6 +50,9 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 		this.imagesParam = imagesParam;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute()
 	{
@@ -53,6 +74,9 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 		pd.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(Object... object)
 	{
@@ -115,6 +139,9 @@ public class EditFoodTask extends AsyncTask<Object, Void, Void>
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

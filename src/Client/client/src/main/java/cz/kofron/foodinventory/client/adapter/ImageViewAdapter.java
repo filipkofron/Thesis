@@ -17,20 +17,36 @@ import cz.kofron.foodinventory.client.task.LoadImageTask;
 import cz.kofron.foodinventory.client.task.param.LoadImageParam;
 import cz.kofron.foodinventory.client.util.Download;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 24.3.14.
  */
 public class ImageViewAdapter
 {
+	
+	/** The layout. */
 	private LinearLayout layout;
+	
+	/** The activity. */
 	private Activity activity;
 
+	/**
+	 * Instantiates a new image view adapter.
+	 *
+	 * @param layout the layout
+	 * @param activity the activity
+	 */
 	public ImageViewAdapter(LinearLayout layout, Activity activity)
 	{
 		this.layout = layout;
 		this.activity = activity;
 	}
 
+	/**
+	 * Populate image.
+	 *
+	 * @param id the id
+	 */
 	private void populateImage(String id)
 	{
 		final View imageLayout = LayoutInflater.from(activity).inflate(R.layout.food_detail_image, null);
@@ -71,6 +87,12 @@ public class ImageViewAdapter
 		layout.addView(imageLayout);
 		layout.invalidate();
 	}
+	
+	/**
+	 * Populate.
+	 *
+	 * @param images the images
+	 */
 	public void populate(ArrayList<String> images)
 	{
 		layout.removeAllViews();

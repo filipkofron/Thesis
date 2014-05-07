@@ -20,16 +20,33 @@ import cz.kofron.foodinventory.client.model.FoodReview;
 import cz.kofron.foodinventory.client.task.param.SetUserReviewParam;
 import cz.kofron.foodinventory.client.task.param.SetUserReviewTask;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 24.3.14.
  */
 public class ReviewDialogFragment extends DialogFragment
 {
+	
+	/** The food detail. */
 	private FoodDetail foodDetail;
+	
+	/** The reload callback. */
 	private ReloadCallback reloadCallback;
+	
+	/** The initial rating. */
 	private float initialRating;
+	
+	/** The food review. */
 	private FoodReview foodReview;
 
+	/**
+	 * Instantiates a new review dialog fragment.
+	 *
+	 * @param foodDetail the food detail
+	 * @param reloadCallback the reload callback
+	 * @param initialRating the initial rating
+	 * @param foodReview the food review
+	 */
 	public ReviewDialogFragment(FoodDetail foodDetail, ReloadCallback reloadCallback, float initialRating, FoodReview foodReview)
 	{
 		this.foodDetail = foodDetail;
@@ -38,6 +55,9 @@ public class ReviewDialogFragment extends DialogFragment
 		this.foodReview = foodReview;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -92,6 +112,11 @@ public class ReviewDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "set_user_review_dialog");

@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import cz.kofron.foodinventory.client.R;
 
+// TODO: Auto-generated Javadoc
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -52,18 +53,34 @@ public class NavigationDrawerFragment extends Fragment
 	 */
 	private ActionBarDrawerToggle mDrawerToggle;
 
+	/** The m drawer layout. */
 	private DrawerLayout mDrawerLayout;
+	
+	/** The m drawer list view. */
 	private ListView mDrawerListView;
+	
+	/** The m fragment container view. */
 	private View mFragmentContainerView;
 
+	/** The m current selected position. */
 	private int mCurrentSelectedPosition = 0;
+	
+	/** The m from saved instance state. */
 	private boolean mFromSavedInstanceState;
+	
+	/** The m user learned drawer. */
 	private boolean mUserLearnedDrawer;
 
+	/**
+	 * Instantiates a new navigation drawer fragment.
+	 */
 	public NavigationDrawerFragment()
 	{
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -84,6 +101,9 @@ public class NavigationDrawerFragment extends Fragment
 		selectItem(mCurrentSelectedPosition);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
@@ -92,6 +112,9 @@ public class NavigationDrawerFragment extends Fragment
 		setHasOptionsMenu(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState)
@@ -122,6 +145,11 @@ public class NavigationDrawerFragment extends Fragment
 		return mDrawerListView;
 	}
 
+	/**
+	 * Checks if is drawer open.
+	 *
+	 * @return true, if is drawer open
+	 */
 	public boolean isDrawerOpen()
 	{
 		return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
@@ -211,6 +239,11 @@ public class NavigationDrawerFragment extends Fragment
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
+	/**
+	 * Select item.
+	 *
+	 * @param position the position
+	 */
 	private void selectItem(int position)
 	{
 		mCurrentSelectedPosition = position;
@@ -229,6 +262,9 @@ public class NavigationDrawerFragment extends Fragment
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onAttach(android.app.Activity)
+	 */
 	@Override
 	public void onAttach(Activity activity)
 	{
@@ -243,6 +279,9 @@ public class NavigationDrawerFragment extends Fragment
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onDetach()
+	 */
 	@Override
 	public void onDetach()
 	{
@@ -250,6 +289,9 @@ public class NavigationDrawerFragment extends Fragment
 		mCallbacks = null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState)
 	{
@@ -257,6 +299,9 @@ public class NavigationDrawerFragment extends Fragment
 		outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onConfigurationChanged(android.content.res.Configuration)
+	 */
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -265,6 +310,9 @@ public class NavigationDrawerFragment extends Fragment
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)
+	 */
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
 	{
@@ -278,6 +326,9 @@ public class NavigationDrawerFragment extends Fragment
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.Fragment#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -301,6 +352,11 @@ public class NavigationDrawerFragment extends Fragment
 		actionBar.setTitle(R.string.app_name);
 	}
 
+	/**
+	 * Gets the action bar.
+	 *
+	 * @return the action bar
+	 */
 	private ActionBar getActionBar()
 	{
 		return ((ActionBarActivity) getActivity()).getSupportActionBar();
@@ -311,11 +367,19 @@ public class NavigationDrawerFragment extends Fragment
 	 */
 	public static interface NavigationDrawerCallbacks
 	{
+		
 		/**
 		 * Called when an item in the navigation drawer is selected.
+		 *
+		 * @param position the position
 		 */
 		void onNavigationDrawerItemSelected(int position);
 
+		/**
+		 * On section attached.
+		 *
+		 * @param number the number
+		 */
 		public void onSectionAttached(int number);
 	}
 }

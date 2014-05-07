@@ -10,22 +10,40 @@ import java.io.IOException;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.param.EditInventoryParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 17.3.14.
  */
 public class EditInventoryTask extends AsyncTask<Object, Void, Void>
 {
+	
+	/** The param. */
 	private EditInventoryParam param;
+	
+	/** The result. */
 	private boolean result;
+	
+	/** The context. */
 	private Context context;
+	
+	/** The pd. */
 	private ProgressDialog pd;
 
+	/**
+	 * Instantiates a new edits the inventory task.
+	 *
+	 * @param context the context
+	 * @param param the param
+	 */
 	public EditInventoryTask(Context context, EditInventoryParam param)
 	{
 		this.context = context;
 		this.param = param;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute()
 	{
@@ -44,6 +62,9 @@ public class EditInventoryTask extends AsyncTask<Object, Void, Void>
 		pd.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(Object... object)
 	{
@@ -60,6 +81,9 @@ public class EditInventoryTask extends AsyncTask<Object, Void, Void>
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

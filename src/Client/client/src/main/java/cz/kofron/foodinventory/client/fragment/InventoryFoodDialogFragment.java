@@ -29,22 +29,44 @@ import cz.kofron.foodinventory.client.task.param.EditInventoryParam;
 import cz.kofron.foodinventory.client.util.DateUtil;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/5/14.
  */
 public class InventoryFoodDialogFragment extends DialogFragment
 {
+	
+	/** The food item. */
 	private FoodItem foodItem;
+	
+	/** The date picker. */
 	private DatePicker datePicker;
+	
+	/** The count. */
 	private TextView count;
+	
+	/** The plus button. */
 	private Button plusButton;
+	
+	/** The minus button. */
 	private Button minusButton;
+	
+	/** The inventory id. */
 	private int inventoryId;
+	
+	/** The edit. */
 	private boolean edit;
+	
+	/** The reload callback. */
 	private ReloadCallback reloadCallback;
+	
+	/** The on done. */
 	private Runnable onDone;
 
+	/** The title. */
 	private int title;
+	
+	/** The on cancel listener. */
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -58,8 +80,15 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	};
 
+	/**
+	 * The Class Success.
+	 */
 	public class Success implements Runnable
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -74,8 +103,15 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	}
 
+	/**
+	 * The Class Fail.
+	 */
 	public class Fail implements Runnable
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run()
 		{
@@ -88,6 +124,7 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	}
 
+	/** The on ok listener. */
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -102,6 +139,16 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		}
 	};
 
+	/**
+	 * Instantiates a new inventory food dialog fragment.
+	 *
+	 * @param title the title
+	 * @param foodItem the food item
+	 * @param inventoryId the inventory id
+	 * @param edit the edit
+	 * @param reloadCallback the reload callback
+	 * @param onDone the on done
+	 */
 	public InventoryFoodDialogFragment(int title, FoodItem foodItem, int inventoryId, boolean edit, ReloadCallback reloadCallback, Runnable onDone)
 	{
 		this.title = title;
@@ -112,6 +159,11 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		this.onDone = onDone;
 	}
 
+	/**
+	 * Gets the count.
+	 *
+	 * @return the count
+	 */
 	private int getCount()
 	{
 		try
@@ -124,6 +176,9 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		return 1;
 	}
 
+	/**
+	 * Increment count.
+	 */
 	private void incrementCount()
 	{
 		int curr = getCount();
@@ -134,6 +189,9 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		count.setText(Integer.toString(curr));
 	}
 
+	/**
+	 * Decrement count.
+	 */
 	private void decrementCount()
 	{
 		int curr = getCount();
@@ -144,6 +202,9 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		count.setText(Integer.toString(curr));
 	}
 
+	/**
+	 * Setup count.
+	 */
 	public void setupCount()
 	{
 		plusButton.setOnClickListener(new View.OnClickListener()
@@ -165,6 +226,9 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		});
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -249,8 +313,20 @@ public class InventoryFoodDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
-		show(activity.getSupportFragmentManager(), "invetory_food_dialog");
+		try
+		{
+			show(activity.getSupportFragmentManager(), "invetory_food_dialog");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

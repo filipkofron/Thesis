@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="The given GTIN number was found at the Product Open Data database only."
-        android:id="@+id/textView"/>
+        android:id="@+id/undo_delete_text"/>
 
     <TextView
         android:layout_width="wrap_content"

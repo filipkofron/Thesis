@@ -11,18 +11,29 @@ import android.widget.ImageView;
 
 import cz.kofron.foodinventory.client.R;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 23.3.14.
  */
 public class ImageZoomDialogFragment extends DialogFragment
 {
+	
+	/** The bitmap. */
 	private Bitmap bitmap;
 
+	/**
+	 * Instantiates a new image zoom dialog fragment.
+	 *
+	 * @param bitmap the bitmap
+	 */
 	public ImageZoomDialogFragment(Bitmap bitmap)
 	{
 		this.bitmap = bitmap;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -53,6 +64,11 @@ public class ImageZoomDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "image_zoom_dialog");

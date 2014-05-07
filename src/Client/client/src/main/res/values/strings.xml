@@ -4,10 +4,11 @@
     <string name="app_name">Food Inventory</string>
     <string name="title_home">Home</string>
     <string name="title_inventory">My Inventory</string>
-    <string name="title_search_food">Search food</string>
-    <string name="title_add_via_barcode">Add via barcode</string>
-    <string name="title_remove_via_barcode">Remove via barcode</string>
+    <string name="title_search_food">Search Food</string>
+    <string name="title_add_via_barcode">Add via Barcode</string>
+    <string name="title_remove_via_barcode">Remove via Barcode</string>
 
+    <string name="search_food_autocomplete_hint">Food name or its barcode (GTIN)</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
@@ -17,7 +18,7 @@
     <string name="action_edit">Edit</string>
     <string name="action_save">Save</string>
     <string name="pick_vendor">Pick a vendor</string>
-    <string name="title_inventory_add_food">Add food to inventory</string>
+    <string name="title_inventory_add_food">Add Food to Inventory</string>
     <string name="title_inventory_food">Food in inventory</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
@@ -45,5 +46,6 @@
     <string name="days_text_year">Year</string>
     <string name="days_text_years">Years</string>
     <string name="expired_msg">Expired</string>
+    <string name="undo_delete_food_text">You have removed</string>
 
 </resources>

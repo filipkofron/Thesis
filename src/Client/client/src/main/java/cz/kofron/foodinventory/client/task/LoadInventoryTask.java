@@ -9,14 +9,22 @@ import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.protocol.message.GetInventoryResponse;
 import cz.kofron.foodinventory.client.task.param.LoadInventoryParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 13.3.14.
  */
 public class LoadInventoryTask extends AsyncTask<LoadInventoryParam, Void, Void>
 {
+	
+	/** The param. */
 	private LoadInventoryParam param;
+	
+	/** The gir. */
 	private GetInventoryResponse gir;
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(LoadInventoryParam... loadInventoryTasks)
 	{
@@ -42,6 +50,9 @@ public class LoadInventoryTask extends AsyncTask<LoadInventoryParam, Void, Void>
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{

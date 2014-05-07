@@ -15,14 +15,25 @@ import java.nio.charset.Charset;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.util.Atomics;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class JSONSender.
+ *
  * @author kofee
  */
 public class JSONSender
 {
 
+	/** The Constant utf8Charser. */
 	private final static Charset utf8Charser = Charset.forName("UTF-8");
 
+	/**
+	 * Send.
+	 *
+	 * @param os the os
+	 * @param obj the obj
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void send(OutputStream os, JSONObject obj) throws IOException
 	{
 		String jsonString = obj.toString();

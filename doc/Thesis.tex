@@ -45,7 +45,7 @@
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
 \abstractCS{Tato bakalářská práce seznamuje čtenáře s~globálním problémem plýtvání potravin. Popisuje možné řešení v~podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v~prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s~případnými vylepšeními, které přinesla odezva při nasazení aplikace u~skutečných uživatelů.}
-\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity to implementation of the mobile application on top of the Android OS and a server component using open-source sofware followed by testing of the whole solution. This work also evaluates the final solution and gives a perspective for the future development with enhancements, which are gained by the deployment of the application between real users.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements which are gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
 \keywordsCS{Nahraďte seznamem klíčových slov v~češtině oddělených čárkou.}
@@ -58,63 +58,64 @@
 
 \begin{introduction}
 
-Plýtvání potravin je celosvětový problém, který má přímé následky v~plýtvání zdrojů k~výrobě potravin, lidského času a sil. Tato činnost je pro mnohé výrobce a zprostředkovatele potravin peněžně výnosná, avšak pro samotnou přírodu včetně fauny a flóry zajisté ne. K~chovu zvěře jsou nutné plodiny. Pro růst plodin je třeba prostor, který musíme zabrat na úkor ostatních rostlin a živočichů. Dle British Institution of Mechanical Engineers (IME) byla v~roce 2013 odhadnuta skutečnost, že polovinou veškerých potravin na světě je plýtváno~\cite{fakta}.
+Plýtvání potravin je celosvětový problém, který má přímé následky v~plýtvání zdrojů k~výrobě potravin, lidského času a sil. Tato činnost je pro mnohé výrobce a zprostředkovatele potravin peněžně výnosná, avšak pro samotnou přírodu včetně fauny a flóry zajisté ne. K~chovu zvěře jsou nutné plodiny. Pro růst plodin je třeba prostor, který musíme zabrat na úkor ostatních rostlin a živočichů. Dle British Institution of Mechanical Engineers byla v~roce 2013 odhadnuta skutečnost, že polovinou veškerých potravin na světě je plýtváno~\cite{fakta}.
 
-Během posledních let vzniklo několik projektů, které se různými způsoby snaží tento problém řešit. Jsou to například způsoby domluvy různých lidí o~nespotřebovaných potravinách, kdy lidé nabízí co mají navíc a za jiných okolností by vyhodili. Ostatní se mohou domluvit a jídlo si bezplatně či za výhodnou cenu převzít. Tento způsob používa mnoho webovch i mobilních aplikací.
+Během posledních let vzniklo několik projektů, které se různými způsoby snaží tomuto problému zabránit. Lidé například nabízejí své nespotřebované potraviny, které by za jiných okolností vyhodili. S ostatními lidmi se mohou domluvit a jídlo si bezplatně či za výhodnou cenu převzít. Tento způsob je široce rozšířen na poli mobilních aplikací..
 
-Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům zabránit plýtvání potravin a nabídne jednoduché a rychlé rozhraní, díky kterému bude na uživatele kladena minímální časová náročnost.
+Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům zabránit v plýtvání potravin a nabídne jednoduché i rychlé rozhraní, díky kterému bude na uživatele kladena minímální časová náročnost při jejím používaní.
 
 V~rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich ceny nejsou pro běžné občany likvidační, jak je tomu naopak v~některých rozvojových zemích. Přesto se však mnozí lidé snaží ušetřit jejich jmění a nakupovat co nejlevněji. To ovšem například znamená nakupování velkého množství aktuálně cenově výhodných potravin. Takové množství potravin se nemusí vždy podařit včas spotřebovat a lidem tak zůstanou prošlé potraviny, které buď dodatečně spotřebují nebo, pokud si nejsou jistí možnou závadností, potraviny vyhodí do odpadu.
 
 Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v~podobě evidence potravin, která uživateli nabídne přehled o~trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončí, či pokud se tak stane v~blízké době.
 
-V~této práci autor popisuje vývoj mobilní aplikace od analýzy až po zhodnocení rozšíření její implementace. Práce využívá znalosti získané během autorova studia z~předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
+V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení nasazení její implementace. Práce využívá znalosti získané během mého studia z~předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
 
 \end{introduction}
 
 \chapter{Analýza}
 
-Process vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které jsou potřeba při návrhu, finalní verifikaci výsledné implementace a jejím testovánim. 
+Process vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které je potřeba znát při návrhu a výsledné implementace i oveření její funkčnosti testovánim. 
 
-Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
+Důraz analýzy je kladu především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
 
 \section{Analýza konkurence}
 
-Tato sekce popisuje aplikace, které více či méně konkurují výsledné aplikaci této práce a snaží se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky. Informace z~této sekce jsou velice důležité pro finální aplikaci. Můžou velice pomoci při hledání cesty k~ještě lepšímu řešení než kterými jsou ty konkurenční. Takto lze posbírat důležité poznatky o~jejich kladech i záporech, které vyplynou z~vlastního otestování (pokud to bude možné) na následujícím seznamu zařízeních, které má autor k~dispozici:
+V Této sekci popisuji aplikace, které více či méně konkurují výsledné aplikaci této práce a snažím se dále popsat jejich vlastnosti. Na konci sekce lze nalézt souhrn, který hodnotí všechny dosavadní řešení a jejich hlavní nedostatky.
+
+Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou výrazně pomoci při hledání cesty k~ještě lepšímu řešení než kterými jsou ty konkurenční. Takto lze posbírat důležité poznatky o~jejich kladech i záporech, které vyplynou z~vlastního otestování (pokud to bude možné) na následujícím seznamu zařízeních, které mám k~dispozici:
 \begin{itemize}
   \item{Nexus 7, Android 4.4.2}
   \item{HTC Evo 3D, Android 2.3.4}
   \item{Vodafone 845 (Huawei U8120), Android 2.3.4}
 \end{itemize}
 
-V~počátku tvorby této práce a implementací aplikace nebylo příliš mnoho konkurenčních aplikací k~naleznutí. Jak se však později ukázalo, vzniklo a rozšířilo se během následujících činností několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
+V~počátku tvorby této práce a implementace aplikace nebylo příliš mnoho konkurenčních aplikací k~nalezení. Jak se však později ukázalo, vzniklo a rozšířilo se v průběhu tvorby této práce několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tato část byla zprvu velice krátka, neboť jediné bližší aplikace neposkytovali vhodné srovnání ani zisk vhodných informací. V~závěru však autor usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnou tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmiňky je autorovo zmýlení v~jejich existenci v~počátku, jelikož aplikace byly nedávno uvedené a nebylo dostatek vodítek k~jejich naleznutí.
+Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmiňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
 
-Všechny následující aplikace lze podle názvu nalézt na Google Play Store ~\cite{play_store}.
+Všechny následující aplikace lze podle jejich názvu nalézt na Google Play Store ~\cite{play_store}.
 
 \subsection{Best before}
 
-Aplikace Best Before je zdarma dostupná jak pro zařízení s~iOS, tak pro zařízení s~OS Android. Na první pohled je aplikace totožná na obou platformách. Při bližším zkoumání verze pro OS Android však bylo zjištěno, že aplikace využívá čisté prvky OS Android v~částech jako jsou dialogy a některé běžné komponenty. Toto vytváří silný kontrast v~rozhraní, který nemusí být pro uživatele OS Android příjemný přesto, že aplikace je jinak po stránce stylu více než na dobré úrovni.
+Aplikace Best Before je zdarma dostupná jak pro zařízení s~iOS, tak pro zařízení s~OS Android. Na první pohled je aplikace totožná na obou platformách. Při bližším zkoumání verze pro OS Android jsem však zjistil, že aplikace využívá čisté prvky OS Android v~místech jako jsou dialogy a jiné běžné komponenty uživatelského rozhraní. Toto vytváří silný kontrast, který nemusí být pro uživatele OS Android příjemný přesto, že úroveň vzhledu aplikace považuji za velmi dobrou.
 
-Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, v~jakém jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace lze tlačítkem v~horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby.Nelze však zadat již existující potravinu a pokud uživatel zadává více potravin, může takto ztrávit poměrně dlouhou dobu.
+Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, jak jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace je umožněno tlačítkem v~horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby. Nelze však zadat již existující a zadanou potravinu. Pokud uživatel zadává více potravin, může takto strávit poměrně dlouhou dobu.
 
-Z~vlastního testování však byly zjištěny zásadní nedostatky v~ošetření různách chyb a stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při ukládání potraviny došlo při každém pokusu k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že někteřým uživatelům aplikace funguje bez problému, jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem k~použitelnosti je tato hodnota spíše překvapivá.
+Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem ke zkušenosti s používaním je tato hodnota spíše překvapivá.
 
-Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze autorův názor, pro ověření by bylo ovšem třeba širšího testování mezi různými uživateli, které ale je příliš časově náročné.
+Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatelů. Tato činnost se mi však nezdá příliš přínosná.
 
 \subsection{Food Safe}
 
-Další aplikací určenou pro OS Android je Food Safe, která se objevila na Play Store teprve nedávno, v~době psaní tohoto textu přibližne úřed 20 dní. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o~této aplikaci byly získány pouze z~Play Store z~toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k~dispozici při jejím testování v~této práci. 
+Další aplikací určenou pro OS Android je Food Safe, která se objevila na Play Store teprve nedávno. V~době psaní tohoto textu to je přibližne 20 dní od vydání. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o~této aplikaci byly získány pouze z~Play Store z~toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k~dispozici při jejím testování v~této práci. 
 
 Aplikace není dostupná zadarmo. Je třeba ji zakoupit za částku, která v~době psaní tohoto textu činí 20,40 Kč.
 
-U~této aplikace lze zaznamenávat potraviny pomocí jména a datumu spotřeby. Aplikace zdá se nabízí i možnost skenování čárových kódů, z~hodnocení Play Store je ale zřejmé, že aplikace získává informace o~potravinách od uživatelů a zaznamenává je do externí databáze. První uživatelé tedy budou nuceni zadávat ručně detaily všech jednotlivých potravin.
+U~této aplikace lze zaznamenávat potraviny pomocí jména a datumu spotřeby. Popis aplikace nabízí také možnost skenování čárových kódů. Z~hodnocení Play Store je ale zřejmé, že aplikace získává informace o~potravinách od uživatelů a zaznamenává je do externí databáze. První uživatelé tedy budou nuceni zadávat ručně detaily všech jednotlivých potravin.
 
 \subsection{Love Food Hate Waste}
 
-Stejně jako aplikace Best Before je tato ve verzích pro iOS i OS Android. Rozhraní aplikace je témeř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled dává velmi dobrý dojem 
-o~aplikaci.
+Stejně jako aplikace Best Before je také tato dostupná ve verzi pro iOS i OS Android. Rozhraní aplikace je témeř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled aplikace považuji také za velmí dobrý.
 
 Nabízená funkcionalita zahrnuje:
 \begin{itemize}
@@ -125,29 +126,57 @@ Nabízená funkcionalita zahrnuje:
   \item{Nákupní lístek}
 \end{itemize}
 
-Z~popisu aplikace není dostatek informací o~jejich skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky vedli uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
+Z~popisu aplikace není dostatek informací o~její skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky dovedly uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
 
 \subsection{Souhrn analýzy konkurence}
 
 Ze všech výše uvedených aplikací je nejvíce podobná aplikaci této práce aplikace Food Safe. Nabízí možnosti, které usnadňují evidenci potravin, nenutí uživatele zadávat zbytečné informace a sbírá již zadaná data uživateli, aby je mohli použít i ostatní uživatelé. Přesto, že tato aplikace je velice podobná, aplikace této práce má snahu přinést ještě jednodušší způsob zadávání potravin, jejich společné sdílení a pokusit se disponovat více informacemi o~potravinách, které do aplikace ještě žádný uživatel nezadal a umožnit takto jednodušší a především rychlejší zadání nové potraviny.
 
-Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Autor si takto troufá tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak bude dále popsáno, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
+Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Troufám si to tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak bude dále popíši, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
 
 \section{Cílová skupina uživatelů}
 
-Nepředpokládá se, že by se tato aplikace používala široce například v~restauračních a jiných zařízeních disponujících závodními kuchyněmi, kterými prochází mnoho potravin a mobilní telefon pro tuto skupinu uživatelů nebude příliš pohodlný. Přesto však může aplikace stačit nějakému malému podniku, pokud si chce vést jednoduchou evidenci, jen aby předešel plýtvání, které by pro menší kapitál mohl znamenat veliký problém.
+Předpokládá se, že tato aplikace bude používána především v domácnostech. Přesto však může aplikace stačit nějakému menšímu podniku, pokud si chce vést jednoduchou evidenci, 
+aby předešel plýtvání, které by pro menší kapitál mohlo znamenat veliký problém.
 
-Autor však shledal nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z~rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o~potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
+Shledal jsem však nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z~rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o~potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
 
-Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, jež mají problém přečíst název potraviny, jejíž obrázek však rozpoznají jednodušeji. Autor nepředpokládá, že by tyto cílové skupiny potraviny přímo zadávali, a proto není nutné řešit problém zadání datumu spotřeby i pro tyto uživatele.
+Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, jež mají problém přečíst název potraviny. Její obrázek totiž rozpoznají snadněji.
 
 \clearpage
 
 \section{Analýza požadavků}
 
-Jako základ dalšího postupu aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, kterému se tato aplikace snaží nalézt řešení.
+Jako základ dalšího postupu vývoje aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, ke kterému se tato aplikace snaží nalézt řešení.
 
-Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z~různých internetových zdrojů lze nalézt, že nejrozšířenější platforma na mobilních telefonech je OS Android. Protože u~žádného z~těchto zdrojů nebylo možné zajistit autentičnost, byl k~této práci vypracován krátký dotazník, na který odpovědělo 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality. Výsledek rozšíření platforem mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
+Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který může alespoň naznačit, jakým směrem se mobilní trh ubírá.
+
+\begin{table}[H]
+    \begin{tabular}{|l|l|}
+    \hline
+    Operační Systém & Podíl na trhu \\ \hline
+    Android         & 78.4\%        \\ \hline
+    iOS             & 15.6\%        \\ \hline
+    Microsoft       & 3.2\%         \\ \hline
+    BlackBerry      & 1.9\%         \\ \hline
+    Other OS        & 0.9\%         \\ \hline
+    \end{tabular}
+    \caption{Přehled prodeje mobilních platforem podle operačních systémů dle Gartner~\cite{gartner} za druhé čtvrtletí roku 2013}
+    \label{table:MobilePlatf}
+\end{table}
+
+Protože tento údaj nebylo skutečné zastoupení platforem, byl k~této práci vypracován krátký dotazník, na který odpovědělo celkem 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality.
+
+Seznam otázek v dotazníku zahrnuje tyto údaje:
+\begin{itemize}
+	\item Operační systém mobilního telefonu
+	\item Věková kategorie
+	\item Dotaz, zda-li by dotyčný(á) používal takovouto aplikaci
+	\item Dotaz, zda-li již dotyčný(á) používá takovouto aplikaci
+	\item Dotaz, zda-li by aplikace měla používat čtečku čárových kódů
+\end{itemize}
+
+Výsledek rozšíření mobilních platforem (mobilních operačních systémů) mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
 
 \begin{figure}[H]
   \centering
@@ -156,7 +185,7 @@ Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace do
   \label{fig:SurveyOS}
 \end{figure}
 
-Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si dává za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společné úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
+Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si klade za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společné úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
 
 Vzhledem k~tomu, že většina potravin disponuje čárovým kódem a k~tomuto kódu můžou být dohledány informace o~zboží, které identifikuje, lze aplikaci vybavit čtečkou čárových kódu, která usnadní manuální zadávání názvu či tohoto kódu. Aby tato informace nebyla jen tak nadhozena, byla do dotazníku přidána další sekce. Na obrázku ~\ref{fig:SurveyScan} lze pozorovat poměr mezi dotázanými, kteří by využili možnosti zadávat jídlo pomocí čtečky a těmi, kteří by toho nevyužili.
 
@@ -173,26 +202,40 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item přidávání nových potravin
   \item sdílení známých potravin
   \item specifikace běžné doby spotřeby potraviny
-  \item zaznamenání fotografie potraviny
+  \item zaznamenání obrázku potraviny
   \item zaznamenávání potravin do inventáře
   \item odebírání potravin z~intentáře
   \item zaznamenání data spotřeby
   \item hledání potraviny pomocí čárového kódu nebo názvu
   \item čtení čárového kódu pomocí kamery mobilního telefonu
+  \item čtení různě dlouhých čárových kódů
   \item upozornění na jídlo, jehož spotřební doba se ocitla v~krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
-  \item nastavení intervalu pro upozornění o~spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
+  \item nastavení intervalu pro upozornění o ukončení trvanlivosti, který je rozdílem doby spotřeby potraviny a aktuálního data
   \item získávání informací o~neznámých potravinách z~otevřené databáze čárových kódů
 \end{itemize}
 
-OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze zhlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpoře těch starších.
+OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze shlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpory těch starších.
 
-Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic. Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
+\begin{table}[h]
+      \begin{tabular}{|l|l|l|}
+      \hline
+      Název   & Počet číslic & Alternativní (starší) názvy \\ \hline
+      GTIN-14 & 14           & DUN-14, ITF                 \\ \hline
+      GTIN-13 & 13           & EAN·UCC-13, EAN-13, CIP     \\ \hline
+      GTIN-12 & 12           & EAN·UCC-12, UCC-12, UPC     \\ \hline
+      GTIN-8  & 8            & EAN·UCC-8, EAN-8            \\ \hline
+      \end{tabular}
+      \caption{Varianty čárových kódů typu GTIN}
+      \label{table:carkod}
+\end{table}
+Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
-Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží server. Dále však plánuji do budoucna server nasadit na výkonější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
 Server budé dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
 
-Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace autor hodlá publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
+Pro celou práci se snažím využívat zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace hodlám publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
 
 Seznam nefunkčních požadavků:
 
@@ -204,7 +247,6 @@ Seznam nefunkčních požadavků:
   \item výkonová škálovatelnost serveru
   \item dostupnost serveru z~více zařízení jedním účtem uživatele
   \item využití open-source software
-  \item podpora různě dlouhých čárových kódů
 \end{itemize}
 
 \clearpage
@@ -215,13 +257,15 @@ Požadavek na čtení čárového kódu vyžaduje použití knihovny, která tak
 
 Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, které pak lze dále použít v~návrhu a implementaci.
 
-Čtečka čárových kódu by mohla být implentována pouze jako externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadáváná čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto přípaďe spouštění externí aplikace není možný.
+\subsection{Externí aplikace}
+
+Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto přípaďe spouštění externí aplikace není možný.
 
 \subsection{Zbar ~\cite{zbar}}
 
 Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k~aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v~roce 2010. Kód není dále aktivně vyvíjen.
 
-Z~jednoduchého dema knihovny vyšlo najevo, že oproti jiným nemá tak dobré výsledky. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny však autorovi nepřijde jako dostatek pro použitelnou aplikaci. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
+Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
 
 \subsection{ZXing ~\cite{zxing}}
 
@@ -233,23 +277,11 @@ Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do 
 
 \subsection{Implementace prototypu}
 
-Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. Při studování kódu lze odhalit základní komponenty skenovácího mechanismu, které jsou dále podrobněji popsány.
-
-\subsubsection{Camera}
-
-Komponenta Camera detekuje dostupné snímací čipy zařízení a přizpůsobuje jejich nastavení potřebám aplikace. Je zde nastaveno zaostřování na automatické a vhodným algoritmem zvolená velikost rozlišení náhledu. Také se zde nastavuje blesk, neboli trvalé osvícení scény, které se ale při podrobném zkoumání ke čtení kódu z~potravin příliš nehodí, neboť povrch většiny potravin býva lesklý a způsobuje tak oslnění snímacího čipu v~bodě odrazu paprsků světla, které znemožní přečtení čárového kódu. Data ze snímacího čipu jsou naslouchána implementací rozhraní Camera.PreviewCallback, které poskytuje data ve zde zvoleném formátu NV21 ~\cite{nv21}, který je výchozím nastaveným.
-
-\subsubsection{Capture}
-
-Pro samotné zobrazení náhledu a dalších prvků uživatelského rozhraní slouží aktivita CaptureActivity, kterou nazveme komponentou Capture. V~této komponentě je umístěn prvek SurfaceView, který zobrazuje živý náhled ze snímacího čipu ve stejném rozlišení, jako jsou získávána data přes rozhraní Camera.PreviewCallback. Změna velikosti prvku SurfaceView vždy vedla k~deformaci obrazu, pokud nepokrýval plochu celého displaye a zároveň měl jiný poměr stran, než který byl dán rozlišením náhledu. Tuto vadu se ani v~průběhu práce nepovedlo autorovi vyřešit, pouze potlačit vhodným rozmístěním ostatních prvků. V~tomto prototypu je prvek zmenšen vertikálně o~téměř polovinu na většině zařízeních, tudíž je obraz velmi zdeformovaný. Zdeformovanost však nezpůsobuje žádné potíže při skenování. Je to tedy pouze kosmetický nedostatek, který se autor rozhodl dále neřešit.
-
-\subsubsection{Decoder}
-
-Tato komponenta slouží k~dekódování načteného obrazu. Je tvořena vláknem, které běží nezávisle na vlákně manipulujícím a vykreslujícím uživatelské rozhraní. Práce vláknu je předávána pomocí zpráv přes třídu Handler. Výsledek úspěšného načtení je dále poslán do komponenty Capture, kde je zobrazen. Dekódovací vlákno je tím dočasně zastaveno.
+Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. 
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující výše zmíněné SurfaceView, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiným způsobem prezentace výsledků. Původní komunikace mezi komponentami zůstaly stejné, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
 Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízení. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Změna rozlišení na vyšší u~původní aplikace Barcode Scanner však znamenala pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů.
 
@@ -260,7 +292,10 @@ Změna na vyšší rozlišení se z~používaní prototypu pro skenování různ
   \label{fig:ScanPrototype}
 \end{figure}
 
-\clearpage
+
+\chapter{Návrh}
+
+Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
 
 \section{Případy užití}
 
@@ -277,10 +312,6 @@ Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější či
   \label{fig:UseCase}
 \end{figure}
 
-\chapter{Návrh}
-
-Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
-
 \section{Architektura}
 
 Vzhledem nutnosti použít pro mobilní aplikaci server bude nejvhodnější model architektury klient - server. Tento model vyžaduje specifikovat komunikaci mezi oběma stranami a dále při vhodném navrhnutí lze uvažovat i o~klientech pro více platforem. Vhodná platforma pro jiný typ aplikace by mohla být webová aplikace, která by zpřístupňovala aplikaci na všech ostatních platformách skrze webový prohlížeč. Touto cestou by však nebylo možné uživatele jednoduše upozorňovat o~trvanlivosti přímo z~webové stránky i v~době, kdy uživatel stránku nepoužívá.
@@ -295,22 +326,22 @@ Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Na
 
 \section{Doménový model}
 
-Na obrázku doménovém modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
+Na obrázku doménového modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi všemi entitami, jejichž význam zde bude vysvětlen.
 
 \subsection{Category}
-Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v~rámci této práce je informace o~kategorii pouze shromažďována. 
+Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v~rámci této práce je informace o~kategorii pouze shromažďována jako název.
 
 \subsection{Edit}
-Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů.
+Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů a k nahrazení dat, které tyto uživatele poškodili.
 
 \subsection{Food}
-Entita food popisuje potravinu.
+Entita food popisuje potravinu jako název, výchozí trvanlivost, běžnou cenu, kategorii, výrobce a uživatele, který potravinu do aplikace přidal.
 
 \subsection{Image}
-Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů.
+Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů. Zde je zaznamenán pouze uživatel, který obrázek k potravině přidal.
 
 \subsection{Inventory}
-Položka inventáře spojující uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
+Položka inventáře spojujuje uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
 
 \subsection{Review}
 Jednoduché hodnocení potraviny od 0 do 5 s~volitelným textem recenze uživatele. Každý uživatel může nabýt nejvíce jednoho hodnocení.
@@ -330,7 +361,36 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné. Detaily jednotlivých entit jsou plně zřetelné z~relačního modelu a není třeba je dále rozepisovat.
+Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+
+Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
+
+\subsection{Edit}
+
+Atribut \textbf{message} zaznamenává zprávu editace. V té server ukládá informaci o tom, jaká editace byla provedena. Případně se tam mohou objevit další zajímavé informace, které poslouží při správě dat o potravinách, tedy k blokování uživatelů, jak již bylo výše zmíněno.
+
+\subsection{Food}
+
+\textbf{gtin} zaznamenává kód GTIN v mém vlastním formátu, který tvoří dohromady 15 znaků. První znak označuje typ čárového kódu v pořadí. Tyto znaky mohou být A, B, C, D nebo Z, které přímo odlišují ve stejném pořadí délky GTIN kódů 8, 12, 13 nebo 14 znaků. Zbylých 14 znaků je vždy samotný kód GTIN doplněný o počáteční nuly do celkové délky.
+
+\textbf{default\_use\_by} zaznamenává dobu běžné spotřeby v milisekundách. Tento typ formátu jsem zvolil pro jednoduchost uložení časového období a následného počítaní s ním.
+
+\textbf{amount\_measure} pro atribut \textbf{amount}, který zaznamenává nějaké množství, popisuje jakým typem množství tato potravina disponuje. Níže je seznam popisující jednotlivé typy.
+
+\begin{itemize}
+  \item 0 s názvem konstanty AMOUNT\_TYPE\_GRAMS popisuje množství v počtu gramů
+  \item 1 s názvem konstanty AMOUNT\_TYPE\_LITRES popisuje množství v počtu litrů
+  \item 2 s názvem konstanty AMOUNT\_TYPE\_PIECES popisuje množství v počtu kusů
+\end{itemize}
+
+\textbf{price} ukládá běžnou cenu potraviny jako hodnotu v americkém dolaru.
+
+\subsection{Inventory}
+V atributu \textbf{use\_by} je uložen datum, do kterého by se měla dná potravina s klíčem v atributu \textbf{food\_id} spotřebovat.
+
+\subsection{Review}
+\textbf{rating} atribut zaznamenává reálnou hodnotu hodnocení potraviny \textbf{food\_id} v rozsahu 0 až 5.
+
 
 \begin{figure}[H]
   \centering
@@ -350,7 +410,7 @@ Mnoho protokolů využíva ke komunikaci textový formát v~XML. Tento formát j
 
 \subsection{JSON}
 
-Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
+Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními proti vložení zákeřného kódu načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
 
 \subsection{Porovnání a zvolení formátu}
 
@@ -419,7 +479,7 @@ Následující podsekce popisují zvolené detaily těchto vlasntostí.
 
 \subsection{C++}
 
-Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu vláknování. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
+Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
 
 \subsection{Škálovatelnost}
 
@@ -429,11 +489,11 @@ Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení vět
 
 \subsection{MySQL}
 
-Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
+Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
 
 \subsection{JSON}
 
-Knihoven podpory JSON pro použití jazykem C++ je mnoho. Po delším uvažování byla vybrána knihovna JsonCpp. Tato umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušit jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
+Knihoven podpory JSON pro použití jazykem C++ je mnoho. Nejrozšířenější knihovny, které se mi podařilo nalézt jsou: rapidjson, JsonCpp, LibJSON. Knihovny jsou si velmi podobné, neboť specifikace formátu JSON není příliš rozsáhlá. Po delším prohlížení zdrojových kódů jednotlivých knihoven a jejich příkladů použití jsem si vybral knihovnu JsonCpp, která se mi jevila jako nejjednodušší a nejsrozumitelnější. Tato knihovna umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušuje jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
 
 Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá. Jelikož zkompilovaná verze, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny a v~případě, že tomu tak není následně upozorní uživatele, který server spouští.
 
@@ -442,19 +502,6 @@ Pro podporu vyjímek byl zřízen speciální repozitář~\cite{json_ex_repo} s~
 \subsection{Návrh tříd}
 
 Protože návrh tříd je příliš rozsáhlý, není vhodné ho zde prezentovat. Detailnější informace jsou dostupné v~rámci hlavičkových souborů v~poskytnutých zdrojových kódech k~této práci.
-
-Třídy serveru však lze rozlišit na základní kategorie, které také učí kořenovou strukturu zdrojových kódů:
-
-\begin{itemize}
-  \item{\textbf{Client} - třídy pro obsluhu klientů}
-  \item{\textbf{Config} - třídy poskytující nastavení serveru}
-  \item{\textbf{Database} - obsluha připojení do databázového serveru a implementace jednotlivých tříd poskytujících správu entit}
-  \item{\textbf{Entity} - třídy jednotlivách entit a rozhraní jejich správy}
-  \item{\textbf{Handler} - třídy pro obsluhu příkazů ze zpráv komunikace}
-  \item{\textbf{Network} - třídy socketového serveru}
-  \item{\textbf{Protocol} - třídy zpráv}
-  \item{\textbf{Util} - obecné a pomocné třídy}
-\end{itemize}
 
 \section{Klient}
 
@@ -468,10 +515,21 @@ Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživa
   \item{Jednoduchost návrhu - nástroje jsou velmi intuitivní}
   \item{Nástroje umožňují předem získat přehled o~vzhledu na různých typech a velikostech obrazovek}
   \item{Vytvořený návrh lze okamžitě testovat mezi dobrovolníky zasláním aplikace}
-  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh}
+  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro}
 \end{itemize}
 
-Dále jsou popsány jednotlivé obrazovky zajímavé pro uživatele.
+Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejne složitá jako rozmístění prvků UI v těchto nástrojích.
+
+Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níž popsány vybrané obrazovky zajímavé pro uživatele.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.70]{diagrams/ui.pdf}
+  \caption{UI Diagram s obrazovkami v zaoblených obdélnících a akcemi ve zbývajících. Zpětné šipky jsou pro přehlednost vynechány. Z obrazovek se však lze dostat ve směru při průchodu zleva doprava opačným směrem zpátky pomocí tlačítka zpět.}
+  \label{fig:UIDiagram}
+\end{figure}
+
+\clearpage
 
 \subsubsection{Menu}
 
@@ -665,7 +723,7 @@ Zmíněna je zde také verze spolu s~autorem aplikace.
   \centering
   \includegraphics[scale=0.4]{screenshots/app_settings.jpg}
   \caption{Nastavení}
-  \label{fig:AppSettings}http://pastebin.com/pU8w3au2
+  \label{fig:AppSettings}
 \end{figure}
 
 \clearpage
@@ -701,7 +759,7 @@ Integrování vyhledávání v~této externí databázi je, jak již bylo zmín�
 
 \chapter{Implementace}
 
-Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v~průběhu práce vyskytly. Nakonec bude popsán průběh testování a jeho souhrn poznatků.
+Tato kapitola popisuje implentaci navrženého serveru a aplikace. Cílem této kapitoly není detailně popsat implementaci, nýbrž snaha popsat vývojové prostředí, zajímavosti a problémy, které se v~průběhu práce vyskytly.
 
 \section{Vývojové nástroje}
 V~této sekci lze nalézt všechny použité nástroje při implementaci.
@@ -716,32 +774,22 @@ Pro sdílení všech materiálů této práce byl zvolen veřejný repozitář p
 
 Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s~MySQL. Některé úpravy však byli prováděny v~softwaru PhpMyAdmin~\cite{phpmyadmin} v~případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z~webového prohlížeče, a tak bylo možné upravovat databázi i bez přístupu k~příkazové řádce.
 
-\subsection{Prostředí pro klienta v~OS Android}
+\subsection{Prostředí pro vývoj klientské aplikace v~OS Android}
 
 Pro tvorbu klienta pro OS Android se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní, používat známý verzovací sooftware. Díky jeho multiplatformnosti mohl autor aplikaci vyvíjet v~různých operačních systémech.
 
-\subsection{Prostředí pro server}
+\subsection{Prostředí pro vývoj serverové aplikace v C++}
 
-Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto 
+Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto lze serverovou aplikaci sestavit na všech rozšířených platformách a vyexportovat případné projektové soubory do dalších vývojových prostředí, které CMake podporuje.
 
 \section{Server}
 
-Jako první částí implementace byl vytvořen základ serveru. Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Sekce tvoří následující seznam:
-\begin{itemize}
-	\item{Client}
-	\item{Config}
-	\item{Database}
-	\item{Entity}
-	\item{Handler}
-	\item{Network}
-	\item{Protocol}
-	\item{Util}
-\end{itemize}
+Jako první částí implementace byl vytvořen základ serveru. Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
 
-Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
+Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
 
-\subsection{Client}
-Název Client může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s~klientem. Zde dochází k~přijímaní zpráv serveru a k~ošetřování chyb, které mohou nastat při komunikaci s~klientem. Mezi ně patří i chyby ze strany serveru.
+\subsection{ConnectedClient}
+Název ConnectedClient může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s~klientem. Zde dochází k~přijímaní zpráv serveru a k~ošetřování chyb, které mohou nastat při komunikaci s~klientem. Mezi ně patří i chyby ze strany serveru.
 
 Důležité pro tuto sekci je, aby nemohlo dojít k~pádu server. Jelikož server používá spoustu vyjímek, je zde pokryto velké množství těch, které lze odchytnout a které by za určitých okolností způsobily pád serveru.
 
@@ -764,13 +812,13 @@ Soubory síťového socketu serveru a soubory pro uskutečnění odesílání i 
 Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpověd. Jejich popis atributy je popsán v~sekci Protocol.
 
 \subsection{Util}
-Pro jednodušší práci s~časovými daty, pro testování a debugování byla vyotvořena sekce Util, kde se nalézají všechny zbylé třídy, které přimo nesouvisí s~ostatními sekcemi.
+Pro jednodušší práci s~časovými daty, logování událostí, testování a pro debugování byla vyotvořena sekce Util, kde se nalézají také všechny zbylé třídy, které přimo nesouvisí s výše uvedenými sekcemi.
 
-Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
+Logování událostí na serveru zde zdůrazním, neboť je velmi důležité sledovat jeho provoz. Tím lze také sesbírat různé informace o pádech a jiných chybách serveru v průběhu testování i při finalním nasazení. Logování bylo zpřístupňeno jako statické metody třídy Log zahrnující výpis chybových, debugovacích a čistě informativních zpráv.
 
 \section{Klient}
 
-Implementace klientské aplikace tvořila 2 části:
+Implementace klientské aplikace tvořily dvě části:
 
 \begin{itemize}
 	\item{Vytvoření síťové vrstvy, která nezasahovala ještě do návrhu uživatelského rozhraní a sloužila také zároveň k~testování počínající implementace serveru. Byl pro to vytvořen projekt TestClient, který lze nalézt ve zdrojových kódech této práce.}
@@ -779,21 +827,11 @@ Implementace klientské aplikace tvořila 2 části:
 
 \subsection{Struktura zdrojového kódu}
 
-Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s~uživatelským rozhraním seskupeny, jak ukázuje následující seznam:
+Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s prvky uživatelského rozhraní seskupeny.
 
-\begin{itemize}
-	\item{Model}
-	\item{Adapter}
-	\item{Network}
-	\item{Task}
-	\item{Barcode}
-	\item{Util}
-	\item{Cache}
-	\item{UI prvky - Activity, Fragment, Dialog, Preference, View}
-	\item{Background}
-\end{itemize}
+Každá část je níže detailněji popsána jako v~případě serveru. Autor by rád zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V~rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
 
-Každá část je dále detailněji popsána jako v~případě serveru. Autor by rád zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V~rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
+Při psaní kódu jsem však dbal na zvyklosti při psaní aplikací pro OS Android, které jsem získal vlastní zkušeností.
 
 \subsubsection{Model}
 
@@ -841,29 +879,37 @@ Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit
 
 Pro získání dat inventáře je zde zjednodušené použití úloh z~části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v~té době aktivní.
 
-\section{Nasazení}
+\chapter{Nasazení}
 
 Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
-Server byl nasazen na autorem vlastněný virtuální server, který běžel již od počátku implementace, aby bylo možné vyvíjenou klientskou aplikaci testovat co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem. Kompilace serveru probíhala přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
+Server byl nasazen na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
 
-Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. 
+Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí ůložiště, odkud lze při ůtoku na aplikaci provést obnovení dat.
 
-\section{Testování}
+Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. Později byla aplikace přejmenována pouze na Food Inventory~\cite{food_inventory_playstore}.
+
+\chapter{Testování}
 
 Každou část aplikace je třeba otestovat, aby byla zajištěna správná funkčnost při nasazení aplikace o~produkce. Je tedy nutné testovat jak server tak klientskou aplikaci.
 
 Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným programátorem (autorem práce) při implementaci. Ta druhá probíhala mezi uživateli, kteří zkoušeli aplikaci v~alfa verzích s~autorovým dozorem. Poslední třetí fáze probíhala před a po dokončení psaní této práce přímo vydáním beta verze aplikace na Play Store.
 
-\subsection{Testování programátorem}
+\section{Testování programátorem}
 
-Průběh testování spočíval v~psaní testů nad částmi, které nebylo možné testovat jako celek. Cílem testů bylo ověřit správnost implementace různých abstraktních tříd a rozhraní v~serveru i klientské aplikaci.
+\subsection{Testování kódu}
+
+Průběh tohoto testování spočíval v~psaní testů nad částmi kódu. Cílem testů bylo ověřit správnost implementace abstraktních tříd a rozhraní v~serverové i klientské aplikaci. Testování bylo shodné s Unit testy, ale pro jednoduchost a nezávislost na dalších knihovnách jsem je napodobil velmi zjednodušeně. Tyto testy jsem spouštěl vždy pří dokončení. Testy však nebyly vhodné pro použití jako regresní testy, proto byly ponechány jen po dobu vývoje jednotlivých částí.
+
+
+
+\subsection{Testování samotné aplikace}
 
 Další testování programátorem spočívalo v~přímém testování aplikace, čímž bylo ověřena aplikace jako celek a odhaleny zásadní chyby v~implementaci, zejména v~komunikaci protokolem se serverem.
 
 Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synchronizační problémy vláken. Všechny tyto chyby bylo možné rychle opravit rovnou při probíhající implementaci a urychlit tak vývoj aplikace i serveru.
 
-\subsection{Pozorované testování vybranými uživateli}
+\section{Pozorované testování vybranými uživateli}
 
 Toto testování mělo za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
 
@@ -871,7 +917,7 @@ Testování probíhalo tak, že uživatelé byli dotázáni na různé případy
 
 Problémy odhalené v~této části testování zahrnovaly především nízkou informovanost uživatele o~probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o~průběhu jejich akcí.
 
-\subsection{Testování vydáním na Play Store}
+\section{Testování vydáním na Play Store}
 
 Vydáním beta verze aplikace na Play Store byla plně naimplementovaná aplikace testována přímo samotnými uživateli. V~době psaní této práce se tohoto testování zúčastnilo 5 osob různých věkových kategorií.
 
@@ -889,11 +935,11 @@ Při tomto testování byly do doby psaní tohoto textu objeveny tyto nedostatky
 Opravení těchto nedostatků již proběhne mimo rámec této práce.
 
 \begin{conclusion}
-Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v~podobě mobilní aplikace na platformě Android. Bylo nutné řešení nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňuje spolu.
+Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v~podobě mobilní aplikace na platformě Android. Řešení bylo nutné nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňovala.
 	
-Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a server, který byl naimplementován pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
+Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a serverovou aplikaci, který byla naimplementována pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
 
-Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
+Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github~\cite{repo}. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
 
 V~době psaní tohoto textu je aplikace nasazena v~testovací beta verzi již veřejně dostupné každému k~vyzkoušení.
 
@@ -901,12 +947,30 @@ V~době psaní tohoto textu je aplikace nasazena v~testovací beta verzi již ve
 
 Aplikace, která vznikla v~rámci této práce, má mnoho nedostatků. Zde se pokusím popsat ty, které lze do budoucna vyřešit.
 
+\subsection{Knihovna pro čtení čárových kódů}
 Jedním z~nich je nedokonalost knihovny ZXing, která čtení čárových sice zvládá, ale testováním uživateli vyšlo najevo, že ne dostatečně. Do budoucna by tedy bylo vhodné zvážit i jiné například komerční řešení nebo vyvinout vlastní řešení založeném na jiném algoritmu, který by umožňoval načítaní čárových kódu potravin spolehlivěji.
 
+\subsection{Zabezpečení aplikace a komunikace}
+Na zabezpečení dat uživatelů této aplikace není kladen žádný důraz. Účty různých lidi lze jendoduše přidat do OS Android účtů a přistoupit tak neoprávněně na účet jiných lidí. Stejně tak není čifrované spojení mezi klientem a server.
+
+Pokud by mělo být zabezpečení v budoucnu zvýšeno, pak by bylo nutné upravit zprávy tak, aby jejich obsah byl dostatečně zašifrovaný. Také uživatelské účty by bylo nutné chránit heslem. Tyto změny by však nebyly nijak zásadní a celkem snadno by je bylo možné aplikovat.
+
+Otevřenost aplikace uživatelům nabízí spoustu způsobů, jak na aplikaci zaútočit. Bylo by vhodné vyvinout pro aplikaci sledovací mechanismy, které by detekovaly nevhodné chování uživatelů při editacích čí pridavaní potravin.
+
+\subsection{Zálohování}
+Zálohování na serveru zatím probíhá pouze jako záloha celé databáze.
+
+Při nasazení se však ukázalo, že by bylo vhodné mít možnost vrátit potravinu do původního stavu po útoku nějakým škodolibým uživatelem bez vracení celé databáze do určitého stavu v minulosti.
+
+Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlednutí, případně k navrácení do aktualní potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
+
+\subsection{UI}
 Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, nění toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výberu uživateli.
 
+\subsection{Výkon serverového stroje}
 Další nedostatek je v~cílovém stroji na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonější stroj.
 
+\subsection{Rozšíření na další platformy}
 Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvynout pro aplikaci také webovou verzi, který by byla dostupná i na jiných zařízeních, které nedisponují operařním systémem Android.
 
 \end{conclusion}
@@ -920,15 +984,16 @@ Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvy
 % \printglossaries
 \begin{description}
 	\item[API] Application Programming Interface
+	\item[DAO] Data Access Object
+	\item[GTIN] Global Trade Item Number
 	\item[HTML] HyperText Markup Language
 	\item[JSON] JavaScript Object Notation
 	\item[NDK] Native Development Kit
 	\item[OS] Operační systém
 	\item[SDK] Software Development Kit
-	\item[VM] Virtual Machine
 	\item[UI] User Interface
+	\item[VM] Virtual Machine
 	\item[XML] Extensible Markup Language
-	\item[DAO] Data Access Object
 \end{description}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % 

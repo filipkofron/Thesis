@@ -14,17 +14,35 @@ import android.view.View;
 import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodEditActivity;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 18.3.14.
  */
 public class AddNewFoodDialogFragment extends DialogFragment
 {
+	
+	/** The view. */
 	private View view;
+	
+	/** The dialog. */
 	private Dialog dialog;
+	
+	/** The on done. */
 	private Runnable onDone;
+	
+	/** The on added. */
 	private Runnable onAdded;
+	
+	/** The gtin. */
 	private String gtin;
 
+	/**
+	 * Instantiates a new adds the new food dialog fragment.
+	 *
+	 * @param onDone the on done
+	 * @param onAdded the on added
+	 * @param gtin the gtin
+	 */
 	public AddNewFoodDialogFragment(Runnable onDone, Runnable onAdded, String gtin)
 	{
 		this.onDone = onDone;
@@ -32,6 +50,7 @@ public class AddNewFoodDialogFragment extends DialogFragment
 		this.gtin = gtin;
 	}
 
+	/** The on cancel listener. */
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -43,6 +62,8 @@ public class AddNewFoodDialogFragment extends DialogFragment
 			}
 		}
 	};
+	
+	/** The on ok listener. */
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -66,6 +87,9 @@ public class AddNewFoodDialogFragment extends DialogFragment
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -103,6 +127,11 @@ public class AddNewFoodDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "add_new_food_dialog");

@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Food` (
   INDEX `NAME` (`name` ASC),
   INDEX `fk_Food_User1_idx` (`user_id` ASC),
   INDEX `fk_Food_Vendor1_idx` (`vendor_id` ASC),
-  UNIQUE INDEX `gtin_UNIQUE` (`gtin` ASC),
+  INDEX `gtin_idx` (`gtin` ASC),
   CONSTRAINT `fk_Food_Category`
     FOREIGN KEY (`category_id`)
     REFERENCES `mydb`.`Category` (`id`)

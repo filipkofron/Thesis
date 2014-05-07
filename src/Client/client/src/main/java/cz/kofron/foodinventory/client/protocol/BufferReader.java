@@ -9,11 +9,23 @@ package cz.kofron.foodinventory.client.protocol;
 import java.io.IOException;
 import java.io.InputStream;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class BufferReader.
+ *
  * @author kofee
  */
 public class BufferReader
 {
+	
+	/**
+	 * Read fully.
+	 *
+	 * @param bytes the bytes
+	 * @param len the len
+	 * @param is the is
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void readFully(byte[] bytes, int len, InputStream is) throws IOException
 	{
 		int got = 0;

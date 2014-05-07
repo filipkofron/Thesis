@@ -5,26 +5,68 @@
                 android:layout_height="match_parent"
                 android:padding="-1dp">
 
-    <cz.kofron.foodinventory.client.view.NowLikeListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/item_background_color"
-        android:dividerHeight="0dp"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false">
-
-    </cz.kofron.foodinventory.client.view.NowLikeListView>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminate="false"
-        android:visibility="visible"/>
+        android:id="@+id/back_layout"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/undo_delete_food_text"
+                android:id="@+id/undo_delete_text"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Undo"
+                android:id="@+id/undo_button"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/back_layout">
+
+        <cz.kofron.foodinventory.client.view.NowLikeListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/item_background_color"
+            android:dividerHeight="0dp"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            >
+
+        </cz.kofron.foodinventory.client.view.NowLikeListView>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:visibility="visible"
+            />
+    </RelativeLayout>
 
 </RelativeLayout>

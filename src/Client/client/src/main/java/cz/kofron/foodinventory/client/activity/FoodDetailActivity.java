@@ -30,19 +30,37 @@ import cz.kofron.foodinventory.client.task.param.LoadFoodDetailParam;
 import cz.kofron.foodinventory.client.util.GtinUtil;
 import cz.kofron.foodinventory.client.util.NetworkErrorToast;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 3/3/14.
  */
 public class FoodDetailActivity extends ActionBarActivity implements ReloadCallback
 {
+	
+	/** The food id. */
 	private int foodId;
+	
+	/** The food. */
 	private FoodDetail food;
+	
+	/** The progress bar. */
 	private ProgressBar progressBar;
+	
+	/** The view. */
 	private View view;
+	
+	/** The scroll view. */
 	private ScrollView scrollView;
+	
+	/** The image view adapter. */
 	private ImageViewAdapter imageViewAdapter;
+	
+	/** The current food review. */
 	private FoodReview currentFoodReview;
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -71,6 +89,9 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		tv.setMovementMethod(new ScrollingMovementMethod());
 	}
 
+	/**
+	 * Load content.
+	 */
 	public void loadContent()
 	{
 		LoadFoodDetailTask lfdt = new LoadFoodDetailTask();
@@ -100,6 +121,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		lfdt.execute(new LoadFoodDetailParam(foodId, this, success, fail));
 	}
 
+	/**
+	 * Toggle progress bar.
+	 *
+	 * @param on the on
+	 */
 	public void toggleProgressBar(boolean on)
 	{
 		if (progressBar == null)
@@ -116,6 +142,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		}
 	}
 
+	/**
+	 * Show content.
+	 *
+	 * @param show the show
+	 */
 	public void showContent(boolean show)
 	{
 		if(show)
@@ -128,6 +159,9 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -137,6 +171,9 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 	}
 
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -156,6 +193,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		return false;
 	}
 
+	/**
+	 * Sets the food detail.
+	 *
+	 * @param foodDetail the new food detail
+	 */
 	public void setFoodDetail(final FoodDetail foodDetail)
 	{
 		food = foodDetail;
@@ -169,6 +211,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		});
 	}
 
+	/**
+	 * Populate reviews.
+	 *
+	 * @param foodDetail the food detail
+	 */
 	private void populateReviews(FoodDetail foodDetail)
 	{
 		LinearLayout reviewLayout = (LinearLayout) findViewById(R.id.review_layout);
@@ -194,6 +241,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		}
 	}
 
+	/**
+	 * Populate rating bar.
+	 *
+	 * @param foodDetail the food detail
+	 */
 	private void populateRatingBar(final FoodDetail foodDetail)
 	{
 		currentFoodReview = null;
@@ -227,6 +279,11 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 
 	}
 
+	/**
+	 * Sets the food detail sync.
+	 *
+	 * @param foodDetail the new food detail sync
+	 */
 	private void setFoodDetailSync(FoodDetail foodDetail)
 	{
 		TextView name = (TextView) findViewById(R.id.name);
@@ -263,12 +320,18 @@ public class FoodDetailActivity extends ActionBarActivity implements ReloadCallb
 		view.invalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{
 		loadContent();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onPostResume()
+	 */
 	@Override
 	protected void onPostResume()
 	{

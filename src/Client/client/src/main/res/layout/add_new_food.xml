@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="The given GTIN number doesn't match any known food."
-        android:id="@+id/textView"/>
+        android:id="@+id/undo_delete_text"/>
 
     <TextView
         android:layout_width="wrap_content"

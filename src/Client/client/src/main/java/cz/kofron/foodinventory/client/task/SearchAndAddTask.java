@@ -19,18 +19,39 @@ import cz.kofron.foodinventory.client.model.PODResult;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.task.param.SearchPODParam;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 18.3.14.
  */
 public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements SearchPODTask.PODResultListener
 {
+	
+	/** The context. */
 	private Context context;
+	
+	/** The gtin. */
 	private String gtin;
+	
+	/** The on done. */
 	private Runnable onDone;
+	
+	/** The on added food. */
 	private Runnable onAddedFood;
+	
+	/** The pd. */
 	private ProgressDialog pd;
+	
+	/** The food item. */
 	private FoodItem foodItem;
 
+	/**
+	 * Instantiates a new search and add task.
+	 *
+	 * @param context the context
+	 * @param gtin the gtin
+	 * @param onDone the on done
+	 * @param onAddedFood the on added food
+	 */
 	public SearchAndAddTask(Context context, String gtin, Runnable onDone, Runnable onAddedFood)
 	{
 		this.context = context;
@@ -39,6 +60,9 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 		this.onAddedFood = onAddedFood;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+	 */
 	@Override
 	protected Void doInBackground(Object... objects)
 	{
@@ -59,6 +83,9 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPreExecute()
+	 */
 	@Override
 	protected void onPreExecute()
 	{
@@ -72,6 +99,9 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 		pd.show();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 */
 	@Override
 	protected void onPostExecute(Void aVoid)
 	{
@@ -92,6 +122,9 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.task.SearchPODTask.PODResultListener#onResults(java.util.ArrayList)
+	 */
 	@Override
 	public void onResults(ArrayList<PODResult> results)
 	{

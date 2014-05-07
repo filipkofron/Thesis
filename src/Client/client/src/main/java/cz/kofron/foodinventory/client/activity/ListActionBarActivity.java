@@ -6,11 +6,21 @@ import android.widget.ListAdapter;
 
 import cz.kofron.foodinventory.client.view.NowLikeListView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListActionBarActivity.
+ */
 public abstract class ListActionBarActivity extends ActionBarActivity
 {
 
+	/** The m list view. */
 	private NowLikeListView mListView;
 
+	/**
+	 * Gets the list view.
+	 *
+	 * @return the list view
+	 */
 	protected NowLikeListView getListView()
 	{
 		if (mListView == null)
@@ -20,6 +30,11 @@ public abstract class ListActionBarActivity extends ActionBarActivity
 		return mListView;
 	}
 
+	/**
+	 * Gets the list adapter.
+	 *
+	 * @return the list adapter
+	 */
 	protected ListAdapter getListAdapter()
 	{
 		ListAdapter adapter = getListView().getAdapter();
@@ -33,6 +48,11 @@ public abstract class ListActionBarActivity extends ActionBarActivity
 		}
 	}
 
+	/**
+	 * Sets the list adapter.
+	 *
+	 * @param adapter the new list adapter
+	 */
 	protected void setListAdapter(ListAdapter adapter)
 	{
 		getListView().setAdapter(adapter);

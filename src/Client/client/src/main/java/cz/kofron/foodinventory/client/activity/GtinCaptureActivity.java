@@ -10,15 +10,22 @@ import cz.kofron.foodinventory.client.adapter.ReloadCallback;
 import cz.kofron.foodinventory.client.dialog.ConnectionDialogManager;
 import cz.kofron.foodinventory.client.fragment.GtinCaptureScanFragment;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 25.3.14.
  */
 public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSelectListener, ReloadCallback
 {
+	
+	/** The on gtin select listener. */
 	private OnGtinSelectListener onGtinSelectListener;
 
+	/** The initial on gtin select listener. */
 	public static OnGtinSelectListener initialOnGtinSelectListener;
 
+	/* (non-Javadoc)
+	 * @see android.support.v7.app.ActionBarActivity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -37,6 +44,9 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 		ft.commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.activity.OnGtinSelectListener#onGtinSelected(java.lang.String)
+	 */
 	@Override
 	public void onGtinSelected(String gtin)
 	{
@@ -47,6 +57,9 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 		finish();
 	}
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -60,6 +73,9 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onResume()
+	 */
 	@Override
 	protected void onResume()
 	{
@@ -67,6 +83,9 @@ public class GtinCaptureActivity extends ActionBarActivity implements OnGtinSele
 		ConnectionDialogManager.initialize(this);
 	}
 
+	/* (non-Javadoc)
+	 * @see cz.kofron.foodinventory.client.adapter.ReloadCallback#update()
+	 */
 	@Override
 	public void update()
 	{

@@ -15,17 +15,35 @@ import cz.kofron.foodinventory.client.R;
 import cz.kofron.foodinventory.client.activity.FoodEditActivity;
 import cz.kofron.foodinventory.client.model.PODResult;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 26.3.14.
  */
 public class AddImportedFoodDialogFragment extends DialogFragment
 {
+	
+	/** The view. */
 	private View view;
+	
+	/** The dialog. */
 	private Dialog dialog;
+	
+	/** The on done. */
 	private Runnable onDone;
+	
+	/** The on added. */
 	private Runnable onAdded;
+	
+	/** The pod result. */
 	private PODResult podResult;
 
+	/**
+	 * Instantiates a new adds the imported food dialog fragment.
+	 *
+	 * @param onDone the on done
+	 * @param onAdded the on added
+	 * @param podResult the pod result
+	 */
 	public AddImportedFoodDialogFragment(Runnable onDone, Runnable onAdded, PODResult podResult)
 	{
 		this.onDone = onDone;
@@ -33,6 +51,7 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 		this.podResult = podResult;
 	}
 
+	/** The on cancel listener. */
 	private DialogInterface.OnClickListener onCancelListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -44,6 +63,8 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 			}
 		}
 	};
+	
+	/** The on ok listener. */
 	private DialogInterface.OnClickListener onOkListener = new DialogInterface.OnClickListener()
 	{
 		@Override
@@ -67,6 +88,9 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
+	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -104,6 +128,11 @@ public class AddImportedFoodDialogFragment extends DialogFragment
 		return dialog;
 	}
 
+	/**
+	 * Show.
+	 *
+	 * @param activity the activity
+	 */
 	public void show(FragmentActivity activity)
 	{
 		show(activity.getSupportFragmentManager(), "add_imported_food_dialog");

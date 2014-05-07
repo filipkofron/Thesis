@@ -14,14 +14,24 @@ import java.nio.charset.Charset;
 import cz.kofron.foodinventory.client.network.NetworkInstance;
 import cz.kofron.foodinventory.client.util.Atomics;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class JSONReceiver.
+ *
  * @author kofee
  */
 public class JSONReceiver
 {
 
+	/** The Constant utf8Charser. */
 	private final static Charset utf8Charser = Charset.forName("UTF-8");
 
+	/**
+	 * Receive.
+	 *
+	 * @param is the is
+	 * @return the JSON object
+	 */
 	public static JSONObject receive(InputStream is)
 	{
 		try

@@ -7,11 +7,16 @@ import android.content.SharedPreferences;
 
 import cz.kofron.foodinventory.client.preference.Preferences;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 25.3.14.
  */
 public class BootReceiver extends BroadcastReceiver
 {
+	
+	/* (non-Javadoc)
+	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent)
 	{

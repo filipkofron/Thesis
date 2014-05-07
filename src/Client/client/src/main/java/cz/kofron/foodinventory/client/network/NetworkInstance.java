@@ -6,16 +6,29 @@
 
 package cz.kofron.foodinventory.client.network;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class NetworkInstance.
+ *
  * @author kofee
  */
 public class NetworkInstance
 {
+	
+	/** The communicator. */
 	public static Communicator communicator;
+	
+	/** The connector. */
 	public static Connector connector = new Connector();
 
+	/** The prepared. */
 	private static boolean prepared = false;
 
+	/**
+	 * Prepare.
+	 *
+	 * @param username the username
+	 */
 	public static void prepare(String username)
 	{
 		if (connector != null)
@@ -27,6 +40,11 @@ public class NetworkInstance
 		prepared = true;
 	}
 
+	/**
+	 * Checks if is prepared.
+	 *
+	 * @return true, if is prepared
+	 */
 	public static boolean isPrepared()
 	{
 		return prepared;

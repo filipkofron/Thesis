@@ -6,11 +6,18 @@
 
 package cz.kofron.foodinventory.client.protocol.message;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class MessageInitializer.
+ *
  * @author kofee
  */
 public class MessageInitializer
 {
+	
+	/**
+	 * Initialize.
+	 */
 	public static void initialize()
 	{
 		Message.registerMessageChild(new KeepAlive());

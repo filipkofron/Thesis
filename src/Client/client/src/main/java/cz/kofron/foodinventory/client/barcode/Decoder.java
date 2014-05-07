@@ -11,15 +11,27 @@ import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;
 import com.google.zxing.common.HybridBinarizer;
 
+// TODO: Auto-generated Javadoc
 /**
  * Created by kofee on 9.3.14.
  */
 public class Decoder
 {
+	
+	/** The call back. */
 	private ResultCallback callBack;
+	
+	/** The multi format reader. */
 	private MultiFormatReader multiFormatReader;
+	
+	/** The rotation data buffer. */
 	private byte[] rotationDataBuffer;
 
+	/**
+	 * Instantiates a new decoder.
+	 *
+	 * @param callBack the call back
+	 */
 	public Decoder(ResultCallback callBack)
 	{
 		this.callBack = callBack;
@@ -28,6 +40,15 @@ public class Decoder
 		multiFormatReader.setHints(DecodeHintProvider.provideHints());
 	}
 
+	/**
+	 * Builds the luminance source.
+	 *
+	 * @param data the data
+	 * @param width the width
+	 * @param height the height
+	 * @param rotated the rotated
+	 * @return the planar yuv luminance source
+	 */
 	public synchronized PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height, boolean rotated)
 	{
 		if (rotated)
@@ -59,6 +80,14 @@ public class Decoder
 				rect.width(), rect.height(), false);
 	}
 
+	/**
+	 * Decode.
+	 *
+	 * @param data the data
+	 * @param width the width
+	 * @param height the height
+	 * @param rotated the rotated
+	 */
 	public void decode(byte[] data, int width, int height, boolean rotated)
 	{
 		String someResult = "";
