@@ -909,13 +909,67 @@ Další testování programátorem spočívalo v~přímém testování aplikace,
 
 Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synchronizační problémy vláken. Všechny tyto chyby bylo možné rychle opravit rovnou při probíhající implementaci a urychlit tak vývoj aplikace i serveru.
 
-\section{Pozorované testování vybranými uživateli}
+\section{Usability testing}
 
-Toto testování mělo za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
+Po dokončení implementace aplikace a otestování aplikace programátorem jsem uskutečnil usability test, který má za úkol zhodnotit celkovou použitelnost aplikace na skupině lidí. Tito lidé budou podrobeni sledovaním při provádění předem daných scénářů, které pokryjí běžné činnosti s aplikací a jednotlivé reakce uživatelů budou zaznamenány pro každý scénář. U nich bude také sepsán předpokládaný způsob jejich řešení..
 
-Testování probíhalo tak, že uživatelé byli dotázáni na různé případy užití a případné zmatení či ztracení uživatele v~navigaci se projevilo při změně rozvržení uživatelského rozhraní. Jejich pocity a názory byli poté autorem zaznamenány. Tím byl zpětně upravován návrh UI aplikace.
+Pro další zisk informací od uživatelů budou položeny níže popsané dotazníky pre-test a post-test.
 
-Problémy odhalené v~této části testování zahrnovaly především nízkou informovanost uživatele o~probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o~průběhu jejich akcí.
+\subsection{Příprava testu}
+
+Jednotlivé scénáře jsou očíslované tak, jak budou níže popsány pozorované reakce a zkušenosti uživatelů při jejich provádění.
+
+\begin{enumerate}
+  \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí vyhledávání do vašeho inventáře.
+    
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Uživatel stiskne tlačítko \textit{Search}. Jelikož nedojde k nalezení potraviny, je seznam prázdný. V panelu je však tlačítko s ikonou plus, kterým se po stisknutí objeví editace pro přidání nové potraviny. Zde uživatel vyplní údaje o potravině, stisktne tlačítko s ikonou diskety pro uložení. Následně se uživatel pokusí potravinu znovu vyhledat, kde se jit potravina zobrazí a uživatel ji přidá do inventáře přes tlačítko s ikonou plus, které zobrazí dialog s potravinou, kde uživatel vyplní datum spotřeby a potvrdí. Tím je potravina přidána jak v databázi potravin, tak v inventáři uživatele.
+
+  \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí skenování čárového kódu do vašeho inventáře.
+    
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Add via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Jelikož nedojde k nalezení potraviny, zobrazí se dialog pro přidání potraviny (zde se může zobrazit i dialog, že byla potravina nalezena v externí databázi, ale uživatel pokračuje stejně). Po potvrzení, že uživatel chce zadat potravinu, se objeví editace pro přidání nové potraviny. Zde uživatel vyplní chybějící údaje o potravině, stisktne tlačítko s ikonou diskety pro uložení. Následně se zobrazí dialog s potravinou, kterou nalezl po jejím přidání. Dále uživatel pokračuje jako ve scénáři 1.
+    
+  \item Přidejte Vámi zvolenou potravinu, která už je v databázi, pomocí skenování čárového kódu do vašeho inventáře.
+    
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Add via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Následně se zobrazí dialog s potravinou, kterou nalezl po jejím přidání. Dále uživatel pokračuje jako ve scénáři 1.
+  
+  \item Odeberte Vámi zvolenou potravinu, která už je v inventáři, pomocí skenování čárového kódu z vašeho inventáře.
+    
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Remove via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Následně se zobrazí dialog se seznamem potravin, které se shodují s načteným čárovým kódem. Uživatel stiskne tlačítko s ikonou koše. Tím je potravina odebrána z inventáře uživatele.
+  
+  \item Odeberte Vámi zvolenou potravinu, která už je v inventáři, při prohlížení vašeho inventáře.
+    
+    \textbf{Předpokládané řešení}: Pokud ještě uživatel není v intentáři, pak v menu klikne na tlačítko \textit{My Inventory}, které uživatele přepne do stejně nazvané aktivity. Zde se zobrazí seznam všech potravin v inventáři. Uživatel pokračuje stejně jako ve scénáři 4.
+  
+  \item Vámi zvolenou potravinu, která už je v databázi, vyhledejte a upravte nějaký údaj. Jako například upravte výchozí datum spotřeby.
+    
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Po stisku hledat se zobrazí seznam potravin se shodujícím se názvem. Zde uživatel klikne na potravinu. Tím se dostane do detailu potraviny, kde stiskne ikonu tužky, která ho zavede do editace. Zde změní údaj, potravinu uloží stiskem tlačitka s ikonou diskety. Následně se tím vrátí do detailu, kde má být údaj aktualizován na upravený.
+  
+\end{enumerate}
+
+\subsection{Provádení testu}
+
+\subsubsection{Test 1}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700.
+
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+\end{enumerate}
+
+ 
+
+% Toto testování má za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, % která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
+
+% Testování probíhalo tak, že uživatelé byli dotázáni na různé případy užití a případné zmatení či ztracení uživatele v~navigaci se projevilo při změně rozvržení uživatelského rozhraní. Jejich pocity a názory byli poté autorem zaznamenány. Tím byl zpětně upravován návrh UI aplikace.
+
+% Problémy odhalené v~této části testování zahrnovaly především nízkou informovanost uživatele o~probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o~průběhu jejich akcí.
+
+% \item{Při skenování nové potraviny uživatel na výzvu přidání potraviny ji uloží, ale potravina musí být naskenována znovu, aby ji bylo možné přidat do inventáře. Je to závažnější problém proto, že některé potraviny je velmi obtížné naskenovat a tím pádem to práci s~aplikací velmi znepříjemní. Zejména v~době začátku aplikace, kdy je v~databázi velmi málo potravin a uživatel musí zadávat potravin více.}
 
 \section{Testování vydáním na Play Store}
 
@@ -926,7 +980,6 @@ Průběh tohoto testování záležel na samotných uživatelích. Uživatelé m
 Při tomto testování byly do doby psaní tohoto textu objeveny tyto nedostatky:
 
 \begin{itemize}
-	\item{Při skenování nové potraviny uživatel na výzvu přidání potraviny ji uloží, ale potravina musí být naskenována znovu, aby ji bylo možné přidat do inventáře. Je to závažnější problém proto, že některé potraviny je velmi obtížné naskenovat a tím pádem to práci s~aplikací velmi znepříjemní. Zejména v~době začátku aplikace, kdy je v~databázi velmi málo potravin a uživatel musí zadávat potravin více.}
 	\item{Nemožnost zvolit kameru, která je použita pro snímání potravin. Některé mobilní telefony totiž mají zadní i přední snímací čip obrazu a někteří uživatelé vyjádřili touhu po této funkcionalitě. Výchozí totiž byla zadní kamera, jelikož obvykle mívá vyšší rozlišení.}
 	\item{Zasekávání kamery. Tato chyba vzniká při uspání aktivity pro skenování čárového kódu a následném probuzení.}
 	\item{Samovolné uspání zařízení z~neaktivity uživatele. Stává se tak obvykle při delším neúspěšném skenování čárového kódu potraviny.}
