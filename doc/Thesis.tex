@@ -45,7 +45,7 @@
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
 \abstractCS{Tato bakalářská práce seznamuje čtenáře s~globálním problémem plýtvání potravin. Popisuje možné řešení v~podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v~prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s~případnými vylepšeními, které přinesla odezva při nasazení aplikace u~skutečných uživatelů.}
-\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity to implementation of the mobile application on top of the Android OS and a server component using open-source sofware followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements, which are gained by the deployment of the application between real users.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements which are gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
 \keywordsCS{Nahraďte seznamem klíčových slov v~češtině oddělených čárkou.}
@@ -383,7 +383,7 @@ Mnoho protokolů využíva ke komunikaci textový formát v~XML. Tento formát j
 
 \subsection{JSON}
 
-Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
+Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními proti vložení zákeřného kódu načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
 
 \subsection{Porovnání a zvolení formátu}
 
@@ -870,7 +870,13 @@ Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným pr
 
 \section{Testování programátorem}
 
-Průběh testování spočíval v~psaní testů nad částmi, které nebylo možné testovat jako celek. Cílem testů bylo ověřit správnost implementace různých abstraktních tříd a rozhraní v~serveru i klientské aplikaci.
+\subsection{Testování kódu}
+
+Průběh tohoto testování spočíval v~psaní testů nad částmi kódu. Cílem testů bylo ověřit správnost implementace abstraktních tříd a rozhraní v~serverové i klientské aplikaci. Testování bylo shodné s Unit testy, ale pro jednoduchost a nezávislost na dalších knihovnách jsem je napodobil velmi zjednodušeně. Tyto testy jsem spouštěl vždy pří dokončení. Testy však nebyly vhodné pro použití jako regresní testy, proto byly ponechány jen po dobu vývoje jednotlivých částí.
+
+
+
+\subsection{Testování samotné aplikace}
 
 Další testování programátorem spočívalo v~přímém testování aplikace, čímž bylo ověřena aplikace jako celek a odhaleny zásadní chyby v~implementaci, zejména v~komunikaci protokolem se serverem.
 
@@ -902,11 +908,11 @@ Při tomto testování byly do doby psaní tohoto textu objeveny tyto nedostatky
 Opravení těchto nedostatků již proběhne mimo rámec této práce.
 
 \begin{conclusion}
-Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v~podobě mobilní aplikace na platformě Android. Bylo nutné řešení nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňuje spolu.
+Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v~podobě mobilní aplikace na platformě Android. Řešení bylo nutné nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňovala.
 	
-Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a server, který byl naimplementován pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
+Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a serverovou aplikaci, který byla naimplementována pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
 
-Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
+Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github~\cite{repo}. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
 
 V~době psaní tohoto textu je aplikace nasazena v~testovací beta verzi již veřejně dostupné každému k~vyzkoušení.
 
@@ -914,12 +920,30 @@ V~době psaní tohoto textu je aplikace nasazena v~testovací beta verzi již ve
 
 Aplikace, která vznikla v~rámci této práce, má mnoho nedostatků. Zde se pokusím popsat ty, které lze do budoucna vyřešit.
 
+\subsection{Knihovna pro čtení čárových kódů}
 Jedním z~nich je nedokonalost knihovny ZXing, která čtení čárových sice zvládá, ale testováním uživateli vyšlo najevo, že ne dostatečně. Do budoucna by tedy bylo vhodné zvážit i jiné například komerční řešení nebo vyvinout vlastní řešení založeném na jiném algoritmu, který by umožňoval načítaní čárových kódu potravin spolehlivěji.
 
+\subsection{Zabezpečení aplikace a komunikace}
+Na zabezpečení dat uživatelů této aplikace není kladen žádný důraz. Účty různých lidi lze jendoduše přidat do OS Android účtů a přistoupit tak neoprávněně na účet jiných lidí. Stejně tak není čifrované spojení mezi klientem a server.
+
+Pokud by mělo být zabezpečení v budoucnu zvýšeno, pak by bylo nutné upravit zprávy tak, aby jejich obsah byl dostatečně zašifrovaný. Také uživatelské účty by bylo nutné chránit heslem. Tyto změny by však nebyly nijak zásadní a celkem snadno by je bylo možné aplikovat.
+
+Otevřenost aplikace uživatelům nabízí spoustu způsobů, jak na aplikaci zaútočit. Bylo by vhodné vyvinout pro aplikaci sledovací mechanismy, které by detekovaly nevhodné chování uživatelů při editacích čí pridavaní potravin.
+
+\subsection{Zálohování}
+Zálohování na serveru zatím probíhá pouze jako záloha celé databáze.
+
+Při nasazení se však ukázalo, že by bylo vhodné mít možnost vrátit potravinu do původního stavu po útoku nějakým škodolibým uživatelem bez vracení celé databáze do určitého stavu v minulosti.
+
+Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlednutí, případně k navrácení do aktualní potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
+
+\subsection{UI}
 Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, nění toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výberu uživateli.
 
+\subsection{Výkon serverového stroje}
 Další nedostatek je v~cílovém stroji na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonější stroj.
 
+\subsection{Rozšíření na další platformy}
 Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvynout pro aplikaci také webovou verzi, který by byla dostupná i na jiných zařízeních, které nedisponují operařním systémem Android.
 
 \end{conclusion}

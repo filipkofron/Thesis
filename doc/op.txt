@@ -5,30 +5,11 @@ Uvod - rozsirit
 Analyza
 	- pozadavky, vice z dotazniku (jaka vekova kategorie)
 	rozdelit kategorie, pozadavky - vice rozepsat
-	ctecka carovych kodu, rozdelit do podkapitol
 	implementace prototypu vysledek tabulkou
-		
-3)
-
-
-4)
-zaloha, jak lepsi do zaveru
-zaver - kategorie
-
-JSON - bezpecnost
-
-
-fix UI diagram
-
 
 protokol - zpravy vice rozepsat, co se prenasi
 Kudy putuje zprava - schema na abstraktnich tridach
 zpusob - 
-
-vice rozepsat to testovani podle typu, v programatorovy
-
-zaver bude vice poznamek, kategorie (podkategorie)
-zabezpeceni do zaveru
 
 keywords - seznam
 
