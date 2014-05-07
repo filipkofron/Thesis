@@ -42,23 +42,6 @@ static const char *ALL_FOOD = "SELECT id, gtin, name, description, category_id, 
 
 void FoodDAOMySQL::addFood(Food &food, int &newId)
 {
-
-    bool exists = false;
-
-    try
-    {
-        getFoodByGtin(food.getGtin());
-        exists = true;
-    }
-    catch(DAOException &e)
-    {
-    }
-
-    if(exists)
-    {
-        throw DAOException("Food already exists!");
-    }
-
     MySQLManager::ConnectionHolder ch(MySQLManager::getInstance());
     std::unique_ptr<sql::PreparedStatement> ps(ch.conn->prepareStatement(ADD_FOOD));
 
