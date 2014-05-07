@@ -42,6 +42,8 @@ void LoginHandler::handle(Context &context)
 
     std::shared_ptr<UserDAO> dao = DAOFactory::getUserDAO();
 
+    Log::debug(std::string("Login attempt with username: '") + request->username + std::string("'"));
+
     User user;
     try
     {
