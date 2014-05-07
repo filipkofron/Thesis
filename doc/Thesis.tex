@@ -149,7 +149,34 @@ Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden neb
 
 Jako základ dalšího postupu aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, kterému se tato aplikace snaží nalézt řešení.
 
-Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z~různých internetových zdrojů lze nalézt, že nejrozšířenější platforma na mobilních telefonech je OS Android. Protože u~žádného z~těchto zdrojů nebylo možné zajistit autentičnost, byl k~této práci vypracován krátký dotazník, na který odpovědělo 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality. Výsledek rozšíření platforem mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
+Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který se 
+
+\begin{table}[H]
+    \begin{tabular}{|l|l|}
+    \hline
+    Operační Systém & Podíl na trhu \\ \hline
+    Android         & 78.4\%        \\ \hline
+    iOS             & 15.6\%        \\ \hline
+    Microsoft       & 3.2\%         \\ \hline
+    BlackBerry      & 1.9\%         \\ \hline
+    Other OS        & 0.9\%         \\ \hline
+    \end{tabular}
+    \caption{Přehled prodeje mobilních platforem podle operačních systémů dle Gartner~\cite{gartner} za druhé čtvrtletí roku 2013}
+    \label{table:MobilePlatf}
+\end{table}
+
+Protože tento údaj nebylo skutečné zastoupení platforem, byl k~této práci vypracován krátký dotazník, na který odpovědělo celkem 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality.
+
+Seznam otázek v dotazníku zahrnuje tyto údaje:
+\begin{itemize}
+	\item Operační systém mobilního telefonu
+	\item Věková kategorie
+	\item Dotaz, zda-li by dotyčný(á) používal takovouto aplikaci
+	\item Dotaz, zda-li již dotyčný(á) používá takovouto aplikaci
+	\item Dotaz, zda-li by aplikace měla používat čtečku čárových kódů
+\end{itemize}
+
+Výsledek rozšíření mobilních platforem (mobilních operačních systémů) mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
 
 \begin{figure}[H]
   \centering
@@ -254,7 +281,7 @@ Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikac
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku  ~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
 Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízení. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Změna rozlišení na vyšší u~původní aplikace Barcode Scanner však znamenala pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů.
 
@@ -497,8 +524,8 @@ Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatři
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.85]{diagrams/ui.pdf}
-  \caption{UI Diagram s obrazovkami v zaoblených obdélnících a akcemi v ostatních}
+  \includegraphics[scale=0.70]{diagrams/ui.pdf}
+  \caption{UI Diagram s obrazovkami v zaoblených obdélnících a akcemi ve zbývajících. Zpětné šipky jsou pro přehlednost vynechány. Z obrazovek se však lze dostat ve směru při průchodu zleva doprava opačným směrem zpátky pomocí tlačítka zpět.}
   \label{fig:UIDiagram}
 \end{figure}
 
