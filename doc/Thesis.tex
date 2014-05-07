@@ -141,15 +141,15 @@ aby předešel plýtvání, které by pro menší kapitál mohlo znamenat velik�
 
 Shledal jsem však nutnost aplikaci umožnit používat jakémukoliv členu rodiny či domácnosti. Je to zejména proto, aby mohl kdokoliv z~rodiny použít rodinný účet a nově zakoupenou potravinu nebo právě spotřebovanou okamžitě přidat do aplikace, respektive odstranit. Nejen pro tento účel, ale i pro výše zmíněné sdílení informací o~potravinách bude nutné, aby aplikace disponovala externím úložištěm dat.
 
-Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, jež mají problém přečíst název potraviny. Její obrázek však rozpoznají jednodušeji.
+Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden nebo více obrázků, které mohou vhodným způsobem odlišit jednotlivé potraviny i například pro lidi, jež mají problém přečíst název potraviny. Její obrázek totiž rozpoznají snadněji.
 
 \clearpage
 
 \section{Analýza požadavků}
 
-Jako základ dalšího postupu aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, kterému se tato aplikace snaží nalézt řešení.
+Jako základ dalšího postupu vývoje aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, ke kterému se tato aplikace snaží nalézt řešení.
 
-Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který se 
+Prvním aspektem aplikace jako řešení je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používa nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který může alespoň naznačit, jakým směrem se mobilní trh ubírá.
 
 \begin{table}[H]
     \begin{tabular}{|l|l|}
@@ -185,7 +185,7 @@ Výsledek rozšíření mobilních platforem (mobilních operačních systémů)
   \label{fig:SurveyOS}
 \end{figure}
 
-Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si dává za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společné úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
+Výběr cílové platformy je tedy jistý. Čtenář může jistě dohledat další průzkumy rozšíření platforem, které jsou více či méně rozdílné, avšak všechny poukazují na fakt, že OS Android je nejrozšířenější. Tato práce si klade za cíl poskytnout řešení pro tuto platformu. Protože budoucnost této aplikace může přinést rozšíření i na více platforem, je nutné zajistit, aby společné úložiště dat aplikace bylo možné použít i pro jinou platformu. Toto zajistí multiplatformní protokol.
 
 Vzhledem k~tomu, že většina potravin disponuje čárovým kódem a k~tomuto kódu můžou být dohledány informace o~zboží, které identifikuje, lze aplikaci vybavit čtečkou čárových kódu, která usnadní manuální zadávání názvu či tohoto kódu. Aby tato informace nebyla jen tak nadhozena, byla do dotazníku přidána další sekce. Na obrázku ~\ref{fig:SurveyScan} lze pozorovat poměr mezi dotázanými, kteří by využili možnosti zadávat jídlo pomocí čtečky a těmi, kteří by toho nevyužili.
 
@@ -202,7 +202,7 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item přidávání nových potravin
   \item sdílení známých potravin
   \item specifikace běžné doby spotřeby potraviny
-  \item zaznamenání fotografie potraviny
+  \item zaznamenání obrázku potraviny
   \item zaznamenávání potravin do inventáře
   \item odebírání potravin z~intentáře
   \item zaznamenání data spotřeby
@@ -210,11 +210,11 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item čtení čárového kódu pomocí kamery mobilního telefonu
   \item čtení různě dlouhých čárových kódů
   \item upozornění na jídlo, jehož spotřební doba se ocitla v~krátkém intervalu mezi koncem, či jehož spotřební doba již uplynula
-  \item nastavení intervalu pro upozornění o~spotřebě, který je rozdílem doby spotřeby potraviny a aktuálního data
+  \item nastavení intervalu pro upozornění o ukončení trvanlivosti, který je rozdílem doby spotřeby potraviny a aktuálního data
   \item získávání informací o~neznámých potravinách z~otevřené databáze čárových kódů
 \end{itemize}
 
-OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze zhlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpoře těch starších.
+OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze shlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3+ je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpory těch starších.
 
 Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN, které pokrývají většinu mezinárodně rozšířených. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
 \begin{table}[h]
@@ -231,11 +231,11 @@ OS Android se na cílových zařízeních nachází v~různých verzích. Někte
 \end{table}
 Kratší kódy lze snadno převést na delší doplněním nulami do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takového kódu.
 
-Externí úložiště aplikace bude tvořit server. Autor práce plánuje nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží autorův server. Dále však autor plánuje do budoucna server nasadit na výkonější, je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží server. Dále však plánuji do budoucna server nasadit na výkonější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
 Server budé dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
 
-Pro celou práci se autor snaží využít zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace autor hodlá publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
+Pro celou práci se snažím využívat zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace hodlám publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
 
 Seznam nefunkčních požadavků:
 
