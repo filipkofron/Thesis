@@ -899,9 +899,7 @@ Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným pr
 
 \subsection{Testování kódu}
 
-Průběh tohoto testování spočíval v~psaní testů nad částmi kódu. Cílem testů bylo ověřit správnost implementace abstraktních tříd a rozhraní v~serverové i klientské aplikaci. Testování bylo shodné s Unit testy, ale pro jednoduchost a nezávislost na dalších knihovnách jsem je napodobil velmi zjednodušeně. Tyto testy jsem spouštěl vždy pří dokončení. Testy však nebyly vhodné pro použití jako regresní testy, proto byly ponechány jen po dobu vývoje jednotlivých částí.
-
-
+Průběh tohoto testování spočíval v~psaní testů nad částmi kódu. Cílem testů bylo ověřit správnost implementace abstraktních tříd a rozhraní v~serverové i klientské aplikaci. Testování bylo shodné s Unit testy, ale pro jednoduchost a nezávislost na dalších knihovnách jsem je napodobil velmi zjednodušeně. Tyto testy jsem vytvářel a aplikoval vždy při vývoji určité části. Testy však nebyly vhodné pro použití jako regresní testy, proto byly ponechány jen po dobu vývoje jednotlivých částí.
 
 \subsection{Testování samotné aplikace}
 
@@ -911,13 +909,13 @@ Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synch
 
 \section{Usability testing}
 
-Po dokončení implementace aplikace a otestování aplikace programátorem jsem uskutečnil usability test, který má za úkol zhodnotit celkovou použitelnost aplikace na skupině lidí. Tito lidé budou podrobeni sledovaním při provádění předem daných scénářů, které pokryjí běžné činnosti s aplikací a jednotlivé reakce uživatelů budou zaznamenány pro každý scénář. U nich bude také sepsán předpokládaný způsob jejich řešení..
+Po dokončení implementace aplikace a otestování aplikace programátorem jsem uskutečnil usability test, který má za úkol zhodnotit celkovou použitelnost aplikace na skupině lidí. Tito lidé byli podrobeni sledovaním při provádění předem daných scénářů, které pokryli běžné činnosti s aplikací a jednotlivé reakce uživatelů byly zaznamenány pro každý scénář. U nich byl také sepsán předpokládaný způsob jejich řešení.
 
-Pro další zisk informací od uživatelů budou položeny níže popsané dotazníky pre-test a post-test.
+Pro další zisk informací od uživatelů byly položeny níže popsané dotazníky pre-test a post-test.
 
-\subsection{Příprava testu}
+\subsection{Testovací scénáře a jejich řešení}
 
-Jednotlivé scénáře jsou očíslované tak, jak budou níže popsány pozorované reakce a zkušenosti uživatelů při jejich provádění.
+Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorované reakce a zkušenosti uživatelů při jejich provádění. 
 
 \begin{enumerate}
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí vyhledávání do vašeho inventáře.
@@ -932,7 +930,7 @@ Jednotlivé scénáře jsou očíslované tak, jak budou níže popsány pozorov
     
     \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Add via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Následně se zobrazí dialog s potravinou, kterou nalezl po jejím přidání. Dále uživatel pokračuje jako ve scénáři 1.
   
-  \item Odeberte Vámi zvolenou potravinu, která už je v inventáři, pomocí skenování čárového kódu z vašeho inventáře.
+  \item Odeberte Vámi zvolenou potravinu, která už je v inventáři, pomocí skenování čárového kódu.
     
     \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Remove via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Následně se zobrazí dialog se seznamem potravin, které se shodují s načteným čárovým kódem. Uživatel stiskne tlačítko s ikonou koše. Tím je potravina odebrána z inventáře uživatele.
   
@@ -948,20 +946,70 @@ Jednotlivé scénáře jsou očíslované tak, jak budou níže popsány pozorov
 
 \subsection{Provádení testu}
 
-\subsubsection{Test 1}
+\subsubsection{Testovací subjekt 1}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním telefonem Huawei M886.
+
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře, uživatel však vykazoval mírné známky zmatení z prázdného seznamu, přesto však včas uvážil možnost stisknutí tlačítka s ikonou plus, které bylo správný cíl.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení, uživatel si však stěžoval, že musel čárový kód potraviny načíst znovu, aby ji mohl následně přidat i do inventáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení, načítání kódu ale trvalo mnohem déle než v předchozím testu. Toto uživatele na chvíli negativně rozrušilo.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+\end{enumerate}
+
+\subsubsection{Testovací subjekt 2}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 50-60 let s mobilním zařízením Xperia sola (MT27i).
+
+\begin{enumerate}
+  \item V tomto úkolu byl uživatel zmatený, zběsile klikal v inventáři místo toho, aby klikl na menu. Dále byl uživatel zmatený při zadání výchozího data spotřeby. Myslel si totiž, že to už je datum spotřeby té dané potraviny.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+\end{enumerate}
+
+\subsubsection{Testovací subjekt 3}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700. Aplikaci již v průběhu vývoje zkoušel.
+
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře. Při přidávání potraviny však uživatel nenašel výrobce potraviny a znejistil. Potravinu však i tak přidal.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení. Po přidání potraviny ale uživatel stiskl tlačítko zpět, které ukončilo aplikaci. Uživatel byl znepokojen a výrazně dal najevo nespokojenost s tímto chováním aplikace. Uživatel předpokládal, že po přidání potraviny se znovu objeví inventář, ze kterého uživatel začal přidávat potravinu.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item Uživatel se v tomto úkolu spletl a místo odebíraní se pokusil potravinu přidat. Poté však již nalezl správné tlačítko v menu. Při načtení a nalezení potraviny uživatele zmátlo, že dialog s potravinou disponuje tlačítkem \textit{Ok}, které ve skutečnosti slouží pouze ke schování dialogu. Toto tlačítko by však podle uživatele mělo být nazváno spíše \textit{Cancel}. Poté již potravinu odebral.
+  \item Uživatel v tomto úkolu kliknul těsně vedle tlačítka s ikonou koše. Tím se zobrazil detail potraviny v inventáři. Po druhé již vše proběhlo podle předpokládaného řešení.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+\end{enumerate}
+
+\subsubsection{Testovací subjekt 4}
 
 V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700.
 
 \begin{enumerate}
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně dle scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
 \end{enumerate}
 
- 
+\subsubsection{Testovací subjekt 5}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700.
+
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+\end{enumerate}
 
 % Toto testování má za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, % která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
 
