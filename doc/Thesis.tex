@@ -196,8 +196,9 @@ Vzhledem k~tomu, že většina potravin disponuje čárovým kódem a k~tomuto k
   \label{fig:SurveyScan}
 \end{figure}
 
-Funkční požadavky této aplikace, které plynou z~daného problému a výše uvedených výsledků dotazníku jsou:
+\section{Funkční požadavky}
 
+Funkční požadavky této aplikace, které plynou z~daného problému a výše uvedených výsledků dotazníku jsou:
 \begin{itemize}
   \item přidávání nových potravin
   \item sdílení známých potravin
@@ -231,7 +232,50 @@ OS Android se na cílových zařízeních nachází v~různých verzích. Někte
 \end{table}
 Kratší kódy lze snadno převést na delší doplněním nul do celkového počtu číslic, který je cílem převodu. Aplikace tedy vyžaduje možnost zaznamenání takových kódu.
 
-Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží server. Dále však plánuji do budoucna server nasadit na výkonější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+\subsection{Čtečka čárových kódu}
+
+Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovouto funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v~této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
+
+Tuto sekci jsem zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, kterou pak lze dále použít v~návrhu a implementaci.
+
+\subsubsection{Externí aplikace}
+
+Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení jsem vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit, tento čas je třeba ještě vynásobit dvěma. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto případě spouštění externí aplikace není možný.
+
+\subsubsection{Zbar ~\cite{zbar}}
+
+Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k~aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v~roce 2010. Kód není dále aktivně vyvíjen.
+
+Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
+
+\subsubsection{ZXing ~\cite{zxing}}
+
+Od autorů teamu ZXing (``Zebra Crossing'') této knihovny je na Play Store k~dispozici aplikace Barcode Scanner~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v~jazyce Java. Touto cestou je knihovna snadno přenositelná do všech platforem podporujících Java byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik Virtual Machine používající Android.
+
+Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódů, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře poslouží jako užitečný zdroj informací o~implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožnuje s~výsledky provádět spoustu činností, jako vyhledávat kód v~různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle mě nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s~knihovnou podporuje, takže použití bude velice úzké, čímž jsem došel k~závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
+
+Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do budoucna počítat se spolehlivějším načítáním kódu i vyšší efektivitou knihovny. Veškeré zdrojové kódy knihovny ZXing a její implementující aplikace Barcode Scanner jsou k~dispozici pod stejnou licencí. Je tedy možné využít jakoukoliv část těchto kódu i v~rámci této práce. 
+
+\subsubsection{Implementace prototypu}
+
+Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. 
+
+\subsubsection{Výsledek implementace}
+
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+
+Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Odproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.3]{screenshots/scan_prototype.png}
+  \caption{Prototyp snímaní čárových kódů}
+  \label{fig:ScanPrototype}
+\end{figure}
+
+\section{Nefunkční požadavky}
+
+Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží serverový stroj. Dále však plánuji do budoucna server nasadit na výkonější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
 Server budé dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
 
@@ -249,57 +293,14 @@ Seznam nefunkčních požadavků:
   \item využití open-source software
 \end{itemize}
 
-\clearpage
-
-\section{Čtečka čárových kódu}
-
-Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovouto funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v~této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
-
-Tuto sekci autor zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, které pak lze dále použít v~návrhu a implementaci.
-
-\subsection{Externí aplikace}
-
-Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení autor vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit,  tento čas je třeba ještě vynásobit dvěmi. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto přípaďe spouštění externí aplikace není možný.
-
-\subsection{Zbar ~\cite{zbar}}
-
-Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k~aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v~roce 2010. Kód není dále aktivně vyvíjen.
-
-Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
-
-\subsection{ZXing ~\cite{zxing}}
-
-Od autorů teamu ZXing (``Zebra Crossing'') této knihovny je na Play Store k~dispozici aplikace Barcode Scanner ~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v~jazyce Java. Touto cestou je knihovna snadno implementovatelná do všech platforem podporujících Java byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik VM používající Android.
-
-Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódů, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře pouslouží jako užitečný zdroj informací o~implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožnuje s~výsledky provádět spoustu činností, jako vyhledávat kód v~různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle autora této práce nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s~knihovnou podporuje, takže použití bude velice úzké a autor této práce došel k~závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
-
-Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do budoucna počítat se spolehlivějším načítáním kódu i vyšší efektivitou knihovny. Veškeré zdrojové kódy jak knihovny ZXing a její implementující aplikace Barcode Scanner jsou k~dispozici pod stejnou licencí. Je tedy možné využít jakoukoliv část těchto kódu i v~rámci této práce. 
-
-\subsection{Implementace prototypu}
-
-Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. 
-
-\subsubsection{Výsledek implementace}
-
-Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
-
-Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízení. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Změna rozlišení na vyšší u~původní aplikace Barcode Scanner však znamenala pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.3]{screenshots/scan_prototype.png}
-  \caption{Prototyp snímaní čárových kódů}
-  \label{fig:ScanPrototype}
-\end{figure}
-
 
 \chapter{Návrh}
 
-Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole Analýza budou pevně diktovat jeho obsah. Struktura návrhu se týka popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
+Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole analýzy budou diktovat jeho obsah. Struktura návrhu se týka popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
 
 \section{Případy užití}
 
-Výše uvedené funkční požadavky se přimo promítají do případů užití. Tento diagram slouží pří návrhu UI i jako scénáře pro uživatelské testování, které ověří, zda daný návrh je pro uživatele dostatečne jednoduchý a zda-li je uživatel schopen v~aplikaci dosáhnout všech daných cílu.
+Výše uvedené funkční požadavky se přimo promítají do případů užití. Tento diagram slouží pří návrhu UI i pro tvorbu scénářů pro usability testing, které ověří, zda daný návrh je pro uživatele dostatečne jednoduchý a zda-li je uživatel schopen v~aplikaci dosáhnout všech daných cílů.
 
 Inventář a vyhledání potraviny jsou základnami, ze kterých se dále odvíjejí ostatní činnosti. Jednotlivé případy vystihují přesně ty činnosti, které bude uživatel provádět během používání aplikace.
 
@@ -314,7 +315,7 @@ Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější či
 
 \section{Architektura}
 
-Vzhledem nutnosti použít pro mobilní aplikaci server bude nejvhodnější model architektury klient - server. Tento model vyžaduje specifikovat komunikaci mezi oběma stranami a dále při vhodném navrhnutí lze uvažovat i o~klientech pro více platforem. Vhodná platforma pro jiný typ aplikace by mohla být webová aplikace, která by zpřístupňovala aplikaci na všech ostatních platformách skrze webový prohlížeč. Touto cestou by však nebylo možné uživatele jednoduše upozorňovat o~trvanlivosti přímo z~webové stránky i v~době, kdy uživatel stránku nepoužívá.
+Vzhledem k nutnosti použít pro mobilní aplikaci server bude nejvhodnější model architektury klient - server. Tento model vyžaduje specifikovat komunikaci mezi oběma stranami a dále při vhodném navrhnutí lze uvažovat i o~klientech pro více platforem. Vhodná platforma pro jiný typ aplikace by mohla být webová aplikace, která by zpřístupňovala aplikaci na všech ostatních platformách skrze webový prohlížeč. Touto cestou by však nebylo možné uživatele jednoduše upozorňovat o~trvanlivosti přímo z~webové stránky i v~době, kdy uživatel stránku neprohlíží.
 
 \subsection{Klient}
 
@@ -322,7 +323,7 @@ Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s
 
 \subsection{Server}
 
-Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku autorova studia obsahovali především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou priblíženy dále.
+Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku mého studia obsahovali především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou priblíženy dále.
 
 \section{Doménový model}
 
@@ -332,16 +333,16 @@ Na obrázku doménového modelu ~\ref{fig:DomainModel} lze spatřit vztahy mezi 
 Category poskytuje kategorizaci potravin. Tato entita je připravena pro budoucí rozšíření vyhledávání, v~rámci této práce je informace o~kategorii pouze shromažďována jako název.
 
 \subsection{Edit}
-Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů a k nahrazení dat, které tyto uživatele poškodili.
+Každá editace potraviny tvoří záznam entity Edit, ve které se nachází informace kdo, kdy a co upravil. Tato informace poté může sloužit k~blokování škodlivých uživatelů a k nahrazení dat, které tyto uživatelé poškodili.
 
 \subsection{Food}
 Entita food popisuje potravinu jako název, výchozí trvanlivost, běžnou cenu, kategorii, výrobce a uživatele, který potravinu do aplikace přidal.
 
 \subsection{Image}
-Každá potravina může nabýt předem nespecifikované množství obrázků od uživatelů. Zde je zaznamenán pouze uživatel, který obrázek k potravině přidal.
+Každá potravina může nabýt předem nespecifikovaného množství obrázků od uživatelů. Zde je zaznamenán pouze uživatel, který obrázek k potravině přidal.
 
 \subsection{Inventory}
-Položka inventáře spojujuje uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
+Položka inventáře spojuje uživatele a potravinu, která zároveň určuje datum spotřeby. Při přidání několika instancí potraviny do inventáře najednou se vždy přidá stejný počet záznamů této entity.
 
 \subsection{Review}
 Jednoduché hodnocení potraviny od 0 do 5 s~volitelným textem recenze uživatele. Každý uživatel může nabýt nejvíce jednoho hodnocení.
@@ -361,7 +362,7 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu byl využit software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
 
 Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
 
@@ -373,7 +374,7 @@ Atribut \textbf{message} zaznamenává zprávu editace. V té server ukládá in
 
 \textbf{gtin} zaznamenává kód GTIN v mém vlastním formátu, který tvoří dohromady 15 znaků. První znak označuje typ čárového kódu v pořadí. Tyto znaky mohou být A, B, C, D nebo Z, které přímo odlišují ve stejném pořadí délky GTIN kódů 8, 12, 13 nebo 14 znaků. Zbylých 14 znaků je vždy samotný kód GTIN doplněný o počáteční nuly do celkové délky.
 
-\textbf{default\_use\_by} zaznamenává dobu běžné spotřeby v milisekundách. Tento typ formátu jsem zvolil pro jednoduchost uložení časového období a následného počítaní s ním.
+\textbf{default\_use\_by} zaznamenává dobu běžné spotřeby v unixovém času v milisekundách. Tento typ formátu jsem zvolil pro jednoduchost uložení časového období a následného počítaní s ním.
 
 \textbf{amount\_measure} pro atribut \textbf{amount}, který zaznamenává nějaké množství, popisuje jakým typem množství tato potravina disponuje. Níže je seznam popisující jednotlivé typy.
 
@@ -386,7 +387,7 @@ Atribut \textbf{message} zaznamenává zprávu editace. V té server ukládá in
 \textbf{price} ukládá běžnou cenu potraviny jako hodnotu v americkém dolaru.
 
 \subsection{Inventory}
-V atributu \textbf{use\_by} je uložen datum, do kterého by se měla dná potravina s klíčem v atributu \textbf{food\_id} spotřebovat.
+V atributu \textbf{use\_by} je uložen datum, do kterého by se měla daná potravina s klíčem v atributu \textbf{food\_id} spotřebovat.
 
 \subsection{Review}
 \textbf{rating} atribut zaznamenává reálnou hodnotu hodnocení potraviny \textbf{food\_id} v rozsahu 0 až 5.
@@ -406,11 +407,11 @@ Z~důvodu zvolené architektury je nutné specifikovat protokol, jakým budou me
 
 \subsection{XML}
 
-Mnoho protokolů využíva ke komunikaci textový formát v~XML. Tento formát je podobný HTML, je platformě nezávislý a široce podporován. V~C/C++ ho implementují různé knihovny, které jsou dostupné jako open-source software. Formát však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
+Mnoho protokolů využíva ke komunikaci textový formát v~XML. Tento formát je podobný HTML, je platformově nezávislý a široce podporován. V~C/C++ ho implementují různé knihovny, které jsou dostupné jako open-source software. Formát však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
 
 \subsection{JSON}
 
-Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními proti vložení zákeřného kódu načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát dat.
+Jako další textový formát umožňující platformově nezávislý přenos dat je JSON. Je to velice populární formát používaný široce ve webových technologiích a jeho použití je také velmi jednoduché. Formát vychází z~JavaScriptové notace a lze ho s~bezpečnostními opatřeními proti vložení zákeřného kódu načíst jako samotný zdrojový kód JavaScriptu. Výhodou formátu JSON je jeho kompaktnost oproti formátu XML, čímž dojde ke snížení přenášeného množství dat a přesto se zachová textový formát reprezentace dat.
 
 \subsection{Porovnání a zvolení formátu}
 
@@ -447,10 +448,10 @@ Zprávy budou mít dále již v~JSON formátu strukturu:
 
 Zprávy budou mít povahu požadavku a odpovědi na něj. Klient bude posílat serveru požadavky a ten mu na ně příslušně odpovídat. Neznámé zprávy způsobí ukončení komunikace.
 
-Jednotlivé zprávy byly navrženy již s~ohledem na funkce uživatelského rozhraní. Tyto zprávy budou dále popsány, jejich pevnou strukturu však bude možné zjistit ze zdrojového kódu, neboť rozsah této práce takovouto specifikaci neumožňuje. Zprávy kromě poslední KeepAlive jsou dvojice Request a Respond, např. pro zprávu Login to je LoginRequest a LoginResponse.
+Jednotlivé zprávy byly navrženy již s~ohledem na funkce uživatelského rozhraní. Tyto zprávy budou dále popsány. Zprávy kromě poslední KeepAlive jsou dvojice Request a Respond, např. pro zprávu Login to je LoginRequest a LoginResponse.
 
 \subsubsection{Login}
-Přihlásí uživatele pod jménem (e-mailem) a vrátí odpověď jako boolean, true pro úspěch a false pro selhání přihlášení.
+Přihlásí uživatele pod jménem (e-mailem) a vrátí odpověď jako boolean, true pro úspěch a false při selhání přihlášení.
 
 Položky požadavku:
 \begin{itemize}
@@ -468,10 +469,10 @@ Vyhledá a vrátí množinu položek inventáře podle zadaného jména, kódu G
 
 Položky požadavku:
 \begin{itemize}
-  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id polozky inventáře nebo je hledána množina podle dalších atributů
+  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id položky inventáře nebo je hledána množina podle dalších atributů
   \item \textbf{id} - unikátní identifikátor položky inventáře
-  \item \textbf{food} - název jídla nebo jen jeho část, které je hledáno
-  \item \textbf{gtin} - číslo GTIN nebo jen jeho část, které je hledáno
+  \item \textbf{food} - název potraviny, která je hledána, nebo jen jeho část
+  \item \textbf{gtin} - číslo GTIN potraviny, která je hledána, nebo jen jeho část
 \end{itemize}
 
 Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následujícími atributy:
@@ -481,7 +482,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
   \item \textbf{imageId} - unikátní identifikátor nějakého obrázku, pokud existuje, jinak 0
   \item \textbf{foodName} - název potraviny
   \item \textbf{foodGtin} - číslo GTIN
-  \item \textbf{useBy} - unixový čas v milisekundách (od roku 1970) dne, kdy končí trvanlivost potraviny
+  \item \textbf{useBy} - unixový čas dne v milisekundách (od roku 1970), kdy končí trvanlivost potraviny
 \end{itemize}
 
 \subsubsection{GetFoodDetail}
@@ -519,8 +520,8 @@ Položky požadavku:
 \begin{itemize}
   \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id potraviny nebo je hledána množina podle dalších atributů
   \item \textbf{id} - unikátní identifikátor potraviny
-  \item \textbf{food} - název jídla, které je hledáno
-  \item \textbf{gtin} - číslo GTIN, které je hledáno
+  \item \textbf{food} - název potraviny, která je hledána
+  \item \textbf{gtin} - číslo GTIN potraviny, která je hledána
   \item \textbf{skip} - počet položek, které se mají při výberu přeskočit
 \end{itemize}
 
@@ -529,7 +530,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
   \item \textbf{id} - unikátní identifikátor potraviny
   \item \textbf{defaultUseBy} - výchozí datum spotřeby
   \item \textbf{imageId} - unikátní identifikátor nějakého obrázku, pokud existuje, jinak 0
-  \item \textbf{name} - jméno potraviny nebo jen jeho část, které je hledáno
+  \item \textbf{name} - jméno potraviny, která je hledána, nebo jen jeho část
   \item \textbf{desc} - popis potraviny
   \item \textbf{gtin} - číslo GTIN potraviny nebo jen jeho část, které je hledáno
 \end{itemize}
