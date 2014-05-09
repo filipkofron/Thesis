@@ -593,7 +593,7 @@ Nahraje nový obrázek potraviny.
 
 Položky požadavku:
 \begin{itemize}
-  \item \textbf{imageData} - řetězec s daty obrázku
+  \item \textbf{imageData} - řetězec s daty obrázku při základu 64 zakódované jako textové znaky, který zabírá zhruba o 0,334 krát větší místo než původní binární reprezentace, což jsem uznal za uspokojující
   \item \textbf{foodId} - unikátní identifikátor potraviny
 \end{itemize}
 
@@ -649,23 +649,25 @@ Následující podsekce popisují zvolené detaily těchto vlasntostí.
 
 \subsection{C++}
 
-Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru byl totiž zvolen ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
+Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru jsem totiž zvolil ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
 
 \subsection{Škálovatelnost}
 
 Aby bylo možné server přizpůsobit výkonějšímu hardware, je třeba příslušné škálovatelnosti. V~případě této práce se jako její nejjednodušší forma jeví použití vlákna pro každého připojeného uživatele zvlášť. Je však také nutné zajistit, že další prostředky jako například připojení k~databázi bude pro vlákna dostupné soubežně a tím umožní zpracovávat více databázových dotazů současně. Je to důležite zejména proto, že tyto operace jsou obecně časově nejnáročnější. Tato forma škálovatelnosti však umožní získat vyšší výkon pouze za předpokladu, že dojde ke zvýšení počtu výpočetních jednotek, které mohou provádět instrukce jednotlivých vláken současně.
 
-Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení větší dostupné dynamické paměti. Zde jde třeba zdůraznit, že navrhnutý komunikační protokol vyžaduje určitou paměťovou režii kvůli dále zmíněné knihovně pro podporu JSON. Server tedy bude mít možnost upravit maximální počet současně obshluhovaných uživatelů, které bude závislé na dostupné paměti.
+Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení větší dostupné dynamické paměti. Zde jde třeba zdůraznit, že navrhnutý komunikační protokol vyžaduje určitou paměťovou režii kvůli dále zmíněné knihovně pro podporu JSON. Server tedy bude mít možnost upravit maximální počet současně obshluhovaných uživatelů, který bude závislý na dostupné paměti.
 
 \subsection{MySQL}
 
-Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java - lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
+Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java. Lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
 
 \subsection{JSON}
 
 Knihoven podpory JSON pro použití jazykem C++ je mnoho. Nejrozšířenější knihovny, které se mi podařilo nalézt jsou: rapidjson, JsonCpp, LibJSON. Knihovny jsou si velmi podobné, neboť specifikace formátu JSON není příliš rozsáhlá. Po delším prohlížení zdrojových kódů jednotlivých knihoven a jejich příkladů použití jsem si vybral knihovnu JsonCpp, která se mi jevila jako nejjednodušší a nejsrozumitelnější. Tato knihovna umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušuje jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
 
-Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá. Jelikož zkompilovaná verze, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny a v~případě, že tomu tak není následně upozorní uživatele, který server spouští.
+Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá.
+
+Jelikož distribuovaná verze JsonCpp, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny. V případě, že tomu tak není, test následně upozorní uživatele, který se server pokouší spoustit.
 
 Pro podporu vyjímek byl zřízen speciální repozitář~\cite{json_ex_repo} s~aplikovaným patchem pro tuto vlastnost. Použití této upravené verze je tedy nutnost pro bezchybný běh serveru.
 
@@ -679,18 +681,18 @@ Jelikož klient této aplikace slouží jako rozhraní pro uživatele, je třeba
 
 \subsection{Uživatelské rozhraní}
 
-Při návrhu bylo dbáno především na požadavek jednoduchosti. Tvorba uživatelského rozhraní je možná v~různém softwaru. V~případě OS Android je však návrh proveditelný přímo do spustitelné podoby s~pomocí vývojářských nástrojů. Tento postup s~sebou přínáší následující výhody:
+Při návrhu jsem dbal především na požadavek jednoduchosti. Tvorba uživatelského rozhraní je možná v~různém softwaru. V~případě OS Android je však návrh proveditelný přímo do spustitelné podoby s~pomocí vývojářských nástrojů. Tento postup s~sebou přínáší následující výhody:
 
 \begin{itemize}
   \item{Jednoduchost návrhu - nástroje jsou velmi intuitivní}
   \item{Nástroje umožňují předem získat přehled o~vzhledu na různých typech a velikostech obrazovek}
   \item{Vytvořený návrh lze okamžitě testovat mezi dobrovolníky zasláním aplikace}
-  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro}
+  \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro finální aplikaci}
 \end{itemize}
 
 Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejne složitá jako rozmístění prvků UI v těchto nástrojích.
 
-Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níž popsány vybrané obrazovky zajímavé pro uživatele.
+Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níže popsány vybrané obrazovky zajímavé pro uživatele.
 
 \begin{figure}[H]
   \centering
@@ -703,9 +705,9 @@ Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatři
 
 \subsubsection{Menu}
 
-První obrazovkou, kterou uživatel po spuštění aplikace uvidí, je navigační menu an obrázku ~\ref{fig:AppMenu}. Je přímo dostupné ze všech cílu položek tohoto menu stiskem tlačítka v~horní levé části nebo posunutím ukazatele (prstu) od okraje obrazovky do jejího středu. Z~ostatních podpoložek se lze dostat zpět standardně tlačítkem zpět, případně tlačítkem v~horním panelu, tzv. ActionBaru.
+První obrazovkou, kterou uživatel po spuštění aplikace uvidí, je navigační menu na obrázku~\ref{fig:AppMenu}. Je přímo dostupné ze všech cílu položek tohoto menu stiskem tlačítka v~horní levé části nebo posunutím ukazatele (prstu) od okraje obrazovky do jejího středu. Z~ostatních podpoložek se lze dostat zpět standardně tlačítkem zpět, případně tlačítkem v~horním panelu, tzv. ActionBaru.
 
-Důvod existence pouze těchto položek spočívá v~jednoduchosti navigace. Scénář použití vždy začíná v~jedné z~těchto položek. Nastavení je standardně přes stisk klávesy menu nebo přes ikonu menu v~ActionBaru, proto není zbytečně umístěno také zde. Stejné je to s~nastavením i na ostatních obrazovkách.
+Důvod existence pouze těchto položek spočívá v~jednoduchosti navigace. Scénář použití vždy začíná v~jedné z~těchto položek. Nastavení je dostupné standardně přes stisk klávesy menu nebo přes ikonu menu v~ActionBaru. Stejné je to s~nastavením i na ostatních obrazovkách.
 
 \begin{figure}[H]
   \centering
@@ -718,7 +720,7 @@ Důvod existence pouze těchto položek spočívá v~jednoduchosti navigace. Sc�
 
 \subsubsection{Inventář}
 
-Inventář se stejně jako menu zobrazí při prvním spuštění, avšak zůstane v~jeho pozadí. Zachycuje ho obrazovka ~\ref{fig:AppInventory}. Lze zde pozorovat seznam potravin, který vlastní uživatel. Tyto položky inventáře dále disponují datumem spotřeby, díky kterému docházi k~seřazení a následně je u~potravin barevně vyznačen jejich status trvanlivosti. Červeně jsou vyznačeny potraviny s~končící trvanlivostí a postupně přechodem do zelené ty, které jsou od konce trvanlivosti vzdáleny více než týden.
+Inventář se stejně jako menu zobrazí při prvním spuštění, avšak zůstane v~jeho pozadí. Zachycuje ho obrazovka ~\ref{fig:AppInventory}. Je zde možné pozorovat seznam potravin, který vlastní uživatel. Tyto položky inventáře dále disponují datumem spotřeby, díky kterému docházi k~seřazení a následně je u~potravin barevně vyznačen jejich status trvanlivosti. Červeně jsou vyznačeny potraviny s~končící trvanlivostí a postupně přechodem do zelené ty, které jsou od konce trvanlivosti vzdáleny více než týden.
 
 Každá položka inventáře reaguje na stisk uživatelem. Při stisku dojde k~zobrazení detailu položky, který je popsán dále. Pro odebrání je k~dispozici ikona odpadkového koše, který potravinu z~inventáře odstraní.
 
