@@ -45,11 +45,11 @@
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
 \abstractCS{Tato bakalářská práce seznamuje čtenáře s~globálním problémem plýtvání potravin. Popisuje možné řešení v~podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v~prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s~případnými vylepšeními, které přinesla odezva při nasazení aplikace u~skutečných uživatelů.}
-\abstractEN{This bachelor's thesis explains the reader a global problem of wasting food. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements which are gained by the deployment of the application between real users.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of food waste. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements which are gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
-\keywordsCS{Nahraďte seznamem klíčových slov v~češtině oddělených čárkou.}
-\keywordsEN{Nahraďte seznamem klíčových slov v~angličtině oddělených čárkou.}
+\keywordsCS{plýtvání potravin, mobilní aplikace, Android}
+\keywordsEN{food waste, mobile application, Android}
 
 \begin{document}
 
@@ -449,20 +449,189 @@ Zprávy budou mít povahu požadavku a odpovědi na něj. Klient bude posílat s
 
 Jednotlivé zprávy byly navrženy již s~ohledem na funkce uživatelského rozhraní. Tyto zprávy budou dále popsány, jejich pevnou strukturu však bude možné zjistit ze zdrojového kódu, neboť rozsah této práce takovouto specifikaci neumožňuje. Zprávy kromě poslední KeepAlive jsou dvojice Request a Respond, např. pro zprávu Login to je LoginRequest a LoginResponse.
 
+\subsubsection{Login}
+Přihlásí uživatele pod jménem (e-mailem) a vrátí odpověď jako boolean, true pro úspěch a false pro selhání přihlášení.
+
+Položky požadavku:
 \begin{itemize}
-  \item{\textbf{Login} - přihlásí uživatele pod jménem (e-mailem) a vrátí odpověď jako boolean, zda-li tak proběhlo}
-  \item{\textbf{GetInventory} - vyhledá a vrátí množinu položek inventáře podle zadaného jména nebo kódu GTIN}
-  \item{\textbf{GetFoodDetail} - vratí veškeré detaily potraviny}
-  \item{\textbf{GetFoodItem} - vyhledá a vrátí množinu potravin podle jména nebo GTIN kódu}
-  \item{\textbf{EditInventory} - upraví položku inventáře}
-  \item{\textbf{DeleteInventory} - smaže položku inventáře}
-  \item{\textbf{EditFood} - upraví detail potraviny}
-  \item{\textbf{GetFoodBase} - vrátí podklady k~zadání potraviny: výrobce a kategorie}
-  \item{\textbf{AddImage} - nahraje nový obrázek potraviny}
-  \item{\textbf{DeleteImage} - smaže zadaný obrázek potraviny}
-  \item{\textbf{SetUserReview} - nastaví nebo smaže uživatelovu recenzi}
-  \item{\textbf{KeepAlive} - příkaz udržující spojení po dobu od posledního}
+  \item \textbf{username} - email jako jméno uživatele
 \end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěšné přihlášení
+  \item \textbf{message} - v případě neúspěchu přihlášení je zde popsán důvod
+\end{itemize}
+
+\subsubsection{GetInventory}
+Vyhledá a vrátí množinu položek inventáře podle zadaného jména, kódu GTIN nebo přímo pomocí unikátního id.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id polozky inventáře nebo je hledána množina podle dalších atributů
+  \item \textbf{id} - unikátní identifikátor položky inventáře
+  \item \textbf{food} - název jídla nebo jen jeho část, které je hledáno
+  \item \textbf{gtin} - číslo GTIN nebo jen jeho část, které je hledáno
+\end{itemize}
+
+Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následujícími atributy:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor položky inventáře
+  \item \textbf{foodId} - unikátní identifikátor potraviny
+  \item \textbf{imageId} - unikátní identifikátor nějakého obrázku, pokud existuje, jinak 0
+  \item \textbf{foodName} - název potraviny
+  \item \textbf{foodGtin} - číslo GTIN
+  \item \textbf{useBy} - unixový čas v milisekundách (od roku 1970) dne, kdy končí trvanlivost potraviny
+\end{itemize}
+
+\subsubsection{GetFoodDetail}
+Vratí veškeré detaily potraviny.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor potraviny
+\end{itemize}
+
+Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následujícími atributy:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor potraviny
+  \item \textbf{name} - název potraviny
+  \item \textbf{category} - název kategorie
+  \item \textbf{categoryId} - unikátní identifikátor kategorie
+  \item \textbf{vendor} - název výrobce potraviny
+  \item \textbf{vendorId} - unikátní identifikátor výrobce potraviny
+  \item \textbf{gtin} - čislo GTIN
+  \item \textbf{imageIds} - pole unikátní identifikátorů obrázků
+  \item \textbf{description} - popis potraviny
+  \item \textbf{defaultUseBy} - výchozí datum spotřeby
+  \item \textbf{amountType} - množstevní typ potraviny
+  \item \textbf{amount} - množství potraviny
+  \item \textbf{usualPrice} - obvyklá cena v amerických dolarech
+  \item \textbf{reviews} - položky jednotlivých hodnocení uživatelů
+  \item \textbf{addedBy} - jméno uživatele, který potravinu přidal
+  \item \textbf{lastEditedBy} - jméno uživatele, který potravinu poslední upravil
+\end{itemize}
+
+\subsubsection{GetFoodItem}
+Vyhledá a vrátí množinu potravin podle jména nebo GTIN kódu.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id potraviny nebo je hledána množina podle dalších atributů
+  \item \textbf{id} - unikátní identifikátor potraviny
+  \item \textbf{food} - název jídla, které je hledáno
+  \item \textbf{gtin} - číslo GTIN, které je hledáno
+  \item \textbf{skip} - počet položek, které se mají při výberu přeskočit
+\end{itemize}
+
+Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následujícími atributy:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor potraviny
+  \item \textbf{defaultUseBy} - výchozí datum spotřeby
+  \item \textbf{imageId} - unikátní identifikátor nějakého obrázku, pokud existuje, jinak 0
+  \item \textbf{name} - jméno potraviny nebo jen jeho část, které je hledáno
+  \item \textbf{desc} - popis potraviny
+  \item \textbf{gtin} - číslo GTIN potraviny nebo jen jeho část, které je hledáno
+\end{itemize}
+
+
+\subsubsection{EditInventory}
+Upraví položku inventáře.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{adding} - boolean, true pokud položka inventáře ještě neexistuje a je vytvářena
+  \item \textbf{id} - unikátní identifikátor položky inventáře
+  \item \textbf{foodId} - unikátní identifikátor potraviny
+  \item \textbf{useBy} - datum spotřeby v unixovém čase v milisekundách
+  \item \textbf{count} - počet položek inventáře, které se mají vytvořit se stejnými parametry
+\end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud editace položky inventáře dopadla v pořádku
+\end{itemize}
+
+\subsubsection{DeleteInventory}
+Smaže položku inventáře.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor položky inventáře
+\end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěšné smazáno
+\end{itemize}
+
+\subsubsection{EditFood}
+Upraví detail potraviny.
+
+Položky požadavku jsou shodné s detailem potraviny a analogicky stejná s editací položky inventáře. Neobshají však pole identifikátorů obrazků a hodnocení uživatelů.
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěšná editace potraviny
+  \item \textbf{id} - unikátní identifikátor přávě vytvořené potraviny
+\end{itemize}
+
+\subsubsection{GetFoodBase}
+Vrátí výrobce a kategorie k~zadání potraviny.
+
+Požadavek nemá žádné položky.
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{vendors} - pole všech známých výrobců
+  \item \textbf{categories} - pole všech známých kategorií
+\end{itemize}
+
+\subsubsection{AddImage}
+Nahraje nový obrázek potraviny.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{imageData} - řetězec s daty obrázku
+  \item \textbf{foodId} - unikátní identifikátor potraviny
+\end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěch
+\end{itemize}
+
+\subsubsection{DeleteImage}
+Smaže zadaný obrázek potraviny.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{id} - unikátní identifikátor obrázku
+\end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěšné smazání obrázku
+\end{itemize}
+
+\subsubsection{SetUserReview}
+Vytvoři, nastaví nebo smaže uživatelovu recenzi.
+
+Položky požadavku:
+\begin{itemize}
+  \item \textbf{rating} - hodnocení potraviny v reálném čísle
+  \item \textbf{delete} - boolean, true pokud se má recenze pro aktuálního uživatele odstranit, jinak vytvořit či změnit
+  \item \textbf{foodId} - unikátní identifikátor potraviny
+  \item \textbf{text} - text hodnocení uživatele
+\end{itemize}
+
+Položky odpovědi:
+\begin{itemize}
+  \item \textbf{success} - boolean, true pokud úspěch požadavku
+\end{itemize}
+
+\subsubsection{KeepAlive}
+Příkaz udržující spojení po dobu od posledního, neobsahuje žádné atributy.
 
 \section{Server}
 
@@ -915,8 +1084,23 @@ Pro další zisk informací od uživatelů byly položeny níže popsané dotazn
 
 \subsection{Testovací scénáře a jejich řešení}
 
-Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorované reakce a zkušenosti uživatelů při jejich provádění. 
+Otázky i odpovědi jsou pro pre-test i post-test ve očíslovány stejně.
 
+Otázky pro pre-test zahrnují:
+\begin{enumerate}
+  \item Jaká je Vaše věková kategorie (v rozmezí desítek let)?
+  \item Jaké zařízení s OS Android použijete v testu či jaké zařízení Vám bylo poskytnuto?
+  \item Chtěli byste aplikaci s touto funkcionalitou používat?
+\end{enumerate}
+
+Otázky pro post-test zahrnují:
+\begin{enumerate}
+  \item Je pro Vás aplikace srozumitelná?
+  \item Zaujala Vás aplikace natolik, že ji budete i nadále používat?
+  \item Napadá Vás něco, co byste v aplikaci rádi změnili?
+\end{enumerate}
+
+Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorované reakce a zkušenosti uživatelů při jejich provádění:
 \begin{enumerate}
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí vyhledávání do vašeho inventáře.
     
@@ -948,8 +1132,15 @@ Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorova
 
 \subsubsection{Testovací subjekt 1}
 
-V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním telefonem Huawei M886.
+Odpovědi pre-test:
 
+\begin{enumerate}
+  \item 40-50 let
+  \item Huawei M886
+  \item Ano.
+\end{enumerate}
+
+Jednotlivé úkoly:
 \begin{enumerate}
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře, uživatel však vykazoval mírné známky zmatení z prázdného seznamu, přesto však včas uvážil možnost stisknutí tlačítka s ikonou plus, které bylo správný cíl.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení, uživatel si však stěžoval, že musel čárový kód potraviny načíst znovu, aby ji mohl následně přidat i do inventáře.
@@ -959,12 +1150,26 @@ V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním 
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
 \end{enumerate}
 
+Odpovědi pro post-test:
+\begin{enumerate}
+  \item Ano, ale pro začátek by bylo vhodné v aplikaci uvést nějaký návod.
+  \item Pokud v aplikaci zařídíte, aby se nemusela potravina znovu načítat po přidání, pak ano.
+  \item Vše co jsem zmínila.
+\end{enumerate}
+
 \subsubsection{Testovací subjekt 2}
 
-V testu číslo jedna byl uživatel ve věkové kategorii 50-60 let s mobilním zařízením Xperia sola (MT27i).
+Odpovědi pre-test:
 
 \begin{enumerate}
-  \item V tomto úkolu byl uživatel zmatený, zběsile klikal v inventáři místo toho, aby klikl na menu. Dále byl uživatel zmatený při zadání výchozího data spotřeby. Myslel si totiž, že to už je datum spotřeby té dané potraviny.
+  \item 50-60 let
+  \item Xperia sola
+  \item Ano.
+\end{enumerate}
+
+Jednotlivé úkoly:
+\begin{enumerate}
+  \item V tomto úkolu byl uživatel zmatený, zběsile klikal v inventáři místo toho, aby klikl na menu. Dále byl uživatel zmatený při zadání výchozího data spotřeby. Myslel si totiž, že to je již datum spotřeby té dané potraviny.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
@@ -972,52 +1177,105 @@ V testu číslo jedna byl uživatel ve věkové kategorii 50-60 let s mobilním 
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
 \end{enumerate}
 
+Odpovědi pro post-test:
+\begin{enumerate}
+  \item Nyní již ano.
+  \item Ještě si to rozmyslím.
+  \item Chtělo by zjednodušit zadávání výchozího data spotřeby a nějak to zdůraznit.
+\end{enumerate}
+
 \subsubsection{Testovací subjekt 3}
 
-V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700. Aplikaci již v průběhu vývoje zkoušel.
+Odpovědi pre-test:
 
 \begin{enumerate}
+  \item 20-30 let
+  \item Huawei G700
+  \item Určitě ano.
+\end{enumerate}
+
+Jednotlivé úkoly:
+\begin{enumerate}
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře. Při přidávání potraviny však uživatel nenašel výrobce potraviny a znejistil. Potravinu však i tak přidal.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení. Po přidání potraviny ale uživatel stiskl tlačítko zpět, které ukončilo aplikaci. Uživatel byl znepokojen a výrazně dal najevo nespokojenost s tímto chováním aplikace. Uživatel předpokládal, že po přidání potraviny se znovu objeví inventář, ze kterého uživatel začal přidávat potravinu.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení. Po přidání potraviny ale uživatel stiskl tlačítko zpět, které ukončilo aplikaci. Uživatel byl znepokojen a výrazně dal najevo nespokojenost s tímto chováním aplikace. Uživatel totiž předpokládal, že po přidání potraviny se znovu objeví inventář, ze kterého uživatel začal přidávat potravinu.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item Uživatel se v tomto úkolu spletl a místo odebíraní se pokusil potravinu přidat. Poté však již nalezl správné tlačítko v menu. Při načtení a nalezení potraviny uživatele zmátlo, že dialog s potravinou disponuje tlačítkem \textit{Ok}, které ve skutečnosti slouží pouze ke schování dialogu. Toto tlačítko by však podle uživatele mělo být nazváno spíše \textit{Cancel}. Poté již potravinu odebral.
   \item Uživatel v tomto úkolu kliknul těsně vedle tlačítka s ikonou koše. Tím se zobrazil detail potraviny v inventáři. Po druhé již vše proběhlo podle předpokládaného řešení.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
 \end{enumerate}
 
+Odpovědi pro post-test:
+\begin{enumerate}
+  \item Ano.
+  \item Ano.
+  \item Pouze bych přidala možnost, aby se potravina nenačítala zbytečně dvakrát, když už jsem ji jednou načetla.
+\end{enumerate}
+
 \subsubsection{Testovací subjekt 4}
 
-V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700.
+Odpovědi pre-test:
 
 \begin{enumerate}
+  \item 20-30 let
+  \item Nexus 5
+  \item Ne.
+\end{enumerate}
+
+Jednotlivé úkoly:
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře. Při naskenování čárového kódu uživatel předpokládal, že ho zpět vrátí do inventáře, stejně jako u testovacího subjektu 4. Uživateli se tedy podařilo aplikaci omylem ukončit.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item V tomto úkolu se aplikace ukončila kvůli chybě spojení se serverem. Chybu zřejmě způsobil mobilní internet, který měl v té chvíli slabý signál. Druhý pokus se již však zadařil.
+\end{enumerate}
+
+Odpovědi pro post-test:
+\begin{enumerate}
+  \item Aplikace by se neměla zabíjet kvůli stisknutí zpět při skenováni, ale měla by mě dostat zpátky do inventáře. Jinak ano.
+  \item Ne, nemám zájem. Nápad je to ovšem zajímavý a aplikace dělá to, co má.
+  \item Už jsem to zmínil.
 \end{enumerate}
 
 \subsubsection{Testovací subjekt 5}
 
-V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním zařízením Huawei G700.
+Odpovědi pre-test:
 
 \begin{enumerate}
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
+  \item 20-30 let
+  \item Nexus 4
+  \item Ne.
+\end{enumerate}
+
+V testu číslo jedna byl uživatel ve věkové kategorii 20-30 let s mobilním telefonem Nexus 4.
+
+Jednotlivé úkoly:
+\begin{enumerate}
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení, ale trvalo mu déle, než nalezl tu správnou cestu. Aplikaci nejdříve celou prozkoumal a až poté splnil úkol.
+  \item V tomto úkolu se uživateli nepodařilo na první pokus dosáhnout řešení, neboť nebylo možné načíst čárový kód potraviny. Druhý pokus se podařil jen díky tomu, že uživatel potravinu nenačetl pomocí kamery, ale zadal čárový kód ručně.
+  \item V tomto úkolu se uživateli podařilo dosáhnout řešení podobně jako v předchozím úkolu.
+  \item Při plnění tohoto úkolu došlo k restartování mobilního telefonu. Stalo se tak v momentě, kdy se zobrazila virtuální klávesnice na obrazovce, která posunula ostatní prvky skenovací obrazovky výše. Chybu bylo možné zreprodukovat.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
 \end{enumerate}
 
-% Toto testování má za účel odhalit chyby v~uživatelském rozhraní, které nebyli odstraněny při návrhu, ale projevily se až při skutečné uživatelské interakci. Pro testování byla použita alfa verze, % která ještě neobsahovala veškerou funkčnost aplikace. Proto se testovaly především nedávno přidané změny.
 
-% Testování probíhalo tak, že uživatelé byli dotázáni na různé případy užití a případné zmatení či ztracení uživatele v~navigaci se projevilo při změně rozvržení uživatelského rozhraní. Jejich pocity a názory byli poté autorem zaznamenány. Tím byl zpětně upravován návrh UI aplikace.
+Odpovědi pro post-test:
+\begin{enumerate}
+  \item Na začátku jsem si nebyl jistý tím, jak vůbec něco přidat, ale teď už mi to je jasné a je to jednoduché.
+  \item Jedině když aplikace nebude padat.
+  \item Zpravit pády v aplikaci a možná vylepšit tu čtečku čárových kódů.
+\end{enumerate}
 
-% Problémy odhalené v~této části testování zahrnovaly především nízkou informovanost uživatele o~probíhajícíh událostech na jejich akce. Proto byly při implementaci přidány dialogy, které informovaly uživatele o~průběhu jejich akcí.
+\subsection{Souhrn výsledků testu}
 
-% \item{Při skenování nové potraviny uživatel na výzvu přidání potraviny ji uloží, ale potravina musí být naskenována znovu, aby ji bylo možné přidat do inventáře. Je to závažnější problém proto, že některé potraviny je velmi obtížné naskenovat a tím pádem to práci s~aplikací velmi znepříjemní. Zejména v~době začátku aplikace, kdy je v~databázi velmi málo potravin a uživatel musí zadávat potravin více.}
+Zásadní nedostatky, které byly objeveny v tomto testu jsou:
+\begin{itemize}
+	\item{Pro přidání potraviny pomocí načítání čárového kódu je nutné jej znovu načíst, aby jej bylo možné přidat i do inventáře.}
+	\item{Aplikace by si měla pamatovat kroky zpět v navigaci, které nevedou přímo z menu. Problém se objevil u dialogu v intentáři, kde je možné zvolit způsob přidání potraviny, který uživatele přesune na vybranou obrazovku stejně jako navigace na tyto místa z menu. Problém pak nastane, když se uživatel chce vrátit zpět do inventáře. Místo toho se totiž aplikace ukončí.}
+	\item{Při prvním používaní jsou uživatelé zmateni. Je nutné zajistit nápovědy v prázdném inventáři nebo ve vyhledávání potravin, pokud není žádná potravina nalezena.}
+\end{itemize}
 
 \section{Testování vydáním na Play Store}
 

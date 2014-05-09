@@ -5,11 +5,8 @@ Uvod - rozsirit
 ___Analyza
 rozdelit kategorie, pozadavky - vice rozepsat
 
-implementace prototypu vysledek tabulkou???
+Kudy putuje zprava
 
-protokol - zpravy vice rozepsat, co se prenasi
-Kudy putuje zprava - schema na abstraktnich tridach
-zpusob - 
 
 keywords - seznam
 
