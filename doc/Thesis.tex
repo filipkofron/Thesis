@@ -262,11 +262,11 @@ Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do 
 
 \subsubsection{Implementace prototypu}
 
-Pro implementaci prototypu autor zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, aby se seznmámil s~její strukturou a vniřními mechanismy. 
+Pro implementaci prototypu jsem zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, abych se seznmámil s~její strukturou a vniřními mechanismy. 
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu se autor této práce rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
 Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Odproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
 
@@ -323,7 +323,7 @@ Vzhledem k nutnosti použít pro mobilní aplikaci server bude nejvhodnější m
 
 \subsection{Klient}
 
-Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s~pomocí jeho SDK. Existují multiplatformní SDK nabízející bežné API, avšak nutnost vytváření upozornění a snímaní čárových kódů je čistě specifická záležitost pro kažou platformu zvlášť. Tuto možnost autor předpokládá jako časově náročnou, proto se tato práce soustředí pouze na Android SDK.
+Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s~pomocí jeho SDK. Existují multiplatformní SDK nabízející bežné API, avšak nutnost vytváření upozornění a snímaní čárových kódů je čistě specifická záležitost pro kažou platformu zvlášť. Předpokládám, že tato možnost bude časově náročnou, proto se tato práce soustředí pouze na Android SDK.
 
 \subsection{Server}
 
@@ -949,7 +949,7 @@ Databázi Product Open Data zpřístupňují online v~době psaní toho textu 3 
 
 Projekty Mingle IO a OpenDataSoft spojuje podobné API, se kterým lze komunikovat ve formátu JSON, pomocí kterého se lze dotazovat na čárové kódy všech produktů v~databázi. Projekt LSA je pouze webový vyhledávač.
 
-Mezi OpenDataSoft a Mingle IO nebylo příliš rozdílů, kterými by bylo možné vybrat ten vhodnější. Autor tím pádem zvolil projekt, který se zdál být lépe zdokumentovaný a tím pádem snadnější na implementaci, čímž byl projekt OpenDataSoft.
+Mezi OpenDataSoft a Mingle IO nebylo příliš rozdílů, kterými by bylo možné vybrat ten vhodnější. Tím pádem jsem zvolil projekt, který se zdál být lépe zdokumentovaný a tím také snadnější na implementaci, čímž byl projekt OpenDataSoft.
 
 \subsubsection{Integrace v~aplikaci}
 
@@ -974,13 +974,13 @@ Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový
 
 \subsection{Prostředí pro vývoj klientské aplikace v~OS Android}
 
-Pro tvorbu klienta pro OS Android se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní a používat známý verzovací software. Díky jeho multiplatformnosti mohl autor aplikaci vyvíjet v~různých operačních systémech.
+Pro tvorbu klienta pro OS Android se jevilo jako vhodné vývojové prostředí Android Studio ~\cite{android_studio}. Tento software umožňuje návrh uživatelského rozhraní a používat známý verzovací software. Díky jeho multiplatformnosti jsem mohl aplikaci vyvíjet v~různých operačních systémech.
 
 \subsection{Prostředí pro vývoj serverové aplikace v C++}
 
 Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcreator}. Důvod výběru tohoto prostředí byla multiplatformnost a podpora multiplatformního sestavovacího systému CMake~\cite{cmake}, kterým byla popsána celá stromová struktura zdrojového kódu serveru. Díky tomuto lze serverovou aplikaci sestavit na všech rozšířených platformách a vyexportovat případné projektové soubory do dalších vývojových prostředí, které CMake podporuje.
 
-\section{Server}
+\section{Serverová aplikace}
 
 Jako první částí implementace byl vytvořen základ serveru. Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
 
@@ -1014,7 +1014,7 @@ Pro jednodušší práci s~časovými daty, logování událostí, testování a
 
 Logování událostí na serveru zde zdůrazním, neboť je velmi důležité sledovat jeho provoz. Tím lze také sesbírat různé informace o pádech a jiných chybách serveru v průběhu testování i při finalním nasazení. Logování bylo zpřístupňeno jako statické metody třídy Log zahrnující výpis chybových, debugovacích a čistě informativních zpráv.
 
-\section{Klient}
+\section{Klientská aplikace}
 
 Implementace klientské aplikace tvořily dvě části:
 
@@ -1099,7 +1099,7 @@ Po asi měsící od vydání aplikace si ji nainstalovalo více než 70 lidí.
 
 Každou část aplikace je třeba otestovat, aby byla zajištěna správná funkčnost při nasazení aplikace do produkce. Je tedy nutné testovat server i klientskou aplikaci.
 
-Testování probíhalo ve 3 fázích. První fáze byla zajištěna samotným programátorem (autorem práce) při implementaci. Ta druhá probíhala mezi uživateli, kteří zkoušeli aplikaci v~alfa verzích s~autorovým dozorem. Poslední třetí fáze probíhala před a po dokončení psaní této práce přímo vydáním beta verze aplikace na Play Store.
+Testování probíhalo ve 3 fázích. První fáze byla zajištěna mnou při implementaci. Ta druhá probíhala mezi uživateli, kteří zkoušeli aplikaci v~alfa verzích s~mým dohledem. Poslední třetí fáze probíhala před a po dokončení psaní této práce přímo vydáním beta verze aplikace na Play Store.
 
 \section{Testování programátorem}
 
@@ -1318,7 +1318,7 @@ Zásadní nedostatky, které byly objeveny v tomto testu jsou:
 
 Vydáním beta verze aplikace na Play Store byla plně naimplementovaná aplikace testována přímo samotnými uživateli. V~době psaní této práce se tohoto testování zúčastnilo 5 osob různých věkových kategorií.
 
-Průběh tohoto testování záležel na samotných uživatelích. Uživatelé měli možnost se k~aplikaci vyjádřit na přání autora.
+Průběh tohoto testování záležel na samotných uživatelích. Uživatelé měli možnost se k~aplikaci vyjádřit na moje přání.
 
 Při tomto testování byly do doby psaní tohoto textu objeveny tyto nedostatky:
 
