@@ -66,7 +66,7 @@ Plýtvání potravin je celosvětový problém, který má přímé následky v~
 
 Během posledních let vzniklo několik projektů, které se různými způsoby snaží tomuto problému zabránit. Lidé například nabízejí své nespotřebované potraviny, které by za jiných okolností vyhodili. S ostatními lidmi se mohou domluvit a jídlo si bezplatně či za výhodnou cenu převzít. Tento způsob je široce rozšířen na poli mobilních aplikací..
 
-Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům zabránit v plýtvání potravin a nabídne jednoduché i rychlé rozhraní, díky kterému bude na uživatele kladena minímální časová náročnost při jejím používaní.
+Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům zabránit v plýtvání potravin a nabídne jednoduché i rychlé rozhraní, díky kterému bude na uživatele kladena minimální časová náročnost při jejím používaní.
 
 V~rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich ceny nejsou pro běžné občany likvidační, jak je tomu naopak v~některých rozvojových zemích. Přesto se však mnozí lidé snaží ušetřit jejich jmění a nakupovat co nejlevněji. To ovšem například znamená nakupování velkého množství aktuálně cenově výhodných potravin. Takové množství potravin se nemusí vždy podařit včas spotřebovat a lidem tak zůstanou prošlé potraviny, které buď dodatečně spotřebují nebo, pokud si nejsou jistí možnou závadností, potraviny vyhodí do odpadu.
 
@@ -78,7 +78,7 @@ V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení 
 
 \chapter{Analýza}
 
-Process vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které je potřeba znát při návrhu a výsledné implementace i oveření její funkčnosti testovánim. 
+Proces vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které je potřeba znát při návrhu a výsledné implementace i ověření její funkčnosti testováním.
 
 Důraz analýzy je kladu především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
 
@@ -95,7 +95,7 @@ Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou v�
 
 V~počátku tvorby této práce a implementace aplikace nebylo příliš mnoho konkurenčních aplikací k~nalezení. Jak se však později ukázalo, vzniklo a rozšířilo se v průběhu tvorby této práce několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmiňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
+Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmíňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
 
 Všechny následující aplikace lze podle jejich názvu nalézt na Google Play Store ~\cite{play_store}.
 
@@ -103,23 +103,23 @@ Všechny následující aplikace lze podle jejich názvu nalézt na Google Play 
 
 Aplikace Best Before je zdarma dostupná jak pro zařízení s~iOS, tak pro zařízení s~OS Android. Na první pohled je aplikace totožná na obou platformách. Při bližším zkoumání verze pro OS Android jsem však zjistil, že aplikace využívá čisté prvky OS Android v~místech jako jsou dialogy a jiné běžné komponenty uživatelského rozhraní. Toto vytváří silný kontrast, který nemusí být pro uživatele OS Android příjemný přesto, že úroveň vzhledu aplikace považuji za velmi dobrou.
 
-Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, jak jednotlivým potravinám vypřší spotřební lhůta. Přidání potraviny do aplikace je umožněno tlačítkem v~horním pravém rohu, které při stisku zobrazí jendoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby. Nelze však zadat již existující a zadanou potravinu. Pokud uživatel zadává více potravin, může takto strávit poměrně dlouhou dobu.
+Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, jak jednotlivým potravinám vyprší spotřební lhůta. Přidání potraviny do aplikace je umožněno tlačítkem v~horním pravém rohu, které při stisku zobrazí jednoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby. Nelze však zadat již existující a zadanou potravinu. Pokud uživatel zadává více potravin, může takto strávit poměrně dlouhou dobu.
 
-Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tuďíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umísťilo na hodnotě 3.9. Vzhledem ke zkušenosti s používaním je tato hodnota spíše překvapivá.
+Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tudíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umístilo na hodnotě 3.9. Vzhledem ke zkušenosti s používáním je tato hodnota spíše překvapivá.
 
 Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatelů. Tato činnost se mi však nezdá příliš přínosná.
 
 \subsection{Food Safe}
 
-Další aplikací určenou pro OS Android je Food Safe, která se objevila na Play Store teprve nedávno. V~době psaní tohoto textu to je přibližne 20 dní od vydání. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o~této aplikaci byly získány pouze z~Play Store z~toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k~dispozici při jejím testování v~této práci. 
+Další aplikací určenou pro OS Android je Food Safe, která se objevila na Play Store teprve nedávno. V~době psaní tohoto textu to je přibližně 20 dní od vydání. Aplikace představuje přímou konkurenci aplikaci této práce. Informace o~této aplikaci byly získány pouze z~Play Store z~toho důvodu, že nebylo možné nainstalovat aplikaci na žádné ze zařízení, které byly k~dispozici při jejím testování v~této práci. 
 
 Aplikace není dostupná zadarmo. Je třeba ji zakoupit za částku, která v~době psaní tohoto textu činí 20,40 Kč.
 
-U~této aplikace lze zaznamenávat potraviny pomocí jména a datumu spotřeby. Popis aplikace nabízí také možnost skenování čárových kódů. Z~hodnocení Play Store je ale zřejmé, že aplikace získává informace o~potravinách od uživatelů a zaznamenává je do externí databáze. První uživatelé tedy budou nuceni zadávat ručně detaily všech jednotlivých potravin.
+U~této aplikace lze zaznamenávat potraviny pomocí jména a datu spotřeby. Popis aplikace nabízí také možnost skenování čárových kódů. Z~hodnocení Play Store je ale zřejmé, že aplikace získává informace o~potravinách od uživatelů a zaznamenává je do externí databáze. První uživatelé tedy budou nuceni zadávat ručně detaily všech jednotlivých potravin.
 
 \subsection{Love Food Hate Waste}
 
-Stejně jako aplikace Best Before je také tato dostupná ve verzi pro iOS i OS Android. Rozhraní aplikace je témeř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled aplikace považuji také za velmí dobrý.
+Stejně jako aplikace Best Before je také tato dostupná ve verzi pro iOS i OS Android. Rozhraní aplikace je téměř identické v~obou verzích, používá styl a prvky obvyklé pouze pro iOS. Vzhled aplikace považuji také za velmi dobrý.
 
 Nabízená funkcionalita zahrnuje:
 \begin{itemize}
@@ -130,13 +130,13 @@ Nabízená funkcionalita zahrnuje:
   \item{Nákupní lístek}
 \end{itemize}
 
-Z~popisu aplikace není dostatek informací o~její skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostaky dovedly uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
+Z~popisu aplikace není dostatek informací o~její skutečné použitelnosti, z~hodnocení uživatelů je ale patrné, že aplikace má mnoho nedostatků, kterými jsou nejčastěji omezení počtu kategorií jídel, zbytečně zobrazené kategorie způsobující nepřehlednost a vysoká nestabilita. Všechny tyto nedostatky dovedly uživatele Play Store k~celkovému hodnocení 2.5, tedy průměrnou hodnotu.
 
 \subsection{Souhrn analýzy konkurence}
 
 Ze všech výše uvedených aplikací je nejvíce podobná aplikaci této práce aplikace Food Safe. Nabízí možnosti, které usnadňují evidenci potravin, nenutí uživatele zadávat zbytečné informace a sbírá již zadaná data uživateli, aby je mohli použít i ostatní uživatelé. Přesto, že tato aplikace je velice podobná, aplikace této práce má snahu přinést ještě jednodušší způsob zadávání potravin, jejich společné sdílení a pokusit se disponovat více informacemi o~potravinách, které do aplikace ještě žádný uživatel nezadal a umožnit takto jednodušší a především rychlejší zadání nové potraviny.
 
-Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Troufám si to tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak dále popíši, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetezcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
+Nejzajímavější nápad aplikace Food Safe je bezesporu možnost načíst čárový kód. Troufám si to tvrdit nejen proto, že informace o~čárových kódech jsou dostupné volně na internetu, jak dále popíši, ale také proto, že naprostá většina potravin, které lze koupit v~běžných řetězcích, obsahují tyto čárové kódy, které jsou pro ně unikátní.
 
 \section{Cílová skupina uživatelů}
 
@@ -153,7 +153,7 @@ Pro širší skupinu použití je vhodné u~potravin evidovat i jejich jeden neb
 
 Jako základ dalšího postupu vývoje aplikace je seznam jejích požadavků. Je třeba shrnout několik základních znalostí okolo problému, ke kterému se tato aplikace snaží nalézt řešení.
 
-Prvním aspektem aplikace je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivni, je zapotřebí zvolit takovou platformu, kterou používá co nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který může alespoň naznačit, jakým směrem se mobilní trh ubírá.
+Prvním aspektem aplikace je její rozšíření. Aby aplikace dosáhla k~většině uživatelů a stala se tak efektivní, je zapotřebí zvolit takovou platformu, kterou používá co nejvíce lidí. Z internetových zdrojů se mi nepodařilo získat rozumný přehled aktuálního zastoupení mobilních platforem. Přesto je však snadno dohledatelný přehled o jejich prodejích~\ref{table:MobilePlatf}, který může alespoň naznačit, jakým směrem se mobilní trh ubírá.
 
 \begin{table}[H]
     \begin{tabular}{|l|l|}
@@ -175,9 +175,9 @@ Otázky v dotazníku zahrnují tyto údaje:
 \begin{itemize}
 	\item Operační systém mobilního telefonu
 	\item Věková kategorie
-	\item Dotaz, zda-li by dotyčný(á) používal takovouto aplikaci
-	\item Dotaz, zda-li již dotyčný(á) používá takovouto aplikaci
-	\item Dotaz, zda-li by aplikace měla používat čtečku čárových kódů
+	\item Dotaz, zdali by dotyčný(á) používal takovouto aplikaci
+	\item Dotaz, zdali již dotyčný(á) používá takovouto aplikaci
+	\item Dotaz, zdali by aplikace měla používat čtečku čárových kódů
 \end{itemize}
 
 Výsledek rozšíření mobilních platforem (mobilních operačních systémů) mezi dotázanými lze nalézt na obrázku ~\ref{fig:SurveyOS}.
@@ -219,7 +219,7 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item získávání informací o~neznámých potravinách z~otevřené databáze čárových kódů
 \end{itemize}
 
-OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rošířených verzích lze shlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3 a výše je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny~\cite{support}, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpory starších verzí OS Android.
+OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rozšířených verzích lze shlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3 a výše je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny~\cite{support}, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpory starších verzí OS Android.
 
 Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
 \begin{table}[h]
@@ -240,17 +240,17 @@ Kratší kódy lze snadno převést na delší doplněním nul do celkového po�
 
 Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovouto funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v~této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
 
-Tuto sekci jsem zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináši analýzu knihoven, kterou pak lze dále použít v~návrhu a implementaci.
+Tuto sekci jsem zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináší analýzu knihoven, kterou pak lze dále použít v~návrhu a implementaci.
 
 \subsubsection{Externí aplikace}
 
-Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivýmí aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení jsem vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit, tento čas je třeba ještě vynásobit dvěma. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto případě spouštění externí aplikace není možný.
+Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivými aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení jsem vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit, tento čas je třeba ještě vynásobit dvěma. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto případě spouštění externí aplikace není možný.
 
 \subsubsection{Zbar ~\cite{zbar}}
 
 Tato knihovna je šířena pod licencí GNU LGPL 2.1. Jazykem, ve kterém je knihovna implementována, je C. Díky tomu lze knihovnu snadno importovat na jakoukoliv platformu, která umožňuje spuštění nativního kódu. Android je takovouto platformou. Jeho NDK umožňuje zkompilovat a přiložit knihovnu k~aplikaci, ke které lze přistoupit pomocí rozhraní Javy, klíčovým slovem ``native''. Tímto NDK lze vygenerovat kód pro různé architektury, jako například ARM, MIPS, x86 a další varianty těchto předcházejících. Nevýhodou této knihovny je však fakt, že poslední vydaná verze byla v~roce 2010. Kód není dále aktivně vyvíjen.
 
-Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zda-li je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
+Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí nižší úspěšnost načítání čárových kódů oproti níže uvedené knihovně ZXing. Je tedy nutné zvážit fakt, zdali je tato knihovna vhodná pro implementaci. Nenáročnost této knihovny mi však nepřipadá jako rozhodující faktor. Je to dáno především tím, že výkon zařízení neustále roste a tato výhoda přestává mít svoji váhu.
 
 \subsubsection{ZXing ~\cite{zxing}}
 
@@ -262,13 +262,13 @@ Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do 
 
 \subsubsection{Implementace prototypu}
 
-Pro implementaci prototypu jsem zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, abych se seznmámil s~její strukturou a vniřními mechanismy. 
+Pro implementaci prototypu jsem zvolil knihovnu ZXing a vhodné části aplikace Barcode Scanner zejména proto, abych se seznámil s~její strukturou a vnitřními mechanismy. 
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo od děděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
-Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdalenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Odproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
+Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdálenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Oproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
 
 \begin{figure}[H]
   \centering
@@ -279,9 +279,9 @@ Změna na vyšší rozlišení se z~používaní prototypu pro skenování různ
 
 \section{Nefunkční požadavky}
 
-Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží serverový stroj. Dále však plánuji do budoucna server nasadit na výkonější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží serverový stroj. Dále však plánuji do budoucna server nasadit na výkonnější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
 
-Server budé dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
+Server bude dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
 
 Pro celou práci se snažím využívat zdarma dostupných nástrojů a využít již hotového software, který je dodáván pod open-source licencemi. Samotný kód aplikace hodlám publikovat jako open-source software, aby následně po skončení práce mohl být vylepšován i případnými zájemci.
 
@@ -300,15 +300,15 @@ Seznam nefunkčních požadavků:
 
 \chapter{Návrh}
 
-Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole analýzy budou diktovat jeho obsah. Struktura návrhu se týka popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
+Kapitola návrh poskytne soubor informací k~následné implementaci. Požadavky sepsány v~kapitole analýzy budou diktovat jeho obsah. Struktura návrhu se týká popisu případů užití, návrhu architektury, doménového modelu, databázového modelu a popisu komunikačního protokolu.
 
 \section{Případy užití}
 
-Výše uvedené funkční požadavky se přimo promítají do případů užití. Tento diagram slouží pří návrhu UI i pro tvorbu scénářů pro usability testing, které ověří, zda daný návrh je pro uživatele dostatečne jednoduchý a zda-li je uživatel schopen v~aplikaci dosáhnout všech daných cílů.
+Výše uvedené funkční požadavky se přímo promítají do případů užití. Tento diagram slouží pří návrhu UI i pro tvorbu scénářů pro usability testing, které ověří, zda daný návrh je pro uživatele dostatečně jednoduchý a zdali je uživatel schopen v~aplikaci dosáhnout všech daných cílů.
 
 Inventář a vyhledání potraviny jsou základnami, ze kterých se dále odvíjejí ostatní činnosti. Jednotlivé případy vystihují přesně ty činnosti, které bude uživatel provádět během používání aplikace.
 
-Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější činnosti uživatele, které lze očekávat. V~závěru práce dojde ke zhodnocení zde navrhnutých scénářů a přípádné návrhy na změnu do budoucnosti.
+Při vytváření tohoto diagramu byl dán veliký důraz na nejčastější činnosti uživatele, které lze očekávat. V~závěru práce dojde ke zhodnocení zde navrhnutých scénářů a případné návrhy na změnu do budoucnosti.
 
 \begin{figure}[H]
   \centering
@@ -323,11 +323,11 @@ Vzhledem k nutnosti použít pro mobilní aplikaci server bude nejvhodnější m
 
 \subsection{Klient}
 
-Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s~pomocí jeho SDK. Existují multiplatformní SDK nabízející bežné API, avšak nutnost vytváření upozornění a snímaní čárových kódů je čistě specifická záležitost pro kažou platformu zvlášť. Předpokládám, že tato možnost bude časově náročnou, proto se tato práce soustředí pouze na Android SDK.
+Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s~pomocí jeho SDK. Existují multiplatformní SDK nabízející běžné API, avšak nutnost vytváření upozornění a snímaní čárových kódů je čistě specifická záležitost pro každou platformu zvlášť. Předpokládám, že tato možnost bude časově náročnou, proto se tato práce soustředí pouze na Android SDK.
 
 \subsection{Server}
 
-Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku mého studia obsahovali především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou priblíženy dále.
+Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku mého studia obsahovali především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou přiblíženy dále.
 
 \section{Doménový model}
 
@@ -366,7 +366,7 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~protředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+Z~prostředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
 
 Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
 
@@ -411,7 +411,7 @@ Z~důvodu zvolené architektury je nutné specifikovat protokol, jakým budou me
 
 \subsection{XML}
 
-Mnoho protokolů využíva ke komunikaci textový formát v~XML. Tento formát je podobný HTML, je platformově nezávislý a široce podporován. V~C/C++ ho implementují různé knihovny, které jsou dostupné jako open-source software. Formát však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
+Mnoho protokolů využívá ke komunikaci textový formát v~XML. Tento formát je podobný HTML, je platformově nezávislý a široce podporován. V~C/C++ ho implementují různé knihovny, které jsou dostupné jako open-source software. Formát však nevyžívá datový prostor dostatečně efektivně, jak bude popsáno dále.
 
 \subsection{JSON}
 
@@ -473,7 +473,7 @@ Vyhledá a vrátí množinu položek inventáře podle zadaného jména, kódu G
 
 Položky požadavku:
 \begin{itemize}
-  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id položky inventáře nebo je hledána množina podle dalších atributů
+  \item \textbf{direct} - boolean, hodnota určuje, zdali je požadavek mířen přímo na id položky inventáře nebo je hledána množina podle dalších atributů
   \item \textbf{id} - unikátní identifikátor položky inventáře
   \item \textbf{food} - název potraviny, která je hledána, nebo jen jeho část
   \item \textbf{gtin} - číslo GTIN potraviny, která je hledána, nebo jen jeho část
@@ -490,7 +490,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
 \end{itemize}
 
 \subsubsection{GetFoodDetail}
-Vratí veškeré detaily potraviny.
+Vrátí veškeré detaily potraviny.
 
 Položky požadavku:
 \begin{itemize}
@@ -522,11 +522,11 @@ Vyhledá a vrátí množinu potravin podle jména nebo GTIN kódu.
 
 Položky požadavku:
 \begin{itemize}
-  \item \textbf{direct} - boolean, hodnota určuje, zda-li je požadavek mířen přímo na id potraviny nebo je hledána množina podle dalších atributů
+  \item \textbf{direct} - boolean, hodnota určuje, zdali je požadavek mířen přímo na id potraviny nebo je hledána množina podle dalších atributů
   \item \textbf{id} - unikátní identifikátor potraviny
   \item \textbf{food} - název potraviny, která je hledána
   \item \textbf{gtin} - číslo GTIN potraviny, která je hledána
-  \item \textbf{skip} - počet položek, které se mají při výberu přeskočit
+  \item \textbf{skip} - počet položek, které se mají při výběru přeskočit
 \end{itemize}
 
 Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následujícími atributy:
@@ -573,12 +573,12 @@ Položky odpovědi:
 \subsubsection{EditFood}
 Upraví detail potraviny.
 
-Položky požadavku jsou shodné s detailem potraviny a analogicky stejná s editací položky inventáře. Neobshají však pole identifikátorů obrazků a hodnocení uživatelů.
+Položky požadavku jsou shodné s detailem potraviny a analogicky stejná s editací položky inventáře. Neobsahují však pole identifikátorů obrázků a hodnocení uživatelů.
 
 Položky odpovědi:
 \begin{itemize}
   \item \textbf{success} - boolean, true pokud úspěšná editace potraviny
-  \item \textbf{id} - unikátní identifikátor přávě vytvořené potraviny
+  \item \textbf{id} - unikátní identifikátor právě vytvořené potraviny
 \end{itemize}
 
 \subsubsection{GetFoodBase}
@@ -620,7 +620,7 @@ Položky odpovědi:
 \end{itemize}
 
 \subsubsection{SetUserReview}
-Vytvoři, nastaví nebo smaže uživatelovu recenzi.
+Vytvoří, nastaví nebo smaže uživatelovu recenzi.
 
 Položky požadavku:
 \begin{itemize}
@@ -644,7 +644,7 @@ Samotná struktura protokolu nepopisuje, jak bude se zprávami zacházeno. Proto
 
 \subsubsection{Zpracování zprávy v klientské aplikaci}
 
-Základem je abstraktní třída \textit{Message}, kterou jednotlivé typy zpráv oddědí. Tato třída tyto potomky při statické inicializaci načte a každý potomek třídy sdělí svůj identifikátor, podle kterého se potom bude moci polymorfně instancovat ze síťového proudu.
+Základem je abstraktní třída \textit{Message}, kterou jednotlivé typy zpráv od dědí. Tato třída tyto potomky při statické inicializaci načte a každý potomek třídy sdělí svůj identifikátor, podle kterého se potom bude moci polymorfně instancovat ze síťového proudu.
 
 Jako první musí klient při určité akci vytvořit příslušnou zprávu a poslat ji serveru. Tuto činnost zajišťuje třída \textit{Communicator}, kterou lze popsat jako fasádu, která svým rozhraním zjednodušeně zpřístupňuje všechny akce, které souvisí se serverem. Voláním příslušných statických metod této třídy se vytvoří objekt zprávy, který se dále pomocí třídy \textit{JSONSender} pošle serveru.
 
@@ -671,7 +671,7 @@ Z~výše uvedených požadavků lze vypsat tyto vlastnosti, které musí server 
   \item{Implementace protokolu s~JSON formátem}
 \end{itemize}
 
-Následující podsekce popisují zvolené detaily těchto vlasntostí.
+Následující podsekce popisují zvolené detaily těchto vlastností.
 
 \subsection{C++}
 
@@ -679,23 +679,23 @@ Implementace v~C++ se může zdát jako silně platformově závislá. Opak je v
 
 \subsection{Škálovatelnost}
 
-Aby bylo možné server přizpůsobit výkonějšímu hardware, je třeba příslušné škálovatelnosti. V~případě této práce se jako její nejjednodušší forma jeví použití vlákna pro každého připojeného uživatele zvlášť. Je však také nutné zajistit, že další prostředky jako například připojení k~databázi bude pro vlákna dostupné soubežně a tím umožní zpracovávat více databázových dotazů současně. Je to důležite zejména proto, že tyto operace jsou obecně časově nejnáročnější. Tato forma škálovatelnosti však umožní získat vyšší výkon pouze za předpokladu, že dojde ke zvýšení počtu výpočetních jednotek, které mohou provádět instrukce jednotlivých vláken současně.
+Aby bylo možné server přizpůsobit výkonnějšímu hardware, je třeba příslušné škálovatelnosti. V~případě této práce se jako její nejjednodušší forma jeví použití vlákna pro každého připojeného uživatele zvlášť. Je však také nutné zajistit, že další prostředky jako například připojení k~databázi bude pro vlákna dostupné souběžně a tím umožní zpracovávat více databázových dotazů současně. Je to důležité zejména proto, že tyto operace jsou obecně časově nejnáročnější. Tato forma škálovatelnosti však umožní získat vyšší výkon pouze za předpokladu, že dojde ke zvýšení počtu výpočetních jednotek, které mohou provádět instrukce jednotlivých vláken současně.
 
-Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení větší dostupné dynamické paměti. Zde jde třeba zdůraznit, že navrhnutý komunikační protokol vyžaduje určitou paměťovou režii kvůli dále zmíněné knihovně pro podporu JSON. Server tedy bude mít možnost upravit maximální počet současně obshluhovaných uživatelů, který bude závislý na dostupné paměti.
+Jako další forma škálovatelnosti se již nabízí pouze přizpůsobení větší dostupné dynamické paměti. Zde jde třeba zdůraznit, že navrhnutý komunikační protokol vyžaduje určitou paměťovou režii kvůli dále zmíněné knihovně pro podporu JSON. Server tedy bude mít možnost upravit maximální počet současně obsluhovaných uživatelů, který bude závislý na dostupné paměti.
 
 \subsection{MySQL}
 
-Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhaní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java. Lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje vyjímky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově návržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
+Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní jiné než poskytované samotnou klientskou knihovnou, které není optimalizováno pro objektové použití v C++ a přináší tak s sebou mnohem složitější implementaci. Jako vhodná multiplatformní knihovna poskytující takové rozhraní se jeví MySQL Connector/C++~\cite{mysqlconn}. Tato knihovna nabízí rozhraní velmi podobné s~tím, co je dostupné pro použití v~jazyce Java. Lze tedy použít například PreparedStatement, které ošetří případné útoky pomocí pokoření formátu dotazů a podobné. Dále poskytuje výjimky pro běžné chyby, které mohou nastat v~rámci jejího použití. Je tedy vhodná pro objektově navržený server. Kromě těchto vlastností umí také poskytovat více připojení k~samotnému databázovému serveru, takže poskytne vyžadovanou škálovatelnost z~podsekce výše.
 
 \subsection{JSON}
 
 Knihoven podpory JSON pro použití jazykem C++ je mnoho. Nejrozšířenější knihovny, které se mi podařilo nalézt jsou: rapidjson, JsonCpp, LibJSON. Knihovny jsou si velmi podobné, neboť specifikace formátu JSON není příliš rozsáhlá. Po delším prohlížení zdrojových kódů jednotlivých knihoven a jejich příkladů použití jsem si vybral knihovnu JsonCpp, která se mi jevila jako nejjednodušší a nejsrozumitelnější. Tato knihovna umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušuje jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
 
-Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá vyjímky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá.
+Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá výjimky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá.
 
-Jelikož distribuovaná verze JsonCpp, která je bežně dostupná, vyjímky nevyhazuje, je třeba do serveru přidat počateční test, který ověří, zda-li je možné odchytit chyby při použití této knihovny. V případě, že tomu tak není, test následně upozorní uživatele, který se server pokouší spoustit.
+Jelikož distribuovaná verze JsonCpp, která je běžně dostupná, výjimky nevyhazuje, je třeba do serveru přidat počáteční test, který ověří, zdali je možné odchytit chyby při použití této knihovny. V případě, že tomu tak není, test následně upozorní uživatele, který se server pokouší spustit.
 
-Pro podporu vyjímek byl zřízen speciální repozitář~\cite{json_ex_repo} s~aplikovaným patchem pro tuto vlastnost. Použití této upravené verze je tedy nutnost pro bezchybný běh serveru.
+Pro podporu výjimek byl zřízen speciální repozitář~\cite{json_ex_repo} s~aplikovaným patchem pro tuto vlastnost. Použití této upravené verze je tedy nutnost pro bezchybný běh serveru.
 
 \subsection{Návrh tříd}
 
@@ -707,7 +707,7 @@ Jelikož klient této aplikace slouží jako rozhraní pro uživatele, je třeba
 
 \subsection{Uživatelské rozhraní}
 
-Při návrhu jsem dbal především na požadavek jednoduchosti. Tvorba uživatelského rozhraní je možná v~různém softwaru. V~případě OS Android je však návrh proveditelný přímo do spustitelné podoby s~pomocí vývojářských nástrojů. Tento postup s~sebou přínáší následující výhody:
+Při návrhu jsem dbal především na požadavek jednoduchosti. Tvorba uživatelského rozhraní je možná v~různém softwaru. V~případě OS Android je však návrh proveditelný přímo do spustitelné podoby s~pomocí vývojářských nástrojů. Tento postup s~sebou přináší následující výhody:
 
 \begin{itemize}
   \item{Jednoduchost návrhu - nástroje jsou velmi intuitivní}
@@ -716,7 +716,7 @@ Při návrhu jsem dbal především na požadavek jednoduchosti. Tvorba uživate
   \item{Výsledná podoba návrhu již nemusí být vytvářena znova a lze využít již hotový návrh pro finální aplikaci}
 \end{itemize}
 
-Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejne složitá jako rozmístění prvků UI v těchto nástrojích.
+Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejně složitá jako rozmístění prvků UI v těchto nástrojích.
 
 Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níže popsány vybrané obrazovky zajímavé pro uživatele.
 
@@ -731,7 +731,7 @@ Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatři
 
 \subsubsection{Menu}
 
-První obrazovkou, kterou uživatel po spuštění aplikace uvidí, je navigační menu na obrázku~\ref{fig:AppMenu}. Je přímo dostupné ze všech cílu položek tohoto menu stiskem tlačítka v~horní levé části nebo posunutím ukazatele (prstu) od okraje obrazovky do jejího středu. Z~ostatních podpoložek se lze dostat zpět standardně tlačítkem zpět, případně tlačítkem v~horním panelu, tzv. ActionBaru.
+První obrazovkou, kterou uživatel po spuštění aplikace uvidí, je navigační menu na obrázku~\ref{fig:AppMenu}. Je přímo dostupné ze všech cílů položek tohoto menu stiskem tlačítka v~horní levé části nebo posunutím ukazatele (prstu) od okraje obrazovky do jejího středu. Z~ostatních podpoložek se lze dostat zpět standardně tlačítkem zpět, případně tlačítkem v~horním panelu, tzv. ActionBaru.
 
 Důvod existence pouze těchto položek spočívá v~jednoduchosti navigace. Scénář použití vždy začíná v~jedné z~těchto položek. Nastavení je dostupné standardně přes stisk klávesy menu nebo přes ikonu menu v~ActionBaru. Stejné je to s~nastavením i na ostatních obrazovkách.
 
@@ -746,11 +746,11 @@ Důvod existence pouze těchto položek spočívá v~jednoduchosti navigace. Sc�
 
 \subsubsection{Inventář}
 
-Inventář se stejně jako menu zobrazí při prvním spuštění, zůstane však v~jeho pozadí. Zachycuje ho obrazovka~\ref{fig:AppInventory}. Je zde možné pozorovat seznam potravin, které vlastní uživatel. Tyto položky inventáře dále disponují datumem spotřeby, díky kterému docházi k~seřazení a následně je u~potravin barevně vyznačen jejich status trvanlivosti. Červeně jsou vyznačeny potraviny s~končící trvanlivostí a postupně přechodem do zelené ty, které jsou od konce trvanlivosti vzdáleny více než týden.
+Inventář se stejně jako menu zobrazí při prvním spuštění, zůstane však v~jeho pozadí. Zachycuje ho obrazovka~\ref{fig:AppInventory}. Je zde možné pozorovat seznam potravin, které vlastní uživatel. Tyto položky inventáře dále disponují datem spotřeby, díky kterému dochází k~seřazení a následně je u~potravin barevně vyznačen jejich status trvanlivosti. Červeně jsou vyznačeny potraviny s~končící trvanlivostí a postupně přechodem do zelené ty, které jsou od konce trvanlivosti vzdáleny více než týden.
 
 Každá položka inventáře reaguje na stisk uživatelem. Při stisku dojde k~zobrazení detailu položky, který je popsán dále. Pro odebrání je k~dispozici ikona odpadkového koše, který potravinu z~inventáře odstraní.
 
-Přidání nové položky do inventáře bude nejpravděpodobnější činností nového uživatele, proto je na horním panelu tlačítko plus, které zobrazí dialog pro volbu, zda-li potravinu načíst čárovým kódem nebo ji vyhledat manuálně. Nahrazuje tím v~podstatě část menu aplikace. Je tu zde však pouze pro úplnost, aby noví uživatelé nebyli příliš zmateni z~prázdného seznamu, který se po prvotním spuštění ukáže.
+Přidání nové položky do inventáře bude nejpravděpodobnější činností nového uživatele, proto je na horním panelu tlačítko plus, které zobrazí dialog pro volbu, zdali potravinu načíst čárovým kódem nebo ji vyhledat manuálně. Nahrazuje tím v~podstatě část menu aplikace. Je tu zde však pouze pro úplnost, aby noví uživatelé nebyli příliš zmateni z~prázdného seznamu, který se po prvotním spuštění ukáže.
 
 \begin{figure}[H]
   \centering
@@ -765,7 +765,7 @@ Přidání nové položky do inventáře bude nejpravděpodobnější činností
 
 Obrazovka~\ref{fig:AppInventoryDetail} zobrazená po stisku položky inventáře ukazuje dialog obsahující detail položky inventáře, kde lze upravit datum spotřeby a případně přejít na detail potraviny, která je položkou tohoto inventáře. Při navigaci zpět zůstává dialog zobrazený stejně jako změny provedené uvnitř.
 
-Tlačítky Ok a Cancel lze uložit či zrušit zvolenou změnu datumu. Uložení způsobí aktualizaci položek inventáře ze serveru.
+Tlačítky Ok a Cancel lze uložit či zrušit zvolenou změnu data. Uložení způsobí aktualizaci položek inventáře ze serveru.
 
 Samotné načítaní inventáře probíhá za zobrazení standardního ukazatele průběhu, který je schován spolu s~plně načteným inventářem.
 
@@ -801,7 +801,7 @@ V~této obrazovce je do budoucna dále možné uvést filtraci výsledků pomoc�
 
 Tato obrazovka~\ref{fig:AppSearchResults} je zobrazena po vyhledávání v~obrazovce~\ref{fig:AppSearch} a zobrazuje seznam nalezených výsledků. Při probíhajícím vyhledávání je seznam nahrazen prvkem ukazující probíhající činnost, který je zpět schován a zobrazen seznam výsledků při dokončení.
 
-V~tomto seznamu výsledků se v~pravém horním rohu nabízí tlačítko plus, které umožní uživateli přidat novou potravinu, neboť je to místo, kde uživatel zjistí, že takováto potravina neexistuje. Přidání potraviny potom probíha stejně jako při editaci~\ref{fig:AppFoodEdit}.
+V~tomto seznamu výsledků se v~pravém horním rohu nabízí tlačítko plus, které umožní uživateli přidat novou potravinu, neboť je to místo, kde uživatel zjistí, že takováto potravina neexistuje. Přidání potraviny potom probíhá stejně jako při editaci~\ref{fig:AppFoodEdit}.
 
 V~seznamu výsledků je dále možné zobrazit detail potraviny~\ref{fig:AppFoodDetail} nebo přidat potravinu do inventáře stisknutím tlačítka plus, které se nachází vpravo v~položce seznamu. Tím se zobrazí dialog~\ref{fig:AppScanAddFood}.
 
@@ -816,7 +816,7 @@ V~seznamu výsledků je dále možné zobrazit detail potraviny~\ref{fig:AppFood
 
 \subsubsection{Přidání potraviny do inventáře}
 
-V~tomto dialogu~\ref{fig:AppScanAddFood} je zobrazen název potraviny, výběr datumu spotřeby a počet takových kusů. Každý takový kus bude přidán jako jedna položka inventáře.
+V~tomto dialogu~\ref{fig:AppScanAddFood} je zobrazen název potraviny, výběr data spotřeby a počet takových kusů. Každý takový kus bude přidán jako jedna položka inventáře.
 
 Stisk tlačítka s~názvem potraviny uživatele přesune do detailu potraviny~\ref{fig:AppFoodDetail}, ze kterého se navigací zpět dostane zpátky do tohoto dialogu.
 
@@ -833,11 +833,11 @@ Tento Dialog se zobrazuje při přidávání z~výsledků hledání potravin i z
 
 \subsubsection{Detail potraviny}
 
-Obrazovka~\ref{fig:AppFoodDetail} ukazuje částečný detail potraviny. V~tomto místě je možné si potravinu detailnějí prohlédnout a ohodnotit. Také z~této obrazovky lze potravinu upravit pomocí tlačítka tužky v~pravém horním rohu.
+Obrazovka~\ref{fig:AppFoodDetail} ukazuje částečný detail potraviny. V~tomto místě je možné si potravinu detailnější prohlédnout a ohodnotit. Také z~této obrazovky lze potravinu upravit pomocí tlačítka tužky v~pravém horním rohu.
 
-Hodnocení potraviny probíha pomocí dialogu, který se dotáže na číselné ohodnocení spolu s~volitelným textem recenze. Pro uložení uživatel stiskne tlačítko Rate, v~opačném případě uživatel stiskne tlačítko Delete, které odstraní hodnocení, pokud existuje. Každý uživatel může potravinu hodnotit maximálně jednou.
+Hodnocení potraviny probíhá pomocí dialogu, který se dotáže na číselné ohodnocení spolu s~volitelným textem recenze. Pro uložení uživatel stiskne tlačítko Rate, v~opačném případě uživatel stiskne tlačítko Delete, které odstraní hodnocení, pokud existuje. Každý uživatel může potravinu hodnotit maximálně jednou.
 
-Ve spodní části jsou dále vidět 2 uživatelé. První je ten, který potravinu přidal jako první a druhý ten, kdo potravinu naposledny upravil.
+Ve spodní části jsou dále vidět 2 uživatelé. První je ten, který potravinu přidal jako první a druhý ten, kdo potravinu naposledy upravil.
 
 \begin{figure}[H]
   \centering
@@ -852,7 +852,7 @@ Ve spodní části jsou dále vidět 2 uživatelé. První je ten, který potrav
 
 K~editaci potraviny slouží obrazovka~\ref{fig:AppFoodEdit}. Stejně tak slouží i pro přidání potraviny pouze s~tím, že všechny položky jsou nastavené na výchozí hodnoty nebo hodnoty takové, které se podařilo zajistit jiným způsobem. Zde je možné nastavit jméno, výrobce i předem určené obecně uznávané kategorie potravin, čárový kód, obrázky potraviny, hmotnost nebo objem a výchozí datum spotřeby.
 
-Výber kategorie i výrobce poskytuje dialog. Pro výrobce je však možné určit název manuálně, čímž dojde k~přidání výrobce do seznamu všech známých na serveru.
+Výběr kategorie i výrobce poskytuje dialog. Pro výrobce je však možné určit název manuálně, čímž dojde k~přidání výrobce do seznamu všech známých na serveru.
 
 Nastavení čárového kódu je možné buď manuálně, či je vedle něj umístěno tlačítko, které zobrazí stejnou obrazovku jako při přidání potraviny~\ref{fig:AppScanAdd}. Tato obrazovka po načtení čárového kódu zanikne a vyplní číslo čárového kódu tím načteným v předchozí obrazovce.
 
@@ -871,11 +871,11 @@ Pro samotné uložení změn potraviny (nebo vytvoření nové) slouží tlačí
 
 \subsubsection{Přidání potraviny do inventáře čárovým kódem}
 
-Pro samotné přidání potraviny pomocí čárového kódu slouží obrazovka~\ref{fig:AppScanAdd}. Uživatel je pobídnut k~umístění čárového kódu do náhledu kamery. Pokud dojde k~úspěšnému načtení, spustí se vyhledání potraviny na serveru, které je signalizováno dialogem pruběhu.
+Pro samotné přidání potraviny pomocí čárového kódu slouží obrazovka~\ref{fig:AppScanAdd}. Uživatel je pobídnut k~umístění čárového kódu do náhledu kamery. Pokud dojde k~úspěšnému načtení, spustí se vyhledání potraviny na serveru, které je signalizováno dialogem průběhu.
 
-V~případě úspešného nalezení potraviny se zobrazí dialog pro přidání potraviny~\ref{fig:AppScanAdd} stejný jako v~případě manuálního hledání potraviny. Po zrušení dialogu či jeho potvrzení se uživatel vrátí na obrazovku načítaní čárového kódu, aby mohl načíst další potravinu.
+V~případě úspěšného nalezení potraviny se zobrazí dialog pro přidání potraviny~\ref{fig:AppScanAdd} stejný jako v~případě manuálního hledání potraviny. Po zrušení dialogu či jeho potvrzení se uživatel vrátí na obrazovku načítaní čárového kódu, aby mohl načíst další potravinu.
 
-Pokud však potravina nalezena nebyla, spustí se dále hledání v~externí databázi, které bude popsáno dále v~této sekci. Signalizováno je také pomocí dialogu průbehu. Při nalezení či nenalezení v~externi databázi se zobrazí dialog, který buď pobízí k vytvoření nové potraviny s~importem nalezených informací~\ref{fig:AppScanAddImport} nebo k~pouhému vytvoření nové potraviny. Do té bude přenesen načtený kód nebo další informace získané z~externí databáze. Přidání potraviny probíhá stejně jako při jejím vytváření při vyhledávání. Po přidání či odmítnutí přidání potraviny se znovu zobrazí obrazovka pro načtení čárového kódu, aby mohl uživatel dále pokračovat v~načítání.
+Pokud však potravina nalezena nebyla, spustí se dále hledání v~externí databázi, které bude popsáno dále v~této sekci. Signalizováno je také pomocí dialogu průběhu. Při nalezení či nenalezení v~externí databázi se zobrazí dialog, který buď pobízí k vytvoření nové potraviny s~importem nalezených informací~\ref{fig:AppScanAddImport} nebo k~pouhému vytvoření nové potraviny. Do té bude přenesen načtený kód nebo další informace získané z~externí databáze. Přidání potraviny probíhá stejně jako při jejím vytváření při vyhledávání. Po přidání či odmítnutí přidání potraviny se znovu zobrazí obrazovka pro načtení čárového kódu, aby mohl uživatel dále pokračovat v~načítání.
 
 \begin{figure}[H]
   \begin{minipage}{0.5\linewidth} 
@@ -898,7 +898,7 @@ Pokud však potravina nalezena nebyla, spustí se dále hledání v~externí dat
 
 Podobně jako obrazovka pro načtení čárového kódu pro přidání potraviny~\ref{fig:AppScanAdd} vypadá i tato pro její odebrání z~inventáře.
 
-Při načtení čárového kódu dojde k~vyhledání v~uživatelově inventáři a zobrazení seznamu potravin ~\ref{fig:AppScanRemoveList}, který je stejný jako v obrazovce zobrazení celého inventáře~\ref{fig:AppInventory}. Smazání položky seznamu tedy probíha stejně.
+Při načtení čárového kódu dojde k~vyhledání v~uživatelově inventáři a zobrazení seznamu potravin ~\ref{fig:AppScanRemoveList}, který je stejný jako v obrazovce zobrazení celého inventáře~\ref{fig:AppInventory}. Smazání položky seznamu tedy probíhá stejně.
 
 \begin{figure}[H]
   \centering
@@ -936,7 +936,7 @@ Vzhledem k~jednoduchosti aplikace a nízkému nebezpečí zneužití dat uživat
 
 Databáze potravin této aplikace bude ze začátku neobsahovat žádné potraviny. Jelikož může být přidání nové potraviny pro uživatele otravné, je vhodné najít cestu, která by zadávání přinejmenším zjednodušila nebo zcela nahradila.
 
-Jednotlivé potraviny výrobců však není jednoduché získat. Díky zaznamenávání potravin pomocí GTIN kódu se však nabízí možnost získat informace o~potravinách z~veřejné a otevřené databáze produktů POD - Product Open Data~\cite{pod}. V~této databázi je možné k~začátku roku 2014 nalézt stovky tisíců záznamů. Informace v~databázi obsahují u~některých potravin složení, ale u~některých naopak pouze jejich výrobce. Možství dat, které se při náhodné analýze této databáze podařilo získat, bylo nedostatečné pro vyplňění většiny potravin. Je zde však možnost využít i pouze částečné informace a ty k~potravině doplňit.
+Jednotlivé potraviny výrobců však není jednoduché získat. Díky zaznamenávání potravin pomocí GTIN kódu se však nabízí možnost získat informace o~potravinách z~veřejné a otevřené databáze produktů POD - Product Open Data~\cite{pod}. V~této databázi je možné k~začátku roku 2014 nalézt stovky tisíců záznamů. Informace v~databázi obsahují u~některých potravin složení, ale u~některých naopak pouze jejich výrobce. Množství dat, které se při náhodné analýze této databáze podařilo získat, bylo nedostatečné pro vyplnění většiny potravin. Je zde však možnost využít i pouze částečné informace a ty k~potravině doplnit.
 
 \subsubsection{Připojení k~Product Open Data}
 
@@ -953,7 +953,7 @@ Mezi OpenDataSoft a Mingle IO nebylo příliš rozdílů, kterými by bylo možn
 
 \subsubsection{Integrace v~aplikaci}
 
-Integrování vyhledávání v~této externí databázi je, jak již bylo zmíněné v~návrhu uživatelského rozhraní, pouze dodatečné vyhledání při nenalezeném produktu, který doplňí podporované informace z~produktu do vytvářené potraviny. U~testovaných potravin v mé domácnosti bylo nalezeno pouze nepatrné množství potravin, u~kterých navíc bylo uvedeno pouze jméno a obrázek. I~takto základní informace však usnadnila přidávání potravin.
+Integrování vyhledávání v~této externí databázi je, jak již bylo zmíněné v~návrhu uživatelského rozhraní, pouze dodatečné vyhledání při nenalezeném produktu, který doplní podporované informace z~produktu do vytvářené potraviny. U~testovaných potravin v mé domácnosti bylo nalezeno pouze nepatrné množství potravin, u~kterých navíc bylo uvedeno pouze jméno a obrázek. I~takto základní informace však usnadnila přidávání potravin.
 
 \chapter{Implementace}
 
@@ -982,14 +982,14 @@ Implementace serveru probíhala ve vývojovém prostředí QT Creator~\cite{qtcr
 
 \section{Serverová aplikace}
 
-Jako první částí implementace byl vytvořen základ serveru. Detailní implementace všech částí serveru probíhala průbežně s~aplikací podle požadavků, které kladla funcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
+Jako první částí implementace byl vytvořen základ serveru. Detailní implementace všech částí serveru probíhala průběžně s~aplikací podle požadavků, které kladla funkcionalita UI. Výhodou souběžné implementace bylo možné jednodušší přizpůsobení obou stran.
 
 Zdrojový kód byl rozdělen do sekcí, ke kterým byla přiřazena stejnojmenná složka. Tyto sekce jsou sestavovány rekurzivně pomocí zmíněného CMake. Níže jsou jednotlivé sekce popsány. 
 
 \subsection{ConnectedClient}
 Název ConnectedClient může být zavádějící, neboť tato sekce ve skutečnosti není klient, ale pouze soubory týkající se spojení s~klientem. Zde dochází k~přijímaní zpráv serveru a k~ošetřování chyb, které mohou nastat při komunikaci s~klientem. Mezi ně patří i chyby ze strany serveru.
 
-Jelikož server používá spoustu vyjímek, je zde pokryto velké množství těch, které lze odchytnout a které by za určitých okolností způsobily pád serveru.
+Jelikož server používá spoustu výjimek, je zde pokryto velké množství těch, které lze odchytnout a které by za určitých okolností způsobily pád serveru.
 
 \subsection{Config}
 Zde jsou umístěny soubory pro načítání konfigurace a pro jejich získání za běhu serveru. Konfigurace používá formát JSON a při neposkytnutí konfiguračního souboru jsou nastaveny výchozí hodnoty použité pro lokální testování, které server znepřístupňuje veřejnosti.
@@ -1007,12 +1007,12 @@ Pro každou zprávu je v~sekci Handler umístěna shodně pojmenovaná obslužn�
 Soubory síťového socketu serveru a soubory pro uskutečnění odesílání i přijímání dat jsou umístěny v~sekci Network. 
 
 \subsection{Protocol}
-Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpověd. Jejich popis atributy je popsán v~sekci Protocol a také výše v návrhu síťového protokolu.
+Každá zpráva kromě zmíněné zprávy KeepAlive obsahuje požadavek a odpověď. Jejich popis atributy je popsán v~sekci Protocol a také výše v návrhu síťového protokolu.
 
 \subsection{Util}
-Pro jednodušší práci s~časovými daty, logování událostí, testování a pro debugování byla vytvořena sekce Util, kde se nalézají také všechny zbylé třídy, které přimo nesouvisí s výše uvedenými sekcemi.
+Pro jednodušší práci s~časovými daty, logování událostí, testování a pro debugování byla vytvořena sekce Util, kde se nalézají také všechny zbylé třídy, které přímo nesouvisí s výše uvedenými sekcemi.
 
-Logování událostí na serveru zde zdůrazním, neboť je velmi důležité sledovat jeho provoz. Tím lze také sesbírat různé informace o pádech a jiných chybách serveru v průběhu testování i při finalním nasazení. Logování bylo zpřístupňeno jako statické metody třídy Log zahrnující výpis chybových, debugovacích a čistě informativních zpráv.
+Logování událostí na serveru zde zdůrazním, neboť je velmi důležité sledovat jeho provoz. Tím lze také sesbírat různé informace o pádech a jiných chybách serveru v průběhu testování i při finálním nasazení. Logování bylo zpřístupněno jako statické metody třídy Log zahrnující výpis chybových, debugovacích a čistě informativních zpráv.
 
 \section{Klientská aplikace}
 
@@ -1027,7 +1027,7 @@ Implementace klientské aplikace tvořily dvě části:
 
 Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jednotlivých částí (zde balíků) jsou části přímo spojené s prvky uživatelského rozhraní seskupeny.
 
-Každá část je níže detailněji popsána jako v~případě serveru. Rád bych zde zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více podčástí. V~rozsahu této práce není možné popsat každou třídu balíků vzlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
+Každá část je níže detailněji popsána jako v~případě serveru. Rád bych zde zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více pod-částí. V~rozsahu této práce není možné popsat každou třídu balíků zvlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
 
 Při psaní kódu jsem však dbal na zvyklosti při psaní aplikací pro OS Android, které jsem získal vlastních zkušeností.
 
@@ -1037,13 +1037,13 @@ Entity využité v~klientské části aplikace jsou umístěny v~této části.
 
 \subsubsection{Adapter}
 
-Některé části uživatelského rozhraní pro zobrazení dat vyžadují adaptery~\cite{adapter} - třídy, které zprostředkovávají jednotlivé prvky dat, které UI prvky pomocí těchto adapterů přimo získávají a následně je prezentují uživateli. 
+Některé části uživatelského rozhraní pro zobrazení dat vyžadují adaptery~\cite{adapter} - třídy, které zprostředkovávají jednotlivé prvky dat, které UI prvky pomocí těchto adapterů přímo získávají a následně je prezentují uživateli. 
 
 Adapterů je v~této aplikaci více, proto jim byla věnována samotná část.
 
 \subsubsection{Network}
 
-Síťová komunikace byla převzata z~projektu TestClient, který byl uveden výše. Stará se o~příjem a odesílání surových dat po síťi, stejně jako vytváření a udržování spojení.
+Síťová komunikace byla převzata z~projektu TestClient, který byl uveden výše. Stará se o~příjem a odesílání surových dat po síti, stejně jako vytváření a udržování spojení.
 
 \subsubsection{Protocol}
 
@@ -1063,7 +1063,7 @@ Všechny ostatní třídy, které nezapadají do ostatních částí, lze naléz
 
 \subsubsection{Cache}
 
-Jelikož jednotlivé potraviny mohou disponovat obrázky, je nutné tyto obrázky uchovávat v~zařízení s~aplikací, aby nedocházelo k~plýtvání přenosu dat po síťi.
+Jelikož jednotlivé potraviny mohou disponovat obrázky, je nutné tyto obrázky uchovávat v~zařízení s~aplikací, aby nedocházelo k~plýtvání přenosu dat po síti.
 
 \subsubsection{UI prvky - Activity, Fragment, Dialog, Preference, View}
 
@@ -1075,7 +1075,7 @@ Protože jsou tyto prvky v~aplikaci rozšířeny mnohočetně, bylo nutné prvky
 
 Pro průběžné zjišťování stavu trvanlivost potravin bylo nutné zařídit zvláštní část background. Zde lze nalézt registrace událostí pro AlarmManager\cite{alarm_manager}, který způsobí volání těchto operací opakovaně.
 
-Pro získání dat inventáře je zde zjednodušené použití úloh z~části Task, které probíhá oddělěně od zbytku aplikace, která může čí nemusí být v~té době aktivní.
+Pro získání dat inventáře je zde zjednodušené použití úloh z~části Task, které probíhá odděleně od zbytku aplikace, která může čí nemusí být v~té době aktivní.
 
 \chapter{Nasazení}
 
@@ -1085,15 +1085,15 @@ Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
 Serverová aplikace byla nasazena na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
 
-Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí ůložiště, odkud lze v případě ůtoku na aplikaci provést obnovení dat.
+Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí úložiště, odkud lze v případě útoku na aplikaci provést obnovení dat.
 
-Po asi měsící od vydání klientské aplikace je serverová aplikace stále nevytížena, ale s přibívajícím množstvím uživatelů a zadávaných potravin prudce roste zatížení databáze MySQL. Je to také způsobeno další aplikací výsledkem cizí bakalářské práce, jejíž serverovou aplikaci jsem umožnil zdarma hostovat na mém serveru.
+Po asi měsíci od vydání klientské aplikace je serverová aplikace stále nevytížena, ale s přibývajícím množstvím uživatelů a zadávaných potravin prudce roste zatížení databáze MySQL. Je to také způsobeno další aplikací výsledkem cizí bakalářské práce, jejíž serverovou aplikaci jsem umožnil zdarma hostovat na mém serveru.
 
 \section{Klientská aplikace}
 
-Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat ~\cite{food_inventory_playstore}.
+Klientská aplikace byla při dokončování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkud si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat ~\cite{food_inventory_playstore}.
 
-Po asi měsící od vydání aplikace si ji nainstalovalo více než 70 lidí.
+Po asi měsíci od vydání aplikace si ji nainstalovalo více než 70 lidí.
 
 \chapter{Testování}
 
@@ -1115,7 +1115,7 @@ Nejzásadnější chyby, které byly takto odhaleny zahrnovaly překlepy a synch
 
 \section{Usability testing}
 
-Po dokončení implementace aplikace a otestování aplikace programátorem jsem uskutečnil usability test, který má za úkol zhodnotit celkovou použitelnost aplikace na skupině lidí. Tito lidé byli podrobeni sledovaním při provádění předem daných scénářů, které pokryli běžné činnosti s aplikací a jednotlivé reakce uživatelů byly zaznamenány pro každý scénář. U nich byl také sepsán předpokládaný způsob jejich řešení.
+Po dokončení implementace aplikace a otestování aplikace programátorem jsem uskutečnil usability test, který má za úkol zhodnotit celkovou použitelnost aplikace na skupině lidí. Tito lidé byli podrobeni sledováním při provádění předem daných scénářů, které pokryli běžné činnosti s aplikací a jednotlivé reakce uživatelů byly zaznamenány pro každý scénář. U nich byl také sepsán předpokládaný způsob jejich řešení.
 
 Pro další zisk informací od uživatelů byly položeny níže popsané dotazníky pre-test a post-test.
 
@@ -1141,11 +1141,11 @@ Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorova
 \begin{enumerate}
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí vyhledávání do vašeho inventáře.
     
-    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Uživatel stiskne tlačítko \textit{Search}. Jelikož nedojde k nalezení potraviny, je seznam prázdný. V panelu je však tlačítko s ikonou plus, kterým se po stisknutí objeví editace pro přidání nové potraviny. Zde uživatel vyplní údaje o potravině, stisktne tlačítko s ikonou diskety pro uložení. Následně se uživatel pokusí potravinu znovu vyhledat, kde se jit potravina zobrazí a uživatel ji přidá do inventáře přes tlačítko s ikonou plus, které zobrazí dialog s potravinou, kde uživatel vyplní datum spotřeby a potvrdí. Tím je potravina přidána jak v databázi potravin, tak v inventáři uživatele.
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Uživatel stiskne tlačítko \textit{Search}. Jelikož nedojde k nalezení potraviny, je seznam prázdný. V panelu je však tlačítko s ikonou plus, kterým se po stisknutí objeví editace pro přidání nové potraviny. Zde uživatel vyplní údaje o potravině, stiskněte tlačítko s ikonou diskety pro uložení. Následně se uživatel pokusí potravinu znovu vyhledat, kde se jit potravina zobrazí a uživatel ji přidá do inventáře přes tlačítko s ikonou plus, které zobrazí dialog s potravinou, kde uživatel vyplní datum spotřeby a potvrdí. Tím je potravina přidána jak v databázi potravin, tak v inventáři uživatele.
 
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí skenování čárového kódu do vašeho inventáře.
     
-    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Add via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Jelikož nedojde k nalezení potraviny, zobrazí se dialog pro přidání potraviny (zde se může zobrazit i dialog, že byla potravina nalezena v externí databázi, ale uživatel pokračuje stejně). Po potvrzení, že uživatel chce zadat potravinu, se objeví editace pro přidání nové potraviny. Zde uživatel vyplní chybějící údaje o potravině, stisktne tlačítko s ikonou diskety pro uložení. Následně se zobrazí dialog s potravinou, kterou nalezl po jejím přidání. Dále uživatel pokračuje jako ve scénáři 1.
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Add via Barcode}, které uživatele přepne do stejně nazvané aktivity. Zde uživatel načte čárový kód. Jelikož nedojde k nalezení potraviny, zobrazí se dialog pro přidání potraviny (zde se může zobrazit i dialog, že byla potravina nalezena v externí databázi, ale uživatel pokračuje stejně). Po potvrzení, že uživatel chce zadat potravinu, se objeví editace pro přidání nové potraviny. Zde uživatel vyplní chybějící údaje o potravině, stiskne tlačítko s ikonou diskety pro uložení. Následně se zobrazí dialog s potravinou, kterou nalezl po jejím přidání. Dále uživatel pokračuje jako ve scénáři 1.
     
   \item Přidejte Vámi zvolenou potravinu, která už je v databázi, pomocí skenování čárového kódu do vašeho inventáře.
     
@@ -1157,15 +1157,17 @@ Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorova
   
   \item Odeberte Vámi zvolenou potravinu, která už je v inventáři, při prohlížení vašeho inventáře.
     
-    \textbf{Předpokládané řešení}: Pokud ještě uživatel není v intentáři, pak v menu klikne na tlačítko \textit{My Inventory}, které uživatele přepne do stejně nazvané aktivity. Zde se zobrazí seznam všech potravin v inventáři. Uživatel pokračuje stejně jako ve scénáři 4.
+    \textbf{Předpokládané řešení}: Pokud ještě uživatel není v inventáři, pak v menu klikne na tlačítko \textit{My Inventory}, které uživatele přepne do stejně nazvané aktivity. Zde se zobrazí seznam všech potravin v inventáři. Uživatel pokračuje stejně jako ve scénáři 4.
   
   \item Vámi zvolenou potravinu, která už je v databázi, vyhledejte a upravte nějaký údaj. Jako například upravte výchozí datum spotřeby.
     
-    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Po stisku hledat se zobrazí seznam potravin se shodujícím se názvem. Zde uživatel klikne na potravinu. Tím se dostane do detailu potraviny, kde stiskne ikonu tužky, která ho zavede do editace. Zde změní údaj, potravinu uloží stiskem tlačitka s ikonou diskety. Následně se tím vrátí do detailu, kde má být údaj aktualizován na upravený.
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Po stisku hledat se zobrazí seznam potravin se shodujícím se názvem. Zde uživatel klikne na potravinu. Tím se dostane do detailu potraviny, kde stiskne ikonu tužky, která ho zavede do editace. Zde změní údaj, potravinu uloží stiskem tlačítka s ikonou diskety. Následně se tím vrátí do detailu, kde má být údaj aktualizován na upravený.
   
 \end{enumerate}
 
-\subsection{Provádení testu}
+\subsection{Provádění testu}
+
+Níže je popsáno testování jednotlivých osob (subjektů).
 
 \subsubsection{Testovací subjekt 1}
 
@@ -1310,7 +1312,7 @@ Odpovědi pro post-test:
 Zásadní nedostatky, které byly objeveny v tomto testu jsou:
 \begin{itemize}
 	\item{Pro přidání potraviny pomocí načítání čárového kódu je nutné jej znovu načíst, aby jej bylo možné přidat i do inventáře.}
-	\item{Aplikace by si měla pamatovat kroky zpět v navigaci, které nevedou přímo z menu. Problém se objevil u dialogu v intentáři, kde je možné zvolit způsob přidání potraviny, který uživatele přesune na vybranou obrazovku stejně jako navigace na tyto místa z menu. Problém pak nastane, když se uživatel chce vrátit zpět do inventáře. Místo toho se totiž aplikace ukončí.}
+	\item{Aplikace by si měla pamatovat kroky zpět v navigaci, které nevedou přímo z menu. Problém se objevil u dialogu v inventáři, kde je možné zvolit způsob přidání potraviny, který uživatele přesune na vybranou obrazovku stejně jako navigace na tyto místa z menu. Problém pak nastane, když se uživatel chce vrátit zpět do inventáře. Místo toho se totiž aplikace ukončí.}
 	\item{Při prvním používaní jsou uživatelé zmateni. Je nutné zajistit nápovědy v prázdném inventáři nebo ve vyhledávání potravin, pokud není žádná potravina nalezena.}
 \end{itemize}
 
@@ -1347,24 +1349,24 @@ Aplikace, která vznikla v~rámci této práce, má mnoho nedostatků. Zde se po
 Jedním z~nich je nedokonalost knihovny ZXing, která čtení čárových sice zvládá, ale testováním uživateli vyšlo najevo, že ne dostatečně. Do budoucna by tedy bylo vhodné zvážit i jiné svobodné či komerční řešení nebo vyvinout vlastní řešení založeném na jiném algoritmu, který by umožňoval načítaní čárových kódu potravin spolehlivěji.
 
 \subsection{Zabezpečení aplikace a komunikace}
-Na zabezpečení dat uživatelů této aplikace není kladen žádný důraz. Účty různých lidí lze jendoduše přidat do OS Android účtů a přistoupit tak neoprávněně na účet jiných lidí. Stejně tak není šifrované spojení mezi klientem a serverem.
+Na zabezpečení dat uživatelů této aplikace není kladen žádný důraz. Účty různých lidí lze jednoduše přidat do OS Android účtů a přistoupit tak neoprávněně na účet jiných lidí. Stejně tak není šifrované spojení mezi klientem a serverem.
 
 Pokud by mělo být zabezpečení v budoucnu zvýšeno, pak by bylo nutné upravit zprávy tak, aby jejich obsah byl dostatečně zašifrovaný. Také uživatelské účty by bylo nutné chránit heslem. Tyto změny by však nebyly nijak zásadní a celkem snadno by je bylo možné aplikovat.
 
-Otevřenost aplikace uživatelům nabízí spoustu způsobů, jak na aplikaci zaútočit. Bylo by vhodné vyvinout pro aplikaci sledovací mechanismy, které by detekovaly nevhodné chování uživatelů při editacích čí pridavaní potravin.
+Otevřenost aplikace uživatelům nabízí spoustu způsobů, jak na aplikaci zaútočit. Bylo by vhodné vyvinout pro aplikaci sledovací mechanismy, které by detekovaly nevhodné chování uživatelů při editacích čí přidávání potravin.
 
 \subsection{Zálohování}
 Zálohování na serveru zatím probíhá pouze jako záloha celé databáze.
 
 Při nasazení se však ukázalo, že by bylo vhodné mít možnost vrátit potravinu do původního stavu po útoku nějakým škodolibým uživatelem bez vracení celé databáze do určitého stavu v minulosti.
 
-Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlednutí, případně k navrácení do aktualní potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
+Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlednutí, případně k navrácení do aktuální potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
 
 \subsection{UI}
-Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, není toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výberu uživateli.
+Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, není toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výběru uživateli.
 
 \subsection{Výkon serverového stroje}
-Další nedostatek je v~cílovém stroji na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonější stroj.
+Další nedostatek je v~cílovém stroji na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonnější stroj.
 
 \subsection{Rozšíření na další platformy}
 Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvinout pro aplikaci také webovou verzi, která by byla dostupná i na jiných zařízeních, které nedisponují operačním systémem Android.
@@ -1511,7 +1513,7 @@ Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvi
 		.1 src\DTcomment{zdrojové kódy práce}.
 		.1 db.
 		.2 model.mwb\DTcomment{databázový model ve formátu MySQL Workbench}.
-		.2 create.sql\DTcomment{skript vytvořející strukturu databáze ve formátu SQL}.
+		.2 create.sql\DTcomment{skript vytvářející strukturu databáze ve formátu SQL}.
 		.1 doc\DTcomment{zdrojová forma práce ve formátu \LaTeX{}}.
 	}
 \end{figure}
