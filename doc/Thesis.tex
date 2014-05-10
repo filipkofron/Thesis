@@ -1081,11 +1081,19 @@ Pro získání dat inventáře je zde zjednodušené použití úloh z~části T
 
 Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
-Server byl nasazen na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
+\section{Serverová aplikace}
 
-Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí ůložiště, odkud lze při ůtoku na aplikaci provést obnovení dat.
+Serverová aplikace byla nasazena na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
 
-Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat. Později byla aplikace přejmenována pouze na Food Inventory~\cite{food_inventory_playstore}.
+Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí ůložiště, odkud lze v případě ůtoku na aplikaci provést obnovení dat.
+
+Po asi měsící od vydání klientské aplikace je serverová aplikace stále nevytížena, ale s přibívajícím množstvím uživatelů a zadávaných potravin prudce roste zatížení databáze MySQL. Je to také způsobeno další aplikací výsledkem cizí bakalářské práce, jejíž serverovou aplikaci jsem umožnil zdarma hostovat na mém serveru.
+
+\section{Klientská aplikace}
+
+Klientská aplikace byla při dokončnování implementace nasazena na Play Store pod názvem Food Inventory - Beta, odkuď si ji mohl jakýkoliv zájemce vlastnící zařízení s~OS Android verze 2.3 a vyšší nainstalovat ~\cite{food_inventory_playstore}.
+
+Po asi měsící od vydání aplikace si ji nainstalovalo více než 70 lidí.
 
 \chapter{Testování}
 
