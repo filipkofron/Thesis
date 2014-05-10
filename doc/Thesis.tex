@@ -638,6 +638,28 @@ Položky odpovědi:
 \subsubsection{KeepAlive}
 Příkaz udržující spojení po dobu od posledního, neobsahuje žádné atributy.
 
+\subsection{Popis vnitřního zpracování zprávy protokolu}
+
+Samotná struktura protokolu nepopisuje, jak bude se zprávami zacházeno. Protože by tyto informace mohli důležité pro čtenáře, který by se případně chtěl přidat do dalšího vývoje aplikace a rozšiřovat ji o další prvky komunikace, rozhodl jsem se proto níže zjednodušeně popsat vnitřní zpracování zprávy protokolu při komunikaci.
+
+\subsubsection{Zpracování zprávy v klientské aplikaci}
+
+Základem je abstraktní třída \textit{Message}, kterou jednotlivé typy zpráv oddědí. Tato třída tyto potomky při statické inicializaci načte a každý potomek třídy sdělí svůj identifikátor, podle kterého se potom bude moci polymorfně instancovat ze síťového proudu.
+
+Jako první musí klient při určité akci vytvořit příslušnou zprávu a poslat ji serveru. Tuto činnost zajišťuje třída \textit{Communicator}, kterou lze popsat jako fasádu, která svým rozhraním zjednodušeně zpřístupňuje všechny akce, které souvisí se serverem. Voláním příslušných statických metod této třídy se vytvoří objekt zprávy, který se dále pomocí třídy \textit{JSONSender} pošle serveru.
+
+V opačném případě se čeká, dokud třída \textit{JSONReceiver} neobdrží zprávu. Tato třída se nainstancuje podle identifikátoru zprávy, která je definována v protokolu výše.
+
+Jelikož je komunikace synchronní, je ze strany serveru očekáván pouze jediný typ odpovědi na každý požadavek. Jakákoliv jiná zpráva vede k chybě a k novému připojení k serveru.
+
+\subsubsection{Zpracování zprávy v serverové aplikaci}
+
+Na straně serveru je zpracování poněkud rozdílné. Základem je znovu abstraktní třída \textit{Message}, která má podobné vlastnosti jako ta v klientovi. Třída \textit{Message} v sobě polymorfně implementuje metodu \textit{createHandler()}, která vrací objekt typu potomka abstraktní třídy \textit{Handler}. V těchto třídách je zajištěno věškeré zpracování určitého požadavku a nakonec i poslání odpovědi klientovi.
+
+Na začátku výměny zprávy s klientem je třeba načíst tu od klienta. Tím je jeho požadavek. V ten moment se deserializace zprávy do JSON formátu pomocí třídy \textit{BufferReader} a následné postavení správného potomka třídy \textit{Message} z formátu JSON získá objekt zprávy, který poskytne instanci potomka třídy \textit{Handler}. Na ten se zavolá metoda \textit{handle()}, která příslušně odpoví klientovi. V jiném případě dojde k chybě a server násilně ukončí spojení s klientem.
+
+Při odesílání zprávy se využije třídy \textit{MessageSender}, která poskytnutou zprávu převede do JSON formátu a následně ji serializuje do síťového proudu směrem ke klientovi.
+
 \section{Server}
 
 Z~výše uvedených požadavků lze vypsat tyto vlastnosti, které musí server splňovat:
