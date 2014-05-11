@@ -2,13 +2,6 @@
 Uvod - rozsirit
 
 2)
-___Analyza
-rozdelit kategorie, pozadavky - vice rozepsat
-
-Kudy putuje zprava
-
-
-keywords - seznam
 
 \hypersetup
 
