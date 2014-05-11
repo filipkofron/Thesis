@@ -23,6 +23,9 @@ class ServerException;
 
 #include <string>
 
+/*!
+ * The ServerException class is raised only on severe server errors.
+ */
 class ServerException
 {
 private:

@@ -34,7 +34,7 @@ public:
     virtual ~Handler(); //!< virual destructor so that childs can be called as well
     
     /*!
-     * handle method is called by client thread to handle a request.
+     * handle method is called by the client thread to handle a request.
      * The method is given the client context
      */
     virtual void handle(Context &context) = 0;

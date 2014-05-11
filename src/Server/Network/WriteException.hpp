@@ -23,6 +23,9 @@ class WriteException;
 
 #include <string>
 
+/*!
+ * The WriteException class is raised during write operations.
+ */
 class WriteException
 {
 public:

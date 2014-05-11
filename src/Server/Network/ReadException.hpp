@@ -23,6 +23,9 @@ class ReadException;
 
 #include <string>
 
+/*!
+ * The ReadException class is raised during read operations.
+ */
 class ReadException
 {
 public:

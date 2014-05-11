@@ -24,12 +24,29 @@ class Log;
 #include <ostream>
 #include <fstream>
 
+/*!
+ * \brief The Log class provides very basic logging methods.
+ */
 class Log
 {
 private:
 public:
+    /*!
+     * \brief info prints an informative message, defaults to standard output stream
+     * \param msg the printed message
+     */
     static void info(const std::string &msg);
+
+    /*!
+     * \brief debug prints a debug message, defaults to standard output stream
+     * \param msg the printed message
+     */
     static void debug(const std::string &msg);
+
+    /*!
+     * \brief error prints an error message, defaults to standard error stream
+     * \param msg the printed message
+     */
     static void error(const std::string &msg);
 };
 

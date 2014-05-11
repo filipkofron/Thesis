@@ -24,6 +24,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sstream>
 #include <iomanip>
 
+/*!
+ * \brief The RandomInitializer class
+ */
 class RandomInitializer
 {
 public:
@@ -32,6 +35,11 @@ public:
     void check();
 };
 
+/*!
+ * \brief generateRandomHexaString generates random hexadecimal string
+ * \param byteLen the byte length of random data converted to hexa string
+ * \return the hexadecimal randomized string of 2 times the size of byteLen param
+ */
 std::string generateRandomHexaString(const int &byteLen);
 
 #endif

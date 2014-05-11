@@ -25,17 +25,55 @@ class Message;
 #include <jsoncpp/json/value.h>
 #include "../Handler/Handler.hpp"
 
+/*!
+ * The Message is an abstract class providing an interface to work with a message.
+ *
+ * The class is supposed to be able to convert to JSON representation and back from it.
+ * All child messages must be registered in the dejsonize static method, so the classes can be
+ * deserialized from the network./
+ */
 class Message
 {
 protected:
+    /*!
+     * \brief Initializes message.
+     */
     Message();
+
+    /*!
+     * \brief _dejsonize dejsonizes the message from the given content object, which must contain
+     * all the message specific atributes
+     * \param content the message specific content of atributes
+     */
     virtual void _dejsonize(Json::Value &content) = 0;
+
+    /*!
+     * \brief _jsonize jsonizes this message to the given content object, which must set all
+     * the message specific atributes directly inside it.
+     * \param content
+     */
     virtual void _jsonize(Json::Value &content) = 0;
 
 public:
+    /*!
+     * \brief getHeader retrieves the message header, the message name.
+     * \return the message header
+     */
     virtual std::string getHeader() = 0;
+
+    /*!
+     * \brief ~Message made virtual so all child message destructors can be called
+     */
     virtual ~Message();
 
+    /*!
+     * \brief dejsonize dejsonizes a given message in the json format, the method will itself
+     * choose the correct child message and dejsonize by it.
+     * \param root the object containing the message header and content
+     * \return an instance of message or null on error
+     *
+     * An exception can be raised from the JSONCpp library.
+     */
     static Message *dejsonize(Json::Value &root);
     virtual void jsonize(Json::Value &root) final;
     virtual Handler *createHandler() = 0;

@@ -24,9 +24,18 @@ class MessageSender;
 #include "../Protocol/Message.hpp"
 #include "../ConnectedClient/Context.hpp"
 
+/*!
+ * The MessageSender class provides sending of a message to a given client's socket
+ * from a given client's context.
+ */
 class MessageSender
 {
 public:
+    /*!
+     * \brief sendMessage sends the given message
+     * \param context client's context
+     * \param message message to be sent
+     */
     static void sendMessage(Context &context, Message &message);
 };
 

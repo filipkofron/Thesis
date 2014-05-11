@@ -27,8 +27,24 @@ class Date;
 class Date
 {
 public:
+    /*!
+     * \brief unixTimeFromMysqlString converts MySQL Date format encoded in string to unix time in miliseconds
+     * \param mysql date format encoded in string
+     * \return unix time in miliseconds
+     */
     static int64_t unixTimeFromMysqlString(const std::string &s);
+
+    /*!
+     * \brief unixTimeToMysqlString converts MySQL Date format encoded in string from unix time in miliseconds
+     * \param unix time in miliseconds
+     * \return mysql date format encoded in string
+     */
     static std::string unixTimeToMysqlString(const int64_t &t);
+
+    /*!
+     * \brief currentTimeMilis calculates the current unix time in miliseconds on server
+     * \return unix time in miliseconds
+     */
     static int64_t currentTimeMilis();
 };
 

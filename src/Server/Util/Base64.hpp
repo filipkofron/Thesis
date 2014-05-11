@@ -86,8 +86,26 @@
 #include <string>
 #include <vector>
 
+/*!
+ * \brief Base64decode_len tells the plain length of the base64 encoded data
+ * \param bufcoded the encoded data byte array
+ * \return the plain length of base64 encoded data
+ */
 int Base64decode_len(const char *bufcoded);
+
+/*!
+ * \brief Base64decode decodes base64 encoded data to plain data
+ * \param bufplain a properly allocated array of bytes
+ * \param bufcoded encoded data byte array
+ * \return
+ */
 int Base64decode(char *bufplain, const char *bufcoded);
+
+/*!
+ * \brief Base64encode_len tells the encoded length of the base64 decoded data
+ * \param len the plain data length
+ * \return the encoded data length
+ */
 int Base64encode_len(int len);
 int Base64encode(char *encoded, const char *string, int len);
 

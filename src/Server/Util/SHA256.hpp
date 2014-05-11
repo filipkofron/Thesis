@@ -28,6 +28,11 @@ extern "C"
     #include <openssl/sha.h>
 }
 
+/*!
+ * \brief sha256 calculates the sha256 hash of the given plaintext
+ * \param plaintext the given plaintext
+ * \return the calculated hash
+ */
 std::string sha256(const std::string &plaintext);
 
 #endif

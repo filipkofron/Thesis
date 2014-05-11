@@ -31,29 +31,32 @@ class Server;
 
 #include "../ConnectedClient/Context.hpp"
 
+/*!
+ * The Server class encapsulates basic socket server with handling of multiple clients using threads.
+ */
 class Server
 {
 private:
-    std::map<int, std::shared_ptr<Context>> clients;
-    std::deque<std::shared_ptr<Context>> finishedContexts;
-    std::mutex clientMutex;
-    int listenSD;
-    bool stopped;
-    sockaddr_in addr;
-    timeval acceptTimeout;
-    uint64_t clientNum;
-    void addrToStr(char *buffer, int bufLen, const sockaddr_in &addr);
-    void handleClient(int clientSD, sockaddr_in clientAddr);
-    void clearFinishedContexts();
+    std::map<int, std::shared_ptr<Context>> clients; //!< map of clients mapped by their socket descriptors
+    std::deque<std::shared_ptr<Context>> finishedContexts; //!< contexts from clients that have already finished (are safely disconnected)
+    std::mutex clientMutex; //!< mutex for handling clients
+    int listenSD; //!< socket descriptor for server to listen for clients
+    bool stopped; //!< when set, the server will shutdown at the next timeout
+    sockaddr_in addr; //!< server's address to bind to
+    timeval acceptTimeout; //!< timeout for accept loop
+    uint64_t clientNum; //!< the number of clients connected during the whole runtime
+    void addrToStr(char *buffer, int bufLen, const sockaddr_in &addr); //!< disambless the binary format of the address to readable string
+    void handleClient(int clientSD, sockaddr_in clientAddr); //!< called upon accepting a client and gathering its address
+    void clearFinishedContexts(); //!< clears all finished clients' contexts
 public:
-    Server();
-    void initialize();
-    void run();
-    void setStopped(const bool &stopped);
-    std::mutex &getClientMutex();
-    std::map<int, std::shared_ptr<Context>> &getClients();
-    std::deque<std::shared_ptr<Context>> &getFinishedContexts();
-    const uint64_t &getClientNum();
+    Server(); //!< initializes member variables
+    void initialize(); //!< initializes the server (binds the socket)
+    void run(); //!< runs the accepting loop (blocking until the server is shutdown)
+    void setStopped(const bool &stopped); //!< sets the server to stop state, which will cause the server to shutdown upon next accept timeout
+    std::mutex &getClientMutex(); //!< retrieves the mutex to handle clients, needed in the client's thread to return the finished context
+    std::map<int, std::shared_ptr<Context>> &getClients(); //!< retrieves all clients map
+    std::deque<std::shared_ptr<Context>> &getFinishedContexts(); //!< retrieves the deque of all finished contexts
+    const uint64_t &getClientNum(); //!< retrieves the number of clients connected during the whole server runtime
 };
 
 #endif
