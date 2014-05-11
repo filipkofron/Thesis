@@ -95,7 +95,7 @@ Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou v�
 
 V~počátku tvorby této práce a implementace aplikace nebylo příliš mnoho konkurenčních aplikací k~nalezení. Jak se však později ukázalo, vzniklo a rozšířilo se v průběhu tvorby této práce několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich zmíňky je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
+Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich přidání je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
 
 Všechny následující aplikace lze podle jejich názvu nalézt na Google Play Store ~\cite{play_store}.
 
@@ -425,7 +425,7 @@ Různé knihovny implementují tyto formáty i do C++, které jejich podporu ve 
 
 \subsection{Struktura protokolu}
 
-Protokol budou tvořit zprávy, které budou mít pevný tvar. Kvůli možnosti budoucího vylepšení protokolu například do komprimované podoby a jednoduchosti jeho načtení ze síťového proudu je vhodné poslat přesný počet bytů každé zprávy v~pevně daném pořadí. Zpráva bude mít teoreticky neomezenou velikost, avšak server bude mít možnost tuto velikost omezit kvůli zabránění zahlcení serveru jednoduchým útokem, který by zaplnil celou dostupnou pamět a způsobil pád serveru. Maximální velikost zprávy bude možné nastavit v~serveru a bude to také hodnota, která s~dalšími vlastnostmi určí maximální množství uživatelů, který je server schopen v~extrémním případě obsloužit.
+Protokol budou tvořit zprávy, které budou mít pevný tvar. Kvůli možnosti budoucího vylepšení protokolu například do komprimované podoby a jednoduchosti jeho načtení ze síťového proudu je vhodné poslat přesný počet bytů každé zprávy v~pevně daném pořadí. Zpráva bude mít teoreticky neomezenou velikost, avšak server bude mít možnost tuto velikost omezit kvůli zabránění zahlcení serveru jednoduchým útokem, který by zaplnil celou dostupnou paměť a způsobil pád serveru. Maximální velikost zprávy bude možné nastavit v~serveru a bude to také hodnota, která s~dalšími vlastnostmi určí maximální množství uživatelů, který je server schopen v~extrémním případě obsloužit.
 
 Komunikaci budou tvořit zprávy přenesené v~přesném pořadí jako:
 
@@ -654,7 +654,7 @@ Jelikož je komunikace synchronní, je ze strany serveru očekáván pouze jedin
 
 \subsubsection{Zpracování zprávy v serverové aplikaci}
 
-Na straně serveru je zpracování poněkud rozdílné. Základem je znovu abstraktní třída \textit{Message}, která má podobné vlastnosti jako ta v klientovi. Třída \textit{Message} v sobě polymorfně implementuje metodu \textit{createHandler()}, která vrací objekt typu potomka abstraktní třídy \textit{Handler}. V těchto třídách je zajištěno věškeré zpracování určitého požadavku a nakonec i poslání odpovědi klientovi.
+Na straně serveru je zpracování poněkud rozdílné. Základem je znovu abstraktní třída \textit{Message}, která má podobné vlastnosti jako ta v klientovi. Třída \textit{Message} v sobě polymorfně implementuje metodu \textit{createHandler()}, která vrací objekt typu potomka abstraktní třídy \textit{Handler}. V těchto třídách je zajištěno veškeré zpracování určitého požadavku a nakonec i poslání odpovědi klientovi.
 
 Na začátku výměny zprávy s klientem je třeba načíst tu od klienta. Tím je jeho požadavek. V ten moment se deserializace zprávy do JSON formátu pomocí třídy \textit{BufferReader} a následné postavení správného potomka třídy \textit{Message} z formátu JSON získá objekt zprávy, který poskytne instanci potomka třídy \textit{Handler}. Na ten se zavolá metoda \textit{handle()}, která příslušně odpoví klientovi. V jiném případě dojde k chybě a server násilně ukončí spojení s klientem.
 
