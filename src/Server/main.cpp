@@ -16,18 +16,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cppconn/driver.h>
-#include <cppconn/connection.h>
-#include <cppconn/exception.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
 #include <jsoncpp/json/writer.h>
-#include "Entity/DAO/DAOException.hpp"
-#include "Entity/Food.hpp"
-#include "Util/SHA256.hpp"
-#include "Protocol/LoginRequest.hpp"
-#include "Database/MySQLManager.hpp"
-#include "Database/DAO/UserDAOMySQL.hpp"
 #include "Network/Server.hpp"
 #include "Util/Log.hpp"
 
@@ -36,6 +25,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 using namespace std;
 
+/*!
+ * \brief json_exception_test test for exceptions from JSON, if crash occurs, the JSON doesn't provide exception throwing
+ */
 void json_exception_test()
 {
     Log::info("Checking whether the JSON library throws exceptions, thus catching them is possible.");
@@ -61,12 +53,19 @@ void json_exception_test()
 
 static Server server;
 
+/*!
+ * \brief onSigInt called on a signal
+ * \param s the signal number
+ */
 static void onSigInt(int s)
 {
     Log::info("Kill signal received! => Stopping server.");
     server.setStopped(true);
 }
 
+/*!
+ * \brief initSignals initializes handling of signals
+ */
 static void initSignals()
 {
     struct sigaction sigIntHandler;
@@ -79,6 +78,11 @@ static void initSignals()
     signal(SIGPIPE, SIG_IGN);
 }
 
+
+/*!
+ * \brief main initializes and executes the server
+ * \return 0 all the time
+ */
 int main()
 {
     initSignals();

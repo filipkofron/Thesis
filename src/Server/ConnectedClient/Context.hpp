@@ -29,39 +29,42 @@ class Context;
 
 #define CONTEXT_ADDR_BUFFER_LEN 16
 
+/*!
+ * The Context class is a holder class for a connected client's context.
+ */
 class Context
 {
 private:
-    char addr[CONTEXT_ADDR_BUFFER_LEN];
-    int port;
-    bool finished;
-    int clientSD;
-    bool loggedIn;
-    std::string username;
-    int userId;
-    Buffer buffer;
-    Server *server;
-    std::shared_ptr<std::thread> thread;
+    char addr[CONTEXT_ADDR_BUFFER_LEN]; //!< client's address info
+    int port; //!< the client's port number
+    bool finished; //!< the communication with client finished
+    int clientSD; //!< client's socket descriptor
+    bool loggedIn; //!< whether the client is logged in
+    std::string username; //!< client's username (available when logged in)
+    int userId; //!< client's user id (available when logged in)
+    Buffer buffer; //!< the client's communication buffer
+    Server *server; //!< the pointer to server object, for releasing itself only
+    std::shared_ptr<std::thread> thread; //!< the client's handling thread
 public:
-    Context();
-    void setClientSD(const int &clientSD);
-    const int &getClientSD();
-    Buffer &getBuffer();
-    void setServer(Server *server);
-    Server *getServer();
-    void setThread(std::shared_ptr<std::thread> thread);
-    std::shared_ptr<std::thread> getThread();
-    char *getAddr();
-    void setPort(const int &port);
-    const int &getPort();
-    const bool &getFinished();
-    void setFinished(const bool &finished);
-    const bool &getLoggedIn();
-    void setLoggedIn(const bool &loggedIn);
-    const std::string &getUsername();
-    void setUsername(const std::string &username);
-    const int &getUserId();
-    void setUserId(const int &userId);
+    Context(); //!< initializes vars
+    void setClientSD(const int &clientSD); //!< sets the client's socket descriptor
+    const int &getClientSD(); //!< retrieves the client's socket descriptor
+    Buffer &getBuffer(); //!< retrieves the buffer
+    void setServer(Server *server); //!< sets the pointer to server object
+    Server *getServer(); //!< retrieves the pointer to server object
+    void setThread(std::shared_ptr<std::thread> thread); //!< sets the smart ptr to client's handling thread
+    std::shared_ptr<std::thread> getThread(); //!< retrieves the smart ptr to client's handling thread
+    char *getAddr(); //!< retrieves the client's addr binary data
+    void setPort(const int &port); //!< sets the client's port number
+    const int &getPort(); //!< retrieves the client's port number
+    const bool &getFinished(); //!< retrieves whether the client has finished yet
+    void setFinished(const bool &finished); //!< sets the finished state for client
+    const bool &getLoggedIn(); //!< retrieves whether the client is logged in
+    void setLoggedIn(const bool &loggedIn); //!< sets when the client is logged in
+    const std::string &getUsername(); //!< retrieves the client's username
+    void setUsername(const std::string &username); //!< sets the client's username
+    const int &getUserId(); //!< retrieves the client's user id
+    void setUserId(const int &userId); //!< sets retrieves the client's user id
 };
 
 #endif

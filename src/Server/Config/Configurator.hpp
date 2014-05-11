@@ -24,27 +24,37 @@ class Configurator;
 #include <jsoncpp/json/value.h>
 #include <jsoncpp/json/reader.h>
 
+//! The Configurator class
+/*!
+ * The Configurator class introduces several methods to retrieve specific
+ * configuration of the server from file "settings.json" in PATH variable.
+ *
+ * When no file is found, the Configurator loads defaults as specified below.
+ */
 class Configurator
 {
 private:
-    Json::Value root;
+    Json::Value root; //!< root of the JSON tree
 public:
-    Configurator();
-    static Configurator *getInstance();
-    void reload();
+    Configurator(); //!< The default constructor, calls reload()
+    static Configurator *getInstance(); //!< Retrieves the static instance of this class
+    void reload(); //!< Reloads the configuration from settings.json or uses defaults below
 
-    std::string getMySQLServerAddress();
-    std::string getMySQLServerUsername();
-    std::string getMySQLServerPassword();
-    std::string getMySQLServerDatabase();
-    std::string getImageDir();
-    std::string getLogFile();
-    int getNetworkClientMaxBuffer();
-    int getNetworkServerListenPort();
-    int getNetworkServerBackLog();
-    int getNetworkServerMaxClients();
+    std::string getMySQLServerAddress(); //!< Retrieves MySQL Server address
+    std::string getMySQLServerUsername(); //!< Retrieves MySQL Server Username
+    std::string getMySQLServerPassword(); //!< Retrieves MySQL Server Plain Password
+    std::string getMySQLServerDatabase(); //!< Retrieves MySQL Server Database name
+    std::string getImageDir(); //!< Retrieves the directory for storing images
+    std::string getLogFile(); //!< Retrieves the log file path
+    int getNetworkClientMaxBuffer(); //!< Retrieves the MAX number of bytes per client buffer
+    int getNetworkServerListenPort(); //!< Retrieves server listening port number
+    int getNetworkServerBackLog(); //!< Retrieves the max number of connections in the backlog
+    int getNetworkServerMaxClients(); //!< Retrieves the MAX number of clients the server accepts
 };
 
+/*!
+ * The defaults that are loaded when the settings.json is not available.
+ */
 #define DEFAULT_JSON_DOCUMENT \
         "{ " \
         "\"database\" : {" \

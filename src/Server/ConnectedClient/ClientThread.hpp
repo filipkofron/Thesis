@@ -23,11 +23,23 @@ class ClientThread;
 
 #include "Context.hpp"
 
+/*!
+ * The ClientThread class provides the server with thread methods
+ * for working with client.
+ */
 class ClientThread
 {
 public:
+    /*!
+     * \brief run (to be run in a thread) executes the handling of client with given context.
+     * \param context is the given client's context.
+     */
     static void run(std::shared_ptr<Context> context);
 private:
+    /*!
+     * \brief communicate starts the network communication with the given client context.
+     * \param context is the give client's context.
+     */
     static void communicate(std::shared_ptr<Context> context);
 };
 

@@ -23,6 +23,9 @@ class BufferException;
 
 #include <string>
 
+/*!
+ * The BufferException class specifies an exception with message.
+ */
 class BufferException
 {
 private:
