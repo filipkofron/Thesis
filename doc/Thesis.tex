@@ -399,10 +399,12 @@ V atributu \textbf{use\_by} je uložen datum, do kterého by se měla daná potr
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=1.20]{diagrams/relational_model}
+  \includegraphics[scale=1.05]{diagrams/relational_model.pdf}
   \caption{Relační model}
   \label{fig:RelationalModel}
 \end{figure}
+
+\clearpage
 
 
 \section{Komunikační formát a protokol}
@@ -718,14 +720,16 @@ Při návrhu jsem dbal především na požadavek jednoduchosti. Tvorba uživate
 
 Pro běžný návrh UI jsou používány wireframy. Ty jsem však vynechal a místo toho jsem vyvíjel UI přímo pomocí vývojářských nástrojů, které mi umožnili získat přesnější podobu rozhraní a získat přehled o tom, jaké prvky UI lze využít pro dosažení cílů návrhu. Tím jsem však vývoj nijak nezpomalil, neboť z vlastní zkušenosti vím, že tvorba wireframů je přibližně stejně složitá jako rozmístění prvků UI v těchto nástrojích.
 
-Dále je zobrazen UI diagram ~\ref{fig:UIDiagram}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. Poté jsou ještě níže popsány vybrané obrazovky zajímavé pro uživatele.
+Dále je zobrazen Task Graph ~\ref{fig:TaskGraph}, ve kterém je možné spatřit jednotlivé názvy obrazovek a akce, pomocí kterých se uživatel mezi obrazovkami naviguje. V zaoblených obdélnících jsou zobrazeny obrazovky a v hranatých akce. Zpětné šipky jsou pro přehlednost vynechány. Z obrazovek se však lze dostat ve směru při průchodu zleva doprava opačným směrem zpátky pomocí tlačítka zpět.
 
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.70]{diagrams/ui.pdf}
-  \caption{UI Diagram s obrazovkami v zaoblených obdélnících a akcemi ve zbývajících. Zpětné šipky jsou pro přehlednost vynechány. Z obrazovek se však lze dostat ve směru při průchodu zleva doprava opačným směrem zpátky pomocí tlačítka zpět.}
-  \label{fig:UIDiagram}
+  \caption{Task Graph s obrazovkami a akcemi.}
+  \label{fig:TaskGraph}
 \end{figure}
+
+Dále jsou popsány vybrané obrazovky zajímavé pro uživatele.
 
 \clearpage
 
