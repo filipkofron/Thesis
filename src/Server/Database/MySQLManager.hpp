@@ -27,33 +27,50 @@ class MySQLManager;
 #include <cppconn/driver.h>
 #include <cppconn/connection.h>
 
+/*!
+ * The MySQLManager class provides connection to the MySQL server.
+ * The class allows to cache existing connections.
+ * The functionality of this class cannot be accesed directly,
+ * using the ConnectionHolder provides this access and makes sure
+ * that the connections are all returned upon the holder destruction.
+ */
 class MySQLManager
 {
 private:
-    std::mutex queueMutex;
-    std::queue<sql::Connection *> connections;
-    sql::Driver *driver;
-    sql::Connection *getConnection();
-    sql::Connection *openNewConnection();
-    void returnConnection(sql::Connection *conn);
+    std::mutex queueMutex; //!< mutex for the queue operations
+    std::queue<sql::Connection *> connections; //!< queue of MySQL connections
+    sql::Driver *driver; //!< the driver instance
+    sql::Connection *getConnection(); //!< retrieves a connection from the queue or calls the openNewConnection to create new connection
+    sql::Connection *openNewConnection(); //!< creates new connection go the MySQL Server
+    void returnConnection(sql::Connection *conn); //!< returns a MySQL connection back to the queue
 public:
     class ConnectionHolder
     {
     private:
         MySQLManager *mysqlManager;
     public:
-        ConnectionHolder(MySQLManager *mysqlManager);
-        ~ConnectionHolder();
-        sql::Connection * const conn;
+        ConnectionHolder(MySQLManager *mysqlManager); //!< constructs the Holder capturing an instance of MySQL Manager and retrieving an instance of MySQL connection
+        ~ConnectionHolder(); //!< returns back the retrieved connection to the MySQL manager
+        sql::Connection * const conn; //!< the MySQL connetion
     };
 
     MySQLManager();
     ~MySQLManager();
 
+		/*!
+		 * Returns the last generated id from the given MySQL Connection.
+		 * The insert query must be the only called before this method
+		 */
     static int lastGeneratedId(sql::Connection *conn);
 
+		/*!
+		 * Closes all MySQL connections, on server shutdown for example
+		 */
     void closeAll();
 
+		/*!
+		 * Returns the default static instance of MySQL Manager
+		 */
     static MySQLManager *getInstance();
 };
 

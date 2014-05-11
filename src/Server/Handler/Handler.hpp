@@ -23,10 +23,20 @@ class Handler;
 
 #include "../ConnectedClient/Context.hpp"
 
+/*!
+ * The Handler is an abstract class defining basic Hanfler interface.
+ * A handler is responsible for handling a specific requestfro the server.
+ * A handler is responsible for carrying the request data from its creation.
+ */
 class Handler
 {
 public:
-    virtual ~Handler();
+    virtual ~Handler(); //!< virual destructor so that childs can be called as well
+    
+    /*!
+     * handle method is called by client thread to handle a request.
+     * The method is given the client context
+     */
     virtual void handle(Context &context) = 0;
 };
 

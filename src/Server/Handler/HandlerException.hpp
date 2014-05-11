@@ -23,6 +23,9 @@ class HandlerException;
 
 #include <string>
 
+/*!
+ * A handler exception class
+ */
 class HandlerException
 {
 public:
