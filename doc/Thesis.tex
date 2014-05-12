@@ -80,7 +80,7 @@ V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení 
 
 Proces vývoje musí projít několika následujícími fázemi, při kterých se analyzují všechny aspekty aplikace, které je potřeba znát při návrhu a výsledné implementace i ověření její funkčnosti testováním.
 
-Důraz analýzy je kladu především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
+Důraz analýzy je kladen především na potřeby uživatelů, neboť je nutné zaručit minimální nutnou funkcionalitu, která výrazně ovlivní náročnost rozhraní pro pochopení použití i jeho rychlost.
 
 \section{Analýza konkurence}
 
@@ -105,7 +105,7 @@ Aplikace Best Before je zdarma dostupná jak pro zařízení s~iOS, tak pro zař
 
 Samotná funkcionalita aplikace je omezena a čistě přizpůsobena svému účelu. Aplikace disponuje seznamem potravin seřazeným v~pořadí, jak jednotlivým potravinám vyprší spotřební lhůta. Přidání potraviny do aplikace je umožněno tlačítkem v~horním pravém rohu, které při stisku zobrazí jednoduchý formulář, ve kterém lze nastavit obrázek potraviny, název, místo uložení a z~dialogu vybrat datum spotřeby. Nelze však zadat již existující a zadanou potravinu. Pokud uživatel zadává více potravin, může takto strávit poměrně dlouhou dobu.
 
-Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tudíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umístilo na hodnotě 3.9. Vzhledem ke zkušenosti s používáním je tato hodnota spíše překvapivá.
+Z~vlastního testování však vyšly najevo zásadní nedostatky v~ošetření různých chyb a na stabilitě. Na žádném z~použitých zařízení nebylo možné přidat obrázek potraviny a při každém pokusu o uložení potraviny došlo k~pádu. Potravina se ve 4 z~5-ti pokusů přidala, v~jednom případě však došlo ke kompletnímu smazání všech ostatních potravin. Aplikace byla tudíž nepoužitelná. Z~hodnocení na Play Store vyplývá, že některým uživatelům aplikace funguje bez problému. Jiní naopak hlásí stejné problémy. Celkové hodnocení aplikace na Play Store se v~rozsahu 1 až 5 umístilo na hodnotě 3.9. Vzhledem ke zkušenosti s používáním je tato hodnota spíše překvapivá.
 
 Ve výsledku lze z~této aplikace převzít zejména pozitivní přístup uživatelů k~hezky nastylovanému rozhraní, které se zdá být jediným důvodem nadprůměrného hodnocení. Ačkoliv je toto pouze můj subjektivní názor, pro ověření by však bylo nutné aplikaci otestovat mezi širší skupinou uživatelů. Tato činnost se mi však nezdá příliš přínosná.
 
@@ -221,7 +221,7 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
 
 OS Android se na cílových zařízeních nachází v~různých verzích. Některé jsou příliš staré na to, aby je bylo nutné podporovat, jiné jsou naopak ještě stále rozšířené. Pro přehled o~rozšířených verzích lze shlédnout Android Dashboards ~\cite{dashboards}. Jak lze na diagramu vidět, od verze Android 2.3.3 a výše je rozšíření jednotlivých verzí významné, tedy má smysl tyto verze podporovat. To však s~sebou přináší některé odlišnosti a je třeba brát v~úvahu, že některé prvky API na nich nejsou k~dispozici. Tento fakt se snaží vyřešit Support knihovny~\cite{support}, které do starších verzí částečně přinášejí vlastnosti novějších API. V~průběhu implementace se bude dbát na průběžné testování na starších verzích, aby bylo dosaženo co nejlepší podpory starších verzí OS Android.
 
-Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN. Kódy jsou číselné a mohou nabývat délky od 8 do 14ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
+Čárové kódy na obalech potravin bývají různého formátu. Obecně se na nich objevují kódy typu GTIN. Kódy jsou číselné a mohou nabývat délky od 8 do 14-ti číslic podle variant, které mají v názvu tento počet přímo zaznamenaný. Spolu se staršími názvy je jednotlivě vypíšu v následující tabulce\ref{table:carkod}.
 \begin{table}[h]
       \begin{tabular}{|l|l|l|}
       \hline
@@ -238,7 +238,7 @@ Kratší kódy lze snadno převést na delší doplněním nul do celkového po�
 
 \subsection{Čtečka čárových kódu}
 
-Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovouto funckionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v~této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
+Požadavek na čtení čárového kódu vyžaduje použití knihovny, která takovouto funkcionalitu zvládne co nejlépe. Protože si práce klade za cíl využívat open-source software, nabízí se 2 známé otevřené knihovny. Předmětem této sekce bude popsat dostupné informace, zanalyzovat jejich praktické využití v~této aplikaci a vytvoření jednoduchého prototypu, který bude simulovat integraci do hotové aplikace.
 
 Tuto sekci jsem zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přináší analýzu knihoven, kterou pak lze dále použít v~návrhu a implementaci.
 
@@ -256,7 +256,7 @@ Při vyzkoušení jednoduché ukázky knihovny vyšlo najevo, že nabízí niž�
 
 Od autorů teamu ZXing (``Zebra Crossing'') této knihovny je na Play Store k~dispozici aplikace Barcode Scanner~\cite{barcode_scanner} využívající tuto knihovnu pro skenování širokého množství čárových i jiných vizuálních kódů. Tato knihovna je šířena pod licencí Apache License Version 2.0 a oproti knihovně Zbar je napsána v~jazyce Java. Touto cestou je knihovna snadno přenositelná do všech platforem podporujících Java byte kód nebo jiné, do kterých lze byte kód Javy převést. Tím je například Dalvik Virtual Machine používající Android.
 
-Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódů, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře poslouží jako užitečný zdroj informací o~implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožnuje s~výsledky provádět spoustu činností, jako vyhledávat kód v~různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle mě nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s~knihovnou podporuje, takže použití bude velice úzké, čímž jsem došel k~závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
+Aplikace má sice vetší nároky na výkon zařízení, je však schopná číst velmi mnoho kódů, jejichž deaktivací se výkon dekódování obrazu ještě zvýší. Aplikace Barcode Scanner velmi dobře poslouží jako užitečný zdroj informací o~implementaci knihovny do vlastní aplikace. Aby byla aplikace co nejvíce užitečná, umožňuje s~výsledky provádět spoustu činností, jako vyhledávat kód v~různých databázích a rovnou zobrazovat výsledky bez externí aplikace. Kód této aplikace je tímto velice rozsáhlý a pro účely aplikace této práce je zbytečný, podle mě nepřehledný a tím pádem i špatně udržovatelný. Kódy GTIN jsou pouze malou podmnožinou všech, které tato aplikace spolu s~knihovnou podporuje, takže použití bude velice úzké, čímž jsem došel k~závěru, že bude vhodné implementovat vlastnosti aplikace a knihovny pouze do úrovně, která je nezbytná pro účely této práce.
 
 Velikou výhodou této knihovny je především aktivní vývoj, lze tudíž do budoucna počítat se spolehlivějším načítáním kódu i vyšší efektivitou knihovny. Veškeré zdrojové kódy knihovny ZXing a její implementující aplikace Barcode Scanner jsou k~dispozici pod stejnou licencí. Je tedy možné využít jakoukoliv část těchto kódu i v~rámci této práce. 
 
@@ -266,7 +266,7 @@ Pro implementaci prototypu jsem zvolil knihovnu ZXing a vhodné části aplikace
 
 \subsubsection{Výsledek implementace}
 
-Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlídnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo od děděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
+Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlédnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
 Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdálenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Oproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
 
@@ -366,7 +366,7 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~prostředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožnuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+Z~prostředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožňuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
 
 Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
 
@@ -376,7 +376,7 @@ Atribut \textbf{message} zaznamenává zprávu editace. V té server ukládá in
 
 \subsection{Food}
 
-\textbf{gtin} zaznamenává kód GTIN v mém vlastním formátu, který tvoří dohromady 15 znaků. První znak označuje typ čárového kódu v pořadí. Tyto znaky mohou být A, B, C, D nebo Z, které přímo odlišují ve stejném pořadí délky GTIN kódů 8, 12, 13 nebo 14 znaků. Zbylých 14 znaků je vždy samotný kód GTIN doplněný o počáteční nuly do celkové délky.
+\textbf{gtin} zaznamenává kód GTIN v mém vlastním formátu, který tvoří dohromady 15 znaků. První znak označuje typ čárového kódu v pořadí. Tyto znaky mohou být A, B, C nebo D, které přímo odlišují ve stejném pořadí délky GTIN kódů 8, 12, 13 nebo 14 znaků. Z v případě chybného kódu. Zbylých 14 znaků je vždy samotný kód GTIN doplněný o počáteční nuly do celkové délky.
 
 \textbf{default\_use\_by} zaznamenává dobu běžné spotřeby v unixovém času v milisekundách. Tento typ formátu jsem zvolil pro jednoduchost uložení časového období a následného počítaní s ním.
 
@@ -507,7 +507,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
   \item \textbf{categoryId} - unikátní identifikátor kategorie
   \item \textbf{vendor} - název výrobce potraviny
   \item \textbf{vendorId} - unikátní identifikátor výrobce potraviny
-  \item \textbf{gtin} - čislo GTIN
+  \item \textbf{gtin} - číslo GTIN
   \item \textbf{imageIds} - pole unikátní identifikátorů obrázků
   \item \textbf{description} - popis potraviny
   \item \textbf{defaultUseBy} - výchozí datum spotřeby
@@ -520,7 +520,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
 \end{itemize}
 
 \subsubsection{GetFoodItem}
-Vyhledá a vrátí množinu potravin podle jména nebo GTIN kódu.
+Vyhledá a vrátí množinu potravin o maximální velikosti 100 prvků podle jména nebo GTIN kódu.
 
 Položky požadavku:
 \begin{itemize}
@@ -543,7 +543,7 @@ Položky odpovědi jsou uloženy v atributu \textbf{items}, disponují následuj
 
 
 \subsubsection{EditInventory}
-Upraví položku inventáře.
+Upraví nebo přidá položku inventáře.
 
 Položky požadavku:
 \begin{itemize}
@@ -551,7 +551,7 @@ Položky požadavku:
   \item \textbf{id} - unikátní identifikátor položky inventáře
   \item \textbf{foodId} - unikátní identifikátor potraviny
   \item \textbf{useBy} - datum spotřeby v unixovém čase v milisekundách
-  \item \textbf{count} - počet položek inventáře, které se mají vytvořit se stejnými parametry
+  \item \textbf{count} - počet položek inventáře, které se mají vytvořit se stejnými parametry (platí v případě že adding je true a v id je správný unikátní klíč)
 \end{itemize}
 
 Položky odpovědi:
@@ -573,7 +573,7 @@ Položky odpovědi:
 \end{itemize}
 
 \subsubsection{EditFood}
-Upraví detail potraviny.
+Upraví nebo přidá detail potraviny.
 
 Položky požadavku jsou shodné s detailem potraviny a analogicky stejná s editací položky inventáře. Neobsahují však pole identifikátorů obrázků a hodnocení uživatelů.
 
@@ -642,11 +642,11 @@ Příkaz udržující spojení po dobu od posledního, neobsahuje žádné atrib
 
 \subsection{Popis vnitřního zpracování zprávy protokolu}
 
-Samotná struktura protokolu nepopisuje, jak bude se zprávami zacházeno. Protože by tyto informace mohli důležité pro čtenáře, který by se případně chtěl přidat do dalšího vývoje aplikace a rozšiřovat ji o další prvky komunikace, rozhodl jsem se proto níže zjednodušeně popsat vnitřní zpracování zprávy protokolu při komunikaci.
+Samotná struktura protokolu nepopisuje, jak bude se zprávami zacházeno. Protože by tyto informace mohli být důležité pro čtenáře, který by se případně chtěl přidat do dalšího vývoje aplikace a rozšiřovat ji o další prvky komunikace, rozhodl jsem se proto níže zjednodušeně popsat vnitřní zpracování zprávy protokolu při komunikaci.
 
 \subsubsection{Zpracování zprávy v klientské aplikaci}
 
-Základem je abstraktní třída \textit{Message}, kterou jednotlivé typy zpráv od dědí. Tato třída tyto potomky při statické inicializaci načte a každý potomek třídy sdělí svůj identifikátor, podle kterého se potom bude moci polymorfně instancovat ze síťového proudu.
+Základem je abstraktní třída \textit{Message}, kterou jednotlivé typy zpráv oddědí. Tato třída tyto potomky při statické inicializaci načte a každý potomek třídy sdělí svůj identifikátor, podle kterého se potom bude moci polymorfně instancovat ze síťového proudu.
 
 Jako první musí klient při určité akci vytvořit příslušnou zprávu a poslat ji serveru. Tuto činnost zajišťuje třída \textit{Communicator}, kterou lze popsat jako fasádu, která svým rozhraním zjednodušeně zpřístupňuje všechny akce, které souvisí se serverem. Voláním příslušných statických metod této třídy se vytvoří objekt zprávy, který se dále pomocí třídy \textit{JSONSender} pošle serveru.
 
@@ -658,7 +658,7 @@ Jelikož je komunikace synchronní, je ze strany serveru očekáván pouze jedin
 
 Na straně serveru je zpracování poněkud rozdílné. Základem je znovu abstraktní třída \textit{Message}, která má podobné vlastnosti jako ta v klientovi. Třída \textit{Message} v sobě polymorfně implementuje metodu \textit{createHandler()}, která vrací objekt typu potomka abstraktní třídy \textit{Handler}. V těchto třídách je zajištěno veškeré zpracování určitého požadavku a nakonec i poslání odpovědi klientovi.
 
-Na začátku výměny zprávy s klientem je třeba načíst tu od klienta. Tím je jeho požadavek. V ten moment se deserializace zprávy do JSON formátu pomocí třídy \textit{BufferReader} a následné postavení správného potomka třídy \textit{Message} z formátu JSON získá objekt zprávy, který poskytne instanci potomka třídy \textit{Handler}. Na ten se zavolá metoda \textit{handle()}, která příslušně odpoví klientovi. V jiném případě dojde k chybě a server násilně ukončí spojení s klientem.
+Na začátku výměny zprávy s klientem je třeba načíst tu od klienta. Tím je jeho požadavek. V ten moment se deserializuje zpráva do JSON formátu pomocí třídy \textit{BufferReader}. Následně třída \textit{Message} zvolí správného potomka a z formátu JSON získá objekt zprávy, který metodou \textit{createHandler()} poskytne instanci potomka třídy \textit{Handler}. Na ten se zavolá metoda \textit{handle()}, která příslušně odpoví klientovi. V jiném případě dojde k chybě a server násilně ukončí spojení s klientem.
 
 Při odesílání zprávy se využije třídy \textit{MessageSender}, která poskytnutou zprávu převede do JSON formátu a následně ji serializuje do síťového proudu směrem ke klientovi.
 
@@ -677,7 +677,7 @@ Následující podsekce popisují zvolené detaily těchto vlastností.
 
 \subsection{C++}
 
-Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru jsem totiž zvolil ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobný na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
+Implementace v~C++ se může zdát jako silně platformově závislá. Opak je však pravdou. Pro implementaci serveru jsem totiž zvolil ISO C++ standard C++11, který mimo jiné přináší multiplatformní podporu multithreading. Dále také umožňuje tvořit snadněji určité konstrukce, které byly dříve obtížnější. Díky těmto vlastnostem by následná implementace serveru měla být jednodušší, neboť není třeba příliš uvažovat o~rozdílech jednotlivých platforem až na vytváření serverového socketu, které je ale velice podobné na všech používaných platformách a jeho přizpůsobení je tím pádem velice jednoduché.
 
 \subsection{Škálovatelnost}
 
@@ -693,7 +693,7 @@ Pro pohodlné a jednoduché použití MySQL v~C++ je vhodné využít rozhraní 
 
 Knihoven podpory JSON pro použití jazykem C++ je mnoho. Nejrozšířenější knihovny, které se mi podařilo nalézt jsou: rapidjson, JsonCpp, LibJSON. Knihovny jsou si velmi podobné, neboť specifikace formátu JSON není příliš rozsáhlá. Po delším prohlížení zdrojových kódů jednotlivých knihoven a jejich příkladů použití jsem si vybral knihovnu JsonCpp, která se mi jevila jako nejjednodušší a nejsrozumitelnější. Tato knihovna umožňuje použití prvků formátu JSON jako objekty a výrazně tak zjednodušuje jejich integraci do serverové aplikace. Knihovna je také multiplatformní.
 
-Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá výjimky pro zachycení nejrůznejších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá.
+Při testování zmíněné knihovny JsonCpp však vyšlo najevo, že knihovna nepoužívá výjimky pro zachycení nejrůznějších chyb. Některé chyby způsobily přímo pád serverové aplikace. Tuto vlastnost tedy bylo třeba povolit. Tato úloha se však ukázala jako velmi jednoduchá.
 
 Jelikož distribuovaná verze JsonCpp, která je běžně dostupná, výjimky nevyhazuje, je třeba do serveru přidat počáteční test, který ověří, zdali je možné odchytit chyby při použití této knihovny. V případě, že tomu tak není, test následně upozorní uživatele, který se server pokouší spustit.
 
@@ -1145,7 +1145,7 @@ Jednotlivé scénáře jsou očíslované tak, jak jsou níže popsány pozorova
 \begin{enumerate}
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí vyhledávání do vašeho inventáře.
     
-    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Uživatel stiskne tlačítko \textit{Search}. Jelikož nedojde k nalezení potraviny, je seznam prázdný. V panelu je však tlačítko s ikonou plus, kterým se po stisknutí objeví editace pro přidání nové potraviny. Zde uživatel vyplní údaje o potravině, stiskněte tlačítko s ikonou diskety pro uložení. Následně se uživatel pokusí potravinu znovu vyhledat, kde se jit potravina zobrazí a uživatel ji přidá do inventáře přes tlačítko s ikonou plus, které zobrazí dialog s potravinou, kde uživatel vyplní datum spotřeby a potvrdí. Tím je potravina přidána jak v databázi potravin, tak v inventáři uživatele.
+    \textbf{Předpokládané řešení}: V menu se klikne na tlačítko \textit{Search food}, které uživatele přepne do stejně nazvané aktivity. Zde se vyplní políčko s názvem potraviny. Uživatel stiskne tlačítko \textit{Search}. Jelikož nedojde k nalezení potraviny, je seznam prázdný. V panelu je však tlačítko s ikonou plus, kterým se po stisknutí objeví editace pro přidání nové potraviny. Zde uživatel vyplní údaje o potravině, stiskněte tlačítko s ikonou diskety pro uložení. Následně se uživatel pokusí potravinu znovu vyhledat, kde se již potravina zobrazí a uživatel ji přidá do inventáře přes tlačítko s ikonou plus, které zobrazí dialog s potravinou, kde uživatel vyplní datum spotřeby a potvrdí. Tím je potravina přidána jak v databázi potravin, tak v inventáři uživatele.
 
   \item Přidejte Vámi zvolenou potravinu, která není v databázi, pomocí skenování čárového kódu do vašeho inventáře.
     
@@ -1271,7 +1271,7 @@ Jednotlivé úkoly:
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
   \item V tomto úkolu se uživateli podařilo dosáhnout řešení přesně podle daného scénáře.
-  \item V tomto úkolu se aplikace ukončila kvůli chybě spojení se serverem. Chybu zřejmě způsobil mobilní internet, který měl v té chvíli slabý signál. Druhý pokus se již však zadařil.
+  \item V tomto úkolu se aplikace ukončila kvůli chybě spojení se serverem. Chybu zřejmě způsobil mobilní internet, který měl v té chvíli slabý signál. Druhý pokus se již však zdařil.
 \end{enumerate}
 
 Odpovědi pro post-test:
@@ -1364,7 +1364,7 @@ Zálohování na serveru zatím probíhá pouze jako záloha celé databáze.
 
 Při nasazení se však ukázalo, že by bylo vhodné mít možnost vrátit potravinu do původního stavu po útoku nějakým škodolibým uživatelem bez vracení celé databáze do určitého stavu v minulosti.
 
-Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlednutí, případně k navrácení do aktuální potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
+Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku její historii. Poté by bylo možné historii uživatelům přímo nabízet k prohlédnutí, případně k navrácení do aktuální potraviny. Také by se tímto daly navrátit škody detekované například automaticky jako spam nebo souvislé poškozování potravin.
 
 \subsection{UI}
 Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, není toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výběru uživateli.
