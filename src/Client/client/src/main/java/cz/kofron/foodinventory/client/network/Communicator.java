@@ -386,7 +386,7 @@ public class Communicator implements ConnectionListener
 			}
 			ConnectionDialogManager.reloadActivity();
 		}
-		catch (IOException ex)
+		catch (Exception ex)
 		{
 			Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
 		}

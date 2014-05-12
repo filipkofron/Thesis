@@ -128,13 +128,20 @@ public class SearchAndAddTask extends AsyncTask<Object, Void, Void> implements S
 	@Override
 	public void onResults(ArrayList<PODResult> results)
 	{
-		if(results == null || results.size() < 1)
+		try
 		{
-			new AddNewFoodDialogFragment(onDone, onAddedFood, gtin).show((FragmentActivity) context);
+			if(results == null || results.size() < 1)
+			{
+				new AddNewFoodDialogFragment(onDone, onAddedFood, gtin).show((FragmentActivity) context);
+			}
+			else
+			{
+				new AddImportedFoodDialogFragment(onDone, onAddedFood, results.get(0)).show((FragmentActivity) context);
+			}
 		}
-		else
+		catch(Exception e)
 		{
-			new AddImportedFoodDialogFragment(onDone, onAddedFood, results.get(0)).show((FragmentActivity) context);
+			e.printStackTrace();
 		}
 	}
 }

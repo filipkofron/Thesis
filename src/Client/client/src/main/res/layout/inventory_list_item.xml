@@ -135,10 +135,12 @@
                     android:layout_gravity="left|center_vertical"
                     android:layout_margin="8dp"
                     android:layout_toRightOf="@+id/image"
-                    android:text="name"
+                    android:text="name of this food test item"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/item_title"
-                    android:typeface="normal"/>
+                    android:typeface="normal"
+                    android:maxWidth="115dp"
+                    android:maxLines="2"/>
             </RelativeLayout>
         </LinearLayout>
 

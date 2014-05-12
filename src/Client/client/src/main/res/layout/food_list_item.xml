@@ -70,10 +70,13 @@
                 android:layout_toRightOf="@+id/image"
                 android:clickable="false"
                 android:focusable="false"
-                android:text="Potravina"
+                android:text="Potravina extremne dlouha     dsf dsf d f"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/item_title"
-                android:typeface="normal"/>
+                android:typeface="normal"
+                android:singleLine="false"
+                android:maxWidth="115dp"
+                android:maxLines="2"/>
 
             <TextView
                 android:id="@+id/food_description"

@@ -18,6 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.zxing.FormatException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -308,35 +310,43 @@ public class FoodEditActivity extends ActionBarActivity implements VendorDialogF
 		EditText months = (EditText) view.findViewById(R.id.use_months);
 		EditText days = (EditText) view.findViewById(R.id.use_days);
 
-		int year;
-		int month;
-		int day;
+		int year = 0;
+		int month = 0;
+		int day = 0;
 
-		if(years.getText() != null)
+		try
 		{
-			year = Integer.parseInt(years.getText().toString());
-		}
-		else
-		{
-			year = 0;
-		}
 
-		if(months.getText() != null)
-		{
-			month = Integer.parseInt(months.getText().toString());
-		}
-		else
-		{
-			month = 0;
-		}
+			if (years.getText() != null)
+			{
+				year = Integer.parseInt(years.getText().toString());
+			}
+			else
+			{
+				year = 0;
+			}
 
-		if(days.getText() != null)
-		{
-			day = Integer.parseInt(days.getText().toString());
+			if (months.getText() != null)
+			{
+				month = Integer.parseInt(months.getText().toString());
+			}
+			else
+			{
+				month = 0;
+			}
+
+			if (days.getText() != null)
+			{
+				day = Integer.parseInt(days.getText().toString());
+			}
+			else
+			{
+				day = 0;
+			}
 		}
-		else
+		catch (NumberFormatException e)
 		{
-			day = 0;
+			e.printStackTrace();
 		}
 
 		return DateUtil.getTimeFromValues(year, month, day);

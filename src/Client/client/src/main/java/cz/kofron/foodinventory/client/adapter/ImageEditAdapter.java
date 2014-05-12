@@ -100,7 +100,8 @@ public class ImageEditAdapter
 		View newImage = LayoutInflater.from(activity).inflate(R.layout.image_edit_new_item, null);
 
 		Button button = (Button) newImage.findViewById(R.id.add_new_button);
-		button.setOnClickListener(new View.OnClickListener()
+
+		View.OnClickListener listener = new View.OnClickListener()
 		{
 			@Override
 			public void onClick(View view)
@@ -121,7 +122,10 @@ public class ImageEditAdapter
 
 				activity.startActivityForResult(chooser, REQUEST_CODE);
 			}
-		});
+		};
+
+		button.setOnClickListener(listener);
+		newImage.setOnClickListener(listener);
 
 		layout.addView(newImage);
 	}
