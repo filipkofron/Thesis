@@ -938,7 +938,7 @@ Vzhledem k~jednoduchosti aplikace a nízkému nebezpečí zneužití dat uživat
 
 \subsection{Vyhledávání čárového kódu v~externí databázi}
 
-Databáze potravin této aplikace bude ze začátku neobsahovat žádné potraviny. Jelikož může být přidání nové potraviny pro uživatele otravné, je vhodné najít cestu, která by zadávání přinejmenším zjednodušila nebo zcela nahradila.
+Databáze potravin této aplikace nebude obsahovat ze začátku žádné potraviny. Jelikož může být přidání nové potraviny pro uživatele otravné, je vhodné najít cestu, která by zadávání přinejmenším zjednodušila nebo zcela nahradila.
 
 Jednotlivé potraviny výrobců však není jednoduché získat. Díky zaznamenávání potravin pomocí GTIN kódu se však nabízí možnost získat informace o~potravinách z~veřejné a otevřené databáze produktů POD - Product Open Data~\cite{pod}. V~této databázi je možné k~začátku roku 2014 nalézt stovky tisíců záznamů. Informace v~databázi obsahují u~některých potravin složení, ale u~některých naopak pouze jejich výrobce. Množství dat, které se při náhodné analýze této databáze podařilo získat, bylo nedostatečné pro vyplnění většiny potravin. Je zde však možnost využít i pouze částečné informace a ty k~potravině doplnit.
 
@@ -1033,7 +1033,7 @@ Struktura klientské aplikace je poněkud rozsáhlejší, proto při popisu jedn
 
 Každá část je níže detailněji popsána jako v~případě serveru. Rád bych zde zdůraznil, že tyto části jsou pouze kořenové složky balíku celé aplikace (mimo využité knihovny), a proto ve zdrojovém kódu lze nalézt více pod-částí. V~rozsahu této práce není možné popsat každou třídu balíků zvlášť, neboť jich aplikace i server obsahují velmi mnoho. Pro více informací o~každé části je třeba navštívit přímo zdrojový kód.
 
-Při psaní kódu jsem však dbal na zvyklosti při psaní aplikací pro OS Android, které jsem získal vlastních zkušeností.
+Při psaní kódu jsem však dbal na zvyklosti při psaní aplikací pro OS Android, které jsem získal z vlastních zkušeností.
 
 \subsubsection{Model}
 
@@ -1308,7 +1308,7 @@ Odpovědi pro post-test:
 \begin{enumerate}
   \item Na začátku jsem si nebyl jistý tím, jak vůbec něco přidat, ale teď už mi to je jasné a je to jednoduché.
   \item Jedině když aplikace nebude padat.
-  \item Zpravit pády v aplikaci a možná vylepšit tu čtečku čárových kódů.
+  \item Spravit pády v aplikaci a možná vylepšit tu čtečku čárových kódů.
 \end{enumerate}
 
 \subsection{Souhrn výsledků testu}
