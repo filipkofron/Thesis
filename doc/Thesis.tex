@@ -47,7 +47,7 @@
 \supervisor{Ing. Jiří Hunka}
 \acknowledgements{Na tomto místě bych chtěl poděkovat svému vedoucímu Ing. Jiřímu Hunkovi za pomoc při realizaci této práce.}
 \abstractCS{Tato bakalářská práce seznamuje čtenáře s~globálním problémem plýtvání potravin. Popisuje možné řešení v~podobě mobilní aplikace od jeho analýzy, návrhu pro jednoduchost použití a efektivitu, až po implementaci mobilního klienta v~prostředí OS Android a serverovou částí využívající open-source software následovanou testováním. Práce dále hodnotí výsledné řešení a nabízí pohled do jeho budoucnosti s~případnými vylepšeními, které přinesla odezva při nasazení aplikace u~skutečných uživatelů.}
-\abstractEN{This bachelor's thesis explains the reader a global problem of food waste. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements which are gained by the deployment of the application between real users.}
+\abstractEN{This bachelor's thesis explains the reader a global problem of food waste. It describes a possible solution in the form of a mobile application starting from analysis, design for simplicity and effectivity, to implementation of the mobile application on top of the Android OS and a server component using open-source sofware, followed by testing of the whole solution. This thesis also evaluates the final solution and gives a perspective for the future development with enhancements gained by the deployment of the application between real users.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{1} %volba Prohlášení
 \keywordsCS{plýtvání potravin, mobilní aplikace, Android \clearpage}
@@ -70,7 +70,7 @@ Cílem této práce je vytvořit mobilní aplikaci, která pomůže uživatelům
 
 V~rozvinutých zemích po celém světě je dnes již dostatek potravin a jejich ceny nejsou pro běžné občany likvidační, jak je tomu naopak v~některých rozvojových zemích. Přesto se však mnozí lidé snaží ušetřit jejich jmění a nakupovat co nejlevněji. To ovšem například znamená nakupování velkého množství aktuálně cenově výhodných potravin. Takové množství potravin se nemusí vždy podařit včas spotřebovat a lidem tak zůstanou prošlé potraviny, které buď dodatečně spotřebují nebo, pokud si nejsou jistí možnou závadností, potraviny vyhodí do odpadu.
 
-Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v~podobě evidence potravin, která uživateli nabídne přehled o~trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončí, či pokud se tak stane v~blízké době.
+Chytré mobilní telefony vlastní dnes již dostatek lidí na to, aby bylo možné docílit řešení tohoto problému právě skrze mobilní aplikaci. Jelikož je spousta potravin vyhazována do odpadu jen kvůli své opomenuté trvanlivosti, nabízí se řešení v~podobě evidence potravin, která uživateli nabídne přehled o~trvanlivosti jeho potravin a upozorní ho, pokud nějakým potravinám již trvanlivost skončila, či pokud se tak stane v~blízké době.
 
 V~této práci popisuji vývoj mobilní aplikace od analýzy až po zhodnocení nasazení její implementace. Práce využívá znalosti získané během mého studia z~předmětů týkajících se algoritmizace, databázových systémů a počítačových sítí.
 
@@ -95,7 +95,7 @@ Informace z~této sekce jsou velice důležité pro finální aplikaci. Mohou v�
 
 V~počátku tvorby této práce a implementace aplikace nebylo příliš mnoho konkurenčních aplikací k~nalezení. Jak se však později ukázalo, vzniklo a rozšířilo se v průběhu tvorby této práce několik dalších aplikací, které jen s~málo rozdíly splňují požadavky aplikace výsledkem této práce.
 
-Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovali vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich přidání je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
+Tuto část jsem dodatečně rozšířil, neboť jediné blíže podobné aplikace neposkytovaly vhodné srovnání ani zisk zajímavých informací. V~závěru jsem však usoudil, že některé tyto aplikace zaslouží zanalyzování a poskytnu tak čtenáři jistý nadhled nad daným tématem i v~průběhu následujícího čtení. Dalším důvodem jejich přidání je mé zmýlení v~jejich existenci už v~počátku. Aplikace byly nedávno zveřejněny a nebylo dostatek vodítek k~jejich nalezení.
 
 Všechny následující aplikace lze podle jejich názvu nalézt na Google Play Store ~\cite{play_store}.
 
@@ -169,7 +169,7 @@ Prvním aspektem aplikace je její rozšíření. Aby aplikace dosáhla k~větš
     \label{table:MobilePlatf}
 \end{table}
 
-Protože tyto údaje nebyli skutečné zastoupení platforem, byl k~této práci vypracován krátký dotazník, na který odpovědělo celkem 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality.
+Protože tyto údaje nebyly skutečné zastoupení platforem, byl k~této práci vypracován krátký dotazník, na který odpovědělo celkem 31 lidí. Cílem tohoto dotazníku bylo nalézt zajímavé informace, které pomůžou při výběru cílové platformy, a další informace pomáhající při volbě funkcionality.
 
 Otázky v dotazníku zahrnují tyto údaje:
 \begin{itemize}
@@ -208,7 +208,7 @@ Funkční požadavky této aplikace, které plynou z~daného problému a výše 
   \item sdílení známých potravin
   \item specifikace běžné doby spotřeby potravin
   \item zaznamenání obrázků potravin
-  \item zaznamenávání potravin do inventáře
+  \item zaznamenání potravin do inventáře
   \item odebírání potravin z~inventáře
   \item zaznamenání data spotřeby
   \item hledání potraviny pomocí čárového kódu nebo názvu
@@ -244,7 +244,7 @@ Tuto sekci jsem zahrnul do analýzy, neboť přímo nepopisuje návrh, ale přin
 
 \subsubsection{Externí aplikace}
 
-Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivými aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení jsem vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit, tento čas je třeba ještě vynásobit dvěma. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měli být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovali nějaký prvek ukazující postup, který v~tomto případě spouštění externí aplikace není možný.
+Čtečka čárových kódu by mohla být implementována pouze s pomocí externí aplikace. Zde však tento způsob naráží v~možnostech rychlosti zadávání čárového kódu. Pro spuštění externí aplikace je vyžadováno, aby se neustále přepínalo mezi jednotlivými aplikacemi, které vyústí v~pravidelném vypínání a zapínání snímacího čipu obrazu, čímž může dojít ke zpomalení. Samotné vyvolání externí aplikace trvá určitou dobu, takže celkové zpomalení bude určitě znatelné. Pro potvrzení tohoto tvrzení jsem vyzkoušel na dostupných zařízeních smyčku, která neustále zapínala a vypínala snímací čip. V~průměru bylo dosaženo na všech zařízeních času, který se pohyboval od 0,5 do 1 sekundy. Při vyvolávání externí aplikace bylo naměřeno v~průměru okolo 0,4 sekundy, protože je však nutné externí aktivitu opustit, tento čas je třeba ještě vynásobit dvěma. Ve výsledku tedy zpomalení dosahuje až 2 sekund. Pocitově takovéto zpomalení UI působí nepříjemně tím, že veškeré činnosti UI v~rámci aplikace po akci uživatele by měly být dokončené nejpozději do 1 sekundy ~\cite{ui_maxlag}. Delší časové prodlevy by vyžadovaly nějaký prvek ukazující postup, který v~tomto případě spouštění externí aplikace není možný.
 
 \subsubsection{Zbar ~\cite{zbar}}
 
@@ -268,7 +268,7 @@ Pro implementaci prototypu jsem zvolil knihovnu ZXing a vhodné části aplikace
 
 Vytvořen byl prototyp obsahující pohled kamery, status panelem a jednoduchým formulářem. Snímek obrazovky prototypu na zařízení Nexus 7 si lze prohlédnout na obrázku~\ref{fig:ScanPrototype}. Implementace využívá části kódu původní aplikace Barcode Scanner, hlavní změnou však je použití vyššího rozlišení a jiný způsob prezentace výsledků. Původní komunikace mezi komponentami zůstala stejná, mnoho tříd však bylo odděděno z~důvodu nutnosti upravit mnoho detailů, které způsobila provázanost veškerých tříd na sobě, čímž byla způsobena velice špatná upravitelnost a udržovatelnost kódu. Na základě prototypu jsem se v této práci rozhodl ve finální aplikaci nepoužívat žádný kód původní aplikace Barcode Scanner ani tohoto prototypu a vyvinout vlastní skenovací komponenty s~pomocí samotné knihovny ZXing, které budou mnohem jednodušší a tím pádem i snadněji udržovatelné a přizpůsobitelné.
 
-Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázali pouze veliké čárové kódy snímané z~větší vzdálenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Oproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
+Změna na vyšší rozlišení se z~používaní prototypu pro skenování různých potravin ukázala jako vhodná na všech zmíněných zařízeních. Zařízení Vodafone 845 však nemá možnost zaostřit na blízký předmět a jelikož disponuje pouze nízkým rozlišením, tak výsledků, které by změna zlepšila, mnoho nebylo. Použitelné se ukázaly pouze veliké čárové kódy snímané z~větší vzdálenosti, aby se dosáhlo optimálního ohniska čočky ostřící obraz. Oproštění od ostatních formátů kódů z původní aplikace Barcode Scanner však znamenalo pocitově velmi znatelný pokles snímací doby, kterou způsobila detekce všech podporovaných čárových kódů. Zvýšení rozlišení obrazu dále nepatrně snímací dobu prodloužilo, ale aplikace je takto schopná detekce čárového kódu ve větším rozsahu vzdálenosti.
 
 \begin{figure}[H]
   \centering
@@ -279,7 +279,7 @@ Změna na vyšší rozlišení se z~používaní prototypu pro skenování různ
 
 \section{Nefunkční požadavky}
 
-Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na stroj, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží serverový stroj. Dále však plánuji do budoucna server nasadit na výkonnější stroj. Je tedy důležité zajistit, aby server dokázal lepších parametrů serveru využít.
+Externí úložiště aplikace bude tvořit server. Plánuji nasazení serveru na hardware, který nedisponuje příliš vysokým výkonem ani velikostí operační paměti. Z~tohoto důvodu je kladen na server požadavek na nízkou paměťovou stopu a efektivitu implementace, která nezatíží serverový hardware. Dále však plánuji do budoucna server nasadit na výkonnější hardware. Je tedy důležité zajistit, aby server dokázal lepších parametrů hardware využít.
 
 Server bude dále umožňovat připojení z~více zařízení v~rámci jednoho uživatele se stejným účtem, aby zajistil používaní například v~rámci rodiny. 
 
@@ -327,7 +327,7 @@ Z~nefunkčního požadavku OS Android vyplývá nutnost implementovat aplikaci s
 
 \subsection{Server}
 
-Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku mého studia obsahovali především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou přiblíženy dále.
+Jako jeden z~hlavních požadavků na server je jeho malý paměťový otisk. Nabízí se spousta různých variant, jak tohoto cíle dosáhnout. Jelikož předměty prvního ročníku mého studia obsahovaly především algoritmizace v~jazycích C/C++ a obor softwarového inženýrství si vyžádal předmět efektivních algoritmů, byla jako vhodná varianta serveru jeho implementace v~jazyce C++. Bližší detaily jeho návrhu budou přiblíženy dále.
 
 \section{Doménový model}
 
@@ -366,7 +366,7 @@ Výrobce je specifikován jako samostatná entita, v~budoucnu lze také použít
 
 \section{Databázový model}
 
-Z~prostředků cílového stroje určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožňuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
+Z~prostředků cílového hardware určeného k~nasazení serveru této aplikace byl jako databázový software zvolen MySQL. K~návrhu jsem využil software MySQL Workbench, který umožňuje vytvořit relační model, který je přímo kompatibilní s~vlastnostmi MySQL. Jelikož jsou veškerá data aplikace uchovávána na serveru, vychází relační model přímo z~doménového. Entity tedy zůstávají stejné.
 
 Některé atributy entit nemusí být zcela jasné, proto jsem níže vypsal entity s vybranými atributy do sekcí, kde se je pokouším čtenáři přiblížit.
 
@@ -974,7 +974,7 @@ Pro sdílení všech materiálů této práce byl zvolen veřejný repozitář p
 
 \subsection{Správa a úpravy databáze}
 
-Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s~MySQL. Některé úpravy však byli prováděny v~software PhpMyAdmin~\cite{phpmyadmin} v~případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z~webového prohlížeče. Bylo tak možné upravovat databázi i bez přístupu k~příkazové řádce.
+Jako nástroj pro správu databáze byl pro jeho jednoduchost použit řádkový klient dodávaný spolu s~MySQL. Některé úpravy však byly prováděny v~software PhpMyAdmin~\cite{phpmyadmin} v~případech, kdy byl řádkový klient nevhodný či nedostačující. Výhodou PhpMyAdmin je běh z~webového prohlížeče. Bylo tak možné upravovat databázi i bez přístupu k~příkazové řádce.
 
 \subsection{Prostředí pro vývoj klientské aplikace v~OS Android}
 
@@ -1087,7 +1087,7 @@ Nasazení probíhalo v~rámci integrace v~průběhu celé implementace.
 
 \section{Serverová aplikace}
 
-Serverová aplikace byla nasazena na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový stroj je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto stroji pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
+Serverová aplikace byla nasazena na mém vlastním virtuálním serveru, který běžel již od počátku implementace, abych mohl vyvíjet klientskou aplikaci a testovat ji co nejpřirozeněji. Tento cílový hardware je poháněn Unix-like operačním systémem Linux. Sestavení serveru probíhalo přímo na tomto hardware pomocí CMake. Server byl napojen na lokální databázový software MySQL. 
 
 Pro zálohování dat MySQL databáze jsem vytvořil skript, který je spouštěn pomocí Cron démona každých 6 hodin. Při běhu skriptu dojde ke kompletní záloze celé MySQL databáze na externí úložiště, odkud lze v případě útoku na aplikaci provést obnovení dat.
 
@@ -1339,7 +1339,7 @@ Opravení těchto nedostatků již proběhne mimo rámec této práce.
 \begin{conclusion}
 Cílem této práce bylo najít možné řešení celosvětového problému plýtvání potravin v~podobě mobilní aplikace na platformě Android. Řešení bylo nutné nejdříve zanalyzovat a získat tak požadavky, které musí aplikace splňovat. Poté byla navrhnuta aplikace, která všechny požadavky splňovala.
 	
-Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a serverovou aplikaci, která byla naimplementována pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky stroje, na němž byl server nasazen.
+Výsledkem práce vznikla aplikace, která řeší část tohoto problému evidencí potravin. Rámec aplikace obsahuje jednoduchou klientskou aplikaci pro platformu Android a serverovou aplikaci, která byla naimplementována pomocí multiplatformních knihoven v~jazyce C++, který měl za cíl efektivně využít slabé prostředky hardware, na němž byl server nasazen.
 
 Celá aplikace byla po dobu vývoje i následně po něm dostupná veřejně ve formě zdrojových kódů na veřejném repozitáři webové služby Github~\cite{repo}. Při tvorbě aplikace byly využity svobodné i open-source nástroje a open-source knihovny, tím pádem i tato aplikace byla vydána jako open-source.
 
@@ -1369,8 +1369,8 @@ Toto zálohování by mohlo být vytvořeno jako 1 ku N vztah, potravina ku jej�
 \subsection{UI}
 Uživatelské rozhraní klientské aplikace je další velkou nedokonalostí. Ačkoliv bylo vytvořeno co nejjednodušeji pro přehlednost a rychlost zároveň, není toto rozhraní příliš příjemné, neboť využívá strohý výchozí styl platformy OS Android. V~budoucnu by bylo možné pro aplikaci získat lepší styl a zpříjemnit tak celou aplikaci. Zároveň by tak mohla být i přitažlivější při výběru uživateli.
 
-\subsection{Výkon serverového stroje}
-Další nedostatek je v~cílovém stroji na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonnější stroj.
+\subsection{Výkon serverového hardware}
+Další nedostatek je v~cílovém hardware na nasazení serveru. Pokud by aplikace měla v~budoucnu být využívána mnoho uživateli, pak by bylo nutné zajistit pro běh serveru výkonnější hardware.
 
 \subsection{Rozšíření na další platformy}
 Jelikož platformu Android nevlastní všichni uživatelé, bylo by vhodné vyvinout pro aplikaci také webovou verzi, která by byla dostupná i na jiných zařízeních, které nedisponují operačním systémem Android.
